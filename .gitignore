@@ -1,4 +1,39 @@
-java\xdclass_springboot\.settings
-java\xdclass_springboot\target
-java\xdclass_springboot\.classpath
-java\xdclass_springboot\.project
+# java\xdclass_springboot\.settings
+# java\xdclass_springboot\target
+# java\xdclass_springboot\.classpath
+# java\xdclass_springboot\.project
+java/xdclass_springboot/.settings/org.eclipse.core.resources.prefs
+java/xdclass_springboot/.settings/org.eclipse.jdt.core.prefs
+java/xdclass_springboot/.settings/org.eclipse.jdt.ui.prefs
+java/xdclass_springboot/.settings/org.eclipse.m2e.core.prefs
+java/xdclass_springboot/target/.DS_Store
+java/xdclass_springboot/target/xdclass_springboot-0.0.1-SNAPSHOT.jar.original
+java/xdclass_springboot/target/classes/application.properties
+java/xdclass_springboot/target/classes/net/xdclass/demo/XdclassApplication.class
+java/xdclass_springboot/target/classes/net/xdclass/demo/controller/FileController.class
+java/xdclass_springboot/target/classes/net/xdclass/demo/controller/GetController.class
+java/xdclass_springboot/target/classes/net/xdclass/demo/controller/OtherHttpController.class
+java/xdclass_springboot/target/classes/net/xdclass/demo/controller/SampleController.class
+java/xdclass_springboot/target/classes/net/xdclass/demo/domain/JsonData.class
+java/xdclass_springboot/target/classes/net/xdclass/demo/domain/User.class
+java/xdclass_springboot/target/classes/public/test.js
+java/xdclass_springboot/target/classes/static/index.html
+java/xdclass_springboot/target/classes/static/test.js
+java/xdclass_springboot/target/classes/static/upload.html
+java/xdclass_springboot/target/classes/static/css/main.css
+java/xdclass_springboot/target/classes/static/images/85a50725-4c2a-44da-921a-78d9e72f1f7c.jpeg
+java/xdclass_springboot/target/classes/static/images/100.png
+java/xdclass_springboot/target/classes/static/images/39020dbb-9253-41b9-8ff9-403309ff3f19.jpeg
+java/xdclass_springboot/target/classes/static/images/dbdfcb66-96f5-4b0d-8546-9b1be9a6e4f5.jpeg
+java/xdclass_springboot/target/classes/static/js/test.js
+java/xdclass_springboot/target/classes/templates/index.html
+java/xdclass_springboot/target/classes/templates/test.js
+java/xdclass_springboot/target/classes/test/test3.js
+java/xdclass_springboot/target/maven-archiver/pom.properties
+java/xdclass_springboot/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+java/xdclass_springboot/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+java/xdclass_springboot/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+java/xdclass_springboot/.classpath
+java/xdclass_springboot/.project
+.gitignore
+java/xdclass_springboot/.DS_Store
