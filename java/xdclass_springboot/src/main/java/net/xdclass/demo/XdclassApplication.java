@@ -9,7 +9,7 @@ import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-//@SpringBootApplication 一个注解顶下面3个
+//@SpringBootApplication //一个注解顶下面3个
 @SpringBootConfiguration
 @EnableAutoConfiguration
 @ComponentScan

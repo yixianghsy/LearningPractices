@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SampleController {
 
-    @RequestMapping("/")
-    String home() {
-        return "Hello World!";
+    @RequestMapping("/test/home")
+    public String home() {
+        return "xdclass";
     }
 
     @RequestMapping("/test")
