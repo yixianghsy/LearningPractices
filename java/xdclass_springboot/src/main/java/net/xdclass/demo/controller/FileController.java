@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.xdclass.demo.domain.JsonData;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
  * <p> 作者：小D课堂</p>
  */
 @Controller
+@PropertySource({"classpath:application.properties"})
 public class FileController {
 
 	 
@@ -34,8 +37,10 @@ public class FileController {
 	
 	
 	
-    	private static final String filePath = "/Users/jack/Desktop/person/springboot/xdclass_springboot/src/main/resources/static/images/";
+    	//private static final String filePath = "/Users/jack/Desktop/person/springboot/xdclass_springboot/src/main/resources/static/images/";
    
+		@Value("${web.file.path}")
+    	private String filePath;
 	
 	 	@RequestMapping(value = "upload")
 	    @ResponseBody
@@ -43,6 +48,9 @@ public class FileController {
 	      
 	 		//file.isEmpty(); 判断图片是否为空
 	 		//file.getSize(); 图片大小进行判断
+	 		
+	 		System.out.println("配置注入打印，文件路径为："+filePath);
+	 		
 	 		
 	 		String name = request.getParameter("name");
 	 		System.out.println("用户名："+name);

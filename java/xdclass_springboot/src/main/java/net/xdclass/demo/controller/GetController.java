@@ -5,14 +5,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.xdclass.demo.domain.ServerSettings;
 import net.xdclass.demo.domain.User;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,6 +53,9 @@ public class GetController {
 		params.clear();
 		params.put("from", from);
 		params.put("size", size);
+		System.out.println("热加载");
+		System.out.println("热加载222");
+		System.out.println("热加333");
 		
 		return params;
 		
@@ -120,6 +123,18 @@ public class GetController {
 		String id = request.getParameter("id");
 		params.put("id", id);
 		return params;	
+	}
+	
+	
+	@Autowired
+	private ServerSettings serverSettings;
+	
+	@GetMapping("/v1/test_properties")
+	public Object testPeroperties(){
+		
+		
+		
+		return serverSettings;	
 	}
 	
 	
