@@ -140,10 +140,9 @@ public class GetController {
 	
 	
 	
-	@GetMapping(value="/api2/v1/account")
+	@GetMapping(value="/api/v1/account")
 	public Object account(){
 		
-		System.out.println(" controller -->account");
 		params.put("money", "1000");
 		
 		return params;
