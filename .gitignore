@@ -38,3 +38,4 @@ java/xdclass_springboot/.classpath
 java/xdclass_springboot/.project
 .gitignore
 java/xdclass_springboot/.DS_Store
+.vscode/settings.json
