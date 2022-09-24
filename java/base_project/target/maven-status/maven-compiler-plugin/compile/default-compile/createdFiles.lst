@@ -1,0 +1,8 @@
+net\xdclass\base_project\utils\JsonUtils.class
+net\xdclass\base_project\domain\User.class
+net\xdclass\base_project\service\impl\UserServiceImpl.class
+net\xdclass\base_project\XdclassApplication.class
+net\xdclass\base_project\controller\UserController.class
+net\xdclass\base_project\domain\JsonData.class
+net\xdclass\base_project\service\UserService.class
+net\xdclass\base_project\mapper\UserMapper.class
