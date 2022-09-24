@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @RestControllerAdvice
@@ -19,7 +20,6 @@ public class CustomExtHandler {
 	
 	//捕获全局异常,处理所有不可知的异常
 	@ExceptionHandler(value=Exception.class)
-	//@ResponseBody
     Object handleException(Exception e,HttpServletRequest request){
 		LOG.error("url {}, msg {}",request.getRequestURL(), e.getMessage()); 
 		Map<String, Object> map = new HashMap<>();
@@ -30,7 +30,27 @@ public class CustomExtHandler {
     }
 	
 	
-	
+
+	/**
+	 * 功能描述：处理自定义异常
+	 * @return
+	 */
+	@ExceptionHandler(value=MyException.class)
+    Object handleMyException(MyException e,HttpServletRequest request){
+		//进行页面跳转
+//		ModelAndView modelAndView = new ModelAndView();
+//	    modelAndView.setViewName("error.html");
+//	    modelAndView.addObject("msg", e.getMessage());
+//	    return modelAndView;
+		
+		//返回json数据，由前端去判断加载什么页面
+		Map<String, Object> map = new HashMap<>();
+        map.put("code", e.getCode());
+        map.put("msg", e.getMsg());
+        map.put("url", request.getRequestURL());
+        return map;
+        
+    }
 	 
 	
 }
