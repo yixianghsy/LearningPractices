@@ -121,6 +121,7 @@ public class GetController {
 	public Object testRequest(HttpServletRequest request){
 		params.clear();
 		String id = request.getParameter("id");
+		System.out.println("Controller处理中ing");
 		params.put("id", id);
 		return params;	
 	}
@@ -129,13 +130,26 @@ public class GetController {
 	@Autowired
 	private ServerSettings serverSettings;
 	
-	@GetMapping("/v1/test_properties")
+	@GetMapping("/api/v1/test_properties")
 	public Object testPeroperties(){
 		
 		
 		
 		return serverSettings;	
 	}
+	
+	
+	
+	@GetMapping(value="/api2/v1/account")
+	public Object account(){
+		
+		System.out.println(" controller -->account");
+		params.put("money", "1000");
+		
+		return params;
+		
+	}
+	
 	
 	
 }
