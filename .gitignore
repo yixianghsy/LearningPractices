@@ -40,3 +40,6 @@ java/xdclass_springboot/.project
 java/xdclass_springboot/.DS_Store
 .vscode/settings.json
 .vscode/launch.json
+java/xdvideo/src/.DS_Store
+app_log/*
+java/xdvideo/target/*

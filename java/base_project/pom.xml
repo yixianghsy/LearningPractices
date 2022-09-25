@@ -26,10 +26,23 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- 整合redis -->
 			<dependency>
 	            <groupId>org.springframework.boot</groupId>
 	            <artifactId>spring-boot-starter-data-redis</artifactId>
 	        </dependency>
+	        
+	     <!-- 整合elasticsearch 3.0.6.RELEASE版本 -->
+	    <!--  <dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-elasticsearch</artifactId>
+		</dependency> -->
+				
+		<dependency>  
+           <groupId>org.springframework.boot</groupId>  
+           <artifactId>spring-boot-starter-data-elasticsearch</artifactId>  
+       </dependency>  
+		
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

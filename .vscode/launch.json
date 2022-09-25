@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch XdvideoApplication",
+            "request": "launch",
+            "mainClass": "net.xdclass.xdvideo.XdvideoApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "Launch XdclassApplication",
             "request": "launch",
             "mainClass": "net.xdclass.base_project.XdclassApplication",
