@@ -6,23 +6,9 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch CoreApplication",
-            "request": "launch",
-            "mainClass": "com.my.blog.website.CoreApplication",
-            "projectName": "my-blog"
-        },
-        {
-            "type": "java",
-            "name": "Launch XdvideoApplication",
-            "request": "launch",
-            "mainClass": "net.xdclass.xdvideo.XdvideoApplication",
-            "projectName": ""
-        },
-        {
-            "type": "java",
             "name": "Launch XdclassApplication",
             "request": "launch",
-            "mainClass": "net.xdclass.base_project.XdclassApplication",
+            "mainClass": "net.xdclass.demo.XdclassApplication",
             "projectName": ""
         },
         {
@@ -33,122 +19,10 @@
         },
         {
             "type": "java",
-            "name": "Launch MD5Utils",
+            "name": "xdvideo",
             "request": "launch",
-            "mainClass": "com.itheima.bos.utils.MD5Utils",
-            "projectName": "bos-utils"
-        },
-        {
-            "type": "java",
-            "name": "Launch PinYin4jUtils",
-            "request": "launch",
-            "mainClass": "com.itheima.bos.utils.PinYin4jUtils",
-            "projectName": "bos-utils"
-        },
-        {
-            "type": "java",
-            "name": "Launch IDUtils",
-            "request": "launch",
-            "mainClass": "cn.e3mall.common.utils.IDUtils",
-            "projectName": "e3-common"
-        },
-        {
-            "type": "java",
-            "name": "Launch Base64",
-            "request": "launch",
-            "mainClass": "org.csource.common.Base64",
-            "projectName": "fastdfs_client"
-        },
-        {
-            "type": "java",
-            "name": "Launch Monitor",
-            "request": "launch",
-            "mainClass": "org.csource.fastdfs.test.Monitor",
-            "projectName": "fastdfs_client"
-        },
-        {
-            "type": "java",
-            "name": "Launch Test",
-            "request": "launch",
-            "mainClass": "org.csource.fastdfs.test.Test",
-            "projectName": "fastdfs_client"
-        },
-        {
-            "type": "java",
-            "name": "Launch Test1",
-            "request": "launch",
-            "mainClass": "org.csource.fastdfs.test.Test1",
-            "projectName": "fastdfs_client"
-        },
-        {
-            "type": "java",
-            "name": "Launch TestAppender",
-            "request": "launch",
-            "mainClass": "org.csource.fastdfs.test.TestAppender",
-            "projectName": "fastdfs_client"
-        },
-        {
-            "type": "java",
-            "name": "Launch TestAppender1",
-            "request": "launch",
-            "mainClass": "org.csource.fastdfs.test.TestAppender1",
-            "projectName": "fastdfs_client"
-        },
-        {
-            "type": "java",
-            "name": "Launch TestClient",
-            "request": "launch",
-            "mainClass": "org.csource.fastdfs.test.TestClient",
-            "projectName": "fastdfs_client"
-        },
-        {
-            "type": "java",
-            "name": "Launch TestClient1",
-            "request": "launch",
-            "mainClass": "org.csource.fastdfs.test.TestClient1",
-            "projectName": "fastdfs_client"
-        },
-        {
-            "type": "java",
-            "name": "Launch TestLoad",
-            "request": "launch",
-            "mainClass": "org.csource.fastdfs.test.TestLoad",
-            "projectName": "fastdfs_client"
-        },
-        {
-            "type": "java",
-            "name": "Launch MallAdminApplication",
-            "request": "launch",
-            "mainClass": "com.macro.mall.MallAdminApplication",
-            "projectName": "mall-admin"
-        },
-        {
-            "type": "java",
-            "name": "Launch Generator",
-            "request": "launch",
-            "mainClass": "com.macro.mall.Generator",
-            "projectName": "mall-mbg"
-        },
-        {
-            "type": "java",
-            "name": "Launch MallPortalApplication",
-            "request": "launch",
-            "mainClass": "com.macro.mall.portal.MallPortalApplication",
-            "projectName": "mall-portal"
-        },
-        {
-            "type": "java",
-            "name": "Launch MallSearchApplication",
-            "request": "launch",
-            "mainClass": "com.macro.mall.search.MallSearchApplication",
-            "projectName": "mall-search"
-        },
-        {
-            "type": "java",
-            "name": "Launch XdclassApplication",
-            "request": "launch",
-            "mainClass": "net.xdclass.demo.XdclassApplication",
-            "projectName": "xdclass_springboot"
+            "mainClass": "net.xdclass.xdvideo.XdvideoApplication",
+            "projectName": "xdvideo"
         }
     ]
 }
