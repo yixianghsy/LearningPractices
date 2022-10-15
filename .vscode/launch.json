@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch CoreApplication",
+            "request": "launch",
+            "mainClass": "com.my.blog.website.CoreApplication",
+            "projectName": "my-blog"
+        },
+        {
+            "type": "java",
+            "name": "Launch ZuulApplication",
+            "request": "launch",
+            "mainClass": "com.itmuch.cloud.study.ZuulApplication",
+            "projectName": "microservice-gateway-zuul-reg-exp"
+        },
+        {
+            "type": "java",
+            "name": "Launch ConfigClientApplication",
+            "request": "launch",
+            "mainClass": "com.itmuch.cloud.study.ConfigClientApplication",
+            "projectName": "microservice-config-client-eureka"
+        },
+        {
+            "type": "java",
             "name": "Launch XdclassApplication",
             "request": "launch",
             "mainClass": "net.xdclass.demo.XdclassApplication",
