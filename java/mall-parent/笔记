@@ -1,0 +1,49 @@
+#####docker-compose 命令默认使用的配置文件是当前目录中的 docker-compose.yml 文件，当然我们可以通过 -f 选项指定一个其它名称的配置文件
+docker-compose -f docker-compose-dev.yml up
+
+### 　**`以后都会把遇到的问题，新知识都会写到这里`**
+* 目前Cookie 工具类无法使用spring boot  使用HttpServletRequest不熟悉　已解决：pom添加ｗｅｂ依赖
+* mvn clean install -Dmaven.test.skip=true   Maven clean install 跳过单元测试  引入web包后恢复正常
+* 现在问题是子工程无法引用父工程后去要解决，不可能父pom引用了，子的还要引用　　已解决：在子工程里引用父工程即可
+* 原先ｓｓｍ项目依赖在spring boot中写法不一样
+* <groupId>org.mybatis.spring.boot</groupId>spring boot的写法
+*　maven模块依赖，正常运行，打包报错找不到包问题解决方式：在pom打包处添加了configuration一项，打的包就不是可执行的包了，看看这个依赖是否可以用ｄｕｂｂｏ来解决
+* 今天把整个都想都删除重新弄，common删除多余的依赖包，纯jar
+* 启动zk一直拒绝连接，明天看看zk的安装教程，看看那里漏了,服务器hosts中127.0.0.1注释调，正常
+* dubbo元数据问题，已解决，元数据配置ip写错了
+**知识点：原先在xml文件配置的bean，使用@Bean注解来配置
+* 内容管理和后台管理就差redis，以及后台管理页面，先看看整合jsp这么弄,redis未完成，原因：不熟悉，配置弄了好久@ConfigurationProperties不熟悉
+* 使用stringRedisTemplate.opsForValue().***具体明天实践，实践结果：stringRedisTemplate.opsForValue() VS RedisTemplate使用的是
+* RedisTemplate使用的是 JdkSerializationRedisSerializer 序列化对象
+* StringRedisTemplate使用的是 StringRedisSerializer 序列化String
+* 主要用来存储字符串，StringRedisSerializer的泛型指定的是String。当存入对象时，会报错 ：can not cast into String。
+* 可见性强，更易维护。如果过都是字符串存储可考虑用StringRedisTemplate。
+* 可以用来存储对象，但是要实现Serializable接口。
+* 以二进制数组方式存储，内容没有可读性。
+####后期修改完毕后，通用的工具要要整到common
+* 后台管理以依赖搜索引擎，先把搜索引工程弄起来,
+* jsp 在多模块下不好弄，换成擎thymeleaf实；$表达式只能写在th标签内部；例子：<h1 th:text="${setting.name}">测试内容</h1>
+* 后台管理页面代码暂时写完，注释，现在写搜索引擎
+* elasticsearch-rest-high-level-client应该与redis的客户端一样对命令进行封砖，一般方法名应该根命令名类似；**elasticsearch对象操作文档，client操作命令
+* 分页查询插件还需要在设置####
+* es总结：今日新接触SearchRequest（搜索要求）SearchSourceBuilder（搜索源生成器）HighlightBuilder（突出显示生成器）SearchResponse（搜索响应）
+* 就查SearchServiceImpl了，做完这个，就做mq
+*#Hibernate配置
+ hibernate.dialect=mysql
+ hibernate.show_sql=false
+ hibernate.format_sql=false
+ #Cookie设置
+ user.cookie.name=xdclass_shop_cookie
+ user.cookie.age=86400
+ #MVC配置
+ spring.mvc.view.prefix=/WEB-INF/views/
+ spring.mvc.view.suffix=.jsp
+ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+* 数据单挑插入要复习下，完成
+* 多模块下jsp页面OK，
+* 后台管理web启动beanName冲突,两种方案，一种是自定义baen名称一种是统一放到工具模块。已解决，把公共的统一放到工具模块
+* 数据库对应的尸体类和配置类冲突，应该是后台管理中的数据库对应类也复制到其他模块。后台管理又引用了这些类导致冲突
+* docker 部署es7.2.0
+  --问题：the default discovery settings are unsuitable for production use; at least one of [discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes] must be configured
+  --解决：discovery.seed_hosts: ["127.0.0.1", "[::1]"]
+*关于*。html请求，参考spring mvc web.xml配置只需转换成spring boot的即可,参考https://blog.csdn.net/leave417/article/details/90758343
