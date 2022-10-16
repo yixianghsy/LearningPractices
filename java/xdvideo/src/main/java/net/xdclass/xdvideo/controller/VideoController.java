@@ -8,7 +8,7 @@ public class VideoController {
 
 	@RequestMapping("test")
 	public String test(){
-		return "远程git测试";
+		return "git同时修改测试2";
 	}
 	
 	
