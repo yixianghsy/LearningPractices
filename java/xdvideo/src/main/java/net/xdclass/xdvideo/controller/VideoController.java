@@ -8,7 +8,7 @@ public class VideoController {
 
 	@RequestMapping("test")
 	public String test(){
-		return "hello xdclass.net";
+		return "远程git测试";
 	}
 	
 	
