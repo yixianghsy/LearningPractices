@@ -12,7 +12,7 @@ dubbo:
     name: dubbo
     port: 20881
   registry:
-    address: zookeeper://39.104.87.118:2181
+    address: zookeeper://120.24.80.45:2181
     protocol: zookeeper
   scan:
     base-packages: com.e3mall.content.service
@@ -29,14 +29,14 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     min-idle: 1
     minEvictableIdleTimeMillis: 300000
-    password: root
     testOnBorrow: true
     testOnReturn: false
     testWhileIdle: true
     timeBetweenEvictionRunsMillis: 60000
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/e3mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://120.24.80.45:3306/e3mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
+    password: root
     validationQuery: SELECT 1 FROM DUAL
 #  redis:
 #    host: 127.0.0.1
