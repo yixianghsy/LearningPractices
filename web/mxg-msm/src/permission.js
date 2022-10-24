@@ -1,59 +1,59 @@
-/*
-权限校验：
-通过router路由前置钩子函数 beforeEach() ，
-在跳转路由前进行拦截判断是否已经登录，
-如果已登录，则进行路由跳转，如果没有则回到登录页
-*/
-import router from './router'
-import {getUserInfo} from './api/login'
-/*
-前置路由钩子函数
-to ：即将要进入的目标路由对象
-from ：当前导航正要离开的路由对象
-next : 调用该方法，进入目标路由
-*/
-router.beforeEach(
-    (to,from,next) =>{
-        //获取Token
-        const token = localStorage.getItem('mgx-msm-token')
-        //没有token
-        if(!token){
-            //不允许访问其他路由，回到登录页
-            if(to.path !== '/login'){
-                next({pash: '/login'})
+/**
+ * 权限校验：
+ *  Vue Router中的 前置钩子函数 beforeEach(to, from, next)
+ * 当进行路由跳转之前，进行判断 是否已经登录 过，登录过则允许访问非登录页面，否则 回到登录页
+ * 
+ * to:  即将要进入的目标路由对象
+ * from: 即将要离开的路由对象
+ * next: 是一个方法，可以指定路由地址，进行路由跳转
+ */
 
-            }else{
+ import router from './router'
+ import {getUserInfo} from './api/login'
+
+ router.beforeEach((to, from , next) => {
+    // 1. 获取token
+    const token = localStorage.getItem('mxg-msm-token')
+    console.log('token', token)
+    
+    if(!token) {
+        // 1.1 如果没有获取到，
+        // 要访问非登录页面，则不让访问，加到登录页面 /login
+        if(to.path !== '/login') {
+            next({path: '/login'})
+        }else {
+            // 请求登录页面 /login
+            next()
+        }
+    }else {
+        // 1.2 获取到token, 
+        // 1.2.1 请求路由 /login ，那就去目标路由
+        if(to.path === '/login') {
+            next()
+        }else {
+            // 1.2.2 请求路由非登录页面，先在本地查看是否有用户信息，
+            const userInfo = localStorage.getItem('mxg-msm-user')
+            if(userInfo) {
+                // 本地获取到，则直接让它去目标路由
                 next()
+            }else {
+                // 如果本地没有用户信息， 就通过token去获取用户信息，
+                getUserInfo(token).then(response => {
+                    const resp = response.data
+                    if(resp.flag) {
+                        // 如果获取到用户信息，则进行非登录页面，否则回到登录页面
+                        // 保存到本地
+                        localStorage.setItem('mxg-msm-user', JSON.stringify(resp.data))
+                        next()
+                    }else {
+                        // 未获取到用户信息，重新登录 
+                        next({path: '/login'})
+                    }
+                })
             }
-        }else{
-            //有token
-            if(to.path === '/login'){
-                //进入路由
-                next
-            }else{
-                //有token 看下是否有you用户信息
-                const userInfo = localStorage.getItem('mgx-msm-user')
-                if(userInfo){
-                    //有信息，进入目标路由
-                    next()
-                }else{
-                    //通过token获取用户信息
-                    getUserInfo(token).then(
-                        (Response) => {
-                            const resp = Response.data
-                            console.log('prer',resp)
-                            if(resp.flag){
-                                //获取到。保存数据
-                                localStorage.setItem('mgx-msm-user',JSON.stringify(resp.data))
-                                next()
-                            }else{
-                                //为获取到。重新登录
-                                next({pash: '/login'})
-                            }
-                        }
-                    )
-                }
-            }
+            
         }
     }
-)
+    
+
+ })

@@ -1,6 +1,5 @@
 <template>
     <el-breadcrumb  separator="/">
-        <!-- 其中获取导航名称使用 $route.meta.title , 路由地址使用 $route.path -->
          <el-breadcrumb-item class="line" :to="{ path: $route.path }">{{$route.meta.title}}</el-breadcrumb-item>
     </el-breadcrumb>
 </template>

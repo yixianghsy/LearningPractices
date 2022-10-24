@@ -1,24 +1,47 @@
 <template>
-    <div class="main">
-        <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item  class="line" :to="{ path: '/' }">首页</el-breadcrumb-item>
-        </el-breadcrumb>
-        <!-- 子路由渲染出口 -->
-        <router-view ></router-view>
-    </div>
-  </template>
-
+  <div>
+    <app-header></app-header>
+    <app-navbar></app-navbar>
+    <app-main></app-main>
+  </div>
 </template>
-<style scoped>
-.el-breadcrumb {
-height: 10px;
-padding: 20px;
-border-radius: 4px;
-/* 投影 */
-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+<script>
+// 会导入 ./AppHeader 下面的 index.vue组件
+import AppHeader from './AppHeader'
+import AppNavbar from './AppNavbar'
+import AppMain from './AppMain'
+
+export default {
+    components: {AppHeader, AppNavbar, AppMain}
 }
- .line {
-    border-left:3px solid #31c17b;
-    padding-left: 10px;
-} 
+</script>
+<style scoped>
+/* 头部区域 */
+.header {
+    position: absolute;
+    line-height: 50px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: #2d3a4b
+}
+.navbar {
+    position: absolute;
+    width: 230px;
+    top: 50px;
+    left: 0px;
+    bottom: 0px;
+    overflow-y: auto;
+    background-color: #545c64;
+}
+.main {
+    position: absolute;
+    top: 50px;
+    left: 230px;
+    right: 0px;
+    bottom: 0px;
+    padding: 10px;
+    overflow-y: auto;
+    /* background-color: red; */
+}
 </style>
