@@ -1,6 +1,7 @@
-import request from "@/utils/request"
+import request from '@/utils/request'
+
 export default {
-    // 分页获取列表
+    // 分页条件查询
     search(page, size, searchMap) {
         return request({
             url: `/goods/list/search/${page}/${size}`,
@@ -8,4 +9,35 @@ export default {
             data: searchMap
         })
     },
+
+    add(pojo) {
+        return request({
+            url: `/goods`,
+            method: 'post',
+            data: pojo
+        })
+    },
+
+    getById(id) {
+        return request({
+            url: `/goods/${id}`,
+            method: 'get'
+        })
+    },
+
+    update(pojo) {
+        return request({
+            url: `/goods/${pojo.id}`,
+            method: 'put',
+            data: pojo
+        })
+    },
+
+    deleteById(id) {
+        return request({
+            url: `/goods/${id}`,
+            method: 'delete'
+        })
+    }
+
 }
