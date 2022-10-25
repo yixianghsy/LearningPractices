@@ -37,8 +37,7 @@
          <el-table
             :data="list"
             height="380"
-            border
-            style="width: 100%">
+            borderstyle="width: 100%">
             <!-- type="index"获取索引值，从1开始 ，label显示标题，prop 数据字段名，width列宽 -->
             <el-table-column type="index" label="序号" width="60"></el-table-column>
             <el-table-column prop="cardNum" label="会员卡号" ></el-table-column>
