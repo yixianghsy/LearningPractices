@@ -2,7 +2,8 @@
 import request from '@/utils/request'
 
 // /dev-api http://mengxuegu.com:7300/mock/5d477ccbfacc296cd6834fe5/db.json
-const BASE_URI = 'http://localhost:8888'
+const BASE_URI = process.env.VUE_APP_BASE_API
+
 // request.get('/db.json').then(response => {
 //     console.log(response.data)
 // })
