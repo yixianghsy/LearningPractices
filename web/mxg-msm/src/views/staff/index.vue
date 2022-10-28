@@ -72,7 +72,7 @@
         title 窗口的标题
         :visible.sync 当它true的时候，窗口会被弹出
         -->
-    <el-dialog title="新增" :visible.sync="dialogFormVisible" width="500px">
+    <el-dialog :title="pojo.id === null ? '新增':'编辑'" :visible.sync="dialogFormVisible" width="500px">
       <el-form
         :rules="rules"
         ref="pojoForm"
