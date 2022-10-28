@@ -1,0 +1,54 @@
+app:
+  name: 后台管理
+  version: 1.0
+druid:
+  allow:
+    ip: 127.0.0.1
+  login:
+    user_name: root
+    password: root
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.10.250:3306/e3mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    initial-size: 1
+    min-idle: 1
+    max-idle: 5
+    max-wait-millis: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: true
+    testOnReturn: false
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+dubbo:
+  application:
+    name: mall-manager
+  protocol:
+    name: dubbo
+    port: 20882
+  registry:
+    address: zookeeper://192.168.10.250:2181
+    protocol: zookeeper
+  scan:
+    base-packages: com.mall.mansger.service
+server:
+  port: 8024
+#头部值
+REDIS_ITEM_PRE2: ITEM_INFO
+ITEM_CACHE_EXPIRE: 600000
+#mq
+rocketmq:
+  producer:
+    groupName: mall-manager
+    namesrvAddr: 192.168.10.250:9876
+    default: true

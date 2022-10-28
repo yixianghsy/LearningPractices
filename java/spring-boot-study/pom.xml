@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.songguoliang</groupId>
+    <artifactId>spring-boot-study</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>spring-boot-demo</module>
+        <module>spring-boot-properties</module>
+        <module>spring-boot-env</module>
+        <module>spring-boot-mybatis</module>
+        <module>spring-boot-druid</module>
+        <module>spring-boot-pagehelper</module>
+        <module>spring-boot-mapper4</module>
+        <module>spring-boot-jsp</module>
+        <module>spring-boot-fastjson</module>
+        <module>spring-boot-devtools</module>
+        <module>spring-boot-upload</module>
+        <module>spring-boot-ehcache</module>
+        <module>spring-boot-mybatis-generator</module>
+        <module>spring-boot-shiro</module>
+        <module>spring-boot-shiro-ehcache</module>
+        <module>spring-boot-shiro-ehcache-shiro</module>
+        <module>spring-boot-scheduling</module>
+        <module>spring-boot-quartz</module>
+        <module>spring-boot-quartz-db</module>
+        <module>spring-boot-mybatis-generator-mysql</module>
+        <module>spring-boot-jwt</module>
+    </modules>
+
+
+</project>

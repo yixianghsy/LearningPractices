@@ -1,0 +1,43 @@
+CONTENT_LIST: CONTENT_LIST
+druid:
+  allow:
+    ip: 127.0.0.1
+  login:
+    password: root
+    user_name: root
+dubbo:
+  application:
+    name: mall-content
+  protocol:
+    name: dubbo
+    port: 20881
+  registry:
+    address: zookeeper://192.168.10.250:2181
+    protocol: zookeeper
+  scan:
+    base-packages: com.mall.content.service
+server:
+  port: 8021
+spring:
+  datasource:
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat,wall
+    initial-size: 1
+    max-idle: 5
+    max-wait-millis: 60000
+    maxPoolPreparedStatementPerConnectionSize: 20
+    min-idle: 1
+    minEvictableIdleTimeMillis: 300000
+    testOnBorrow: true
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://192.168.10.250:3306/e3mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+    validationQuery: SELECT 1 FROM DUAL
+  redis:
+    host: 192.168.10.250
+    port: 6379

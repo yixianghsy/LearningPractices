@@ -1,0 +1,8 @@
+
+spring:
+  profiles:
+    active: dev,common #这样就引入其他模块的yml文件了，可以使用@value等方式取值。
+
+mybatis:
+  mapper-locations:
+    - classpath:dao/*.xml

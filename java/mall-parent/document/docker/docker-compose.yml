@@ -1,0 +1,79 @@
+version: '3'
+services:
+ es01:
+  image: ${image}
+  container_name: es01
+  environment:
+   - discovery.seed_hosts=es02,es03
+   - cluster.initial_master_nodes=es01,es02,es03
+   - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  ulimits:
+   memlock:
+    soft: -1
+    hard: -1
+  volumes:
+   - /home/hsy/Es/es01/data:/usr/share/elasticsearch/data
+   - /home/hsy/Es/es01/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+   - /home/hsy/Es/es01/plugins:/usr/share/elasticsearch/plugins
+  ports:
+   - 9200:9200
+  networks:
+   - elastic
+ es02:
+  image: ${image}
+  container_name: es02
+  environment:
+   - discovery.seed_hosts=es01,es03
+   - cluster.initial_master_nodes=es01,es02,es03
+   - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  ulimits:
+   memlock:
+    soft: -1
+    hard: -1
+  volumes:
+   - /home/hsy/Es/es02/data:/usr/share/elasticsearch/data
+   - /home/hsy/Es/es02/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+   - /home/hsy/Es/es02/plugins:/usr/share/elasticsearch/plugins
+  ports:
+   - 9201:9201
+  networks:
+   - elastic
+
+ es03:
+  image: ${image}
+  container_name: es03
+  environment:
+   - discovery.seed_hosts=es01,es02
+   - cluster.initial_master_nodes=es01,es02,es03
+   - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  ulimits:
+   memlock:
+    soft: -1
+    hard: -1
+  volumes:
+   - /home/hsy/Es/es03/data:/usr/share/elasticsearch/data
+   - /home/hsy/Es/es03/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+   - /home/hsy/Es/es03/plugins:/usr/share/elasticsearch/plugins
+  ports:
+   - 9202:9202
+  networks:
+   - elastic
+ kibana:
+  image: ${image_kibana}
+  container_name: kibana
+  depends_on:
+   - es01
+  environment:
+   ELASTICSEARCH_URL: http://es01:9200
+   ELASTICSEARCH_HOSTS: http://es01:9200
+  volumes:
+   - /home/hsy/Es/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+  networks:
+   - elastic
+  ports:
+   - 5601:5601
+
+networks:
+ elastic:
+  driver: bridge
+

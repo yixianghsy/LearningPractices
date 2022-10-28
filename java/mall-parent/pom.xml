@@ -3,20 +3,27 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.mall</groupId>
     <artifactId>mall-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>mall-parent</name>
-    <!--指定当前项目继承spring-boot-->
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-
+    <modules>
+        <module>mall-common</module>
+        <module>mall-content</module>
+        <module>mall-search</module>
+        <module>mall-manager</module>
+        <module>mall-sso</module>
+        <module>mall-cart</module>
+        <module>mall-order</module>
+        <module>mall-manager-web</module>
+        <module>mall-search-web</module>
+        <module>mall-sso-web</module>
+        <module>mall-portal-web</module>
+        <module>mall-item-web</module>
+        <module>mall-order-web</module>
+        <module>mall-cart-web</module>
+    </modules>
     <!--项目中依赖版本统一管理-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,38 +33,40 @@
         <mybatis.version>2.1.1</mybatis.version>
         <lombok.version>1.18.10</lombok.version>
         <junit.version>4.12</junit.version>
+        <!--这里是复制过来的-->
+        <version.rocketmq>4.3.0</version.rocketmq>
+        <version.lombok>1.18.10</version.lombok>
+        <version.qiniu>[7.2.0, 7.2.99]</version.qiniu>
+        <version.fastdfs>1.25</version.fastdfs>
+        <version.okhttp>3.3.1</version.okhttp>
+        <version.gson>2.6.2</version.gson>
+        <version.druid>1.1.0</version.druid>
+        <version.dubbo>2.7.3</version.dubbo>
+        <version.curator>2.8.0</version.curator>
+        <version.curator-recipe>2.8.0</version.curator-recipe>
+        <version.zookeeper>3.4.13</version.zookeeper>
+        <version.zkclient>0.10</version.zkclient>
+        <version.redis>2.2.7.RELEASE</version.redis>
+        <version.swagger>1.5.0</version.swagger>
+        <version.rocketmq>4.3.0</version.rocketmq>
+        <version.mysql>5.1.46</version.mysql>
+        <version.mybatis>1.3.2</version.mybatis>
+        <version.pagehelper>1.2.10</version.pagehelper>
+        <version.lang3>3.3.2</version.lang3>
+        <version.commons.io>2.5</version.commons.io>
+        <version.elasticsearch>7.2.0</version.elasticsearch>
+        <version.web>2.2.7.RELEASE</version.web>
+        <version.jstl>1.2</version.jstl>
+        <version.tomcat>9.0.34</version.tomcat>
+        <version.fastjson>1.2.62</version.fastjson>
+        <version.freemarker>2.2.7.RELEASE</version.freemarker>
     </properties>
-    <!--注册子项目 后面创建二级子项目后，需在父项目中注册-->
-    <modules>
-        <!--<module>swotxu-common</module>-->
-        <!--<module>swotxu-webbase</module>-->
-        <module>mall-manager</module>
-    </modules>
-
-    <!--
-    	父项目引用依赖
-        注：父项目依赖引用有两种方式
-        1、使用此方式进行依赖管理时，父项目相当于一个依赖发布工厂。
-            子项目需要哪些依赖，需要手动指定引入，无法继承父项目依赖直接使用
-            <dependencyManagement>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-web</artifactId>
-                        <version>${springboot.version}</version>
-                    </dependency>
-                </dependencies>
-            </dependencyManagement>
-         2、使用此方式经行依赖管理时，子项目无需手动指定依赖引入，
-            会自动继承父依赖直接使用。
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                    <version>${springboot.version}</version>
-                </dependency>
-            </dependencies>
-    -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.7.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
     <dependencyManagement>
         <dependencies>
             <!-- web组件 -->
@@ -79,33 +88,195 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <!--这里复制过来的-->
+            <!--对于包管理尽量做到相互依赖的包放一起并做好注释 -->
+            <!--分页插件-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${version.pagehelper}</version>
+            </dependency>
+            <!--rocketmq-->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${version.rocketmq}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${version.lombok}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!--qiniu图片上传-->
+            <dependency>
+                <groupId>com.qiniu</groupId>
+                <artifactId>qiniu-java-sdk</artifactId>
+                <version>${version.qiniu}</version>
+            </dependency>
+            <dependency>
+                <groupId>fastdfs_client</groupId>
+                <artifactId>fastdfs_client</artifactId>
+                <version>${version.fastdfs}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${version.okhttp}</version>
+                <scope>compile</scope>
+            </dependency>
+            <!--gson-->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${version.gson}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${version.web}</version>
+            </dependency>
+            <!--druid-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${version.druid}</version>
+            </dependency>
+            <!-- 新增 dubbo/zookeeper依赖 -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${version.dubbo}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${version.dubbo}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${version.curator}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${version.curator-recipe}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>${version.zookeeper}</version>
+                <type>pom</type>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>com.101tec</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>${version.zkclient}</version>
+            </dependency>
+            <!-- redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${version.redis}</version>
+            </dependency>
+            <!-- jsp -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${version.jstl}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-jasper</artifactId>
+                <version>${version.tomcat}</version>
+            </dependency>
+            <!--文档生成包 -->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${version.swagger}</version>
+            </dependency>
+            <!--rocketmq-->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${version.rocketmq}</version>
+            </dependency>
+            <!-- 数据库驱动包 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${version.mysql}</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${version.mybatis}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${version.pagehelper}</version>
+            </dependency>
+            <!-- commons-lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${version.lang3}</version>
+            </dependency>
+            <!-- commons-io -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${version.commons.io}</version>
+            </dependency>
+            <!-- elasticsearch -->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${version.elasticsearch}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${version.elasticsearch}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${version.fastjson}</version>
+            </dependency>
+            <!-- freemarker 依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-freemarker</artifactId>
+                <version>${version.freemarker}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <build>
-        <plugins>
-            <!-- 资源文件拷贝插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <!-- java编译插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+
 </project>
