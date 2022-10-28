@@ -259,7 +259,7 @@ export default {
         
         // 打开编辑窗口
         handleEdit(id) {
-            console.log('编辑', id)
+        console.log('编辑', id)
            this.handleAdd()
             memberApi.getById(id).then(response => {
                 const resp = response.data
