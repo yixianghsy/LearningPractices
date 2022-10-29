@@ -1,3 +1,0 @@
-对于pagehelper分页插件的的心得及出现警告java.lang.ClassNotFoundException: com.github.pagehelper.Page
-心得，由于这个插件中的page继承了ArrayList并对其拓展，serbice又对其依赖所以查询后返回的是一个page对象，后面经过序列化传输到web层时被反序
-列化成ArrayList，又因为是page的父类所以不会报错，只是警告，解决方法就是在web的pom文件中添加pagehelper依赖

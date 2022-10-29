@@ -1,7 +1,7 @@
 spring:
   redis:
     database: 0
-    host: 192.168.10.250
+    host: 120.24.80.45
     port: 6379
     password: # 如果未单独配置默认为空即可
     timeout: 1000

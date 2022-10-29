@@ -7,7 +7,7 @@ druid:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.10.250:3306/e3mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://120.24.80.45:3306/e3mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
@@ -36,7 +36,7 @@ server:
 rocketmq:
   producer:
     groupName: mall-search
-    namesrvAddr: 192.168.10.250:9876
+    namesrvAddr: 120.24.80.45:9876
     default: true
 dubbo:
   application:
@@ -45,7 +45,7 @@ dubbo:
     name: dubbo
     port: 20884
   registry:
-    address: zookeeper://192.168.10.250:2181
+    address: zookeeper://120.24.80.45:2181
     protocol: zookeeper
   scan:
     base-packages: com.mall.search.service

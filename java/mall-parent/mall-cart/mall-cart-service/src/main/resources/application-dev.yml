@@ -10,9 +10,9 @@ druid:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.10.250:3306/e3mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
-    username: root
-    password: root
+    url: jdbc:mysql://120.24.80.45:3306/mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: mall
+    password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
     initial-size: 1
     min-idle: 1
@@ -31,7 +31,7 @@ spring:
     # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
   redis:
-    host: 192.168.10.250
+    host: 120.24.80.45
     port: 6379
 dubbo:
   application:
@@ -40,7 +40,7 @@ dubbo:
     name: dubbo
     port: 20880
   registry:
-    address: zookeeper://192.168.10.250:2181
+    address: zookeeper://120.24.80.45:2181
     protocol: zookeeper
   scan:
     base-packages: com.mall.cart.service
@@ -53,6 +53,6 @@ ITEM_CACHE_EXPIRE: 600000
 rocketmq:
   producer:
     groupName: mall-manager
-    namesrvAddr: 192.168.10.250:9876
+    namesrvAddr: 120.24.80.45:9876
     default: true
 REDIS_CART_PRE: CART
