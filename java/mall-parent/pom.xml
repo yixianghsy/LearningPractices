@@ -60,6 +60,7 @@
         <version.tomcat>9.0.34</version.tomcat>
         <version.fastjson>1.2.62</version.fastjson>
         <version.freemarker>2.2.7.RELEASE</version.freemarker>
+        <common.version>1.0-SNAPSHOT</common.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -69,6 +70,12 @@
     </parent>
     <dependencyManagement>
         <dependencies>
+            <!-- 公共依赖 -->
+            <dependency>
+                <groupId>com.mall</groupId>
+                <artifactId>mall-common</artifactId>
+                <version>${common.version}</version>
+            </dependency>
             <!-- web组件 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
