@@ -5,6 +5,7 @@ import com.mall.mapper.pojo.TbItem;
 import com.mall.pojo.EasyUIDataGridResult;
 import com.mall.mansger.service.ItemService;
 import com.mall.utils.E3Result;
+import com.mall.utils.JsonUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,8 @@ public class ItemController {
 
     //调用服务查询商品列表
         EasyUIDataGridResult easyUIDataGridResult = itemService.getItemListgetItemList(page,rows);
+        String json = JsonUtils.objectToJson(easyUIDataGridResult);
+        System.out.println("ItemController.getItemList"+json);
         return easyUIDataGridResult;
     }
     /**
