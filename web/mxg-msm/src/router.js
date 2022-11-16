@@ -28,7 +28,8 @@ export default new Router({
         {
           path: '/home',
           component: Home,
-          meta: {title: '首页'}
+          meta: {
+            title: '首页'}
         },
         // {
         //   path: '/member',
