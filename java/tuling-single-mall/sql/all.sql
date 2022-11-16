@@ -6,7 +6,7 @@ Source Server Version : 50719
 Source Host           : localhost:3306
 Source Database       : micromall
 
-Target Server Type    : MYSQL
+Target Server Type    : MYSQLpms_product_category
 Target Server Version : 50719
 File Encoding         : 65001
 
