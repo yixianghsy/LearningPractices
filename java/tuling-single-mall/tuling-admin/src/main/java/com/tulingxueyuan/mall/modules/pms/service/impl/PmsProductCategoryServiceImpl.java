@@ -112,7 +112,26 @@ public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategor
     }
     @Override
     public boolean update(PmsProductCategoryDTO productCategoryDTO) {
-        return false;
+        //保存商品分类
+        PmsProductCategory productCategory = new PmsProductCategory();
+        // 通过BeanUtils 将productCategoryDTO的数据拷贝到productCategory
+        // 为什么要拷贝：因为一定要通过this.save 去保存PmsProductCategory，因为只有它才映射了@TableName
+        BeanUtils.copyProperties(productCategoryDTO,productCategory);
+        if (productCategory.getParentId() == 0) {
+            productCategory.setLevel(0);
+        }else {
+            // 如果有多级分类，根据parentId查出商品分类获取level+1
+            // 由于只有2级分类，直接设置为1'
+            productCategory.setLevel(1);
+        }
+        this.updateById(productCategory);
+        // 删除已保存的关联属性—根据商品分类id删除
+        QueryWrapper<PmsProductCategoryAttributeRelation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(PmsProductCategoryAttributeRelation::getProductCategoryId,productCategory.getParentId());
+        relationService.remove(queryWrapper);
+
+        saveAttrRelation(productCategoryDTO, productCategory);
+        return true;
     }
 
 

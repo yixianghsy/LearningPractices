@@ -90,5 +90,45 @@ public class PmsProductCategoryController {
             return CommonResult.failed();
         }
     }
+
+    /**
+     *  根据id获取商品分类
+     *  return request({
+     *     url:'/productCategory/'+id,
+     *     method:'get',
+     *   })
+     */
+    @RequestMapping(value="/{id}",method = RequestMethod.GET)
+    public CommonResult<PmsProductCategory>  getById(@PathVariable Long id){
+        PmsProductCategory productCategory = productCategoryService.getById(id);
+        return CommonResult.success(productCategory);
+    }
+    /**
+     * 修改
+     *   url:'/productCategory/update/'+id,
+     *     method:'post',
+     *     data:data
+     *
+     */
+    @RequestMapping(value="/update/{id}",method = RequestMethod.POST)
+    public CommonResult update(@RequestBody PmsProductCategoryDTO productCategoryDTO){
+        boolean result = productCategoryService.update(productCategoryDTO);
+        if (result) {
+            return  CommonResult.success(result);
+        }else {
+            return  CommonResult.failed();
+        }
+    }
+    /**
+     *   获取商品一级分类和二级分类的下拉级联数据
+     *   url:'/productCategory/list/withChildren',
+     *     method:'get'
+     */
+//    @RequestMapping("/list/withChildren")
+//    public  CommonResult getWithChildren(){
+//        List<ProductCateChildrenDTO> list= productCategoryService.getWithChildren();
+//
+//        return CommonResult.success(list);
+//    }
 }
 
