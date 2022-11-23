@@ -4,6 +4,7 @@ package com.tulingxueyuan.mall.modules.pms.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tulingxueyuan.mall.common.api.CommonPage;
 import com.tulingxueyuan.mall.common.api.CommonResult;
+import com.tulingxueyuan.mall.dto.PmsProductCategoryDTO;
 import com.tulingxueyuan.mall.modules.pms.model.PmsProductCategory;
 import com.tulingxueyuan.mall.modules.pms.service.PmsProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,22 @@ public class PmsProductCategoryController {
 
         }else {
             return  CommonResult.failed();
+        }
+    }
+    /**
+     * 分类添加
+     * url:'/productCategory/create',
+     *     method:'post',
+     *     data:data
+     */
+    @RequestMapping(value="/create",method = RequestMethod.POST)
+    public CommonResult create (@RequestBody PmsProductCategoryDTO productCategoryDTO){
+        boolean result = productCategoryService.CustomSave(productCategoryDTO);
+        if(result){
+            return CommonResult.success(result);
+        }
+        else {
+            return CommonResult.failed();
         }
     }
 }
