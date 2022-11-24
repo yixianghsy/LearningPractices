@@ -168,7 +168,7 @@
         // 对整个表单进行校验的方法 https://element.eleme.io/#/zh-CN/component/form
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            let data = new URLSearchParams();    // formdata 
+            let data = new URLSearchParams();    // 后端就不需要转成对象了
             data.append("name",this.productAttrCate.name);
             // 添加
             if(this.dialogTitle==="添加类型"){
