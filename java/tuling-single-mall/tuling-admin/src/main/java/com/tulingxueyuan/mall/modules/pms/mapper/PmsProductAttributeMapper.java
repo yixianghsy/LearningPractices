@@ -1,7 +1,10 @@
 package com.tulingxueyuan.mall.modules.pms.mapper;
 
+import com.tulingxueyuan.mall.dto.RelationAttrInfoDTO;
 import com.tulingxueyuan.mall.modules.pms.model.PmsProductAttribute;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2022-11-16
  */
 public interface PmsProductAttributeMapper extends BaseMapper<PmsProductAttribute> {
+    List<RelationAttrInfoDTO> getRelationAttrInfoByCid(Long cId);
 
 }
