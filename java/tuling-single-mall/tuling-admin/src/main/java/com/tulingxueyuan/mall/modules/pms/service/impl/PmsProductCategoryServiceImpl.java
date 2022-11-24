@@ -1,10 +1,10 @@
 package com.tulingxueyuan.mall.modules.pms.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tulingxueyuan.mall.dto.PmsProductCategoryDTO;
+import com.tulingxueyuan.mall.dto.ProductCateChildrenDTO;
 import com.tulingxueyuan.mall.modules.pms.model.PmsProductCategory;
 import com.tulingxueyuan.mall.modules.pms.mapper.PmsProductCategoryMapper;
 import com.tulingxueyuan.mall.modules.pms.model.PmsProductCategoryAttributeRelation;
@@ -32,6 +32,9 @@ public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategor
 
     @Autowired
     PmsProductCategoryAttributeRelationService relationService;
+
+    @Autowired
+    PmsProductCategoryMapper productCategoryMapper;
 
     /**
      * 获取商品分类列表
@@ -134,5 +137,13 @@ public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategor
         return true;
     }
 
+    /**
+     * 获取商品一级分类和二级分类的下拉级联数据
+     * @return
+     */
+    @Override
+    public List<ProductCateChildrenDTO> getWithChildren() {
+        return productCategoryMapper.getWithChildren();
+    }
 
 }

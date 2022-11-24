@@ -9,5 +9,21 @@
         <result column="attribute_count" property="attributeCount" />
         <result column="param_count" property="paramCount" />
     </resultMap>
+    <resultMap id="ListWithAttrMap" type="com.tulingxueyuan.mall.dto.ProductAttributeCateDTO">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <!--嵌套查询   定义2条sql语句 1.查商品分类 2.商品属性-->
+        <!--嵌套结果  1.一条sql语句-->
+        <collection property="productAttributeList" columnPrefix="attr_" resultMap="PmsProductAttributeMapper.BaseResultMap" ></collection>
+    </resultMap>
 
+    <select id="getListWithAttr" resultMap="ListWithAttrMap" >
+        SELECT
+            pac.id,
+            pac.`name`,
+            pa.id attr_id,
+            pa.`name` attr_name
+        FROM pms_product_attribute_category pac
+                 LEFT JOIN pms_product_attribute pa ON pac.id=pa.product_attribute_category_id and pa.type=1
+    </select>
 </mapper>

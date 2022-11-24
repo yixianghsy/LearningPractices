@@ -2,6 +2,7 @@ package com.tulingxueyuan.mall.modules.pms.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tulingxueyuan.mall.dto.PmsProductCategoryDTO;
+import com.tulingxueyuan.mall.dto.ProductCateChildrenDTO;
 import com.tulingxueyuan.mall.modules.pms.model.PmsProductCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -26,4 +27,5 @@ public interface PmsProductCategoryService extends IService<PmsProductCategory> 
     boolean update(PmsProductCategoryDTO productCategoryDTO);
 
 
+    List<ProductCateChildrenDTO> getWithChildren();
 }

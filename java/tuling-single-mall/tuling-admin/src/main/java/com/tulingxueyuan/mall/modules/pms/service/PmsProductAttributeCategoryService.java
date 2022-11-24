@@ -1,7 +1,11 @@
 package com.tulingxueyuan.mall.modules.pms.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tulingxueyuan.mall.dto.ProductAttributeCateDTO;
 import com.tulingxueyuan.mall.modules.pms.model.PmsProductAttributeCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +16,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-11-16
  */
 public interface PmsProductAttributeCategoryService extends IService<PmsProductAttributeCategory> {
+    Page list(Integer pageNum, Integer pageSize);
 
+    boolean add(PmsProductAttributeCategory productAttributeCategory);
+
+    List<ProductAttributeCateDTO> getListWithAttr();
 }
