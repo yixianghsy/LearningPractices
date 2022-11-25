@@ -21,7 +21,6 @@ public class SwaggerConfig extends BaseSwaggerConfig {
                 .description("tuling_mall项目后台管理接口文档")
                 .contactName("xushu")
                 .version("1.0")
-                .enableSecurity(false)
                 .build();
     }
 }

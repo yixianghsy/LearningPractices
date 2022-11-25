@@ -21,6 +21,4 @@ public class MyBatisConfig {
         paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));
         return paginationInterceptor;
     }
-
-
 }

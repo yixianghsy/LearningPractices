@@ -13,9 +13,10 @@ import java.util.List;
  * </p>
  *
  * @author XuShu
- * @since 2022-11-16
+ * @since 2021-02-26
  */
 public interface PmsProductAttributeCategoryService extends IService<PmsProductAttributeCategory> {
+
     Page list(Integer pageNum, Integer pageSize);
 
     boolean add(PmsProductAttributeCategory productAttributeCategory);

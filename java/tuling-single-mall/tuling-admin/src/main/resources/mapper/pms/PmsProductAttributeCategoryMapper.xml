@@ -9,6 +9,7 @@
         <result column="attribute_count" property="attributeCount" />
         <result column="param_count" property="paramCount" />
     </resultMap>
+
     <resultMap id="ListWithAttrMap" type="com.tulingxueyuan.mall.dto.ProductAttributeCateDTO">
         <id column="id" property="id" />
         <result column="name" property="name" />
@@ -19,11 +20,11 @@
 
     <select id="getListWithAttr" resultMap="ListWithAttrMap" >
         SELECT
-            pac.id,
-            pac.`name`,
-            pa.id attr_id,
-            pa.`name` attr_name
+        pac.id,
+        pac.`name`,
+        pa.id attr_id,
+        pa.`name` attr_name
         FROM pms_product_attribute_category pac
-                 LEFT JOIN pms_product_attribute pa ON pac.id=pa.product_attribute_category_id and pa.type=1
+        LEFT JOIN pms_product_attribute pa ON pac.id=pa.product_attribute_category_id and pa.type=1
     </select>
 </mapper>

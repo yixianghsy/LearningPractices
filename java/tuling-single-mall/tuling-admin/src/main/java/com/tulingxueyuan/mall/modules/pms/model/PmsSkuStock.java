@@ -1,14 +1,17 @@
 package com.tulingxueyuan.mall.modules.pms.model;
 
-import java.math.BigDecimal;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -16,7 +19,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author XuShu
- * @since 2022-11-16
+ * @since 2021-03-09
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -32,6 +35,7 @@ public class PmsSkuStock implements Serializable {
     private Long productId;
 
     @ApiModelProperty(value = "sku编码")
+    @NotBlank(message = "SKU编号不能为空")
     private String skuCode;
 
     private BigDecimal price;

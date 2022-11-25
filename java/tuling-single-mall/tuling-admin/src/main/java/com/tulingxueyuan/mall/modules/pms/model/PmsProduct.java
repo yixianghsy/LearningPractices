@@ -1,6 +1,8 @@
 package com.tulingxueyuan.mall.modules.pms.model;
 
 import java.math.BigDecimal;
+
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
@@ -11,13 +13,15 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 商品信息
  * </p>
  *
  * @author XuShu
- * @since 2022-11-16
+ * @since 2021-02-26
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -31,7 +35,7 @@ public class PmsProduct implements Serializable {
     private Long id;
 
     private Long brandId;
-
+    // 二级分类id
     private Long productCategoryId;
 
     private Long feightTemplateId;
@@ -46,6 +50,7 @@ public class PmsProduct implements Serializable {
     private String productSn;
 
     @ApiModelProperty(value = "删除状态：0->未删除；1->已删除")
+    @TableLogic(value="0",delval = "1")
     private Integer deleteStatus;
 
     @ApiModelProperty(value = "上架状态：0->下架；1->上架")

@@ -1,10 +1,8 @@
 package com.tulingxueyuan.mall.config;
 
-import org.apache.tomcat.util.http.Rfc6265CookieProcessor;
-import org.apache.tomcat.util.http.SameSiteCookies;
-import org.springframework.boot.web.embedded.tomcat.TomcatContextCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -34,5 +32,4 @@ public class GlobalCorsConfig  {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
- 
 }

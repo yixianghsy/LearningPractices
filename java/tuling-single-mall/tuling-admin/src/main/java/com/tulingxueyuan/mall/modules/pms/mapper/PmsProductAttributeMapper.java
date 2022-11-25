@@ -12,9 +12,9 @@ import java.util.List;
  * </p>
  *
  * @author XuShu
- * @since 2022-11-16
+ * @since 2021-02-26
  */
 public interface PmsProductAttributeMapper extends BaseMapper<PmsProductAttribute> {
-    List<RelationAttrInfoDTO> getRelationAttrInfoByCid(Long cId);
 
+    List<RelationAttrInfoDTO> getRelationAttrInfoByCid(Long cId);
 }

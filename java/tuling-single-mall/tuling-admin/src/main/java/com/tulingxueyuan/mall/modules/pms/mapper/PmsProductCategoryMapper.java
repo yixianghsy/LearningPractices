@@ -12,9 +12,10 @@ import java.util.List;
  * </p>
  *
  * @author XuShu
- * @since 2022-11-16
+ * @since 2021-02-26
  */
 public interface PmsProductCategoryMapper extends BaseMapper<PmsProductCategory> {
+
     /**
      * 获取商品一级分类和二级分类的下拉级联数据
      * @return
