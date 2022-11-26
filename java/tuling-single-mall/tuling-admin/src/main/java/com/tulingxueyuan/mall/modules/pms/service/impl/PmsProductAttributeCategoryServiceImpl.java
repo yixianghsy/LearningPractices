@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import com.tulingxueyuan.mall.modules.pms.mapper.PmsProductAttributeCategoryMapper;
 import com.tulingxueyuan.mall.modules.pms.model.PmsProductAttributeCategory;
-import com.tulingxueyuan.mall.modules.pms.model.dto.ProductAttributeCateDTO;
+import com.tulingxueyuan.mall.dto.ProductAttributeCateDTO;
 import com.tulingxueyuan.mall.modules.pms.service.PmsProductAttributeCategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

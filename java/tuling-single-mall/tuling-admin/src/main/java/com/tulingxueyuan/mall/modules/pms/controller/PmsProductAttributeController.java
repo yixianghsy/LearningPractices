@@ -101,8 +101,7 @@ public class PmsProductAttributeController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public CommonResult delete(@RequestParam("ids") List<Long> ids) {
 
-//        boolean result = productAttributeService.delete(ids);
-        boolean result = productAttributeService.removeByIds(ids);
+        boolean result = productAttributeService.delete(ids);
         if (result) {
             return CommonResult.success(result);
         } else {
