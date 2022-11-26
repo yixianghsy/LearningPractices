@@ -4,7 +4,8 @@ import com.tulingxueyuan.mall.dto.RelationAttrInfoDTO;
 import com.tulingxueyuan.mall.modules.pms.mapper.PmsProductAttributeCategoryMapper;
 import com.tulingxueyuan.mall.modules.pms.mapper.PmsProductAttributeMapper;
 import com.tulingxueyuan.mall.modules.pms.service.PmsProductAttributeService;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 

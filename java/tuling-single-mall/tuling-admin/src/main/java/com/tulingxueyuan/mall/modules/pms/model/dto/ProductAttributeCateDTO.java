@@ -16,5 +16,5 @@ public class ProductAttributeCateDTO {
      //商品类型名称
      private  String name;
      //商品属性二级级联
-//     private List<PmsProductAttribute>   productAttributeList;
+     private List<PmsProductAttribute>   productAttributeList;
 }
