@@ -47,7 +47,7 @@ export default {
         //{value: '手机 电话卡', url: 'https://www.mi.com/p/1915.html', type: 'phone'},
       ],
       banners: [
-       {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cefed8336bae62768afeeb6a3b8f55c8.jpg?w=2452&h=920', url: 'https://www.mi.com/redminote7/'},
+      // {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cefed8336bae62768afeeb6a3b8f55c8.jpg?w=2452&h=920', url: 'https://www.mi.com/redminote7/'},
         
       ],
       products:{
@@ -67,22 +67,39 @@ export default {
       this.bannerMenuFlag = true;
       clearTimeout(this.menuTimer);
     },
-    init(){
-      this.axios.get("/home/menus").then((res) => {
-        let cateMenus =res;
-        for(let i = 0 ; i<cateMenus.length;i++){
-         const cate = cateMenus[i];
+    init() {
+        this.axios.get("/home/menus_banner").then((res) => { 
+          // 处理类型
+          let homeMenusList= res.homeMenusList;
+          for (let i = 0; i < homeMenusList.length; i++) {
+            const cate = homeMenusList[i];
             this.menus.push({
               value:cate.name,
               type:cate.id,
               url:"/#/searchResult/"+cate.name
             });
-             // 处理商品
-             this.products[cate.id]= cate.productList 
-        }
-      })
+            
+            // 处理商品
+            this.products[cate.id]= cate.productList 
+          }
 
-    }
+          // banner
+          let homeAdvertisesList= res.homeAdvertisesList;
+          for (let index = 0; index < homeAdvertisesList.length; index++) {
+            const adver = homeAdvertisesList[index];
+            this.banners.push({
+              src:adver.pic,
+              url:adver.url
+            })
+            
+          }
+          
+       });
+
+      // this.axios.get("/home/content").then((res) => {
+      //   this.banners = res.advertiseList;
+      // });
+    },
   },
     // 生命周期钩子函数
     mounted() {
