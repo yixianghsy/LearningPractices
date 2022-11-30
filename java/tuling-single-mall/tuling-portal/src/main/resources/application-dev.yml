@@ -14,3 +14,10 @@ logging:
   level:
     root: info
     com.tulingxueyuan: debug
+
+trade:
+  zhifu:
+    qrcode:
+      httpBasePath: /static/qrcode
+      paySuccessCallBack: http://tulingmall.free.idcfengye.com/order/paySuccess
+      storePath: D:/temp/qr-code
