@@ -32,6 +32,7 @@
         <velocity.version>2.2</velocity.version>
         <lombok.version>1.18.16</lombok.version>
         <mall.common.version>0.0.1-SNAPSHOT</mall.common.version>
+        <mall.security.version>0.0.1-SNAPSHOT</mall.security.version>
     </properties>
 
     <dependencies>
@@ -138,6 +139,21 @@
                 <artifactId>velocity-engine-core</artifactId>
                 <version>${velocity.version}</version>
             </dependency>
+
+            <!--jwt-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <!--tuling-security-->
+            <dependency>
+                <groupId>com.tulingxueyuan</groupId>
+                <artifactId>tuling-security</artifactId>
+                <version>${mall.security.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>
