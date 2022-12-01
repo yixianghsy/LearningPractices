@@ -11,8 +11,9 @@ import java.util.List;
  * </p>
  *
  * @author XuShu
- * @since 2022-11-30
+ * @since 2021-03-16
  */
 public interface SmsHomeAdvertiseService extends IService<SmsHomeAdvertise> {
+
     List<SmsHomeAdvertise> getHomeBanners();
 }

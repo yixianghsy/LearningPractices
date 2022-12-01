@@ -44,9 +44,9 @@
             p.sub_title pro_sub_title
         FROM
             pms_product_category pc
-                LEFT JOIN pms_product p ON EXISTS ( SELECT pc2.id FROM pms_product_category pc2 WHERE pc2.parent_id = pc.id AND p.product_category_id = pc2.id )
-                AND p.delete_status = 0
-                AND p.recommand_status = 1
+            LEFT JOIN pms_product p ON EXISTS ( SELECT pc2.id FROM pms_product_category pc2 WHERE pc2.parent_id = pc.id AND p.product_category_id = pc2.id )
+            AND p.delete_status = 0
+            AND p.recommand_status = 1
         WHERE
             pc.parent_id = 0 and nav_status=1
         ORDER BY

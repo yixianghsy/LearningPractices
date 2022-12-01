@@ -19,21 +19,7 @@
       </div>
     </div>
     <div class="box-content">
-      <div class="promo-content">
-        <div class="promo-one" v-if="goodsItem.listData.promo.length === 1">
-          <a class="brick-item" target="_blank" :href="goodsItem.listData.promo[0].url">
-            <img :src="goodsItem.listData.promo[0].src">
-          </a>
-        </div>
-        <div class="promo-two" v-if="goodsItem.listData.promo.length === 2">
-          <a class="brick-item" target="_blank"
-          :href="item.url"
-          v-for="(item, index) in goodsItem.listData.promo"
-          :key="index">
-            <img :src="item.src">
-          </a>
-        </div>
-      </div>
+       
       <div class="goods-content">
         <div class="goods-one" v-if="!goodsItem.isHot">
           <div class="goods-item brick-item"

@@ -1628,6 +1628,29 @@ INSERT INTO `sms_home_advertise` VALUES ('9', '电影推荐广告', '1', 'http:/
 INSERT INTO `sms_home_advertise` VALUES ('10', '汽车促销广告', '1', 'http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20181113/car_ad.jpg', '2018-11-13 00:00:00', '2018-11-24 00:00:00', '1', '0', '0', 'xxx', null, '99');
 INSERT INTO `sms_home_advertise` VALUES ('11', '汽车推荐广告', '1', 'http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20181113/car_ad2.jpg', '2018-11-13 00:00:00', '2018-11-30 00:00:00', '1', '0', '0', 'xxx', null, '98');
 
+
+
+-- ----------------------------
+-- Table structure for sms_home_category
+-- ----------------------------
+DROP TABLE IF EXISTS `sms_home_category`;
+CREATE TABLE `sms_home_category`  (
+                                      `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                                      `category_id` bigint(20) NULL DEFAULT NULL  COMMENT '二级分类id',
+                                      `category_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+                                      `type` int(1) NULL DEFAULT NULL COMMENT '广告位置：0->PC广告首页；1->app广告轮播',
+                                      `status` int(1) NULL DEFAULT NULL COMMENT '上下线状态：0->下线；1->上线',
+                                      `pic` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+                                      `url` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '链接地址',
+                                      `sort` int(11) NULL DEFAULT 0 COMMENT '排序',
+                                      PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of sms_home_category
+-- ----------------------------
+INSERT INTO `sms_home_category` VALUES (1, 19, '手机', 0, 1, 'https://tulingmall-xushu.oss-cn-chengdu.aliyuncs.com/phone.jpg', 'http://localhost:8081/#/detail/26', 10);
+INSERT INTO `sms_home_category` VALUES (2, 7, '外套', 0, 1, 'https://tulingmall-xushu.oss-cn-chengdu.aliyuncs.com/clothes.jpg', 'http://localhost:8081/#/detail/30', 20);
 -- ----------------------------
 -- Table structure for sms_home_brand
 -- ----------------------------

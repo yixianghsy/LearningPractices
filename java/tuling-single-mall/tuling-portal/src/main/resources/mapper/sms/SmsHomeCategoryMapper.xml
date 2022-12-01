@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tulingxueyuan.mall.modules.sms.mapper.SmsHomeCategoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tulingxueyuan.mall.modules.sms.model.SmsHomeCategory">
+        <id column="id" property="id" />
+        <result column="category_id" property="categoryId" />
+        <result column="category_name" property="categoryName" />
+        <result column="type" property="type" />
+        <result column="status" property="status" />
+        <result column="pic" property="pic" />
+        <result column="url" property="url" />
+        <result column="sort" property="sort" />
+    </resultMap>
+
+    <resultMap id="HomeCategoryWithProductMap" type="com.tulingxueyuan.mall.dto.HomeGoodsSaleDTO">
+
+        <result column="category_name" property="categoryName" />
+        <result column="pic" property="pic" />
+        <result column="url" property="url" />
+        <collection property="productList" ofType="com.tulingxueyuan.mall.dto.ProductDTO">
+            <id property="id" column="pro_id"></id>
+            <result property="name" column="pro_name"></result>
+            <result property="pic" column="pro_pic"></result>
+            <result property="price" column="pro_price"></result>
+            <result property="originalPrice" column="pro_original_price"></result>
+            <result property="subTitle" column="pro_sub_title"></result>
+            <result property="sub" column="sub"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getHomeCategoryWithProduct" resultMap="HomeCategoryWithProductMap">
+        SELECT
+            hc.category_name,
+            hc.pic,
+            hc.url,
+            p.id pro_id,
+            p.`name` pro_name,
+            p.pic pro_pic,
+            p.price pro_price,
+            p.original_price pro_original_price,
+            p.sub_title pro_sub_title ,
+	        (SELECT avg(price)=price FROM pms_sku_stock ss where ss.product_id=p.id) sub
+        FROM
+            sms_home_category hc
+            LEFT JOIN pms_product p ON hc.category_id = p.product_category_id
+            AND delete_status = 0
+            AND recommand_status = 1
+        WHERE
+            hc.type = 0
+            AND hc.`status` = 1
+        ORDER BY
+            hc.sort,
+            hc.id,
+            p.sort
+    </select>
+</mapper>
