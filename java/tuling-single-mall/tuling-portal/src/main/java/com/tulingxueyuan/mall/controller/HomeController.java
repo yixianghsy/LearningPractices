@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 @Api(tags = "HomeController",description = "首页内容管理")
 @RequestMapping("/home")
-public class HomeController {
+public class   HomeController {
 
     @Autowired
     OmsCartItemService cartItemService;

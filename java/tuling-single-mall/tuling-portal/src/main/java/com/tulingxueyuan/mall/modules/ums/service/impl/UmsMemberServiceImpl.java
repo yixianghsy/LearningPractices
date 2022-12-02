@@ -1,10 +1,11 @@
 package com.tulingxueyuan.mall.modules.ums.service.impl;
-
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tulingxueyuan.mall.modules.ums.mapper.UmsMemberMapper;
 import com.tulingxueyuan.mall.modules.ums.service.UmsMemberService;
 import com.tulingxueyuan.mall.modules.ums.model.UmsMember;
 import org.springframework.stereotype.Service;
+
+
 /**
  * <p>
  * 会员表 服务实现类
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember> implements UmsMemberService {
-
     @Override
     public UmsMember register(UmsMember umsMemberParam) {
         return null;
@@ -35,4 +35,5 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     public UmsMember getCurrentMember() {
         return null;
     }
+
 }

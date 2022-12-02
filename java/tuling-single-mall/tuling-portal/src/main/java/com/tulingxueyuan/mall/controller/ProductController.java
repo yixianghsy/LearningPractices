@@ -1,4 +1,4 @@
-package com.tulingxueyuan.mall.modules.pms.controller;
+package com.tulingxueyuan.mall.controller;
 
 import com.tulingxueyuan.mall.common.api.CommonResult;
 import com.tulingxueyuan.mall.dto.ProductDetailDTO;
