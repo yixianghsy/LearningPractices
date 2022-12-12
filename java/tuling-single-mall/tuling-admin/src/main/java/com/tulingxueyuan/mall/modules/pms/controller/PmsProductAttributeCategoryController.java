@@ -105,8 +105,8 @@ public class PmsProductAttributeCategoryController {
      */
     @RequestMapping(value="/list/withAttr",method = RequestMethod.GET)
     public CommonResult getListWithAttr(){
-        List<ProductAttributeCateDTO> list= attributeCategoryService.getListWithAttr();
-        return CommonResult.success(list);
+         List<ProductAttributeCateDTO> list= attributeCategoryService.getListWithAttr();
+         return CommonResult.success(list);
     }
 
 }

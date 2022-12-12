@@ -24,13 +24,13 @@
     </resultMap>
 
     <!--根据商品分类id获取关联的筛选属性-->
-    <select id="getRelationAttrInfoByCid" resultMap="RelationAttrInfoByCidMap">
-        SELECT
-        pcar.product_attribute_id,
-        pa.product_attribute_category_id
-        FROM pms_product_category_attribute_relation pcar
-        LEFT JOIN pms_product_attribute pa on pcar.product_attribute_id=pa.id
-        where pcar.product_category_id=#{cId}
-    </select>
+<!--    <select id="getRelationAttrInfoByCid" resultMap="RelationAttrInfoByCidMap">-->
+<!--        SELECT-->
+<!--        pcar.product_attribute_id,-->
+<!--        pa.product_attribute_category_id-->
+<!--        FROM pms_product_category_attribute_relation pcar-->
+<!--        LEFT JOIN pms_product_attribute pa on pcar.product_attribute_id=pa.id-->
+<!--        where pcar.product_category_id=#{cId}-->
+<!--    </select>-->
 
 </mapper>

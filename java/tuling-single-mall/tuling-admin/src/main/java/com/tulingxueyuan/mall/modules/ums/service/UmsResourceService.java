@@ -3,7 +3,10 @@ package com.tulingxueyuan.mall.modules.ums.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.tulingxueyuan.mall.dto.ResourceRoleDTO;
 import com.tulingxueyuan.mall.modules.ums.model.UmsResource;
+
+import java.util.List;
 
 /**
  * 后台资源管理Service
@@ -29,4 +32,6 @@ public interface UmsResourceService extends IService<UmsResource> {
      * 分页查询资源
      */
     Page<UmsResource> list(Long categoryId, String nameKeyword, String urlKeyword, Integer pageSize, Integer pageNum);
+
+    List<ResourceRoleDTO> getAllResourceRole();
 }

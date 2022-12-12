@@ -50,4 +50,21 @@
             r.id
     </select>
 
+
+    <resultMap id="AllResourceRoleMap" extends="BaseResultMap" type="com.tulingxueyuan.mall.dto.ResourceRoleDTO">
+        <collection property="roleList" columnPrefix="rl_" resultMap="com.tulingxueyuan.mall.modules.ums.mapper.UmsRoleMapper.BaseResultMap"></collection>
+    </resultMap>
+
+    <select id="getAllResourceRole" resultMap="AllResourceRoleMap">
+        SELECT
+        r.id,
+        r.`name`,
+        r.url,
+        rl.`name` rl_name
+        FROM ums_resource r
+        LEFT JOIN ums_role_resource_relation rrr on rrr.resource_id=r.id
+        LEFT JOIN ums_role rl on rl.id=rrr.role_id
+        where rl.`name` is not null
+        order by r.id
+    </select>
 </mapper>

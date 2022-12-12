@@ -146,7 +146,6 @@
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.version}</version>
             </dependency>
-
             <!--tuling-security-->
             <dependency>
                 <groupId>com.tulingxueyuan</groupId>

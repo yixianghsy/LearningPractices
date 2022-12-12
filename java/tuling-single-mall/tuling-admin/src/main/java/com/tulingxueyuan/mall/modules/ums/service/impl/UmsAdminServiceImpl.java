@@ -2,7 +2,6 @@ package com.tulingxueyuan.mall.modules.ums.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -10,21 +9,25 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tulingxueyuan.mall.common.exception.ApiException;
 import com.tulingxueyuan.mall.common.exception.Asserts;
+import com.tulingxueyuan.mall.common.util.JwtTokenUtil;
+import com.tulingxueyuan.mall.domain.AdminUserDetails;
 import com.tulingxueyuan.mall.modules.ums.dto.UmsAdminParam;
 import com.tulingxueyuan.mall.modules.ums.dto.UpdateAdminPasswordParam;
 import com.tulingxueyuan.mall.modules.ums.mapper.UmsAdminLoginLogMapper;
 import com.tulingxueyuan.mall.modules.ums.mapper.UmsAdminMapper;
 import com.tulingxueyuan.mall.modules.ums.mapper.UmsResourceMapper;
 import com.tulingxueyuan.mall.modules.ums.mapper.UmsRoleMapper;
-import com.tulingxueyuan.mall.modules.ums.model.*;
 import com.tulingxueyuan.mall.modules.ums.service.UmsAdminCacheService;
 import com.tulingxueyuan.mall.modules.ums.service.UmsAdminRoleRelationService;
 import com.tulingxueyuan.mall.modules.ums.service.UmsAdminService;
-
+import com.tulingxueyuan.mall.modules.ums.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -53,6 +56,8 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     private UmsRoleMapper roleMapper;
     @Autowired
     private UmsResourceMapper resourceMapper;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     @Override
     public UmsAdmin getAdminByUsername(String username) {
@@ -95,13 +100,18 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
         //密码需要客户端加密后传递
         UmsAdmin umsAdmin=null;
         try {
-             umsAdmin = loadUserByUsername(username);
+            AdminUserDetails adminUserDetails = loadUserByUsername(username);
+            umsAdmin=adminUserDetails.getUmsAdmin();
             if(!BCrypt.checkpw(password,umsAdmin.getPassword())){
                 Asserts.fail("密码不正确");
             }
-            /*if(!userDetails.isEnabled()){
+
+            // 生成springsecurity的通过认证标识
+            UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(adminUserDetails,null,adminUserDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            if(!adminUserDetails.isEnabled()){
                 Asserts.fail("帐号已被禁用");
-            }*/
+            }
             insertLoginLog(username);
         } catch (Exception e) {
             Asserts.fail("登录异常:"+e.getMessage());
@@ -241,14 +251,22 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     }
 
     @Override
-    public UmsAdmin loadUserByUsername(String username){
+    public AdminUserDetails loadUserByUsername(String username){
         //获取用户信息
         UmsAdmin admin = getAdminByUsername(username);
         if (admin != null) {
             // 查询用户访问资源，暂留， 后续改动
-            // List<UmsResource> resourceList = getResourceList(admin.getId());
-            return admin;
+            List<UmsResource> resourceList = getResourceList(admin.getId());
+
+            List<UmsRole> roleList = getRoleList(admin.getId());
+            AdminUserDetails adminUserDetails = new AdminUserDetails(admin,roleList);
+            return adminUserDetails;
         }
         throw new ApiException("用户不存在");
+    }
+
+    @Override
+    public String refreshToken(String oldToken) {
+        return jwtTokenUtil.refreshHeadToken(oldToken);
     }
 }

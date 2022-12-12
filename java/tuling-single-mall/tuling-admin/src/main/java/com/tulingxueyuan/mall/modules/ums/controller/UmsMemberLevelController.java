@@ -4,7 +4,6 @@ package com.tulingxueyuan.mall.modules.ums.controller;
 import com.tulingxueyuan.mall.common.api.CommonResult;
 import com.tulingxueyuan.mall.modules.ums.model.UmsMemberLevel;
 import com.tulingxueyuan.mall.modules.ums.service.UmsMemberLevelService;
-import io.swagger.annotations.ApiImplicitParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
