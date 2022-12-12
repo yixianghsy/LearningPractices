@@ -1964,7 +1964,7 @@ INSERT INTO `ums_member_level` VALUES ('1', '黄金会员', '1000', '0', '199.00
 INSERT INTO `ums_member_level` VALUES ('2', '白金会员', '5000', '0', '99.00', '10', '1', '1', '1', '1', '1', '1', null);
 INSERT INTO `ums_member_level` VALUES ('3', '钻石会员', '15000', '0', '69.00', '15', '1', '1', '1', '1', '1', '1', null);
 INSERT INTO `ums_member_level` VALUES ('4', '普通会员', '1', '1', '199.00', '20', '1', '1', '1', '1', '0', '0', null);
-commit
+commit;
 -- ----------------------------
 -- Table structure for ums_member_login_log
 -- ----------------------------
@@ -1983,7 +1983,17 @@ CREATE TABLE `ums_member_login_log` (
 -- ----------------------------
 -- Records of ums_member_login_log
 -- ----------------------------
-
+DROP TABLE IF EXISTS `ums_member_login_log`;
+CREATE TABLE `ums_member_login_log` (
+                                        `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                                        `member_id` bigint(20) DEFAULT NULL,
+                                        `create_time` datetime DEFAULT NULL,
+                                        `ip` varchar(64) DEFAULT NULL,
+                                        `city` varchar(64) DEFAULT NULL,
+                                        `login_type` int(1) DEFAULT NULL COMMENT '登录类型：0->PC；1->android;2->ios;3->小程序',
+                                        `province` varchar(64) DEFAULT NULL,
+                                        PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='会员登录记录';
 -- ----------------------------
 -- Table structure for ums_member_member_tag_relation
 -- ----------------------------

@@ -31,22 +31,22 @@ jwt:
   tokenHead: Bearer #jwt规范  #告诉客户端jwt令牌开头需要加的一个字符串
   tokenHeader: Authorization #告诉客户端你要在请求头里面传什么参数名字
 
-#secure:
-#  ignored:
-#    urls: #安全路径白名单
-#      - /swagger-ui.html
-#      - /swagger-resources/**
-#      - /swagger/**
-#      - /**/v2/api-docs
-#      - /**/*.js
-#      - /**/*.css
-#      - /**/*.png
-#      - /**/*.ico
-#      - /webjars/springfox-swagger-ui/**
-#      - /druid/**
-#      - /user/**
-#      - /product/**
-#      - /home/**
-#      - /order/paySuccess/*
-#      - /static/qrcode/**
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /swagger-ui.html
+      - /swagger-resources/**
+      - /swagger/**
+      - /**/v2/api-docs
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.ico
+      - /webjars/springfox-swagger-ui/**
+      - /druid/**
+      - /user/**
+      - /product/**
+      - /home/**
+      - /order/paySuccess/*
+      - /static/qrcode/**
 

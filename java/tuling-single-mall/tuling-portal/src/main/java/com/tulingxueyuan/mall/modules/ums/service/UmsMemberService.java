@@ -2,7 +2,7 @@ package com.tulingxueyuan.mall.modules.ums.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.tulingxueyuan.mall.modules.ums.model.UmsMember;
-//import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * <p>
@@ -26,5 +26,5 @@ public interface UmsMemberService extends IService<UmsMember> {
      */
     UmsMember getCurrentMember();
 
-//    UserDetails loadUserByUsername(String username);
+    UserDetails loadUserByUsername(String username);
 }
