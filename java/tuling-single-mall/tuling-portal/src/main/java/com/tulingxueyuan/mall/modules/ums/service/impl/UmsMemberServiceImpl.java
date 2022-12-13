@@ -1,5 +1,6 @@
 package com.tulingxueyuan.mall.modules.ums.service.impl;
 
+import cn.hutool.crypto.digest.BCrypt;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tulingxueyuan.mall.common.exception.ApiException;
@@ -11,6 +12,7 @@ import com.tulingxueyuan.mall.modules.ums.model.UmsMemberLoginLog;
 import com.tulingxueyuan.mall.modules.ums.service.UmsMemberCacheService;
 import com.tulingxueyuan.mall.modules.ums.service.UmsMemberService;
 import com.tulingxueyuan.mall.modules.ums.model.UmsMember;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,9 +44,25 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
 
     @Autowired
     UmsMemberLoginLogMapper loginLogMapper;
+
     @Override
-    public UmsMember register(UmsMember umsMemberParam) {
-        return null;
+    public UmsMember register(UmsMember umsAdminParam) {
+        UmsMember umsMember = new UmsMember();
+        BeanUtils.copyProperties(umsAdminParam, umsMember);
+        umsMember.setCreateTime(new Date());
+        umsMember.setStatus(1);
+        //查询是否有相同用户名的用户
+        QueryWrapper<UmsMember> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(UmsMember::getUsername,umsMember.getUsername());
+        List<UmsMember> umsAdminList = list(wrapper);
+        if (umsAdminList.size() > 0) {
+            return null;
+        }
+        //将密码进行加密操作
+        String encodePassword = BCrypt.hashpw(umsMember.getPassword());
+        umsMember.setPassword(encodePassword);
+        baseMapper.insert(umsMember);
+        return umsMember;
     }
 
     @Override
