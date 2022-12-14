@@ -15,6 +15,7 @@ import com.tulingxueyuan.mall.modules.ums.model.UmsMember;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -109,10 +110,16 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         }
         return null;
     }
-
+    /**
+     * 获得当前用户
+     * @return
+     */
     @Override
     public UmsMember getCurrentMember() {
-        return null;
+        //标识
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MemberDetails memberDetails =(MemberDetails) authentication.getPrincipal();
+        return memberDetails.getUmsMember();
     }
     /**
      * 添加登录记录
