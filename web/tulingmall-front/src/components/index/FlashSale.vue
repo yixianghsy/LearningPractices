@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Slide from './Slide'
+import Slide from '../parts/Slide'
 
 export default {
   data () {

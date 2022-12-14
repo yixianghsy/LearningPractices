@@ -1,69 +1,87 @@
 <template>
   <div class="menu-banner">
     <div class="menu-container" @mouseleave="bannerMenuHide()">
+      <!-- 循环所有的分类 -->
       <ul class="menu-list">
-        <li class="list-item"
-        v-for="(item, index) in menus"
-        :key="index"
-        @mouseenter="bannerMenuShow(item.type)">
-          <a :href="item.url" target="blank">{{item.value}}</a>
+        <li
+          class="list-item"
+          v-for="(item, index) in menus"
+          :key="index"
+          @mouseenter="bannerMenuShow(item.type)"
+        >
+          <a :href="item.url" target="blank">{{ item.value }}</a>
           <i class="fa fa-angle-right"></i>
         </li>
       </ul>
     </div>
-    <div class="menu-info"
-    v-show="bannerMenuFlag"
-    @mouseleave="bannerMenuHide()"
-    @mouseenter="bannerMenuShow()">
-        <ul class="menu-info-list"
+    <div
+      class="menu-info"
+      v-show="bannerMenuFlag"
+      @mouseleave="bannerMenuHide()"
+      @mouseenter="bannerMenuShow()"
+    >
+      <ul
+        class="menu-info-list"
         v-for="(list, key) in menuListMatch"
         :key="key"
-        :data-key="key">
-          <li class="info-list-item"
+        :data-key="key"
+      >
+        <li
+          class="info-list-item"
           v-for="(item, index) in list"
           :key="index"
-          :data-index="index">
-            <a :href="item.url">
-              <img :src="item.pic" :alt="item.name" />
-							<span class="">{{item.name}}</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+          :data-index="index"
+        >
+          <a :href="'/#/detail/'+item.id">
+            <img :src="item.pic" :alt="item.name" />
+            <span class="">{{ item.name }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
     <banner :banners="banners"></banner>
   </div>
 </template>
 
 <script>
-import Banner from './Banner'
+import Banner from "./Banner";
 
 export default {
-  data () {
+  data() {
     return {
       bannerMenuFlag: false,
-      menuTimer: '',
-      listInfoData: [],
+      menuTimer: "",
+      listInfoData: [],   
+      // 一级分类
       menus: [
-        //{value: '手机 电话卡', url: 'https://www.mi.com/p/1915.html', type: 'phone'},
+        // {
+        //   value: "手机 电话卡",
+        //   url: "/#/searchResult/s",
+        //   type: "phone",
+        // },
       ],
       banners: [
-      // {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cefed8336bae62768afeeb6a3b8f55c8.jpg?w=2452&h=920', url: 'https://www.mi.com/redminote7/'},
-        
-      ],
+        // {
+        //   src:
+        //     "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cefed8336bae62768afeeb6a3b8f55c8.jpg?w=2452&h=920",
+        //   url: "https://www.mi.com/redminote7/",
+        // } 
+      ],  
       products:{
       }
-    }
+    };
   },
-  methods: {
-    bannerMenuHide () {
+  methods: { 
+    bannerMenuHide() {
       this.menuTimer = setTimeout(() => {
-				this.bannerMenuFlag = false;
-			}, 300);
+        this.bannerMenuFlag = false;
+      }, 300);
     },
-    bannerMenuShow (type) {
+    bannerMenuShow(type) {   //2
       if (type) {
         this.listInfoData = this.products[type]; 
       }
+
       this.bannerMenuFlag = true;
       clearTimeout(this.menuTimer);
     },
@@ -101,25 +119,26 @@ export default {
       // });
     },
   },
-    // 生命周期钩子函数
-    mounted() {
+  // 生命周期钩子函数
+  mounted() {
     this.init();
   },
   computed: {
-    menuListMatch () {
-        const matchData = [];
+    menuListMatch() {
+      const matchData = [];
       if (this.listInfoData && this.listInfoData.length) {
         for (let i = 0; i < this.listInfoData.length; i += 6) {
           matchData.push(this.listInfoData.slice(i, i + 6));
         }
       }
-        return matchData;
-    }
+      return matchData;
+      
+    },
   },
   components: {
-    'Banner': Banner
-  }
-}
+    Banner: Banner,
+  },
+};
 </script>
 
 <style lang="less">

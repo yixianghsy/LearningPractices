@@ -3,61 +3,69 @@
     <div class="banner-prev" @click="prev"></div>
     <div class="banner-next" @click="next"></div>
     <transition-group tag="ul" name="banner-trans" class="banner-container">
-      <li class="image-container"
-      v-for="(item, index) in banners"
-      v-show="index === imgIndex"
-      :key="index">
+      <li
+        class="image-container"
+        v-for="(item, index) in banners"
+        v-show="index === imgIndex"
+        :key="index"
+      >
         <a :href="item.url" target="_blank">
           <img :src="item.src" />
         </a>
       </li>
     </transition-group>
     <div class="banner-points">
-      <a class="banner-point" @click="jump(index)" :class="{'active': index === imgIndex}" v-for="(item, index) in banners.length" :key="index"></a>
+      <a
+        class="banner-point"
+        @click="jump(index)"
+        :class="{ active: index === imgIndex }"
+        v-for="(item, index) in banners.length"
+        :key="index"
+      ></a>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       imgIndex: 0,
-      timer: '',
-    }
+      timer: "",
+    };
   },
-  props: ['banners'],
+  props: ["banners"],
   methods: {
-    next () {
+    next() {
       const lastPage = this.banners.length - 1;
-			if (this.imgIndex < lastPage) {
-				this.imgIndex += 1;
-			} else {
-				this.imgIndex = 0;
-			}
+      if (this.imgIndex < lastPage) {
+        this.imgIndex += 1;
+      } else {
+        this.imgIndex = 0;
+      }
     },
-    prev () {
+    prev() {
       const lastPage = this.banners.length - 1;
-			if (this.imgIndex > 0) {
-				this.imgIndex -= 1;
-			} else {
-				this.imgIndex = lastPage;
-			}
+      if (this.imgIndex > 0) {
+        this.imgIndex -= 1;
+      } else {
+        this.imgIndex = lastPage;
+      }
     },
-    play () {
-			clearInterval(this.timer);
-			this.timer = setInterval(() => {
-				this.next();
-			}, 5000);
+    play() {
+      clearInterval(this.timer);
+      this.timer = setInterval(() => {
+        this.next();
+      }, 5000);
     },
-    jump (index) {
+    jump(index) {
       this.imgIndex = index;
-    }
+    },
   },
-  mounted () {
+  mounted() {
     this.play();
-  }
-}
+  },
+};
 </script>
 
 <style lang="less">
