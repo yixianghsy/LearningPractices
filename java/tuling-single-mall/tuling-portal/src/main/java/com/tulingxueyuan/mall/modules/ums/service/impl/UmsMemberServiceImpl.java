@@ -1,23 +1,27 @@
 package com.tulingxueyuan.mall.modules.ums.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.tulingxueyuan.mall.common.api.ResultCode;
 import com.tulingxueyuan.mall.common.exception.ApiException;
 import com.tulingxueyuan.mall.common.exception.Asserts;
-import com.tulingxueyuan.mall.domain.MemberDetails;
 import com.tulingxueyuan.mall.modules.ums.mapper.UmsMemberLoginLogMapper;
 import com.tulingxueyuan.mall.modules.ums.mapper.UmsMemberMapper;
+import com.tulingxueyuan.mall.modules.ums.service.UmsMemberService;
+import com.tulingxueyuan.mall.common.util.JwtTokenUtil;
+import com.tulingxueyuan.mall.modules.ums.model.UmsMember;
 import com.tulingxueyuan.mall.modules.ums.model.UmsMemberLoginLog;
 import com.tulingxueyuan.mall.modules.ums.service.UmsMemberCacheService;
-import com.tulingxueyuan.mall.modules.ums.service.UmsMemberService;
-import com.tulingxueyuan.mall.modules.ums.model.UmsMember;
+import domain.MemberDetails;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -37,14 +41,28 @@ import java.util.List;
  */
 @Service
 public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember> implements UmsMemberService {
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     @Autowired
     UmsMemberCacheService memberCacheService;
-
     @Autowired
     UmsMemberLoginLogMapper loginLogMapper;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Override
+    public UmsMember getAdminByUsername(String username) {
+        UmsMember user = memberCacheService.getUser(username);
+        if(user!=null) return  user;
+        QueryWrapper<UmsMember> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(UmsMember::getUsername,username);
+        List<UmsMember> adminList = list(wrapper);
+        if (adminList != null && adminList.size() > 0) {
+            user = adminList.get(0);
+            memberCacheService.setUser(user);
+            return user;
+        }
+        return null;
+    }
 
     @Override
     public UmsMember register(UmsMember umsAdminParam) {
@@ -76,7 +94,6 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
             umsAdmin=((MemberDetails)userDetails).getUmsMember();
 
             if(!passwordEncoder.matches(password,umsAdmin.getPassword())){
-//            if(!passwordEncoder.matches("123456","$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG")){
                 Asserts.fail("密码不正确");
             }
 
@@ -94,33 +111,6 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         return umsAdmin;
     }
 
-    @Override
-    public UmsMember getAdminByUsername(String username) {
-        //先去redis里获取
-        UmsMember user = memberCacheService.getUser(username);
-        if(user!=null) return  user;
-        QueryWrapper<UmsMember> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(UmsMember::getUsername,username);
-        List<UmsMember> adminList = list(wrapper);
-        if (adminList !=null &&  adminList.size() >0){
-            user = adminList.get(0);
-            memberCacheService.setUser(user);
-            return user;
-
-        }
-        return null;
-    }
-    /**
-     * 获得当前用户
-     * @return
-     */
-    @Override
-    public UmsMember getCurrentMember() {
-        //标识
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MemberDetails memberDetails =(MemberDetails) authentication.getPrincipal();
-        return memberDetails.getUmsMember();
-    }
     /**
      * 添加登录记录
      * @param username 用户名
@@ -136,6 +126,18 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         loginLog.setIp(request.getRemoteAddr());
         loginLogMapper.insert(loginLog);
     }
+
+    /**
+     * 获得当前用户
+     * @return
+     */
+    public UmsMember getCurrentMember(){
+        // 标识
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MemberDetails memberDetails =(MemberDetails) authentication.getPrincipal();
+        return memberDetails.getUmsMember();
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) {
         UmsMember umsMember = getAdminByUsername(username);

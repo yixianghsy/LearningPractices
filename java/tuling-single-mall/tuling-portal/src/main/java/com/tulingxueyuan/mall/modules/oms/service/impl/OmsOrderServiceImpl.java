@@ -110,7 +110,7 @@ public class OmsOrderServiceImpl extends ServiceImpl<OmsOrderMapper, OmsOrder> i
      */
     public void calcCatAmount(ConfirmOrderDTO confirmOrderDTO){
         //计算商品数量
-        Integer productTotal=0;
+          Integer productTotal=0;
         // 总价
         BigDecimal priceTotal=new BigDecimal(0);
         // 运费
@@ -162,7 +162,7 @@ public class OmsOrderServiceImpl extends ServiceImpl<OmsOrderMapper, OmsOrder> i
 
         // 防止用户篡改
         queryWrapper.lambda().eq(OmsCartItem::getMemberId,currentMember.getId())
-                .in(OmsCartItem::getId,paramDTO.getItemIds());
+        .in(OmsCartItem::getId,paramDTO.getItemIds());
         // 根据购物车id查询所有购物车信息
         List<CartItemStockDTO> cartItemStockByIds = cartItemMapper.getCartItemStockByIds(queryWrapper);
 
@@ -199,7 +199,7 @@ public class OmsOrderServiceImpl extends ServiceImpl<OmsOrderMapper, OmsOrder> i
      */
     @Override
     public OrderDetailDTO getOrderDetail(Long id) {
-        return this.baseMapper.getOrderDetail(id);
+         return this.baseMapper.getOrderDetail(id);
     }
 
     /**

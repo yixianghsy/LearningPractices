@@ -7,6 +7,8 @@
         <module>tuling-common</module>
         <module>tuling-admin</module>
         <module>tuling-mpbg</module>
+        <module>tuling-portal</module>
+        <module>tuling-security</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -146,6 +148,7 @@
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.version}</version>
             </dependency>
+
             <!--tuling-security-->
             <dependency>
                 <groupId>com.tulingxueyuan</groupId>

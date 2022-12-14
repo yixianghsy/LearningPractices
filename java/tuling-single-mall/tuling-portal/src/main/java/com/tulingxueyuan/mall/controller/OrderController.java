@@ -54,10 +54,10 @@ public class OrderController {
      */
     @RequestMapping(value="generateConfirmOrder",method = RequestMethod.POST)
     public CommonResult generateConfirmOrder(
-            @RequestParam("itemIds") List<Long> ids
+           @RequestParam("itemIds") List<Long> ids
     ){
-        ConfirmOrderDTO confirmOrderDTO= orderService.generateConfirmOrder(ids);
-        return CommonResult.success(confirmOrderDTO) ;
+         ConfirmOrderDTO confirmOrderDTO= orderService.generateConfirmOrder(ids);
+         return CommonResult.success(confirmOrderDTO) ;
     }
 
     /**

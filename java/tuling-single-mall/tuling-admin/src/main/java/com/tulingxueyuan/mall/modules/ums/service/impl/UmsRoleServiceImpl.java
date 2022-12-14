@@ -8,11 +8,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tulingxueyuan.mall.modules.ums.mapper.UmsMenuMapper;
 import com.tulingxueyuan.mall.modules.ums.mapper.UmsResourceMapper;
 import com.tulingxueyuan.mall.modules.ums.mapper.UmsRoleMapper;
-import com.tulingxueyuan.mall.modules.ums.model.*;
 import com.tulingxueyuan.mall.modules.ums.service.UmsAdminCacheService;
 import com.tulingxueyuan.mall.modules.ums.service.UmsRoleMenuRelationService;
 import com.tulingxueyuan.mall.modules.ums.service.UmsRoleResourceRelationService;
 import com.tulingxueyuan.mall.modules.ums.service.UmsRoleService;
+import com.tulingxueyuan.mall.modules.ums.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -113,4 +113,6 @@ public class UmsRoleServiceImpl extends ServiceImpl<UmsRoleMapper, UmsRole>imple
         adminCacheService.delResourceListByRole(roleId);
         return resourceIds.size();
     }
+
+
 }

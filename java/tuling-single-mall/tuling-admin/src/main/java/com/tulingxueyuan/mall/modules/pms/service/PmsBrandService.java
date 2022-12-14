@@ -10,8 +10,16 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author XuShu
- * @since 2022-11-16
+ * @since 2021-02-26
  */
 public interface PmsBrandService extends IService<PmsBrand> {
+    /**
+     *
+     *  品牌数据列表
+     * @param keyword 商品名称
+     * @param pageNum pageNum
+     * @param pageSize pageSize
+     * @return
+     */
     Page list(String keyword, Integer pageNum, Integer pageSize);
 }

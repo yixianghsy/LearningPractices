@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "trade.zhifu.qrcode")
 public class TradePayProp {
 
-    private String  paySuccessCallBack;
-    private String storePath;
-    private String httpBasePath;
+   private String  paySuccessCallBack;
+   private String storePath;
+   private String httpBasePath;
 }

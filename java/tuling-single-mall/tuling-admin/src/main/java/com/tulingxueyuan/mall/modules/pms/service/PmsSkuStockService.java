@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author XuShu
- * @since 2022-11-16
+ * @since 2021-02-26
  */
 public interface PmsSkuStockService extends IService<PmsSkuStock> {
 

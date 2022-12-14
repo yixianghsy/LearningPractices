@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * Created by macro on 2020/2/2.
  */
 @Service
-public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper,UmsMenu>implements UmsMenuService {
+public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper, UmsMenu>implements UmsMenuService {
 
     @Override
     public boolean create(UmsMenu umsMenu) {

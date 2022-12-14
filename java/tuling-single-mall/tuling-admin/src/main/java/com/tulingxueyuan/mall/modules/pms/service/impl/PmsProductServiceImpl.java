@@ -13,8 +13,8 @@ import com.tulingxueyuan.mall.dto.ProductSaveParamsDTO;
 import com.tulingxueyuan.mall.dto.ProductUpdateInitDTO;
 import com.tulingxueyuan.mall.modules.pms.model.PmsProduct;
 import com.tulingxueyuan.mall.modules.pms.mapper.PmsProductMapper;
-import com.tulingxueyuan.mall.modules.pms.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.tulingxueyuan.mall.modules.pms.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,10 +28,11 @@ import java.util.List;
  * </p>
  *
  * @author XuShu
- * @since 2022-11-16
+ * @since 2021-02-26
  */
 @Service
 public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProduct> implements PmsProductService {
+
     @Autowired
     PmsProductMapper productMapper;
 
@@ -48,7 +49,8 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
 
     @Override
     public Page list(ProductConditionDTO condition) {
-        Page page = new Page(condition.getPageNum(),condition.getPageSize());
+        Page page=new Page(condition.getPageNum(),condition.getPageSize());
+
         QueryWrapper<PmsProduct> queryWrapper = new QueryWrapper<>();
         LambdaQueryWrapper<PmsProduct> lambdaWrapper = queryWrapper.lambda();
         // 商品名称
@@ -84,10 +86,10 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
     public boolean updateStatus(Integer status, List<Long> ids, SFunction<PmsProduct, ?> getPublishStatus) {
         UpdateWrapper<PmsProduct> updateWrapper = new UpdateWrapper<>();
         updateWrapper.lambda().set(getPublishStatus,status)
-                .in(PmsProduct::getId,ids);
-
-        return this.update(updateWrapper);
+        .in(PmsProduct::getId,ids);   // where in (ids)
+         return this.update(updateWrapper);
     }
+
     /**
      * 添加
      * @param productSaveParamsDTO
@@ -96,10 +98,12 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
     @Override
     @Transactional
     public boolean create(ProductSaveParamsDTO productSaveParamsDTO) {
-        PmsProduct product = productSaveParamsDTO;
+        // 1. 保存商品基本信息 --商品主表 
+        PmsProduct product=productSaveParamsDTO;
         product.setId(null);
         boolean result = this.save(product);
-        if (result){
+        if(result) {
+
             // 为了解决 前端会传入其他促销方式的空数据进来
             switch (product.getPromotionType()) {
                 case 2:
@@ -115,14 +119,16 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
                     SaveManyList(productSaveParamsDTO.getProductFullReductionList(), product.getId(), productFullReductionService);
                     break;
             }
-            //5.sku
-            SaveManyList(productSaveParamsDTO.getSkuStockList(),product.getId(),skuStockService);
-            //6. spu
-            SaveManyList(productSaveParamsDTO.getProductAttributeValueList(),product.getId(),productAttributeValueService);
+             // 5. sku
+            SaveManyList(productSaveParamsDTO.getSkuStockList(),product.getId(), skuStockService);
+
+            // 6 spu
+            SaveManyList(productSaveParamsDTO.getProductAttributeValueList(),product.getId(), productAttributeValueService);
 
         }
         return result;
     }
+
     /**
      * 编辑数据初始化
      * @param id
@@ -181,6 +187,7 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
         }
         return result;
     }
+
     /**
      * 根据商品id删除关联数据
      */

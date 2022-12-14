@@ -46,7 +46,7 @@ public class PmsProductAttributeServiceImpl extends ServiceImpl<PmsProductAttrib
                 .eq(PmsProductAttribute::getType,type)
                 .orderByAsc(PmsProductAttribute::getSort);
 
-        return this.page(page,queryWrapper);
+       return this.page(page,queryWrapper);
     }
 
     @Override
@@ -107,19 +107,19 @@ public class PmsProductAttributeServiceImpl extends ServiceImpl<PmsProductAttrib
         int length = productAttributeMapper.deleteBatchIds(ids);
 
         if(length>0 && productAttribute!=null) {
-            UpdateWrapper<PmsProductAttributeCategory> updateWrapper = new UpdateWrapper<>();
-            // 属性 减
-            if(productAttribute.getType()==0){
-                updateWrapper.setSql("attribute_count=attribute_count-"+length);
-                // 用这种方式要先查 updateWrapper.lambda().set(PmsProductAttributeCategory::getAttributeCount,+1)
-            }
-            // 参数 减
-            else if(productAttribute.getType()==1){
-                updateWrapper.setSql("param_count=param_count-"+length);
-            }
-            // 根据属性的类型id进行更新
-            updateWrapper.lambda().eq(PmsProductAttributeCategory::getId,productAttribute.getProductAttributeCategoryId());
-            productAttrCateService.update(updateWrapper);
+        UpdateWrapper<PmsProductAttributeCategory> updateWrapper = new UpdateWrapper<>();
+        // 属性 减
+        if(productAttribute.getType()==0){
+            updateWrapper.setSql("attribute_count=attribute_count-"+length);
+            // 用这种方式要先查 updateWrapper.lambda().set(PmsProductAttributeCategory::getAttributeCount,+1)
+        }
+        // 参数 减
+        else if(productAttribute.getType()==1){
+            updateWrapper.setSql("param_count=param_count-"+length);
+        }
+        // 根据属性的类型id进行更新
+        updateWrapper.lambda().eq(PmsProductAttributeCategory::getId,productAttribute.getProductAttributeCategoryId());
+        productAttrCateService.update(updateWrapper);
         }
         return length>0;
     }

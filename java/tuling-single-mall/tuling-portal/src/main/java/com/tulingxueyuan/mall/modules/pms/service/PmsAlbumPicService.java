@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author XuShu
- * @since 2022-11-30
+ * @since 2021-03-14
  */
 public interface PmsAlbumPicService extends IService<PmsAlbumPic> {
 

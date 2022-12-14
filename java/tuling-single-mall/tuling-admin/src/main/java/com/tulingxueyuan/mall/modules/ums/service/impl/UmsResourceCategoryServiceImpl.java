@@ -15,7 +15,7 @@ import java.util.List;
  * Created by macro on 2020/2/5.
  */
 @Service
-public class UmsResourceCategoryServiceImpl extends ServiceImpl<UmsResourceCategoryMapper,UmsResourceCategory> implements UmsResourceCategoryService {
+public class UmsResourceCategoryServiceImpl extends ServiceImpl<UmsResourceCategoryMapper, UmsResourceCategory> implements UmsResourceCategoryService {
 
     @Override
     public List<UmsResourceCategory> listAll() {

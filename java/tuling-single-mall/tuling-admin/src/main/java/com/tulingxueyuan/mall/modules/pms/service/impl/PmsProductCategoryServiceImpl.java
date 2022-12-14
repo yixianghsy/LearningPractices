@@ -25,7 +25,7 @@ import java.util.List;
  * </p>
  *
  * @author XuShu
- * @since 2022-11-16
+ * @since 2021-02-26
  */
 @Service
 public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategoryMapper, PmsProductCategory> implements PmsProductCategoryService {
@@ -45,13 +45,19 @@ public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategor
      */
     @Override
     public Page list(Long parentId, Integer pageNum, Integer pageSize) {
-        Page page = new Page(pageNum,pageSize);
-        //条件构造器
+
+
+        Page page=new Page(pageNum,pageSize);
+
+        // 条件构造器
         QueryWrapper<PmsProductCategory> queryWrapper=new QueryWrapper<>();
-       queryWrapper.lambda().eq(PmsProductCategory::getParentId,parentId)
-               .orderByAsc(PmsProductCategory::getSort);
-        return this.page(page,queryWrapper);
+        //queryWrapper.eq("parent_id",parentId);
+        queryWrapper.lambda().eq(PmsProductCategory::getParentId,parentId)
+        .orderByAsc(PmsProductCategory::getSort);
+
+        return this.page(page, queryWrapper);
     }
+
     /**
      * 修改导航栏显示状态
      * @param ids
@@ -60,13 +66,16 @@ public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategor
      */
     @Override
     public boolean updateNavStatus(List<Long> ids, Integer navStatus) {
+
         UpdateWrapper<PmsProductCategory> pmsProductCategoryUpdateWrapper = new UpdateWrapper<>();
+
         pmsProductCategoryUpdateWrapper.lambda()
-                //需要更新得列
+                // 需要更新的列
                 .set(PmsProductCategory::getNavStatus,navStatus)
-                //条件
+                // 条件
                 .in(PmsProductCategory::getId,ids);
-        return  this.update(pmsProductCategoryUpdateWrapper);
+
+        return this.update(pmsProductCategoryUpdateWrapper);
     }
 
     @Override
@@ -100,10 +109,10 @@ public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategor
      * @return
      */
     private boolean saveAttrRelation(PmsProductCategoryDTO productCategoryDTO, PmsProductCategory productCategory) {
+
         List<Long> productAttributeIdList = productCategoryDTO.getProductAttributeIdList();
         List<PmsProductCategoryAttributeRelation> list=new ArrayList<>();
-        for (Long attrId: productAttributeIdList
-             ) {
+        for (Long attrId : productAttributeIdList) {
             // 得到分类保存后的主键id,   保存商品分类筛选属性关系
             PmsProductCategoryAttributeRelation productCategoryAttributeRelation=new PmsProductCategoryAttributeRelation();
             productCategoryAttributeRelation.setProductCategoryId(productCategory.getId());
@@ -113,24 +122,27 @@ public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategor
         }
         return relationService.saveBatch(list);
     }
+
     @Override
     public boolean update(PmsProductCategoryDTO productCategoryDTO) {
-        //保存商品分类
+        // 保存商品分类
         PmsProductCategory productCategory = new PmsProductCategory();
         // 通过BeanUtils 将productCategoryDTO的数据拷贝到productCategory
         // 为什么要拷贝：因为一定要通过this.save 去保存PmsProductCategory，因为只有它才映射了@TableName
-        BeanUtils.copyProperties(productCategoryDTO,productCategory);
+        BeanUtils.copyProperties(productCategoryDTO, productCategory);
         if (productCategory.getParentId() == 0) {
             productCategory.setLevel(0);
-        }else {
+        } else {
             // 如果有多级分类，根据parentId查出商品分类获取level+1
-            // 由于只有2级分类，直接设置为1'
+            // 由于只有2级分类，直接设置为1
             productCategory.setLevel(1);
         }
         this.updateById(productCategory);
+
+
         // 删除已保存的关联属性—根据商品分类id删除
         QueryWrapper<PmsProductCategoryAttributeRelation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(PmsProductCategoryAttributeRelation::getProductCategoryId,productCategory.getParentId());
+        queryWrapper.lambda().eq(PmsProductCategoryAttributeRelation::getProductCategoryId, productCategory.getId());
         relationService.remove(queryWrapper);
 
         saveAttrRelation(productCategoryDTO, productCategory);
@@ -145,5 +157,6 @@ public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategor
     public List<ProductCateChildrenDTO> getWithChildren() {
         return productCategoryMapper.getWithChildren();
     }
+
 
 }

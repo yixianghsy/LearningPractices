@@ -1,8 +1,8 @@
 package com.tulingxueyuan.mall.modules.pms.mapper;
 
+import com.tulingxueyuan.mall.dto.ProductAttributeCateDTO;
 import com.tulingxueyuan.mall.modules.pms.model.PmsProductAttributeCategory;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.tulingxueyuan.mall.dto.ProductAttributeCateDTO;
 
 import java.util.List;
 

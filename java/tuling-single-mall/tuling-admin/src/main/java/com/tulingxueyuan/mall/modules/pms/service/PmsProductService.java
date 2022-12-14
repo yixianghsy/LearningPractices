@@ -16,10 +16,12 @@ import java.util.List;
  * </p>
  *
  * @author XuShu
- * @since 2022-11-16
+ * @since 2021-02-26
  */
 public interface PmsProductService extends IService<PmsProduct> {
+
     Page list(ProductConditionDTO condition);
+
     /**
      * 更新 单个字段的公共方法
      * @param publishStatus

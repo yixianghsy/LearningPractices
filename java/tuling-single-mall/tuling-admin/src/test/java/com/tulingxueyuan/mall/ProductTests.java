@@ -1,10 +1,9 @@
 package com.tulingxueyuan.mall;
 
+import com.tulingxueyuan.mall.dto.ProductAttributeCateDTO;
 import com.tulingxueyuan.mall.dto.RelationAttrInfoDTO;
 import com.tulingxueyuan.mall.modules.pms.mapper.PmsProductAttributeCategoryMapper;
 import com.tulingxueyuan.mall.modules.pms.mapper.PmsProductAttributeMapper;
-import com.tulingxueyuan.mall.modules.pms.service.PmsProductAttributeService;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,16 +15,17 @@ public class ProductTests {
     @Autowired
     PmsProductAttributeCategoryMapper mapper;
     @Autowired
-    PmsProductAttributeService productAttributeService;
+    PmsProductAttributeMapper productAttributeMapper;
     @Test
     public void test01(){
-        System.out.println(mapper.getListWithAttr());
+        List<ProductAttributeCateDTO> listWithAttr = mapper.getListWithAttr();
+        System.out.println(listWithAttr);
     }
+
     @Test
     public  void test02 (){
-        List<RelationAttrInfoDTO> cid = productAttributeService.getRelationAttrInfoByCid(24L);
+        List<RelationAttrInfoDTO> cid = productAttributeMapper.getRelationAttrInfoByCid(24L);
         System.out.println(cid);
 
     }
 }
-

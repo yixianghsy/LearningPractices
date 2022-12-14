@@ -14,10 +14,17 @@ import java.util.List;
  * </p>
  *
  * @author XuShu
- * @since 2022-11-16
+ * @since 2021-02-26
  */
 public interface PmsProductCategoryService extends IService<PmsProductCategory> {
 
+    /**
+     * 获取商品分类列表
+     * @param parentId
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     Page list(Long parentId, Integer pageNum, Integer pageSize);
 
     boolean updateNavStatus(List<Long> ids, Integer navStatus);
@@ -26,6 +33,9 @@ public interface PmsProductCategoryService extends IService<PmsProductCategory> 
 
     boolean update(PmsProductCategoryDTO productCategoryDTO);
 
-
+    /**
+     * 获取商品一级分类和二级分类的下拉级联数据
+     * @return
+     */
     List<ProductCateChildrenDTO> getWithChildren();
 }

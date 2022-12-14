@@ -13,7 +13,7 @@ import java.util.List;
  * </p>
  *
  * @author XuShu
- * @since 2022-11-16
+ * @since 2021-02-26
  */
 public interface PmsProductAttributeService extends IService<PmsProductAttribute> {
 

@@ -23,7 +23,7 @@ public class AdminUserDetails implements UserDetails {
     UmsAdmin umsAdmin;
 
     List<UmsRole> roleList;
-
+     
 
     public AdminUserDetails(UmsAdmin umsAdmin, List<UmsRole> roleList) {
         this.umsAdmin = umsAdmin;
