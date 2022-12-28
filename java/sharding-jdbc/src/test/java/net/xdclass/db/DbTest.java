@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 小滴课堂,愿景：让技术不再难学
@@ -41,15 +38,17 @@ public class DbTest {
     @Test
     public void testSaveProductOrder(){
 
-        for(int i=0; i<10;i++){
+        Random random = new Random();
+        for(int i=0; i<20;i++){
             ProductOrderDO productOrderDO = new ProductOrderDO();
             productOrderDO.setCreateTime(new Date());
-            productOrderDO.setNickname("小滴课堂i="+i);
+            productOrderDO.setNickname("小滴课堂 PreciseShardingAlgorithm i="+i);
             productOrderDO.setOutTradeNo(UUID.randomUUID().toString().substring(0,32));
             productOrderDO.setPayAmount(100.00);
             productOrderDO.setState("PAY");
 
-            productOrderDO.setUserId(Long.valueOf(i+""));
+            productOrderDO.setUserId( Long.valueOf(random.nextInt(50)) );
+
             productOrderMapper.insert(productOrderDO);
 
         }
@@ -70,12 +69,16 @@ public class DbTest {
 
     }
 
+
+
+
     @Test
     public void testBingding(){
 
         List<Object> list = productOrderMapper.listProductOrderDetail();
         System.out.println(list);
     }
+
 
     /**
      * 有分片键
@@ -115,7 +118,8 @@ public class DbTest {
     @Test
     public void testNoPartitionKeyDel(){
         //productOrderMapper.delete(new QueryWrapper<ProductOrderDO>().eq("out_trade_no","2cc08fb8-7e77-4973-b408-7c68925b"));
-        productOrderMapper.delete(new QueryWrapper<ProductOrderDO>().in("out_trade_no", Arrays.asList("2cc08fb8-7e77-4973-b408-7c68925b")));
+        productOrderMapper.delete(new QueryWrapper<ProductOrderDO>().in("out_trade_no",Arrays.asList("2cc08fb8-7e77-4973-b408-7c68925b")));
     }
+
 
 }
