@@ -42,7 +42,7 @@ public class DbTest {
         for(int i=0; i<20;i++){
             ProductOrderDO productOrderDO = new ProductOrderDO();
             productOrderDO.setCreateTime(new Date());
-            productOrderDO.setNickname("小滴课堂 PreciseShardingAlgorithm i="+i);
+            productOrderDO.setNickname("自定义水平分库分表-小滴课堂 i="+i);
             productOrderDO.setOutTradeNo(UUID.randomUUID().toString().substring(0,32));
             productOrderDO.setPayAmount(100.00);
             productOrderDO.setState("PAY");
