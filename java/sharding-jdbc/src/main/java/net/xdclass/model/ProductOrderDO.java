@@ -22,7 +22,8 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 public class ProductOrderDO {
 
-    @TableId(value = "id",type = IdType.AUTO)
+    //@TableId(value = "id",type = IdType.AUTO)
+    //@TableId(value = "id",type = IdType.ASSIGN_ID)
     private Long id;
 
     private String outTradeNo;

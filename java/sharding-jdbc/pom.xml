@@ -11,8 +11,8 @@
     <properties>
         <!--JDK版本，如果是jdk8则这里是 1.8-->
         <java.version>1.8</java.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+<!--        <maven.compiler.source>11</maven.compiler.source>-->
+<!--        <maven.compiler.target>11</maven.compiler.target>-->
         <spring.boot.version>2.5.5</spring.boot.version>
         <mybatisplus.boot.starter.version>3.4.0</mybatisplus.boot.starter.version>
         <lombok.version>1.18.16</lombok.version>
