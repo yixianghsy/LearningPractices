@@ -34,7 +34,6 @@ public class DbTest {
 
     @Autowired
     private AdConfigMapper adConfigMapper;
-
     @Test
     public void testSaveProductOrder(){
 
@@ -121,5 +120,10 @@ public class DbTest {
         productOrderMapper.delete(new QueryWrapper<ProductOrderDO>().in("out_trade_no",Arrays.asList("2cc08fb8-7e77-4973-b408-7c68925b")));
     }
 
+    @Test
+    public void testBetween(){
+
+        productOrderMapper.selectList(new QueryWrapper<ProductOrderDO>().between("id",1L,1L));
+    }
 
 }
