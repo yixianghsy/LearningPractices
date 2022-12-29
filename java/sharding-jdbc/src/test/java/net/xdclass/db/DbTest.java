@@ -125,5 +125,10 @@ public class DbTest {
 
         productOrderMapper.selectList(new QueryWrapper<ProductOrderDO>().between("id",1L,1L));
     }
+    @Test
+    public void testMultiPartitionKeySelect(){
+
+        productOrderMapper.selectList(new QueryWrapper<ProductOrderDO>().eq("id",66L).eq("user_id",99L));
+    }
 
 }
