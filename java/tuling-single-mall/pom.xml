@@ -69,10 +69,16 @@
                 <version>${mall.common.version}</version>
             </dependency>
             <!--集成druid连接池-->
+            <!--            <dependency>-->
+            <!--                <groupId>com.alibaba</groupId>-->
+            <!--                <artifactId>druid-spring-boot-starter</artifactId>-->
+            <!--                <version>${druid.version}</version>-->
+            <!--            </dependency>-->
+            <!-- druid -->
             <dependency>
                 <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid.version}</version>
+                <artifactId>druid</artifactId>
+                <version>1.2.8</version>
             </dependency>
             <!--Mysql数据库驱动-->
             <dependency>
@@ -115,12 +121,6 @@
                 <artifactId>spring-boot-configuration-processor</artifactId>
                 <optional>true</optional>
             </dependency>
-            <!-- 合Sharding-Jdbc-->
-            <dependency>
-                <groupId>org.apache.shardingsphere</groupId>
-                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-                <version>${sharding-jdbc.version}</version>
-            </dependency>
             <!--Hutool Java工具包-->
             <dependency>
                 <groupId>cn.hutool</groupId>
@@ -160,7 +160,17 @@
                 <artifactId>tuling-security</artifactId>
                 <version>${mall.security.version}</version>
             </dependency>
-
+            <!-- 合Sharding-Jdbc-->
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>${sharding-jdbc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>20.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
