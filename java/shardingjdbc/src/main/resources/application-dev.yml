@@ -1,0 +1,38 @@
+spring:
+  shardingsphere:
+    #配置数据源
+    datasource:
+      #每个数据源的别名 主库从库
+      names: ds0,ds1
+      #主库
+      ds0:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.11:3306/master_slave_test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT&useSSL=false
+        password: 123456
+        type: com.alibaba.druid.pool.DruidDataSource
+        username: root
+      #从库
+      ds1:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.12:3306/master_slave_test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT&useSSL=false
+        password: 123456
+        type: com.alibaba.druid.pool.DruidDataSource
+        username: root
+    #配置默认数据源
+    sharding:
+      #默认数据源 主要用于写  这就是配置读写分离 如果不配置 会把三个节点都当做slave 写数据的时候会报错
+      default-data-source-name: ds0
+    #配置从节点  不配置的话  所有读操作也会在主节点
+    masterslave:
+      name: ms
+      #主库
+      master-data-source-name: ds0
+      #从库
+      slave-data-source-names: ds1
+      #从节点负载均衡使用轮询机制
+      load-balance-algorithm-type: round_robin
+    #参数配置 显示sql
+    props:
+      sql:
+        show:  true
+

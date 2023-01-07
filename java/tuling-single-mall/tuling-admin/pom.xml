@@ -13,6 +13,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.tulingxueyuan</groupId>
             <artifactId>tuling-common</artifactId>
         </dependency>

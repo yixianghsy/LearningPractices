@@ -35,7 +35,7 @@
         <lombok.version>1.18.16</lombok.version>
         <mall.common.version>0.0.1-SNAPSHOT</mall.common.version>
         <mall.security.version>0.0.1-SNAPSHOT</mall.security.version>
-        <sharding-jdbc.version>4.1.1</sharding-jdbc.version>
+        <sharding-jdbc.version>4.0.0-RC1</sharding-jdbc.version>
     </properties>
 
     <dependencies>
@@ -69,11 +69,11 @@
                 <version>${mall.common.version}</version>
             </dependency>
             <!--集成druid连接池-->
-            <!--            <dependency>-->
-            <!--                <groupId>com.alibaba</groupId>-->
-            <!--                <artifactId>druid-spring-boot-starter</artifactId>-->
-            <!--                <version>${druid.version}</version>-->
-            <!--            </dependency>-->
+<!--                        <dependency>-->
+<!--                            <groupId>com.alibaba</groupId>-->
+<!--                            <artifactId>druid-spring-boot-starter</artifactId>-->
+<!--                            <version>${druid.version}</version>-->
+<!--                        </dependency>-->
             <!-- druid -->
             <dependency>
                 <groupId>com.alibaba</groupId>

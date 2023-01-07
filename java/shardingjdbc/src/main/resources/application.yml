@@ -1,0 +1,33 @@
+server:
+  port: 8999
+logging:
+  level:
+    root: info
+druid:
+  allow:
+    ip: 127.0.0.1
+  login:
+    user_name: root
+    password: root
+spring:
+  profiles:
+    active: dev
+  main:   #允许相同bean名称覆盖
+    allow-bean-definition-overriding: true
+  application:
+    name: shardingsphere-demo
+  jackson:
+    # 日期进行格式化处理
+    date-format: yyyy/MM/dd HH:mm:ss
+    # 解决json转换少8个小时的问题
+    time-zone: GMT+8
+    # 解决json返回过程中long的精度丢失问题
+    generator:
+      write-numbers-as-strings: true
+      write-bigdecimal-as-plain: true
+# mybatis-plus配置
+#mybatis-plus:
+#  mapper-locations: classpath*:/mappers/*.xml
+#  configuration:
+#    call-setters-on-nulls: true
+#  type-aliases-package: com.thh.entity
