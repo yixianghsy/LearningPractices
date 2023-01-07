@@ -6,15 +6,16 @@ spring:
     name: mall-admin
   profiles:
     active: dev
-
+  main:   #允许相同bean名称覆盖
+    allow-bean-definition-overriding: true
 mybatis-plus:
-  mapper-locations: classpath:/mapper/**/*.xml
-  global-config:
-    db-config:
-      id-type: auto
   configuration:
     auto-mapping-behavior: partial
     map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+  mapper-locations: classpath:/mapper/**/*.xml
 
 redis:
   database: mall

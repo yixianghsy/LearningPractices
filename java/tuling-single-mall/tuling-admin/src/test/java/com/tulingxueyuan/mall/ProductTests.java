@@ -19,6 +19,9 @@ public class ProductTests {
     @Test
     public void test01(){
         List<ProductAttributeCateDTO> listWithAttr = mapper.getListWithAttr();
+        listWithAttr.forEach((srt)->{
+            System.out.println(srt);
+        });
         System.out.println(listWithAttr);
     }
 
