@@ -1,10 +1,36 @@
 spring:
   datasource:
+    password: 123456
     url: jdbc:mysql://localhost:3306/mall_tiny2?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: mall
-    password: 123456
+  #shardingsphere默认接管数据源
+  shardingsphere:
+    datasource:
+      names: ds0,ds1
+      ds0:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.1.11:3306/mall_tiny2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+        password: 123456
+        type: com.zaxxer.hikari.HikariDataSource
+        username: root
+      ds1:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.1.12:3306/mall_tiny2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+        password: 123456
+        type: com.zaxxer.hikari.HikariDataSource
+        username: root
+    masterslave:
+      name: ms
+      master-data-source-name: ds0
+      slave-data-source-names: ds1
+      load-balance-algorithm-type: round_robin
+    props:
+      sql:
+        show: true
+    sharding:
+      default-data-source-name: ds0
   redis:
-    host: localhost # Redis服务器地址
+    host: 192.168.1.11 # Redis服务器地址
     database: 0 # Redis数据库索引（默认为0）
     port: 6379 # Redis服务器连接端口
     password: # Redis服务器连接密码（默认为空）
