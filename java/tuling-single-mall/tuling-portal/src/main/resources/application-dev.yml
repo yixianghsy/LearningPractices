@@ -9,13 +9,13 @@ spring:
       names: ds0,ds1
       ds0:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://192.168.1.11:3306/mall_tiny2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+        jdbc-url: jdbc:mysql://localhost:3340/mall_tiny2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
         password: 123456
         type: com.zaxxer.hikari.HikariDataSource
         username: root
       ds1:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://192.168.1.12:3306/mall_tiny2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+        jdbc-url: jdbc:mysql://localhost:3341/mall_tiny2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
         password: 123456
         type: com.zaxxer.hikari.HikariDataSource
         username: root
@@ -30,7 +30,7 @@ spring:
     sharding:
       default-data-source-name: ds0
   redis:
-    host: 192.168.1.11 # Redis服务器地址
+    host: localhost # Redis服务器地址
     database: 0 # Redis数据库索引（默认为0）
     port: 6379 # Redis服务器连接端口
     password: # Redis服务器连接密码（默认为空）
