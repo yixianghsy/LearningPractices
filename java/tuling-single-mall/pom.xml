@@ -36,6 +36,8 @@
         <mall.common.version>0.0.1-SNAPSHOT</mall.common.version>
         <mall.security.version>0.0.1-SNAPSHOT</mall.security.version>
         <sharding-jdbc.version>4.0.0-RC1</sharding-jdbc.version>
+        <version.elasticsearch>7.2.0</version.elasticsearch>
+        <version.fastjson>1.2.62</version.fastjson>
     </properties>
 
     <dependencies>
@@ -170,6 +172,22 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>20.0</version>
+            </dependency>
+            <!-- elasticsearch -->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${version.elasticsearch}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${version.elasticsearch}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${version.fastjson}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -44,7 +44,10 @@ secure:
       - /admin/info
       - /admin/logout
       - /error
-
+es:
+  host: localhost
+  port: 9200
+  scheme: http
 jwt:
   secret: tuling-mall-admin  #服务端私钥（一定不能泄露）
   expiration: 86400   #过期时间 60*60*24  =一天
