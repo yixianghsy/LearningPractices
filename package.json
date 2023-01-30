@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "screenfull": "^6.0.2",
-    "vuex": "^4.1.0"
-  }
-}
