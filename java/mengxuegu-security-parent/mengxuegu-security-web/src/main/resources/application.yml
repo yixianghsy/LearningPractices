@@ -1,0 +1,65 @@
+server:
+  port: 8099
+  servlet:
+    session:
+      timeout: 30m # session会话超时时间，默认情况 下是30分钟（m）,不能小于1分钟
+      cookie:
+        name: JSESSIONID # 指定浏览器Cookie中关于SessionID保存的那个名称
+
+spring:
+  session:
+    store-type: none # session存储方式采用 redis
+  redis: # 如果是本地redis可不配置
+    port: 6379
+
+  thymeleaf:
+    cache: false #关闭thymeleaf缓存
+# 数据源配置
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/study-security?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
+    #mysql8版本以上驱动包指定新的驱动类
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #   数据源其他配置, 在 DruidConfig配置类中手动绑定
+    initialSize: 8
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true # springboot2.2版本后,要手动开启对delete和put方法的处理
+
+
+
+mybatis-plus:
+  # 指定实体类所有包
+  type-aliases-package: com.mengxuegu.web.entities
+
+# 日志级别，会打印sql语句
+logging:
+  level:
+    com.mengxuegu.web.mapper: debug
+
+
+mengxuegu:
+   security:
+     authentication:
+       loginPage: /login/page # 响应认证(登录)页面的URL
+       loginProcessingUrl: /login/form # 登录表单提交处理的url
+       usernameParameter: name # 登录表单提交的用户名的属性名
+       passwordParameter: pwd  # 登录表单提交的密码的属性名
+       staticPaths: # 静态资源 "/dist/**", "/modules/**", "/plugins/**"
+       - /dist/**
+       - /modules/**
+       - /plugins/**
+       loginType: REDIRECT # 认证之后 响应的类型：JSON/REDIRECT
+#  "/code/image","/mobile/page", "/code/mobile"
+       imageCodeUrl: /code/image # 获取图形验证码地址
+       mobileCodeUrl: /code/mobile # 发送手机验证码地址
+       mobilePage: /mobile/page # 前往手机登录页面
+       tokenValiditySeconds: 604800 # 记住我功能有效时长

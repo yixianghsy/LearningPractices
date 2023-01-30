@@ -1,0 +1,51 @@
+app:
+  name: 小D商店
+  version: 1.0
+dubbo:
+  application:
+    name: shop
+  monitor:
+    protocol: registry
+  protocol:
+    accesslog: dubbo-access.log
+    name: dubbo
+    port: -1
+  provider:
+    retries: 0
+    timeout: 3000
+  registry:
+    address: 192.168.10.10:2181
+    id: zookeeper-registry
+    protocol: zookeeper
+hibernate:
+  dialect: mysql
+  format_sql: false
+  show_sql: false
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/shop
+  password: root
+  username: root
+rocketmq:
+  producer:
+    default: true
+    groupName: shop
+    namesrvAddr: localhost:9876
+server:
+  port: 8022
+spring:
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  output:
+    ansi:
+      enabled: always
+user:
+  cookie:
+    age: 86400
+    name: xdclass_shop_cookie
