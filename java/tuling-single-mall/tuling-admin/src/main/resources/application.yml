@@ -1,6 +1,5 @@
 server:
   port: 8099
-
 spring:
   application:
     name: mall-admin
@@ -23,7 +22,7 @@ redis:
     admin: 'ums:admin'
     resourceList: 'ums:resourceList'
   expire:
-    common: 86400 # 24小时
+    common: 60 # 24小时
 
 secure:
   ignored:
@@ -44,10 +43,7 @@ secure:
       - /admin/info
       - /admin/logout
       - /error
-#es:
-#  host: localhost
-#  port: 9200
-#  scheme: http
+
 jwt:
   secret: tuling-mall-admin  #服务端私钥（一定不能泄露）
   expiration: 86400   #过期时间 60*60*24  =一天

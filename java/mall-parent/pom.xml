@@ -224,7 +224,7 @@
                 <artifactId>swagger-annotations</artifactId>
                 <version>${version.swagger}</version>
             </dependency>
-            <!--rocketmq-->
+                <!--rocketmq-->
             <dependency>
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-client</artifactId>
