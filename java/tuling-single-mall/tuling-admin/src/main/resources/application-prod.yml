@@ -66,8 +66,8 @@ logging:
 aliyun:
   oss:
     endpoint: oss-cn-zhangjiakou.aliyuncs.com # oss对外服务的访问域名
-    accessKeyId: localhost # 访问身份验证中用到用户标识
-    accessKeySecret: localhost # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
+    accessKeyId: LTAI4FnNvw5E5Do1SDtLNiyF # 访问身份验证中用到用户标识
+    accessKeySecret: TjAUwSiod2caNFO8edetPgQNkLfu2N # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
     bucketName: hsy-tuling-oss # oss的存储空间
     policy:
       expire: 300 # 签名有效期(S)
