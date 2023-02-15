@@ -1,0 +1,51 @@
+server:
+  port: 8099
+spring:
+  application:
+    name: mall-admin
+  profiles:
+    active: dev
+  main:   #允许相同bean名称覆盖
+    allow-bean-definition-overriding: true
+mybatis-plus:
+  configuration:
+    auto-mapping-behavior: partial
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+  mapper-locations: classpath:/mapper/**/*.xml
+
+redis:
+  database: mall
+  key:
+    admin: 'ums:admin'
+    resourceList: 'ums:resourceList'
+  expire:
+    common: 60 # 24小时
+
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /swagger-ui.html
+      - /swagger-resources/**
+      - /swagger/**
+      - /**/v2/api-docs
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.ico
+      - /webjars/springfox-swagger-ui/**
+      - /actuator/**
+      - /druid/**
+      - /admin/login
+      - /admin/register
+      - /admin/info
+      - /admin/logout
+      - /error
+
+jwt:
+  secret: tuling-mall-admin  #服务端私钥（一定不能泄露）
+  expiration: 86400   #过期时间 60*60*24  =一天
+  tokenHead: Bearer #jwt规范  #告诉客户端jwt令牌开头需要加的一个字符串
+  tokenHeader: Authorization #告诉客户端你要在请求头里面传什么参数名字
