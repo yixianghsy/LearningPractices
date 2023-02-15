@@ -5,27 +5,34 @@ package cn.bugstack.springframework.test.bean;
  *
  *
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
- * @description 模拟含有入参构造函数的用户 Bean 对象
- * @date 2022/03/07
+ * @description 模拟用户服务类
+ * @date 2022/03/09
  *
  *
  */
 public class UserService {
 
-    private String name;
+    private String uId;
+
+    private UserDao userDao;
 
     public void queryUserInfo() {
-        System.out.println("查询用户信息：" + name);
-    }
-    //新增入参信息得构造函数
-    public UserService(String name) {
-        this.name = name;
-    }
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("");
-        sb.append("").append(name);
-        return sb.toString();
+        System.out.println("查询用户信息：" + userDao.queryUserName(uId));
     }
 
+    public String getuId() {
+        return uId;
+    }
+
+    public void setuId(String uId) {
+        this.uId = uId;
+    }
+
+    public UserDao getUserDao() {
+        return userDao;
+    }
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 }

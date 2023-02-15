@@ -1,4 +1,5 @@
 package cn.bugstack.springframework.beans;
+
 /**
  *
  *
@@ -29,4 +30,6 @@ public class PropertyValue {
     public Object getValue() {
         return value;
     }
+
+
 }

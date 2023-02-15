@@ -11,6 +11,7 @@ package cn.bugstack.springframework.beans.factory.config;
  *
  */
 public class BeanReference {
+
     private final String beanName;
 
     public BeanReference(String beanName) {
