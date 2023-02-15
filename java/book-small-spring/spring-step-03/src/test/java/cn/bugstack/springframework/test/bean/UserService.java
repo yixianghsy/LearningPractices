@@ -14,14 +14,13 @@ public class UserService {
 
     private String name;
 
-    public UserService(String name) {
-        this.name = name;
-    }
-
     public void queryUserInfo() {
         System.out.println("查询用户信息：" + name);
     }
-
+    //新增入参信息得构造函数
+    public UserService(String name) {
+        this.name = name;
+    }
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("");

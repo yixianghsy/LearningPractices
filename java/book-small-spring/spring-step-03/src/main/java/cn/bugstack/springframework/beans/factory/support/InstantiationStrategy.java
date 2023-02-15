@@ -12,6 +12,7 @@ import java.lang.reflect.Constructor;
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description Bean 实例化策略接口
  * @date 2022/03/08
+ * ctor 获取与入参信息相对应得构造函数
  *
  *
  */

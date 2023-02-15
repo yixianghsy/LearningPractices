@@ -32,6 +32,14 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         return bean;
     }
 
+    /**
+     * 创建 策略调用，这里使用Cglib
+     * @param beanDefinition
+     * @param beanName
+     * @param args
+     * @constructorToUse 表示有几个构造函数
+     * @return
+     */
     protected Object createBeanInstance(BeanDefinition beanDefinition, String beanName, Object[] args) {
         Constructor constructorToUse = null;
         Class<?> beanClass = beanDefinition.getBeanClass();

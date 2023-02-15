@@ -22,6 +22,7 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy {
     public Object instantiate(BeanDefinition beanDefinition, String beanName, Constructor ctor, Object[] args) throws BeansException {
         Class clazz = beanDefinition.getBeanClass();
         try {
+            //判断是否有构造函数
             if (null != ctor) {
                 return clazz.getDeclaredConstructor(ctor.getParameterTypes()).newInstance(args);
             } else {
