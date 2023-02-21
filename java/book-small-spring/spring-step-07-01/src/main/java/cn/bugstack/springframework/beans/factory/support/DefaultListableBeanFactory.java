@@ -1,56 +1,63 @@
 package cn.bugstack.springframework.beans.factory.support;
 
 import cn.bugstack.springframework.beans.BeansException;
-import cn.bugstack.springframework.beans.factory.DisposableBean;
-import cn.bugstack.springframework.beans.factory.config.SingletonBeanRegistry;
+import cn.bugstack.springframework.beans.factory.ConfigurableListableBeanFactory;
+import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  *
  *
  *
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
- * @description 通用的注册表实现
+ * @description 默认的Bean工厂实现类
  * @date 2022/03/07
  *
  *
  */
-public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
+public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory implements BeanDefinitionRegistry, ConfigurableListableBeanFactory {
 
-    private Map<String, Object> singletonObjects = new HashMap<>();
-
-    private final Map<String, DisposableBean> disposableBeans = new HashMap<>();
+    private Map<String, BeanDefinition> beanDefinitionMap = new HashMap<>();
 
     @Override
-    public Object getSingleton(String beanName) {
-        return singletonObjects.get(beanName);
+    public BeanDefinition getBeanDefinition(String beanName) {
+        BeanDefinition beanDefinition = beanDefinitionMap.get(beanName);
+        if (beanDefinition == null) throw new BeansException("No bean named '" + beanName + "' is defined");
+        return beanDefinition;
     }
 
     @Override
-    public void registerSingleton(String beanName, Object singletonObject) {
-        singletonObjects.put(beanName, singletonObject);
+    public void preInstantiateSingletons() throws BeansException {
+        beanDefinitionMap.keySet().forEach(this::getBean);
     }
 
-    public void registerDisposableBean(String beanName, DisposableBean bean) {
-        disposableBeans.put(beanName, bean);
+    @Override
+    public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) {
+        beanDefinitionMap.put(beanName, beanDefinition);
     }
 
-    public void destroySingletons() {
-        Set<String> keySet = this.disposableBeans.keySet();
-        Object[] disposableBeanNames = keySet.toArray();
+    @Override
+    public boolean containsBeanDefinition(String beanName) {
+        return beanDefinitionMap.containsKey(beanName);
+    }
 
-        for (int i = disposableBeanNames.length - 1; i >= 0; i--) {
-            Object beanName = disposableBeanNames[i];
-            DisposableBean disposableBean = disposableBeans.remove(beanName);
-            try {
-                disposableBean.destroy();
-            } catch (Exception e) {
-                throw new BeansException("Destroy method on bean with name '" + beanName + "' threw an exception", e);
+    @Override
+    public <T> Map<String, T> getBeansOfType(Class<T> type) throws BeansException {
+        Map<String, T> result = new HashMap<>();
+        beanDefinitionMap.forEach((beanName, beanDefinition) -> {
+            Class beanClass = beanDefinition.getBeanClass();
+            if (type.isAssignableFrom(beanClass)) {
+                result.put(beanName, (T) getBean(beanName));
             }
-        }
+        });
+        return result;
+    }
+
+    @Override
+    public String[] getBeanDefinitionNames() {
+        return beanDefinitionMap.keySet().toArray(new String[0]);
     }
 
 }
