@@ -14,6 +14,7 @@ import cn.bugstack.springframework.context.ApplicationListener;
  *
  */
 public interface ApplicationEventMulticaster {
+
     /**
      * Add a listener to be notified of all events.
      * @param listener the listener to add
@@ -31,4 +32,5 @@ public interface ApplicationEventMulticaster {
      * @param event the event to multicast
      */
     void multicastEvent(ApplicationEvent event);
+
 }

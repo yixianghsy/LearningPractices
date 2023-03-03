@@ -1,4 +1,5 @@
 package cn.bugstack.springframework.context.event;
+
 /**
  *
  *
@@ -9,7 +10,7 @@ package cn.bugstack.springframework.context.event;
  *  /CodeDesignTutorials
  *
  */
-public class ContextClosedEvent  extends ApplicationContextEvent{
+public class ContextClosedEvent extends ApplicationContextEvent{
 
     /**
      * Constructs a prototypical Event.

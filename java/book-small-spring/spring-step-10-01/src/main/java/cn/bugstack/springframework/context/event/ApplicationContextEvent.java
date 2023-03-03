@@ -2,6 +2,7 @@ package cn.bugstack.springframework.context.event;
 
 import cn.bugstack.springframework.context.ApplicationContext;
 import cn.bugstack.springframework.context.ApplicationEvent;
+
 /**
  *
  *
@@ -12,7 +13,8 @@ import cn.bugstack.springframework.context.ApplicationEvent;
  *  /CodeDesignTutorials
  *
  */
-public class ApplicationContextEvent  extends ApplicationEvent {
+public class ApplicationContextEvent extends ApplicationEvent {
+
     /**
      * Constructs a prototypical Event.
      *

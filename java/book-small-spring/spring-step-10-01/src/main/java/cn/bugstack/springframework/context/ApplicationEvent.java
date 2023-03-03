@@ -13,7 +13,8 @@ import java.util.EventObject;
  *  /CodeDesignTutorials
  *
  */
-public abstract  class ApplicationEvent  extends EventObject {
+public abstract class ApplicationEvent extends EventObject {
+
     /**
      * Constructs a prototypical Event.
      *
@@ -23,4 +24,5 @@ public abstract  class ApplicationEvent  extends EventObject {
     public ApplicationEvent(Object source) {
         super(source);
     }
+
 }
