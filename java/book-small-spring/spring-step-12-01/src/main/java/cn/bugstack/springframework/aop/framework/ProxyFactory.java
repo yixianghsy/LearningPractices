@@ -15,7 +15,6 @@ import cn.bugstack.springframework.aop.AdvisedSupport;
  *
  */
 public class ProxyFactory {
-
     private AdvisedSupport advisedSupport;
 
     public ProxyFactory(AdvisedSupport advisedSupport) {
@@ -28,10 +27,8 @@ public class ProxyFactory {
 
     private AopProxy createAopProxy() {
         if (advisedSupport.isProxyTargetClass()) {
-            return new Cglib2AopProxy(advisedSupport);
+            return  new Cglib2AopProxy(advisedSupport);
         }
-
         return new JdkDynamicAopProxy(advisedSupport);
     }
-
 }
