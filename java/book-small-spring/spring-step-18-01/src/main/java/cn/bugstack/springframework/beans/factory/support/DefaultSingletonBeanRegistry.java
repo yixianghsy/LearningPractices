@@ -11,9 +11,6 @@ import java.util.Set;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description 通用的注册表实现
  * @date 2022/03/07
  *

@@ -7,9 +7,6 @@ import java.lang.annotation.Target;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description Marks a constructor, field, setter method or config method as to be
  * autowired by Spring's dependency injection facilities.
  * @date 2022/3/15

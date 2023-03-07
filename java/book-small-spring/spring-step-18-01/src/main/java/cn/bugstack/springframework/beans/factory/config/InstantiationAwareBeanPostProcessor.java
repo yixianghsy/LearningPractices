@@ -5,9 +5,6 @@ import cn.bugstack.springframework.beans.PropertyValues;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description Subinterface of {@link BeanPostProcessor} that adds a before-instantiation callback,
  * and a callback after instantiation but before explicit properties are set or
  * autowiring occurs.

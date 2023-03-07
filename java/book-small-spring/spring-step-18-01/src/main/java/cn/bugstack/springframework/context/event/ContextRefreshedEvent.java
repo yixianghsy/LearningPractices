@@ -2,9 +2,6 @@ package cn.bugstack.springframework.context.event;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description Event raised when an <code>ApplicationContext</code> gets initialized or refreshed.
  * @date 2022/3/13
  *  /CodeDesignTutorials

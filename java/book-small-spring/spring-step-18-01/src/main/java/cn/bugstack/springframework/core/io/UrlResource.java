@@ -10,9 +10,6 @@ import java.net.URLConnection;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description URL 资源
  * @date 2022/3/9
  *

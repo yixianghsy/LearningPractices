@@ -2,9 +2,6 @@ package cn.bugstack.springframework.context;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description 事件发布者接口
  * @date 2022/3/13
  *  /CodeDesignTutorials

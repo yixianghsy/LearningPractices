@@ -19,9 +19,6 @@ import java.util.Set;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description BeanPostProcessor implementation that creates AOP proxies based on all candidate
  * Advisors in the current BeanFactory. This class is completely generic; it contains
  * no special code to handle any particular aspects, such as pooling aspects.

@@ -7,9 +7,6 @@ import java.io.InputStream;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description 文件资源
  * @date 2022/3/9
  *

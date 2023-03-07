@@ -2,9 +2,6 @@ package cn.bugstack.springframework.core.io;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description 资源加载器
  * @date 2022/3/9
  *

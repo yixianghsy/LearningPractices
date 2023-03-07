@@ -12,9 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description 默认的Bean工厂实现类
  * @date 2022/03/07
  *

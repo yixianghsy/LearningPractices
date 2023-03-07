@@ -4,9 +4,6 @@ import java.lang.reflect.Method;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description Advice invoked before a method is invoked. Such advices cannot
  * prevent the method call proceeding, unless they throw a Throwable.
  * @date 2022/3/14

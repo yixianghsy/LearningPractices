@@ -6,9 +6,6 @@ import cn.bugstack.springframework.context.ApplicationListener;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description Simple implementation of the {@link ApplicationEventMulticaster} interface.
  * @date 2022/3/13
  *  /CodeDesignTutorials

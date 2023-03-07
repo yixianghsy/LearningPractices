@@ -5,9 +5,6 @@ import cn.bugstack.springframework.context.ApplicationEvent;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description Base class for events raised for an <code>ApplicationContext</code>.
  * @date 2022/3/13
  *  /CodeDesignTutorials

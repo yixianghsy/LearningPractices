@@ -4,9 +4,6 @@ import com.sun.istack.internal.Nullable;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description 类型转换抽象接口
  * @date 2022/3/16
  *

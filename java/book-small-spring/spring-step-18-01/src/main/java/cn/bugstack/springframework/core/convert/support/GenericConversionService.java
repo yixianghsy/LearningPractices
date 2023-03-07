@@ -12,9 +12,6 @@ import java.util.*;
 
 /**
  *
- *
- *
- * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description Base ConversionService implementation suitable for use in most environments.
  * Indirectly implements ConverterRegistry as registration API through the
  * ConfigurableConversionService interface.
