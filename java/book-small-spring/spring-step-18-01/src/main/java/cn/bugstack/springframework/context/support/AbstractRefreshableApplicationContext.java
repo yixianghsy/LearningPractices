@@ -6,6 +6,9 @@ import cn.bugstack.springframework.beans.factory.support.DefaultListableBeanFact
 
 /**
  *
+ *
+ *
+ * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description 抽象基类刷新应用上下文 Base class for {@link cn.bugstack.springframework.context.ApplicationContext}
  * implementations which are supposed to support multiple calls to {@link #refresh()},
  * creating a new internal bean factory instance every time.

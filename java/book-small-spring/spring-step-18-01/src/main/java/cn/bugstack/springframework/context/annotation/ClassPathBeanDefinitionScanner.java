@@ -20,6 +20,9 @@ import java.util.Set;
 
 /**
  *
+ *
+ *
+ * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description A bean definition scanner that detects bean candidates on the classpath,
  * registering corresponding bean definitions with a given registry ({@code BeanFactory}
  * or {@code ApplicationContext}).

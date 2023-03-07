@@ -16,6 +16,9 @@ import java.util.Set;
 
 /**
  *
+ *
+ *
+ * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description Abstract implementation of the {@link ApplicationEventMulticaster} interface,
  * providing the basic listener registration facility.
  * @date 2022/3/13

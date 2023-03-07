@@ -8,6 +8,9 @@ import java.lang.reflect.InvocationTargetException;
 
 /**
  *
+ *
+ *
+ * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description JDK实例化策略
  * @date 2022/03/08
  *

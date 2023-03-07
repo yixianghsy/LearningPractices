@@ -2,6 +2,9 @@ package cn.bugstack.springframework.beans;
 
 /**
  *
+ *
+ *
+ * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description Bean 属性信息
  * @date 2022/3/9
  *  /CodeDesignTutorials

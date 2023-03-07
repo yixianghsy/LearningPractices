@@ -13,6 +13,9 @@ import java.lang.reflect.Field;
 
 /**
  *
+ *
+ *
+ * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description 处理 @Value、@Autowired，注解的 BeanPostProcessor {@link cn.bugstack.springframework.beans.factory.config.BeanPostProcessor} implementation
  * that autowires annotated fields, setter methods and arbitrary config methods.
  * Such members to be injected are detected through a Java 5 annotation: by default,
