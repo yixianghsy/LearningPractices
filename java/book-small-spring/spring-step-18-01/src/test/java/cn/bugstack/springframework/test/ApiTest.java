@@ -21,7 +21,7 @@ public class ApiTest {
 
     @Test
     public void execute(){
-        jdbcTemplate.execute("insert into user (id, userId, userHead, createTime, updateTime) values (1, '184172133','01_50', now(), now())");
+        jdbcTemplate.execute("insert into user (id, userId, userHead, createTime, updateTime) values (2, '184172133','01_50', now(), now())");
     }
 
     @Test
