@@ -26,7 +26,7 @@ public class JdbcTest {
     public void init() throws SQLException {
         dataSource = new DruidDataSource();
         dataSource.setDriver(new Driver());
-        dataSource.setUrl("jdbc:mysql://localhost:3306/spring?useSSL=false");
+        dataSource.setUrl("jdbc:mysql://192.168.1.41:3306/spring?useSSL=false");
         dataSource.setPassword("123456");
         dataSource.setUsername("root");
     }
@@ -39,7 +39,7 @@ public class JdbcTest {
         connection.setAutoCommit(false);
         try {
             statement.execute("insert into user (id, userId, userHead, createTime, updateTime) values (1, '184172133','01_50', now(), now())");
-            statement.execute("insert into user (id, userId, userHead, createTime, updateTime) values (1, '184172133','01_50', now(), now())");
+//            statement.execute("insert into user (id, userId, userHead, createTime, updateTime) values (1, '184172133','01_50', now(), now())");
         } catch (Exception e) {
             e.printStackTrace();
             connection.rollback();
