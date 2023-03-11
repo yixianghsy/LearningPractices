@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * @author 马亮
+ * @author maliangnansheng
  * @date 2022/4/6 14:33
  */
 public interface ArticleService {
@@ -33,6 +33,15 @@ public interface ArticleService {
      * @return
      */
     PageInfo<ArticleDTO> getList(ArticleSearchDTO articleSearchDTO, UserSsoDTO currentUser, ArticleStateEnum articleStateEnum);
+
+    /**
+     * 获取用户文章数量
+     *
+     * @param createUser
+     * @param articleStateEnum
+     * @return
+     */
+    Long getUserArticleCount(Long createUser, ArticleStateEnum articleStateEnum);
 
     /**
      * 获取待审核的文章
@@ -204,4 +213,12 @@ public interface ArticleService {
      * @return
      */
     Boolean delete(Integer id, UserSsoDTO currentUser);
+
+    /**
+     * 文章审核数据量
+     *
+     * @param title
+     * @return
+     */
+    ArticleCheckCountDTO getArticleCheckCount(String title);
 }

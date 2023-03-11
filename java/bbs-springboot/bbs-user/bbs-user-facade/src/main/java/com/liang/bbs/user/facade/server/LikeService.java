@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * @author 马亮
+ * @author maliangnansheng
  * @date 2022/4/6 14:33
  */
 public interface LikeService {
@@ -89,5 +89,13 @@ public interface LikeService {
      * @return
      */
     Long getUserLikeCount(Long userId);
+
+    /**
+     * 用户获点赞的数量
+     *
+     * @param userId
+     * @return
+     */
+    Long getUserTheLikeCount(Long userId);
 
 }

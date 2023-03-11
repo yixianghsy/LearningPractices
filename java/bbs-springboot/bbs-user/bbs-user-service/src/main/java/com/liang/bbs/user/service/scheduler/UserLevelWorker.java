@@ -5,11 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
- * @author 马亮
+ * @author maliangnansheng
  * @date 2022/5/24 10:57
  */
 @Component
@@ -24,6 +25,7 @@ public class UserLevelWorker {
     /**
      * 每天凌晨1点执行
      */
+    @Async("asyncTaskExecutor")
     @Scheduled(cron = "0 0 1 * * ?")
     public void threadTask() {
         execute();
@@ -52,6 +54,7 @@ public class UserLevelWorker {
     /**
      * 每天5分钟执行
      */
+    @Async("asyncTaskExecutor")
     @Scheduled(cron = "0 0/5 * * * ?")
     public void threadTask2() {
         executeNull();

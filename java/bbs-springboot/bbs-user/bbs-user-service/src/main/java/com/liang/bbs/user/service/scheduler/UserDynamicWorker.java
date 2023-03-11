@@ -5,11 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
- * @author 马亮
+ * @author maliangnansheng
  * @date 2022/5/24 10:57
  */
 @Component
@@ -24,7 +25,8 @@ public class UserDynamicWorker {
     /**
      * 每10分钟执行
      */
-    @Scheduled(cron = "0 0/10 * * * ?")
+    @Async("asyncTaskExecutor")
+    @Scheduled(cron = "0 0/5 * * * ?")
     public void threadTask() {
         execute();
     }

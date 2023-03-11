@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Springboot 整合Redisson 实现分布式锁
  *
- * @author 马亮
+ * @author maliangnansheng
  * @date 2022/4/20 10:09
  */
 @Configuration
@@ -22,8 +22,8 @@ public class RedissonConfig {
     @Value("${spring.redis.port}")
     private String redisPort;
 
-    @Value("${spring.redis.password}")
-    private String redisPassword;
+//    @Value("${spring.redis.password}")
+//    private String redisPassword;
 
     @Value("${spring.redis.timeout}")
     private Integer redisTimeout;
@@ -38,7 +38,7 @@ public class RedissonConfig {
         Config config = new Config();
         SingleServerConfig singleServerConfig = config.useSingleServer();
         singleServerConfig.setAddress("redis://" + redisHost + ":" + redisPort);
-        singleServerConfig.setPassword(redisPassword);
+//        singleServerConfig.setPassword(redisPassword);
         singleServerConfig.setTimeout(redisTimeout);
 
         return Redisson.create(config);

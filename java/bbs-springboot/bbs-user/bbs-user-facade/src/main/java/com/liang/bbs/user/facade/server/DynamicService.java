@@ -6,7 +6,7 @@ import com.liang.bbs.user.facade.dto.DynamicDTO;
 import java.time.LocalDateTime;
 
 /**
- * @author 马亮
+ * @author maliangnansheng
  * @date 2022/4/6 14:33
  */
 public interface DynamicService {
@@ -28,6 +28,14 @@ public interface DynamicService {
      * @return
      */
     Boolean create(DynamicDTO dynamicDTO);
+
+    /**
+     * 验证是否已经存在
+     *
+     * @param dynamicDTO
+     * @return
+     */
+    Boolean verifyExist(DynamicDTO dynamicDTO);
 
     /**
      * 删除用户动态信息

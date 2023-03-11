@@ -11,11 +11,11 @@ spring:
       max-file-size: 100MB
       max-request-size: 1000MB
   redis:
-    host: 120.48.100.28
+    host: 192.168.1.41
     port: 6379
-    password: 12345678
+#    password: 12345678
     # 单位 毫秒
-    timeout: 3000
+    timeout: 60000
     lettuce:
       pool:
         max-active: 10
@@ -26,7 +26,7 @@ dubbo:
   application:
     name: ns-bbs-rest
   registry:
-    address: zookeeper://120.48.100.28:2181
+    address: zookeeper://192.168.1.41:2181
     timeout: 60000
   protocol:
     name: dubbo

@@ -6,13 +6,13 @@ spring:
     name: ns-bbs-user
   datasource:
     # 数据库访问配置
-    url: jdbc:mysql://127.0.0.1:3306/ns_bbs?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.1.41:3306/ns_bbs?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     # mysql用户名（需要改成你自己的）
     username: root
     # mysql密码（需要改成你自己的）
-    password: 777888
+    password: 123456
     # 下面为连接池的补充设置，应用到上面所有数据源中
     druid:
       # 初始化大小
@@ -48,11 +48,11 @@ spring:
           log-slow-sql: true
           slow-sql-millis: 2000
   redis:
-    host: 120.48.100.28
+    host: 192.168.1.41
     port: 6379
-    password: 12345678
+#    password: 12345678
     # 单位 毫秒
-    timeout: 3000
+    timeout: 60000
     lettuce:
       pool:
         max-active: 10
@@ -63,7 +63,7 @@ dubbo:
   application:
     name: ns-bbs-user
   registry:
-    address: zookeeper://120.48.100.28:2181
+    address: zookeeper://192.168.1.41:2181
     timeout: 60000
   protocol:
     name: dubbo
@@ -82,7 +82,7 @@ mybatis:
 
 # 一般情况下 默认的配置就行（可以自动识别），只对topic区分就行
 rocketmq:
-  name-server: 120.48.100.28:9876
+  name-server: 192.168.1.41:9876
   producer:
     group: bbs-user-service
   consumer:
