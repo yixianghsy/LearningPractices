@@ -38,8 +38,8 @@ public class JdbcTest {
 
         connection.setAutoCommit(false);
         try {
-            statement.execute("insert into user (id, userId, userHead, createTime, updateTime) values (1, '184172133','01_50', now(), now())");
-            statement.execute("insert into user (id, userId, userHead, createTime, updateTime) values (1, '184172133','01_50', now(), now())");
+            statement.execute("insert into user (id, userId, userHead, createTime, updateTime) values (5, '184172133','01_50', now(), now())");
+            statement.execute("insert into user (id, userId, userHead, createTime, updateTime) values (6, '184172133','01_50', now(), now())");
         } catch (Exception e) {
             e.printStackTrace();
             connection.rollback();

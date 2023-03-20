@@ -12,6 +12,7 @@ import cn.bugstack.springframework.beans.BeansException;
  * to the application context client methods in the
  * {@link cn.bugstack.springframework.context.ApplicationContext} interface.
  * @date 2022/3/10
+ * 注册、关闭虚拟机钩子得方法
  *
  *
  */

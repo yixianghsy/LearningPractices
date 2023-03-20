@@ -23,12 +23,20 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
     private InstantiationStrategy instantiationStrategy = new CglibSubclassingInstantiationStrategy();
 
+    /**
+     *
+     * @param beanName
+     * @param beanDefinition   属性值集合
+     * @param args
+     * @return
+     * @throws BeansException
+     */
     @Override
     protected Object createBean(String beanName, BeanDefinition beanDefinition, Object[] args) throws BeansException {
         Object bean = null;
         try {
             bean = createBeanInstance(beanDefinition, beanName, args);
-            // 给 Bean 填充属性
+            // 给 Bean 填充属性！！主要是关注这个方法
             applyPropertyValues(beanName, bean, beanDefinition);
         } catch (Exception e) {
             throw new BeansException("Instantiation of bean failed", e);

@@ -30,7 +30,7 @@ public class ApiTest {
     public void test_BeanFactory() {
         // 1.初始化 BeanFactory
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
-
+        //注册就是吧bean信息添加到map
         // 2. UserDao 注册
         beanFactory.registerBeanDefinition("userDao", new BeanDefinition(UserDao.class));
 

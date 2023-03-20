@@ -30,6 +30,7 @@ public interface ApplicationEventMulticaster {
     /**
      * Multicast the given application event to appropriate listeners.
      * @param event the event to multicast
+     * 退推送时间，决定有谁来接受
      */
     void multicastEvent(ApplicationEvent event);
 

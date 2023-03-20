@@ -19,7 +19,9 @@ import org.junit.Test;
  *
  */
 public class ApiTest {
-
+    /**
+     * 不使用上下文
+     */
     @Test
     public void test_BeanFactoryPostProcessorAndBeanPostProcessor(){
         // 1.初始化 BeanFactory
@@ -43,6 +45,9 @@ public class ApiTest {
         System.out.println("测试结果：" + result);
     }
 
+    /**
+     * 使用上下文
+     */
     @Test
     public void test_xml() {
         // 1.初始化 BeanFactory

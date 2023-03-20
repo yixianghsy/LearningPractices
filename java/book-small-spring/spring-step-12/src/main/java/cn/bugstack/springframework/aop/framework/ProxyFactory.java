@@ -10,6 +10,7 @@ import cn.bugstack.springframework.aop.AdvisedSupport;
  * @description Factory for AOP proxies for programmatic use, rather than via a bean
  * factory. This class provides a simple way of obtaining and configuring
  * AOP proxies in code.
+ * 代理工厂
  * @date 2022/3/14
  *  /CodeDesignTutorials
  *

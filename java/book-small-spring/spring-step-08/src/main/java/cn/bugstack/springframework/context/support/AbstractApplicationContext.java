@@ -44,7 +44,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         // 6. 提前实例化单例Bean对象
         beanFactory.preInstantiateSingletons();
     }
-
+    //注册钩子
     @Override
     public void registerShutdownHook() {
         Runtime.getRuntime().addShutdownHook(new Thread(this::close));

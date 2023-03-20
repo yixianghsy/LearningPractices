@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
  *
  *
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
+ * 定义销毁方法适配器（接口和配置）
  * @description Adapter that implements the {@link DisposableBean} and {@link Runnable} interfaces
  * performing various destruction steps on a given bean instance:
  * @date 2022/3/10

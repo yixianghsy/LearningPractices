@@ -29,7 +29,7 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
      * @throws BeansException
      */
     public ClassPathXmlApplicationContext(String configLocations) throws BeansException {
-        this(new String[]{configLocations});
+        this(new String[] {configLocations});
     }
 
     /**

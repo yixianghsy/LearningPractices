@@ -1,5 +1,8 @@
 package cn.bugstack.springframework.test.bean;
 
+/**
+ * 老公类  
+ */
 public class Husband {
 
     private Wife wife;

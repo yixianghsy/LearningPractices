@@ -26,6 +26,7 @@ import java.util.Set;
  * registering corresponding bean definitions with a given registry ({@code BeanFactory}
  * or {@code ApplicationContext}).
  * @date 2022/3/14
+ * 扫描所有使用Component注解的
  *
  *
  */

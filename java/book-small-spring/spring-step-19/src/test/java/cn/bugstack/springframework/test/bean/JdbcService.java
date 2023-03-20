@@ -17,13 +17,13 @@ public class JdbcService {
      */
     @Transactional(rollbackFor = Exception.class)
     public void saveData(JdbcTemplate jdbcTemplate) {
-        jdbcTemplate.execute("insert into user (id, userId, userHead, createTime, updateTime) values (1, '184172133','01_50', now(), now())");
-        jdbcTemplate.execute("insert into user (id, userId, userHead, createTime, updateTime) values (1, '184172133','01_50', now(), now())");
+        jdbcTemplate.execute("insert into user (id, userId, userHead, createTime, updateTime) values (7, '184172133','01_50', now(), now())");
+        jdbcTemplate.execute("insert into user (id, userId, userHead, createTime, updateTime) values (8, '184172133','01_50', now(), now())");
     }
 
     public void saveDataNoTransaction(JdbcTemplate jdbcTemplate) {
-        jdbcTemplate.execute("insert into user (id, userId, userHead, createTime, updateTime) values (1, '184172133','01_50', now(), now())");
-        jdbcTemplate.execute("insert into user (id, userId, userHead, createTime, updateTime) values (1, '184172133','01_50', now(), now())");
+        jdbcTemplate.execute("insert into user (id, userId, userHead, createTime, updateTime) values (9, '184172133','01_50', now(), now())");
+        jdbcTemplate.execute("insert into user (id, userId, userHead, createTime, updateTime) values (44, '184172133','01_50', now(), now())");
     }
 
 }

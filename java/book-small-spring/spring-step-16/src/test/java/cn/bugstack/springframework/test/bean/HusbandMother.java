@@ -7,7 +7,7 @@ import java.lang.reflect.Proxy;
 /**
  *
  *
- *
+ * 婆婆类，代理了媳妇的妈妈的职责的类
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
  * @description 代理类
  * @date 2022/3/16

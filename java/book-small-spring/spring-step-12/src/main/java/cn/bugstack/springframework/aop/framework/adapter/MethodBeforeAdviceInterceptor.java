@@ -12,6 +12,7 @@ import org.aopalliance.intercept.MethodInvocation;
  * @description Interceptor to wrap am {@link cn.bugstack.springframework.aop.MethodBeforeAdvice}.
  * Used internally by the AOP framework; application developers should not need
  * to use this class directly.
+ * 方法拦截器
  * @date 2022/3/14
  *  /CodeDesignTutorials
  *

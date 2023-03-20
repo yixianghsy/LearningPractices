@@ -9,6 +9,7 @@ import cn.bugstack.springframework.context.ApplicationContextAware;
  * 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
  * 公众号：bugstack虫洞栈
  * Create by 小傅哥(fustack)
+ * 这里实现多个接口，那后期是否可以把接口合并到一个接口，且把这个合并得接口变成注解
  */
 public class UserService implements BeanNameAware, BeanClassLoaderAware, ApplicationContextAware, BeanFactoryAware {
 

@@ -21,6 +21,7 @@ import java.util.Collection;
  * @description BeanPostProcessor implementation that creates AOP proxies based on all candidate
  * Advisors in the current BeanFactory. This class is completely generic; it contains
  * no special code to handle any particular aspects, such as pooling aspects.
+ * 融入Bean生命周期的自动代理创建者6
  * @date 2022/3/14
  *  /CodeDesignTutorials
  *
