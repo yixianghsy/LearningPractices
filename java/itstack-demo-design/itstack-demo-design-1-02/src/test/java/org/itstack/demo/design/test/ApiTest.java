@@ -7,6 +7,9 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 工厂设计模式学习
+ */
 public class ApiTest {
 
     @Test
