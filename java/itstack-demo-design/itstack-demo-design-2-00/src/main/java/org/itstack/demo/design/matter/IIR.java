@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 模拟集群 IIR
+ */
 public class IIR {
 
     private Logger logger = LoggerFactory.getLogger(IIR.class);

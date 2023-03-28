@@ -5,6 +5,9 @@ import org.itstack.demo.desgin.util.ClassLoaderUtils;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
+/**
+ * 工厂实现
+ */
 public class JDKInvocationHandler implements InvocationHandler {
 
     private ICacheAdapter cacheAdapter;

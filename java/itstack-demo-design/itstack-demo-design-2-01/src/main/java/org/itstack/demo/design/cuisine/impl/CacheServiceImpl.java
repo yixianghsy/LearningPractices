@@ -16,7 +16,7 @@ public class CacheServiceImpl implements CacheService {
     private IIR iir = new IIR();
 
     public String get(String key, int redisType) {
-
+        //这⾥的实现过程⾮常简单，主要根据类型判断是哪个Redis集群
         if (1 == redisType) {
             return egm.gain(key);
         }

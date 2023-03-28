@@ -7,6 +7,10 @@ import org.itstack.demo.desgin.factory.impl.IIRCacheAdapter;
 import org.itstack.demo.desgin.impl.CacheServiceImpl;
 import org.junit.Test;
 
+/**
+ *
+ * 抽象工厂学习
+ */
 public class ApiTest {
 
     @Test
