@@ -17,6 +17,9 @@ import java.util.Date;
 import java.util.HashMap;
 
 /**
+ * 适配器模式的主要作⽤就是把原本不兼容的接⼝，通过适配修改做到统⼀
+ */
+/**
  * 适配器设计模式，以后可能经常用到
  */
 public class ApiTest {
