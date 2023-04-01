@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * 开户
+ *  注册开户MQ
  */
 public class create_account {
 

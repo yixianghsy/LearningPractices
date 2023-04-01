@@ -4,6 +4,9 @@ import com.alibaba.fastjson.JSON;
 
 import java.util.Date;
 
+/**
+ * 内部订单MQ
+ */
 public class OrderMq {
 
     private String uid;           // 用户ID

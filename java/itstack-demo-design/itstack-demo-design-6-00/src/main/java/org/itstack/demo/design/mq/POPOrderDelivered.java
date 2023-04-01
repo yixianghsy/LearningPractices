@@ -7,6 +7,8 @@ import java.util.Date;
 
 /**
  * 订单妥投消息
+ *
+ * 内部订单MQ
  */
 public class POPOrderDelivered {
 

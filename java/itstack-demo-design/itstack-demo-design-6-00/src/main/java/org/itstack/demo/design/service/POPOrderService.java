@@ -3,6 +3,9 @@ package org.itstack.demo.design.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 查询⽤户第三⽅下单⾸单接⼝
+ */
 public class POPOrderService {
 
     private Logger logger = LoggerFactory.getLogger(POPOrderService.class);
