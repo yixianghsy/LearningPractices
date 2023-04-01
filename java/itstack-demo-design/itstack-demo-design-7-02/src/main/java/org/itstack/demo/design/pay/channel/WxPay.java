@@ -4,6 +4,9 @@ import org.itstack.demo.design.pay.mode.IPayMode;
 
 import java.math.BigDecimal;
 
+/**
+ * 两个⽀付类型的实现
+ */
 public class WxPay extends Pay {
 
     public WxPay(IPayMode payMode) {

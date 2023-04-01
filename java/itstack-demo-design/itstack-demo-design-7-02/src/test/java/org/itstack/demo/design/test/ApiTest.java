@@ -9,6 +9,11 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
+/**
+ * 桥接模式的主要作⽤就是通过将抽象部分与实现部分分离，把多种可匹配的使⽤进⾏组合。说⽩了核⼼
+ * 实现也就是在A类中含有B类接⼝，通过构造函数传递B类的实现，这个B类就是设计的 桥
+ * 注：这不就是经常用到的码？
+ */
 public class ApiTest {
 
     @Test

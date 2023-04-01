@@ -6,6 +6,9 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 
+/**
+ * ⽀付类型桥接抽象类
+ */
 public abstract class Pay {
 
     protected Logger logger = LoggerFactory.getLogger(Pay.class);
