@@ -13,6 +13,10 @@ import org.slf4j.LoggerFactory;
 import java.io.Reader;
 import java.util.List;
 
+/**
+ * 中介者模式要解决的就是复杂功能应⽤之间的᯿复调⽤，在这中间添加⼀层中介者包装服务，对外提供
+ * 简单、通⽤、易扩展的服务能⼒
+ */
 public class ApiTest {
 
     private Logger logger = LoggerFactory.getLogger(ApiTest.class);

@@ -6,6 +6,7 @@ import java.util.List;
  * 公众号 | bugstack虫洞栈
  * 博 客 | https://bugstack.cn
  * Create by 小傅哥 @2020
+ * 定义SqlSession接⼝
  */
 public interface SqlSession {
 
