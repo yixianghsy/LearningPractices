@@ -19,6 +19,9 @@ import java.util.Map;
  * 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
  * 公众号：bugstack虫洞栈
  * Create by 小傅哥(fustack) @2020
+ *
+ * 命令模式 ：命令、命令实现者、命令的调⽤者
+ * 服务员只要根据客人点的菜品调用专业的厨师就可以了
  */
 public class ApiTest {
 
