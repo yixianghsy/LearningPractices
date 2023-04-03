@@ -1,5 +1,5 @@
 package org.itstack.demo.design;
-
+//链路抽象类定义
 public class AuthInfo {
 
     private String code;
