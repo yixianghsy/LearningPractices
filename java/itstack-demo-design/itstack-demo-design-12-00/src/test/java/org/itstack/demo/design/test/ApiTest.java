@@ -7,6 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * 代理模式学习
+ *
+ */
 public class ApiTest {
 
     private Logger logger = LoggerFactory.getLogger(ApiTest.class);
