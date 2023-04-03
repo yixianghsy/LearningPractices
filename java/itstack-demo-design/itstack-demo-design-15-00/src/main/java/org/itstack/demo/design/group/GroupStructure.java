@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
+//(核⼼)迭代器功能实现
 public class GroupStructure implements Collection<Employee, Link> {
 
     private String groupId;                                                 // 组织ID，也是一个组织链的头部ID

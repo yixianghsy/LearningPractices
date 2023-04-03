@@ -1,5 +1,5 @@
 package org.itstack.demo.design.lang;
-
+// 集合功能接⼝定
 public interface Collection<E, L> extends Iterable<E> {
 
     boolean add(E e);
