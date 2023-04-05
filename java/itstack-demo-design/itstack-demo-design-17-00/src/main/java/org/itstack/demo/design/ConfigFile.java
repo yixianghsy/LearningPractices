@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * 配置文件
+ * 配置信息类
  */
 public class ConfigFile {
 

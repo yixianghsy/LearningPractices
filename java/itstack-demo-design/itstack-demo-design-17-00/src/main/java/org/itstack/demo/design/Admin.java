@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * 管理员类
+ */
 public class Admin {
 
     private int cursorIdx = 0;

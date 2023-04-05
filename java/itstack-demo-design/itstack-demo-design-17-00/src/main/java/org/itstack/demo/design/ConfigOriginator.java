@@ -1,5 +1,8 @@
 package org.itstack.demo.design;
 
+/**
+ * 记录者类
+ */
 public class ConfigOriginator {
 
     private ConfigFile configFile;

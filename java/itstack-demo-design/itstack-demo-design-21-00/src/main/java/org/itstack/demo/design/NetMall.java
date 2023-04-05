@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 
 /**
+ *
+ * 定义执⾏顺序的抽象类
  * 基础电商推广服务
  * 1. 生成最优价商品海报
  * 2. 海报含带推广邀请码

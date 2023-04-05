@@ -2,6 +2,7 @@ package org.itstack.demo.design;
 
 /**
  * 配置文件备忘录
+ * 备忘录类
  */
 public class ConfigMemento {
 
