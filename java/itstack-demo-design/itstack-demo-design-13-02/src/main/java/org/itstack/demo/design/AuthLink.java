@@ -11,6 +11,7 @@ import java.util.Date;
  * 1. 601-610 三级审批 + 二级审批
  * 2. 611-620 三级审批 + 二级审批 + 一级审批
  * 3. 其他时间 三级审批
+ * 链路抽象类定义
  */
 public abstract class AuthLink {
 

@@ -11,6 +11,7 @@ import java.util.*;
  * 公众号 | bugstack虫洞栈
  * 博 客 | https://bugstack.cn
  * Create by 小傅哥 @2020
+ * SqlSession具体实现类
  */
 public class DefaultSqlSession implements SqlSession {
 

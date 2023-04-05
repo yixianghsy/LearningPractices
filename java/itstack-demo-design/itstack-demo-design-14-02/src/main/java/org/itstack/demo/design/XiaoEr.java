@@ -13,7 +13,7 @@ import java.util.List;
  * 公众号：bugstack虫洞栈
  * Create by 小傅哥(fustack) @2020
  * <p>
- * 饭店小二，负责点单
+ * 饭店小二，负责点单(调⽤者(⼩⼆))
  */
 public class XiaoEr {
 

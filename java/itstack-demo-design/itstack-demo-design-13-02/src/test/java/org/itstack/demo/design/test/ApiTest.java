@@ -13,6 +13,9 @@ import org.slf4j.LoggerFactory;
 import java.text.ParseException;
 import java.util.Date;
 
+/**
+ * 原来那些.xxx.xxx是责任链设计模式
+ */
 public class ApiTest {
 
     private Logger logger = LoggerFactory.getLogger(ApiTest.class);

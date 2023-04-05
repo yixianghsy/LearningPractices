@@ -12,11 +12,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AuthService {
 
     private static Map<String, Date> authMap = new ConcurrentHashMap<String, Date>();
-
+    //查询审核结果
     public static Date queryAuthInfo(String uId, String orderId) {
         return authMap.get(uId.concat(orderId));
     }
-
+    //处理审核
     public static void auth(String uId, String orderId) {
         authMap.put(uId.concat(orderId), new Date());
     }
