@@ -17,7 +17,7 @@ public class ApiTest {
     public void test() {
 
         // 初始化数据
-        String activityId = "100001";
+        String activityId = "10000";
         ActivityService.init(activityId, Status.Editing);
 
         ActivityExecStatusController activityExecStatusController = new ActivityExecStatusController();

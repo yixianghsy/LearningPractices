@@ -1,7 +1,7 @@
 package org.itstack.demo.design;
 
 import java.util.Date;
-
+//基本活动信息
 public class ActivityInfo {
 
     private String activityId;    // 活动ID

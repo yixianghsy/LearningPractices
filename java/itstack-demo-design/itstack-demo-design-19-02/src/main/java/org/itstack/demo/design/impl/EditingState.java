@@ -7,6 +7,7 @@ import org.itstack.demo.design.Status;
 
 /**
  * 活动状态；编辑中
+ * 部分状态流转实现
  */
 public class EditingState extends State {
 

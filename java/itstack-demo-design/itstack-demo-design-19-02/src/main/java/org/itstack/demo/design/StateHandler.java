@@ -4,7 +4,7 @@ import org.itstack.demo.design.impl.*;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
+//状态处理服务
 public class StateHandler {
 
     private Map<Enum<Status>, State> stateMap = new ConcurrentHashMap<Enum<Status>, State>();

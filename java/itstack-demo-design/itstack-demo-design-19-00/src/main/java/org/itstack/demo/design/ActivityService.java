@@ -1,4 +1,11 @@
 package org.itstack.demo.design;
+//活动服务接⼝
+/**
+ * 在这个静态类中提供了活动的查询和状态变更接
+ * ⼝； queryActivityInfo 、 queryActivityStatus 、 execStatus 。
+ * 同时使⽤Map的结构来记录活动ID和状态变化信息，另外还有init⽅法来初始化活动数据。实际的
+ * 开发中这类信息基本都是从 数据库 或者 Redis 中获取。
+ */
 
 import java.util.Date;
 import java.util.Map;

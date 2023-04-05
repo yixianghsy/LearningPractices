@@ -7,6 +7,7 @@ import org.itstack.demo.design.Status;
 
 /**
  * 活动状态；待审核
+ * 提审
  */
 public class CheckState extends State {
 

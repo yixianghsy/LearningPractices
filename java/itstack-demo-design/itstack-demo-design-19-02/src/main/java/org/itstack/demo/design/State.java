@@ -1,5 +1,5 @@
 package org.itstack.demo.design;
-
+//定义状态抽象类
 public abstract class State {
 
     /**
