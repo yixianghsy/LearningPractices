@@ -1,7 +1,7 @@
 package org.itstack.demo.design;
 
 import java.util.Date;
-
+//业务接⼝实现类
 public class LotteryServiceImpl extends LotteryService {
 
     private MinibusTargetService minibusTargetService = new MinibusTargetService();

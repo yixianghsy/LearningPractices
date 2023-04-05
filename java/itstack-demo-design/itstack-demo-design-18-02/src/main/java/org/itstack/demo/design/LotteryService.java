@@ -3,7 +3,7 @@ package org.itstack.demo.design;
 import org.itstack.demo.design.event.EventManager;
 import org.itstack.demo.design.event.listener.MQEventListener;
 import org.itstack.demo.design.event.listener.MessageEventListener;
-
+//业务抽象类接⼝
 public abstract class LotteryService {
 
     private EventManager eventManager;
