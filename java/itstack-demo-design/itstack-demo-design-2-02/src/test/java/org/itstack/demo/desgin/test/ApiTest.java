@@ -15,7 +15,8 @@ public class ApiTest {
 
     @Test
     public void test_CacheService() throws Exception {
-
+        //在测试的代码中通过传⼊不同的集群类型，就可以调⽤不同的集群下的⽅
+        //法。 JDKProxy.getProxy(CacheServiceImpl.class, new EGMCacheAdapter());
         CacheService proxy_EGM = JDKProxy.getProxy(CacheServiceImpl.class, new EGMCacheAdapter());
         proxy_EGM.set("user_name_01", "小傅哥");
         String val01 = proxy_EGM.get("user_name_01");

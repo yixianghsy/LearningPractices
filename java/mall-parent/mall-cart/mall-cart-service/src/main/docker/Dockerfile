@@ -3,7 +3,7 @@ VOLUME /tmp
 ADD mall-cart-service-1.0-SNAPSHOT.jar app.jar
 # 设置环境变量
 ENV JAVA_OPTS="-server -Xms512m -Xmx512m"
-ENV DUBBO_IP_TO_REGISTRY 192.168.10.140
+ENV DUBBO_IP_TO_REGISTRY 192.168.10.251
 # 时区设置
 RUN echo "Asia/shanghai" > /etc/timezone
 RUN bash -c 'touch /app.jar'
