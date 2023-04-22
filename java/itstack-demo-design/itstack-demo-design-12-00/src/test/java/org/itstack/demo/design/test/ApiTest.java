@@ -17,6 +17,7 @@ public class ApiTest {
 
     @Test
     public void test_IUserDao() {
+        //加载配置文件
         BeanFactory beanFactory = new ClassPathXmlApplicationContext("spring-config.xml");
         IUserDao userDao = beanFactory.getBean("userDao", IUserDao.class);
         String res = userDao.queryUserInfo("100001");
