@@ -7,6 +7,11 @@ import org.springframework.beans.factory.FactoryBean;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
+/**
+ * 代理类定义
+ * 好像代理类都实现了FactoryBean<T>
+ * @param <T>
+ */
 public class MapperFactoryBean<T> implements FactoryBean<T> {
 
     private Logger logger = LoggerFactory.getLogger(MapperFactoryBean.class);

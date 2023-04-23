@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tulingxueyuan.mall.modules.pms.mapper.PmsProductCategoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tulingxueyuan.mall.modules.pms.model.PmsProductCategory">
+        <id column="id" property="id" />
+        <result column="parent_id" property="parentId" />
+        <result column="name" property="name" />
+        <result column="level" property="level" />
+        <result column="product_count" property="productCount" />
+        <result column="product_unit" property="productUnit" />
+        <result column="nav_status" property="navStatus" />
+        <result column="show_status" property="showStatus" />
+        <result column="sort" property="sort" />
+        <result column="icon" property="icon" />
+        <result column="keywords" property="keywords" />
+        <result column="description" property="description" />
+    </resultMap>
+
+    <resultMap id="ProductWithCategoryMap" type="com.tulingxueyuan.mall.dto.HomeMenusDTO">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <collection property="productList"  ofType="com.tulingxueyuan.mall.dto.ProductDTO" >
+            <id property="id" column="pro_id"></id>
+            <result property="name" column="pro_name"></result>
+            <result property="pic" column="pro_pic"></result>
+            <result property="promotionPrice" column="pro_promotion_price"></result>
+            <result property="originalPrice" column="pro_original_price"></result>
+            <result property="subTitle" column="pro_sub_title"></result>
+        </collection>
+    </resultMap>
+
+    <!-- 首页 分类导航栏菜单-->
+    <select id="getProductWithCategory" resultMap="ProductWithCategoryMap">
+        SELECT
+            pc.id,
+            pc.`name`,
+            p.id pro_id,
+            p.`name` pro_name,
+            p.pic pro_pic,
+            p.promotion_price pro_promotion_price,
+            p.original_price pro_original_price,
+            p.sub_title pro_sub_title
+        FROM
+            pms_product_category pc
+            LEFT JOIN pms_product p ON EXISTS ( SELECT pc2.id FROM pms_product_category pc2 WHERE pc2.parent_id = pc.id AND p.product_category_id = pc2.id )
+            AND p.delete_status = 0
+            AND p.recommand_status = 1
+        WHERE
+            pc.parent_id = 0 and nav_status=1
+        ORDER BY
+            pc.sort,
+            pc.id,
+            p.sort
+    </select>
+</mapper>

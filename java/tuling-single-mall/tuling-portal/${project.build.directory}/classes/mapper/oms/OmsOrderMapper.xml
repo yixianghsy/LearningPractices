@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tulingxueyuan.mall.modules.oms.mapper.OmsOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tulingxueyuan.mall.modules.oms.model.OmsOrder">
+        <id column="id" property="id" />
+        <result column="member_id" property="memberId" />
+        <result column="coupon_id" property="couponId" />
+        <result column="order_sn" property="orderSn" />
+        <result column="create_time" property="createTime" />
+        <result column="member_username" property="memberUsername" />
+        <result column="total_amount" property="totalAmount" />
+        <result column="pay_amount" property="payAmount" />
+        <result column="freight_amount" property="freightAmount" />
+        <result column="promotion_amount" property="promotionAmount" />
+        <result column="integration_amount" property="integrationAmount" />
+        <result column="coupon_amount" property="couponAmount" />
+        <result column="discount_amount" property="discountAmount" />
+        <result column="pay_type" property="payType" />
+        <result column="source_type" property="sourceType" />
+        <result column="status" property="status" />
+        <result column="order_type" property="orderType" />
+        <result column="delivery_company" property="deliveryCompany" />
+        <result column="delivery_sn" property="deliverySn" />
+        <result column="auto_confirm_day" property="autoConfirmDay" />
+        <result column="integration" property="integration" />
+        <result column="growth" property="growth" />
+        <result column="promotion_info" property="promotionInfo" />
+        <result column="bill_type" property="billType" />
+        <result column="bill_header" property="billHeader" />
+        <result column="bill_content" property="billContent" />
+        <result column="bill_receiver_phone" property="billReceiverPhone" />
+        <result column="bill_receiver_email" property="billReceiverEmail" />
+        <result column="receiver_name" property="receiverName" />
+        <result column="receiver_phone" property="receiverPhone" />
+        <result column="receiver_post_code" property="receiverPostCode" />
+        <result column="receiver_province" property="receiverProvince" />
+        <result column="receiver_city" property="receiverCity" />
+        <result column="receiver_region" property="receiverRegion" />
+        <result column="receiver_detail_address" property="receiverDetailAddress" />
+        <result column="note" property="note" />
+        <result column="confirm_status" property="confirmStatus" />
+        <result column="delete_status" property="deleteStatus" />
+        <result column="use_integration" property="useIntegration" />
+        <result column="payment_time" property="paymentTime" />
+        <result column="delivery_time" property="deliveryTime" />
+        <result column="receive_time" property="receiveTime" />
+        <result column="comment_time" property="commentTime" />
+        <result column="modify_time" property="modifyTime" />
+    </resultMap>
+
+    <resultMap id="OrderDetailMap" type="com.tulingxueyuan.mall.dto.OrderDetailDTO">
+        <id column="id" property="id" />
+        <result column="order_sn" property="orderSn" />
+        <result column="receiver_province" property="receiverProvince" />
+        <result column="receiver_city" property="receiverCity" />
+        <result column="receiver_region" property="receiverRegion" />
+        <result column="receiver_detail_address" property="receiverDetailAddress" />
+        <result column="pay_amount" property="payAmount" />
+        <result column="status" property="status"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="normal_order_overtime" property="normalOrderOvertime"></result>
+        <collection property="orderItemList" ofType="com.tulingxueyuan.mall.modules.oms.model.OmsOrderItem">
+            <id column="item_id" property="id"></id>
+            <result column="product_pic" property="productPic"></result>
+            <result column="product_name" property="productName"></result>
+            <result column="product_price" property="productPrice"></result>
+            <result column="product_quantity" property="productQuantity"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getOrderDetail" resultMap="OrderDetailMap">
+        SELECT
+        o.id,
+        o.order_sn,
+        o.receiver_province,
+        o.receiver_city,
+        o.receiver_region,
+        o.receiver_detail_address,
+        o.pay_amount,
+        o.status,
+        o.create_time,
+        oi.product_pic,
+        oi.product_name,
+        oi.id as item_id,
+        oi.product_price,
+        oi.product_quantity,
+        (SELECT normal_order_overtime FROM oms_order_setting  LIMIT 0,1) as normal_order_overtime
+        FROM oms_order o
+        LEFT JOIN oms_order_item oi on o.id=oi.order_id
+        WHERE o.id=#{id} and o.delete_status=0
+    </select>
+
+
+    <resultMap id="MyOrdersMap" extends="BaseResultMap" type="com.tulingxueyuan.mall.dto.OrderListDTO">
+        <collection property="orderItemList" column="id"  select="com.tulingxueyuan.mall.modules.oms.mapper.OmsOrderItemMapper.selectByOrderId"></collection>
+    </resultMap>
+
+    <select id="getMyOrders" resultMap="MyOrdersMap">
+        SELECT
+        o.*
+        FROM oms_order o
+        WHERE o.delete_status=0 and  o.member_id=#{memberId}
+    </select>
+
+</mapper>

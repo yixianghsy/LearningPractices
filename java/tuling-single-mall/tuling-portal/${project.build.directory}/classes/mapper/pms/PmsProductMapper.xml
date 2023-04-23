@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tulingxueyuan.mall.modules.pms.mapper.PmsProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tulingxueyuan.mall.modules.pms.model.PmsProduct">
+        <id column="id" property="id" />
+        <result column="brand_id" property="brandId" />
+        <result column="product_category_id" property="productCategoryId" />
+        <result column="feight_template_id" property="feightTemplateId" />
+        <result column="product_attribute_category_id" property="productAttributeCategoryId" />
+        <result column="name" property="name" />
+        <result column="pic" property="pic" />
+        <result column="product_sn" property="productSn" />
+        <result column="delete_status" property="deleteStatus" />
+        <result column="publish_status" property="publishStatus" />
+        <result column="new_status" property="newStatus" />
+        <result column="recommand_status" property="recommandStatus" />
+        <result column="verify_status" property="verifyStatus" />
+        <result column="sort" property="sort" />
+        <result column="sale" property="sale" />
+        <result column="price" property="price" />
+        <result column="promotion_price" property="promotionPrice" />
+        <result column="gift_growth" property="giftGrowth" />
+        <result column="gift_point" property="giftPoint" />
+        <result column="use_point_limit" property="usePointLimit" />
+        <result column="sub_title" property="subTitle" />
+        <result column="description" property="description" />
+        <result column="original_price" property="originalPrice" />
+        <result column="stock" property="stock" />
+        <result column="low_stock" property="lowStock" />
+        <result column="unit" property="unit" />
+        <result column="weight" property="weight" />
+        <result column="preview_status" property="previewStatus" />
+        <result column="service_ids" property="serviceIds" />
+        <result column="keywords" property="keywords" />
+        <result column="note" property="note" />
+        <result column="album_pics" property="albumPics" />
+        <result column="detail_title" property="detailTitle" />
+        <result column="detail_desc" property="detailDesc" />
+        <result column="detail_html" property="detailHtml" />
+        <result column="detail_mobile_html" property="detailMobileHtml" />
+        <result column="promotion_start_time" property="promotionStartTime" />
+        <result column="promotion_end_time" property="promotionEndTime" />
+        <result column="promotion_per_limit" property="promotionPerLimit" />
+        <result column="promotion_type" property="promotionType" />
+        <result column="brand_name" property="brandName" />
+        <result column="product_category_name" property="productCategoryName" />
+    </resultMap>
+
+    <resultMap id="ProductDetailMap" extends="BaseResultMap" type="com.tulingxueyuan.mall.dto.ProductDetailDTO">
+        <!--sku-->
+        <collection property="skuStockList" columnPrefix="sku_" resultMap="com.tulingxueyuan.mall.modules.pms.mapper.PmsSkuStockMapper.BaseResultMap"></collection>
+        <!--spk-->
+        <collection property="productAttributeValueList"  columnPrefix="att_" ofType="com.tulingxueyuan.mall.dto.PmsProductAttributeValueDTO" >
+            <id column="id" property="id" />
+            <result column="product_id" property="productId" />
+            <result column="product_attribute_id" property="productAttributeId" />
+            <result column="value" property="value" />
+            <result column="attrname" property="attrName"></result>
+        </collection>
+    </resultMap>
+
+   <select id="getProductDetail"  resultMap="ProductDetailMap">
+        SELECT
+        p.*,
+        pc.parent_id cate_parent_id,
+        p.brand_id,
+        sku.id sku_id, sku.lock_stock sku_lock_stock, sku.low_stock sku_low_stock, sku.pic sku_pic,sku.price sku_price,sku.product_id sku_product_id,sku.promotion_price sku_promotion_price,sku.sale sku_sale,sku.sku_code sku_sku_code,sku.sp1 sku_sp1,sku.sp2 sku_sp2,sku.sp3 sku_sp3,sku.stock sku_stock,
+        att.id att_id,att.product_attribute_id att_product_attribute_id,att.product_id att_product_id,att.value att_value,
+				(SELECT pa.name FROM pms_product_attribute pa where pa.id =att.product_attribute_id) att_attrname
+        FROM pms_product p
+        -- 一级和二级分类id
+        LEFT JOIN pms_product_category pc ON p.product_category_id=pc.id
+        LEFT JOIN pms_sku_stock sku on sku.product_id=p.id
+        LEFT JOIN pms_product_attribute_value att on att.product_id=p.id
+        where p.id=#{id}
+   </select>
+
+</mapper>
