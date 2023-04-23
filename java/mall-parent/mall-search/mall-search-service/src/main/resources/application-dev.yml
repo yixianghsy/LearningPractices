@@ -7,9 +7,9 @@ druid:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://120.24.80.45:3306/e3mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://192.168.1.33:3306/e3mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
-    password: root
+    password: 123
     type: com.alibaba.druid.pool.DruidDataSource
     initial-size: 1
     min-idle: 1
@@ -28,7 +28,7 @@ spring:
     # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 es:
-  host: 192.168.10.140
+  host: 192.168.1.251
   port: 9200
   scheme: http
 server:
@@ -36,7 +36,7 @@ server:
 rocketmq:
   producer:
     groupName: mall-search
-    namesrvAddr: 120.24.80.45:9876
+    namesrvAddr: 192.168.1.251:9876
     default: true
 dubbo:
   application:
@@ -45,7 +45,7 @@ dubbo:
     name: dubbo
     port: 20884
   registry:
-    address: zookeeper://120.24.80.45:2181
+    address: zookeeper://192.168.1.33:2181
     protocol: zookeeper
   scan:
     base-packages: com.mall.search.service
