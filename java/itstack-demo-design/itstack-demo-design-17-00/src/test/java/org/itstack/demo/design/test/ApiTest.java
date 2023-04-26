@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 
+/**
+ * 备忘录模式记录配置⽂件版本信息
+ */
 public class ApiTest {
 
     private Logger logger = LoggerFactory.getLogger(ApiTest.class);
