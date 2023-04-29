@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="search-web" type="docker-deploy" factoryName="dockerfile" server-name="openwrt">
+    <deployment type="dockerfile">
+      <settings>
+        <option name="imageTag" value="search-web" />
+        <option name="containerName" value="search-web" />
+        <option name="contextFolderPath" value="mall-parent/mall-search-web/target" />
+        <option name="commandLineOptions" value=" --ip=192.168.1.42 --network docker-mavlan" />
+        <option name="sourceFilePath" value="mall-parent/mall-search-web/src/main/docker/Dockerfile" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

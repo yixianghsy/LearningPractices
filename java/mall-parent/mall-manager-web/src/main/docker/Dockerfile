@@ -1,10 +1,9 @@
-FROM adoptopenjdk/openjdk8-openj9:alpine-slim
+FROM openjdk:8
 #维护人员信息
 MAINTAINER hsy
 EXPOSE 8025
 VOLUME /tmp
 ADD mall-manager-web-1.0-SNAPSHOT.jar app.jar
-RUN echo "Asia/shanghai" > /etc/timezone
 RUN echo "Asia/shanghai" > /etc/timezone
 #执行启动命令
 ENTRYPOINT ["java", "-jar","/app.jar"]

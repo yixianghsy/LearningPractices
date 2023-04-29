@@ -1,5 +1,5 @@
 #设置镜像基础，jdk8
-FROM adoptopenjdk/openjdk8-openj9:alpine-slim
+FROM openjdk:8
 #维护人员信息
 MAINTAINER hsy
 #设置镜像对外暴露端口
