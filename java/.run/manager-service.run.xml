@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="manager-service" type="docker-deploy" factoryName="dockerfile" singleton="false" server-name="openwrt">
+    <deployment type="dockerfile">
+      <settings>
+        <option name="imageTag" value="manager-service" />
+        <option name="containerName" value="manager-service" />
+        <option name="contextFolderPath" value="mall-parent/mall-manager/mall-manager-service/target" />
+        <option name="commandLineOptions" value="--ip=192.168.1.40 --network docker-mavlan" />
+        <option name="sourceFilePath" value="mall-parent/mall-manager/mall-manager-service/src/main/docker/Dockerfile" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>
