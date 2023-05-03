@@ -17,8 +17,14 @@ import org.w3c.dom.NodeList;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * 可以理解是把原本需要手动注入属性得代码移到这里了，
+ * 如何回忆？？？？先回忆属性是如何注入得在思考在看这个代码
+ * 获取配置文件中依赖属性，注入
+ */
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
    //疑问。。为什么一定要又这个构造器？？
+    //解答:通过构造器初始化BeanDefinitionRegistry
    public XmlBeanDefinitionReader(BeanDefinitionRegistry registry) {
        super(registry);
    }
@@ -49,6 +55,19 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         Resource resource = resourceLoader.getResource(location);
         loadBeanDefinitions(resource);
     }
+
+    @Override
+    public void loadBeanDefinitions(String... locations) throws BeansException {
+        for (String location : locations) {
+            loadBeanDefinitions(location);
+        }
+    }
+
+    /**
+     * 读取配置文件信息
+     * @param inputStream
+     * @throws ClassNotFoundException
+     */
     protected void  doLoadBeanDefinitions(InputStream inputStream) throws ClassNotFoundException {
         Document doc = XmlUtil.readXML(inputStream);
         Element root = doc.getDocumentElement();
@@ -85,7 +104,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
                 // 获取属性值：引入对象、值对象
                 Object value = StrUtil.isNotEmpty(attrRef) ? new BeanReference(attrRef) : attrValue;
                 //创建属性信息
-                PropertyValue propertyValue = new PropertyValue(attrRef, value);
+                PropertyValue propertyValue = new PropertyValue(attrName, value);
                 beanDefinition.getPropertyValues().addPropertyValue(propertyValue);
             }
             if (getRegistry().containsBeanDefinition(beanName)) {

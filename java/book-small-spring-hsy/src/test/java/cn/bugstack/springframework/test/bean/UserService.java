@@ -5,19 +5,20 @@ package cn.bugstack.springframework.test.bean;
  *
  *
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
- * @description 模拟含有入参构造函数的用户 Bean 对象
- * @date 2022/03/07
+ * @description 模拟用户服务类
+ * @date 2022/03/10
  *
  *
  */
 public class UserService {
 
     private String uId;
-
+    private String company;
+    private String location;
     private UserDao userDao;
 
     public String queryUserInfo() {
-        return userDao.queryUserName(uId);
+        return userDao.queryUserName(uId) + "," + company + "," + location;
     }
 
     public String getuId() {
@@ -28,6 +29,22 @@ public class UserService {
         this.uId = uId;
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     public UserDao getUserDao() {
         return userDao;
     }
@@ -35,5 +52,4 @@ public class UserService {
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
-
 }

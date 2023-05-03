@@ -10,4 +10,7 @@
         <property name="userDao" ref="userDao"/>
     </bean>
 
+    <bean class="cn.bugstack.springframework.test.common.MyBeanPostProcessor"/>
+    <bean class="cn.bugstack.springframework.test.common.MyBeanFactoryPostProcessor"/>
+
 </beans>

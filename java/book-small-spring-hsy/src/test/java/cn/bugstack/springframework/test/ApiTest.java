@@ -6,6 +6,7 @@ import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
 import cn.bugstack.springframework.beans.factory.config.BeanReference;
 import cn.bugstack.springframework.beans.factory.support.DefaultListableBeanFactory;
 import cn.bugstack.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import cn.bugstack.springframework.context.support.ClassPathXmlApplicationContext;
 import cn.bugstack.springframework.core.io.DefaultResourceLoader;
 import cn.bugstack.springframework.core.io.Resource;
 import cn.bugstack.springframework.test.bean.UserDao;
@@ -32,7 +33,9 @@ import java.lang.reflect.InvocationTargetException;
  *
  */
 public class ApiTest {
-
+    /**
+     * 不使用上下文
+     */
     @Test
     public void test_BeanFactory(){
         // 1.初始化 BeanFactory
@@ -53,6 +56,19 @@ public class ApiTest {
         String result = userService.queryUserInfo();
         System.out.println("测试结果：" + result);
 
+    }
+
+    /**
+     * 使用上下文
+     */
+    @Test
+    public void test_xml_applicationContext() {
+        // 1.初始化 BeanFactory
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:springPostProcessor.xml");
+        // 2. 获取Bean对象调用方法
+        UserService userService = applicationContext.getBean("userService", UserService.class);
+        userService.queryUserInfo()
+        System.out.println("测试结果：" + result);
     }
     private DefaultResourceLoader resourceLoader;
     @Before
@@ -97,6 +113,9 @@ public class ApiTest {
     }
     @Test
     public void test_xml() {
+        /**
+         * 上下文学习，要合并步骤1和2得代码
+         */
         // 1.初始化 BeanFactory
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
         // 2. 读取配置文件&注册Bean
