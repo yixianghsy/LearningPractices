@@ -1,7 +1,11 @@
 package cn.bugstack.springframework.beans.factory.support;
 
 import cn.bugstack.springframework.beans.BeansException;
+import cn.bugstack.springframework.beans.PropertyValue;
+import cn.bugstack.springframework.beans.PropertyValues;
 import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
+import cn.bugstack.springframework.beans.factory.config.BeanReference;
+import cn.hutool.core.bean.BeanUtil;
 
 import java.lang.reflect.Constructor;
 
@@ -19,11 +23,21 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
     private InstantiationStrategy instantiationStrategy = new CglibSubclassingInstantiationStrategy();
 
+    /**
+     *
+     * @param beanName
+     * @param beanDefinition   属性值集合
+     * @param args
+     * @return
+     * @throws BeansException
+     */
     @Override
     protected Object createBean(String beanName, BeanDefinition beanDefinition, Object[] args) throws BeansException {
         Object bean = null;
         try {
             bean = createBeanInstance(beanDefinition, beanName, args);
+            //给Bean 填充属性，主要是关注这个方法
+            applyPropertyValues(beanName,bean,beanDefinition);
         } catch (Exception e) {
             throw new BeansException("Instantiation of bean failed", e);
         }
@@ -31,7 +45,24 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         registerSingleton(beanName, bean);
         return bean;
     }
-
+    private  void applyPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition){
+        try {
+        PropertyValues propertyValues = beanDefinition.getPropertyValues();
+        for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
+            String name = propertyValue.getName();
+            Object value = propertyValue.getValue();
+            if (value instanceof BeanReference) {
+                //A依赖B,获取B得实例化
+                BeanReference beanReference = (BeanReference) value;
+                value = getBean(beanReference.getBeanName());
+            }
+            //属性填充
+            BeanUtil.setFieldValue(bean, name, value);
+            }
+        } catch (Exception e) {
+                throw new BeansException("Error setting property values：" + beanName);
+            }
+        }
     /**
      * 创建 策略调用，这里使用Cglib
      * @param beanDefinition
