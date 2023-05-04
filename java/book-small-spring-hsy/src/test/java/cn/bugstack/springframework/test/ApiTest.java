@@ -33,6 +33,25 @@ import java.lang.reflect.InvocationTargetException;
  *
  */
 public class ApiTest {
+
+
+
+    @Test
+    public void test_xml_07() {
+        // 1.初始化 BeanFactory
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        applicationContext.registerShutdownHook();
+
+        // 2. 获取Bean对象调用方法
+        UserService userService = applicationContext.getBean("userService", UserService.class);
+        String result = userService.queryUserInfo();
+        System.out.println("测试结果：" + result);
+    }
+    @Test
+    public void test_hook() {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("close！")));
+    }
+
     /**
      * 不使用上下文
      */
@@ -67,7 +86,7 @@ public class ApiTest {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:springPostProcessor.xml");
         // 2. 获取Bean对象调用方法
         UserService userService = applicationContext.getBean("userService", UserService.class);
-        userService.queryUserInfo()
+        String result = userService.queryUserInfo();
         System.out.println("测试结果：" + result);
     }
     private DefaultResourceLoader resourceLoader;
