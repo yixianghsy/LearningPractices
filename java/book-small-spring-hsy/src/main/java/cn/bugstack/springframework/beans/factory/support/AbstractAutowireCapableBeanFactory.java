@@ -3,8 +3,7 @@ package cn.bugstack.springframework.beans.factory.support;
 import cn.bugstack.springframework.beans.BeansException;
 import cn.bugstack.springframework.beans.PropertyValue;
 import cn.bugstack.springframework.beans.PropertyValues;
-import cn.bugstack.springframework.beans.factory.DisposableBean;
-import cn.bugstack.springframework.beans.factory.InitializingBean;
+import cn.bugstack.springframework.beans.factory.*;
 import cn.bugstack.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
 import cn.bugstack.springframework.beans.factory.config.BeanPostProcessor;
@@ -44,8 +43,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Object bean = null;
         try {
             bean = createBeanInstance(beanDefinition, beanName, args);
-            //给Bean 填充属性，主要是关注这个方法
-            applyPropertyValues(beanName,bean,beanDefinition);
+            // 给 Bean 填充属性
+            applyPropertyValues(beanName, bean, beanDefinition);
             // 执行 Bean 的初始化方法和 BeanPostProcessor 的前置和后置处理方法
             bean = initializeBean(beanName, bean, beanDefinition);
         } catch (Exception e) {
@@ -54,43 +53,63 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
         // 注册实现了 DisposableBean 接口的 Bean 对象
         registerDisposableBeanIfNecessary(beanName, bean, beanDefinition);
+
         registerSingleton(beanName, bean);
         return bean;
     }
 
-    private void registerDisposableBeanIfNecessary(String beanName, Object bean, BeanDefinition beanDefinition) {
+
+    protected void registerDisposableBeanIfNecessary(String beanName, Object bean, BeanDefinition beanDefinition) {
         if (bean instanceof DisposableBean || StrUtil.isNotEmpty(beanDefinition.getDestroyMethodName())) {
             registerDisposableBean(beanName, new DisposableBeanAdapter(bean, beanName, beanDefinition));
         }
     }
 
     private Object initializeBean(String beanName, Object bean, BeanDefinition beanDefinition) {
+
+
+        // invokeAwareMethods
+        if (bean instanceof Aware){
+            if (bean instanceof BeanFactoryAware){
+                ((BeanFactoryAware) bean).setBeanFactory(this);
+            }
+            if (bean instanceof BeanClassLoaderAware) {
+                ((BeanClassLoaderAware) bean).setBeanClassLoader(getBeanClassLoader());
+            }
+            if (bean instanceof  BeanNameAware){
+                ((BeanNameAware) bean).setBeanName(beanName);
+            }
+        }
         // 1. 执行 BeanPostProcessor Before 处理
         Object wrappedBean = applyBeanPostProcessorsBeforeInitialization(bean, beanName);
+
         // 执行 Bean 对象的初始化方法
         try {
             invokeInitMethods(beanName, wrappedBean, beanDefinition);
         } catch (Exception e) {
             throw new BeansException("Invocation of init method of bean[" + beanName + "] failed", e);
         }
+
         // 2. 执行 BeanPostProcessor After 处理
-        wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean,beanName);
+        wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
         return wrappedBean;
     }
+
     private void invokeInitMethods(String beanName, Object bean, BeanDefinition beanDefinition) throws Exception {        // 1. 实现接口 InitializingBean
         // 1. 实现接口 InitializingBean
-        if (bean instanceof InitializingBean){
+        if (bean instanceof InitializingBean) {
             ((InitializingBean) bean).afterPropertiesSet();
         }
         // 2. 注解配置 init-method {判断是为了避免二次执行初始化}
         String initMethodName = beanDefinition.getInitMethodName();
-        if (StrUtil.isNotEmpty(initMethodName)&& !(bean instanceof  InitializingBean));
-        Method initMethod = beanDefinition.getBeanClass().getMethod(initMethodName);
-        if (null == initMethod){
-            throw new BeansException("Could not find an init method named '" + initMethodName + "' on bean with name '" + beanName + "'");
+        if (StrUtil.isNotEmpty(initMethodName)&& !(bean instanceof  InitializingBean)){
+            Method initMethod = beanDefinition.getBeanClass().getMethod(initMethodName);
+            if (null == initMethod){
+                throw new BeansException("Could not find an init method named '" + initMethodName + "' on bean with name '" + beanName + "'");
 
+            }
+            initMethod.invoke(bean);
         }
-        initMethod.invoke(bean);
 
     }
     private  void applyPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition){

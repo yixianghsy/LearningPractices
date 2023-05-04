@@ -35,11 +35,26 @@ import java.lang.reflect.InvocationTargetException;
 public class ApiTest {
 
 
-
     @Test
-    public void test_xml_07() {
+    public void test_xml_08() {
         // 1.初始化 BeanFactory
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        applicationContext.registerShutdownHook();
+        UserService userService = applicationContext.getBean("userService", UserService.class);
+        String result = userService.queryUserInfo();
+        System.out.println("测试结果：" + result);
+
+        System.out.println("ApplicationContextAware："+userService.getApplicationContext());
+        System.out.println("BeanFactoryAware："+userService.getBeanFactory());
+    }
+    @Test
+    public void test_xml_07() {
+        /**
+         * 适配器模式。。。代码少好多还加了初始化和销毁功能
+         */
+        // 1.初始化 BeanFactory
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        //比上期使用上下文，多了这个方法
         applicationContext.registerShutdownHook();
 
         // 2. 获取Bean对象调用方法
