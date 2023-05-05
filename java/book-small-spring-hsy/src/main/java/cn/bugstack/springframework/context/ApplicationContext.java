@@ -1,6 +1,8 @@
 package cn.bugstack.springframework.context;
 
+import cn.bugstack.springframework.beans.factory.HierarchicalBeanFactory;
 import cn.bugstack.springframework.beans.factory.ListableBeanFactory;
+import cn.bugstack.springframework.core.io.ResourceLoader;
 
 /**
  * 作者：DerekYRC https://github.com/DerekYRC/mini-spring
@@ -9,5 +11,6 @@ import cn.bugstack.springframework.beans.factory.ListableBeanFactory;
  * reloaded if the implementation supports this.
  * 以上段落大概意思是实现此接口可以有上下文功能
  */
-public interface ApplicationContext extends ListableBeanFactory {
+public interface ApplicationContext extends ListableBeanFactory, HierarchicalBeanFactory, ResourceLoader, ApplicationEventPublisher  {
+
 }
