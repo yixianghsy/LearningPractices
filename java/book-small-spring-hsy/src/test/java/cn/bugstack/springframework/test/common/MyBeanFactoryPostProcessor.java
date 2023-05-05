@@ -12,7 +12,7 @@ public class MyBeanFactoryPostProcessor implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         if ("userService".equals(beanName)){
             UserService userService = (UserService) bean;
-            userService.setLocation("改为：北京");
+          //  userService.setLocation("改为：北京");
         }
         return bean;
     }
