@@ -4,6 +4,7 @@ import cn.bugstack.springframework.aop.*;
 import cn.bugstack.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor;
 import cn.bugstack.springframework.aop.framework.ProxyFactory;
 import cn.bugstack.springframework.beans.BeansException;
+import cn.bugstack.springframework.beans.PropertyValues;
 import cn.bugstack.springframework.beans.factory.BeanFactory;
 import cn.bugstack.springframework.beans.factory.BeanFactoryAware;
 import cn.bugstack.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
@@ -21,7 +22,6 @@ import java.util.Collection;
  * @description BeanPostProcessor implementation that creates AOP proxies based on all candidate
  * Advisors in the current BeanFactory. This class is completely generic; it contains
  * no special code to handle any particular aspects, such as pooling aspects.
- * 融入Bean生命周期的自动代理创建者6
  * @date 2022/3/14
  *  /CodeDesignTutorials
  *
@@ -66,6 +66,11 @@ public class DefaultAdvisorAutoProxyCreator implements InstantiationAwareBeanPos
         return null;
     }
 
+    @Override
+    public PropertyValues postProcessPropertyValues(PropertyValues pvs, Object bean, String beanName) throws BeansException {
+        return pvs;
+    }
+
     private boolean isInfrastructureClass(Class<?> beanClass) {
         return Advice.class.isAssignableFrom(beanClass) || Pointcut.class.isAssignableFrom(beanClass) || Advisor.class.isAssignableFrom(beanClass);
     }
@@ -79,5 +84,5 @@ public class DefaultAdvisorAutoProxyCreator implements InstantiationAwareBeanPos
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         return bean;
     }
-
+    
 }

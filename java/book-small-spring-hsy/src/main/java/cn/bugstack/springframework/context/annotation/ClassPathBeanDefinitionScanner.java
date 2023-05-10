@@ -1,4 +1,13 @@
 package cn.bugstack.springframework.context.annotation;
+
+import cn.bugstack.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
+import cn.bugstack.springframework.beans.factory.support.BeanDefinitionRegistry;
+import cn.bugstack.springframework.stereotype.Component;
+import cn.hutool.core.util.StrUtil;
+
+import java.util.Set;
+
 /**
  * A bean definition scanner that detects bean candidates on the classpath,
  * registering corresponding bean definitions with a given registry ({@code BeanFactory}
@@ -9,13 +18,6 @@ package cn.bugstack.springframework.context.annotation;
  * Create by 小傅哥(fustack)
  */
 
-import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
-import cn.bugstack.springframework.beans.factory.support.BeanDefinitionRegistry;
-import cn.bugstack.springframework.stereotype.Component;
-import cn.hutool.core.util.StrUtil;
-
-import java.util.Set;
-
 /**
  *
  *
@@ -25,11 +27,11 @@ import java.util.Set;
  * registering corresponding bean definitions with a given registry ({@code BeanFactory}
  * or {@code ApplicationContext}).
  * @date 2022/3/14
- * 扫描所有使用Component注解的
  *
  *
  */
 public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateComponentProvider {
+
     private BeanDefinitionRegistry registry;
 
     public ClassPathBeanDefinitionScanner(BeanDefinitionRegistry registry) {
@@ -46,10 +48,18 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
                     beanDefinition.setScope(beanScope);
                 }
                 registry.registerBeanDefinition(determineBeanName(beanDefinition), beanDefinition);
-
             }
         }
 
+        // 注册处理注解的 BeanPostProcessor（@Autowired、@Value）
+        registry.registerBeanDefinition("cn.bugstack.springframework.context.annotation.internalAutowiredAnnotationProcessor", new BeanDefinition(AutowiredAnnotationBeanPostProcessor.class));
+    }
+
+    private String resolveBeanScope(BeanDefinition beanDefinition) {
+        Class<?> beanClass = beanDefinition.getBeanClass();
+        Scope scope = beanClass.getAnnotation(Scope.class);
+        if (null != scope) return scope.value();
+        return StrUtil.EMPTY;
     }
 
     private String determineBeanName(BeanDefinition beanDefinition) {
@@ -62,10 +72,4 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
         return value;
     }
 
-    private String resolveBeanScope(BeanDefinition beanDefinition) {
-        Class<?> beanClass = beanDefinition.getBeanClass();
-        Scope scope = beanClass.getAnnotation(Scope.class);
-        if (null != scope) return scope.value();
-        return StrUtil.EMPTY;
-    }
 }

@@ -145,4 +145,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         // 执行销毁单例bean的销毁方法
         getBeanFactory().destroySingletons();
     }
+
+    @Override
+    public <T> T getBean(Class<T> requiredType) throws BeansException {
+        return getBeanFactory().getBean(requiredType);
+    }
 }

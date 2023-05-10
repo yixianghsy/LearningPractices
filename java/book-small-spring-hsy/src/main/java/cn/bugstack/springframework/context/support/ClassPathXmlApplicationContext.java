@@ -17,12 +17,13 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
     }
 
     /**
-     * 从XML中加载 BeanDefinition，并刷新上下文
+     * 从 XML 中加载 BeanDefinition，并刷新上下文
+     *
      * @param configLocations
      * @throws BeansException
      */
     public ClassPathXmlApplicationContext(String configLocations) throws BeansException {
-        this(new String[] {configLocations});
+        this(new String[]{configLocations});
     }
 
     /**
@@ -32,12 +33,13 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
      */
     public ClassPathXmlApplicationContext(String[] configLocations) throws BeansException {
         this.configLocations = configLocations;
-        //刷新容器
         refresh();
     }
 
-        @Override
+    @Override
     protected String[] getConfigLocations() {
         return configLocations;
     }
+
+
 }

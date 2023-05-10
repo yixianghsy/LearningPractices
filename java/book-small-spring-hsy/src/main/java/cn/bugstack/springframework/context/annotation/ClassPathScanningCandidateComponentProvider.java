@@ -15,11 +15,11 @@ import java.util.Set;
  * @description A component provider that scans the classpath from a base package. It then
  * applies exclude and include filters to the resulting classes to find candidates.
  * @date 2022/3/14
- * 处理对象扫描装配
  *
  *
  */
 public class ClassPathScanningCandidateComponentProvider {
+
     public Set<BeanDefinition> findCandidateComponents(String basePackage) {
         Set<BeanDefinition> candidates = new LinkedHashSet<>();
         Set<Class<?>> classes = ClassUtil.scanPackageByAnnotation(basePackage, Component.class);
@@ -27,6 +27,6 @@ public class ClassPathScanningCandidateComponentProvider {
             candidates.add(new BeanDefinition(clazz));
         }
         return candidates;
-
     }
+
 }
