@@ -1,5 +1,7 @@
 package cn.bugstack.springframework.aop;
 
+import cn.bugstack.springframework.util.ClassUtils;
+
 /**
  * 被代理得目标对象
  */
@@ -19,7 +21,9 @@ public class TargetSource {
      * @return the type of targets returned by this {@link TargetSource}
      */
     public Class<?>[] getTargetClass(){
-        return this.target.getClass().getInterfaces();
+        Class<?> clazz = this.target.getClass();
+        clazz = ClassUtils.isCglibProxyClass(clazz) ? clazz.getSuperclass() : clazz;
+        return clazz.getInterfaces();
     }
 
     /**
