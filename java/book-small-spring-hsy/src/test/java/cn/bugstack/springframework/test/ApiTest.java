@@ -20,9 +20,12 @@ import cn.bugstack.springframework.beans.factory.config.BeanReference;
 import cn.bugstack.springframework.beans.factory.support.DefaultListableBeanFactory;
 import cn.bugstack.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import cn.bugstack.springframework.context.support.ClassPathXmlApplicationContext;
+import cn.bugstack.springframework.core.convert.converter.Converter;
+import cn.bugstack.springframework.core.convert.support.StringToNumberConverterFactory;
 import cn.bugstack.springframework.core.io.DefaultResourceLoader;
 import cn.bugstack.springframework.core.io.Resource;
 import cn.bugstack.springframework.test.bean.*;
+import cn.bugstack.springframework.test.converter.StringToIntegerConverter;
 import cn.bugstack.springframework.test.event.CustomEvent;
 import cn.hutool.core.io.IoUtil;
 import net.sf.cglib.proxy.Enhancer;
@@ -48,14 +51,37 @@ import java.util.List;
  *
  */
 public class ApiTest {
+    @Test
+    public void test_convert_17() {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        Husband husband = applicationContext.getBean("husband", Husband.class);
+        System.out.println("测试结果：" + husband);
+    }
 
+    @Test
+    public void test_StringToIntegerConverter() {
+        StringToIntegerConverter converter = new StringToIntegerConverter();
+        Integer num = converter.convert("1234");
+        System.out.println("测试结果：" + num);
+    }
+
+    @Test
+    public void test_StringToNumberConverterFactory() {
+        StringToNumberConverterFactory converterFactory = new StringToNumberConverterFactory();
+
+        Converter<String, Integer> stringToIntegerConverter = converterFactory.getConverter(Integer.class);
+        System.out.println("测试结果：" + stringToIntegerConverter.convert("1234"));
+
+        Converter<String, Long> stringToLongConverter = converterFactory.getConverter(Long.class);
+        System.out.println("测试结果：" + stringToLongConverter.convert("1234"));
+    }
 
     @Test
     public void test_circular_16() {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");
         Husband husband = applicationContext.getBean("husband", Husband.class);
         Wife wife = applicationContext.getBean("wife", Wife.class);
-        System.out.println("老公的媳妇：" + husband.queryWife());
+//        System.out.println("老公的媳妇：" + husband.queryWife());
         System.out.println("媳妇的老公：" + wife.queryHusband());
     }
     @Test

@@ -1,22 +1,35 @@
 package cn.bugstack.springframework.test.bean;
 
-/**
- * 老公类  
- */
+import java.time.LocalDate;
+
 public class Husband {
 
-    private Wife wife;
+    private String wifiName;
 
-    public String queryWife(){
-        return "Husband.wife";
+    private LocalDate marriageDate;
+
+    public String getWifiName() {
+        return wifiName;
     }
 
-    public Wife getWife() {
-        return wife;
+    public void setWifiName(String wifiName) {
+        this.wifiName = wifiName;
     }
 
-    public void setWife(Wife wife) {
-        this.wife = wife;
+    public LocalDate getMarriageDate() {
+        return marriageDate;
+    }
+
+    public void setMarriageDate(LocalDate marriageDate) {
+        this.marriageDate = marriageDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Husband{" +
+                "wifiName='" + wifiName + '\'' +
+                ", marriageDate=" + marriageDate +
+                '}';
     }
 
 }
