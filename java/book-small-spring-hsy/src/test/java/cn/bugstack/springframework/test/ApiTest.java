@@ -14,6 +14,7 @@ import cn.bugstack.springframework.aop.framework.adapter.MethodBeforeAdviceInter
 import cn.bugstack.springframework.beans.BeansException;
 import cn.bugstack.springframework.beans.PropertyValue;
 import cn.bugstack.springframework.beans.PropertyValues;
+import cn.bugstack.springframework.beans.factory.BeanFactory;
 import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
 import cn.bugstack.springframework.beans.factory.config.BeanPostProcessor;
 import cn.bugstack.springframework.beans.factory.config.BeanReference;
@@ -26,8 +27,11 @@ import cn.bugstack.springframework.core.io.DefaultResourceLoader;
 import cn.bugstack.springframework.core.io.Resource;
 import cn.bugstack.springframework.test.bean.*;
 import cn.bugstack.springframework.test.converter.StringToIntegerConverter;
+import cn.bugstack.springframework.test.dao.IUserDao;
 import cn.bugstack.springframework.test.event.CustomEvent;
+import cn.bugstack.springframework.test.po.User;
 import cn.hutool.core.io.IoUtil;
+import com.alibaba.fastjson.JSON;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.NoOp;
 import org.aopalliance.intercept.MethodInterceptor;
@@ -51,6 +55,14 @@ import java.util.List;
  *
  */
 public class ApiTest {
+    @Test
+    public void test_ClassPathXmlApplicationContext_21() {
+        BeanFactory beanFactory = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        cn.bugstack.springframework.test.dao.IUserDao userDao = beanFactory.getBean("IUserDao", IUserDao.class);
+        User user = userDao.queryUserInfoById(1L);
+        System.out.println("测试结果：" + JSON.toJSONString(user));
+    }
+
     @Test
     public void test_convert_17() {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring.xml");

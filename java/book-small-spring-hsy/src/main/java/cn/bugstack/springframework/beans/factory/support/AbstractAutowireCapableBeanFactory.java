@@ -5,10 +5,8 @@ import cn.bugstack.springframework.beans.PropertyValue;
 import cn.bugstack.springframework.beans.PropertyValues;
 import cn.bugstack.springframework.beans.factory.*;
 import cn.bugstack.springframework.beans.factory.config.*;
-import cn.bugstack.springframework.core.convert.ConversionService;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.core.util.TypeUtil;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -65,7 +63,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 //        return bean;
     }
 
-    private Object doCreateBean(String beanName, BeanDefinition beanDefinition, Object[] args) {
+    protected Object doCreateBean(String beanName, BeanDefinition beanDefinition, Object[] args) {
         Object bean = null;
         try {
             // 实例化 Bean
@@ -207,16 +205,16 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                     value = getBean(beanReference.getBeanName());
                 }
                 // 类型转换
-                else {
-                    Class<?> sourceType = value.getClass();
-                    Class<?> targetType = (Class<?>) TypeUtil.getFieldType(bean.getClass(), name);
-                    ConversionService conversionService = getConversionService();
-                    if (conversionService != null) {
-                        if (conversionService.canConvert(sourceType, targetType)) {
-                            value = conversionService.convert(value, targetType);
-                        }
-                    }
-                }
+//                else {
+//                    Class<?> sourceType = value.getClass();
+//                    Class<?> targetType = (Class<?>) TypeUtil.getFieldType(bean.getClass(), name);
+//                    ConversionService conversionService = getConversionService();
+//                    if (conversionService != null) {
+//                        if (conversionService.canConvert(sourceType, targetType)) {
+//                            value = conversionService.convert(value, targetType);
+//                        }
+//                    }
+//                }
                 // 反射设置属性填充
                 BeanUtil.setFieldValue(bean, name, value);
             }

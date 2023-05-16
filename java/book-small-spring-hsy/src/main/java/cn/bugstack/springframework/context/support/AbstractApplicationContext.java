@@ -4,6 +4,8 @@ import cn.bugstack.springframework.beans.BeansException;
 import cn.bugstack.springframework.beans.factory.ConfigurableListableBeanFactory;
 import cn.bugstack.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import cn.bugstack.springframework.beans.factory.config.BeanPostProcessor;
+import cn.bugstack.springframework.beans.factory.support.BeanDefinitionRegistry;
+import cn.bugstack.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import cn.bugstack.springframework.context.ApplicationEvent;
 import cn.bugstack.springframework.context.ApplicationListener;
 import cn.bugstack.springframework.context.ConfigurableApplicationContext;
@@ -93,8 +95,17 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         for (BeanFactoryPostProcessor beanFactoryPostProcessor : beanFactoryPostProcessorMap.values()) {
             beanFactoryPostProcessor.postProcessBeanFactory(beanFactory);
         }
+        //注册对象
+        if (beanFactory instanceof BeanDefinitionRegistry) {
+            BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
+            for (BeanFactoryPostProcessor postProcessor : beanFactoryPostProcessorMap.values()) {
+                if (postProcessor instanceof BeanDefinitionRegistryPostProcessor) {
+                    BeanDefinitionRegistryPostProcessor registryProcessor = (BeanDefinitionRegistryPostProcessor) postProcessor;
+                    registryProcessor.postProcessBeanDefinitionRegistry(registry);
+                }
+            }
+        }
     }
-
     private void registerBeanPostProcessors(ConfigurableListableBeanFactory beanFactory) {
         Map<String, BeanPostProcessor> beanPostProcessorMap = beanFactory.getBeansOfType(BeanPostProcessor.class);
         for (BeanPostProcessor beanPostProcessor : beanPostProcessorMap.values()) {

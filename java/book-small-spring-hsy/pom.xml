@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.bugstack.springframework</groupId>
-    <artifactId>spring-step-11</artifactId>
+    <artifactId>spring-step-hsy</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>spring-step-11</name>
+    <name>spring-step-hsy</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -47,11 +47,36 @@
             <version>2.1.3</version>
         </dependency>
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.7</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.2.8</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.75</version>
+        </dependency>
+
+        <!-- 引入 Mybatis -->
+        <dependency>
+            <groupId>cn.bugstack.springframework</groupId>
+            <artifactId>spring-step-20</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -67,6 +92,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
