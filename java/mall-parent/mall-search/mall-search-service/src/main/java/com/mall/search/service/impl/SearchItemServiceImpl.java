@@ -32,7 +32,7 @@ public class SearchItemServiceImpl implements SearchItemService {
         try {
             //查询商品列表
             List<SearchItem> itemList = itemMapper.getItemList();
-            System.out.println(itemList.get(0).toString());
+            System.out.println(itemList.toString());
             List<EsEntity> list = new ArrayList<>();
             itemList.forEach(item -> list.add(
                     new EsEntity<>(item.getId().toString(),

@@ -26,8 +26,9 @@ public class ApiTest {
         UserService userService = applicationContext.getBean("userService", UserService.class);
         String result = userService.queryUserInfo();
         System.out.println("测试结果：" + result);
-
+        //ApplicationContextAware：cn.bugstack.springframework.context.support.ClassPathXmlApplicationContext@19bb089b加载类得地方
         System.out.println("ApplicationContextAware："+userService.getApplicationContext());
+        //BeanFactoryAware：cn.bugstack.springframework.beans.factory.support.DefaultListableBeanFactory@4563e9ab这个是bean存放的地方
         System.out.println("BeanFactoryAware："+userService.getBeanFactory());
     }
 

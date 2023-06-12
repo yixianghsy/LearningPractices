@@ -10,7 +10,7 @@ druid:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.1.33:3306/mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://192.168.10.33:3306/mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
@@ -32,7 +32,7 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     redis:
   redis:
-    host: 192.168.1.33
+    host: 192.168.10.33
     port: 6379
 dubbo:
   application:
@@ -41,7 +41,7 @@ dubbo:
     name: dubbo
     port: 20882
   registry:
-    address: zookeeper://192.168.1.33:2181
+    address: zookeeper://192.168.10.33:2181
     protocol: zookeeper
   scan:
     base-packages: com.mall.mansger.service
@@ -55,5 +55,5 @@ ITEM_CACHE_EXPIRE: 600000
 rocketmq:
   producer:
     groupName: mall-manager
-    namesrvAddr: 192.168.1.33:9876
+    namesrvAddr: 192.168.10.33:9876
     default: true

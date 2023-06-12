@@ -1,4 +1,5 @@
 FROM openjdk:8
+MAINTAINER hsy
 VOLUME /tmp
 ADD mall-sso-service-1.0-SNAPSHOT.jar app.jar
 # 设置环境变量
@@ -6,7 +7,7 @@ ADD mall-sso-service-1.0-SNAPSHOT.jar app.jar
 #ENV DUBBO_IP_TO_REGISTRY 192.168.10.140
 # 时区设置
 RUN echo "Asia/shanghai" > /etc/timezone
-RUN #bash -c 'touch /app.jar'
+#RUN bash -c 'touch /app.jar'
 EXPOSE 8030
 ENTRYPOINT ["java", "-jar","/app.jar"]
 #ENTRYPOINT ["java","exec java ${JAVA_OPTS}","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]

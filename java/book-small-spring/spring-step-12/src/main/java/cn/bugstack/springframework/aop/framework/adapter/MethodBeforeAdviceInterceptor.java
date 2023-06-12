@@ -24,9 +24,7 @@ public class MethodBeforeAdviceInterceptor implements MethodInterceptor {
     public MethodBeforeAdviceInterceptor() {
     }
 
-    public MethodBeforeAdviceInterceptor(MethodBeforeAdvice advice) {
-        this.advice = advice;
-    }
+
 
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {

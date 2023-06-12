@@ -5,7 +5,7 @@
         <option name="imageTag" value="manager-service" />
         <option name="containerName" value="manager-service" />
         <option name="contextFolderPath" value="mall-parent/mall-manager/mall-manager-service/target" />
-        <option name="commandLineOptions" value="--ip=192.168.1.40 --network docker-mavlan" />
+        <option name="commandLineOptions" value="--network  host" />
         <option name="sourceFilePath" value="mall-parent/mall-manager/mall-manager-service/src/main/docker/Dockerfile" />
       </settings>
     </deployment>
