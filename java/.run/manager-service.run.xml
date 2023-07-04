@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="manager-service" type="docker-deploy" factoryName="dockerfile" singleton="false" server-name="openwrt">
+  <configuration default="false" name="manager-service" type="docker-deploy" factoryName="dockerfile" singleton="false" server-name="localhost">
     <deployment type="dockerfile">
       <settings>
         <option name="imageTag" value="manager-service" />

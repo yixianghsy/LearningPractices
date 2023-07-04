@@ -14,8 +14,9 @@
     <name>mall-content</name>
     <packaging>pom</packaging>
     <modules>
-        <module>mall-content-service</module>
         <module>mall-content-interface</module>
+        <module>mall-content-service</module>
+
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
