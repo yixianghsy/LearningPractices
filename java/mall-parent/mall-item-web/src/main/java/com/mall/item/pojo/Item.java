@@ -1,7 +1,7 @@
 package com.mall.item.pojo;
 
 
-import com.mall.mapper.pojo.TbItem;
+import com.mall.modules.Item.TbItem;
 
 public class Item  extends TbItem {
     public Item(TbItem tbItem) {

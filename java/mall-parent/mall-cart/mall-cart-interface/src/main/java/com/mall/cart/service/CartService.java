@@ -1,6 +1,6 @@
 package com.mall.cart.service;
 
-import com.mall.mapper.pojo.TbItem;
+import com.mall.modules.Item.TbItem;
 import com.mall.utils.E3Result;
 
 import java.util.List;

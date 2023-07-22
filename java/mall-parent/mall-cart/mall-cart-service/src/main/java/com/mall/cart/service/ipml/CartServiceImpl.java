@@ -1,7 +1,7 @@
 package com.mall.cart.service.ipml;
 import com.mall.cart.service.CartService;
 import com.mall.mapper.TbItemMapper;
-import com.mall.mapper.pojo.TbItem;
+import com.mall.modules.Item.TbItem;
 import com.mall.utils.E3Result;
 import com.mall.utils.JsonUtils;
 import org.apache.commons.lang3.StringUtils;

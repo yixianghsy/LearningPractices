@@ -1,6 +1,6 @@
 package com.mall.mapper.controller;
 
-import com.mall.mapper.pojo.TbItem;
+import com.mall.modules.Item.TbItem;
 
 import com.mall.pojo.EasyUIDataGridResult;
 import com.mall.mansger.service.ItemService;

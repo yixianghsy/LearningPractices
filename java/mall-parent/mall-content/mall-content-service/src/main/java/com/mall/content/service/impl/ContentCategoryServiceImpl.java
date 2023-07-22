@@ -3,8 +3,8 @@ package com.mall.content.service.impl;
 import com.mall.content.service.ContentCategoryService;
 
 import com.mall.mapper.TbContentCategoryMapper;
-import com.mall.mapper.pojo.TbContentCategory;
-import com.mall.mapper.pojo.TbContentCategoryExample;
+import com.mall.modules.content.TbContentCategory;
+import com.mall.modules.content.TbContentCategoryExample;
 import com.mall.pojo.EasyUITreeNode;
 import com.mall.utils.E3Result;
 

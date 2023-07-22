@@ -1,6 +1,6 @@
 package com.mall.content.service;
 
-import com.mall.mapper.pojo.TbContent;
+import com.mall.modules.content.TbContent;
 import com.mall.utils.E3Result;
 
 import java.util.List;

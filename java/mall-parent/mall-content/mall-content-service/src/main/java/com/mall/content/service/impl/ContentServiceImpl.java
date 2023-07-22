@@ -1,10 +1,10 @@
 package com.mall.content.service.impl;
+import com.mall.mapper.TbContentMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.mall.content.service.ContentService;
-import com.mall.mapper.TbContentMapper;
-import com.mall.mapper.pojo.TbContent;
-import com.mall.mapper.pojo.TbContentExample;
+import com.mall.modules.content.TbContent;
+import com.mall.modules.content.TbContentExample;
 import com.mall.utils.E3Result;
 import com.mall.utils.JsonUtils;
 import org.apache.commons.lang3.StringUtils;

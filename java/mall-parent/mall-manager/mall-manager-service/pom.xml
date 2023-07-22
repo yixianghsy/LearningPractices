@@ -18,15 +18,10 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>com.mall</groupId>
-            <artifactId>mall-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
         <!--内部依赖-->
         <dependency>
             <groupId>com.mall</groupId>
-            <artifactId>mall-manager-dao</artifactId>
+            <artifactId>mall-content-mapper</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

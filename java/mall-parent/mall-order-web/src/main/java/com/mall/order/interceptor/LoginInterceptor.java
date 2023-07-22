@@ -2,7 +2,7 @@ package com.mall.order.interceptor;
 
 
 import com.mall.cart.service.CartService;
-import com.mall.mapper.pojo.TbItem;
+import com.mall.modules.Item.TbItem;
 import com.mall.mapper.pojo.TbUser;
 import com.mall.sso.service.TokenService;
 import com.mall.utils.CookieUtils;

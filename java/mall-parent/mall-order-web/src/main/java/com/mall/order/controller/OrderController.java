@@ -2,13 +2,12 @@ package com.mall.order.controller;
 
 
 import com.mall.cart.service.CartService;
-import com.mall.mapper.pojo.TbItem;
+import com.mall.modules.Item.TbItem;
 import com.mall.mapper.pojo.TbUser;
 import com.mall.order.pojo.OrderInfo;
 import com.mall.order.service.OrderService;
 import com.mall.utils.E3Result;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

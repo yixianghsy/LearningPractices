@@ -2,9 +2,6 @@ package com.mall.mapper;
 
 
 import java.util.List;
-
-import com.mall.mapper.pojo.TbItemCat;
-import com.mall.mapper.pojo.TbItemCatExample;
 import org.apache.ibatis.annotations.Param;
 
 public interface TbItemCatMapper {

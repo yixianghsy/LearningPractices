@@ -3,8 +3,8 @@ package com.mall.item.controller;
 
 import com.mall.item.pojo.Item;
 import com.mall.mansger.service.ItemService;
-import com.mall.mapper.pojo.TbItem;
-import com.mall.mapper.pojo.TbItemDesc;
+import com.mall.modules.Item.TbItem;
+import com.mall.modules.Item.TbItemDesc;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -17,7 +17,6 @@
         <module>mall-cart</module>
         <module>mall-order</module>
         <module>mall-manager-web</module>
-        <module>mall-manager-admin</module>
         <module>mall-search-web</module>
         <module>mall-sso-web</module>
         <module>mall-portal-web</module>
@@ -62,7 +61,6 @@
         <version.fastjson>1.2.62</version.fastjson>
         <version.freemarker>2.2.7.RELEASE</version.freemarker>
         <common.version>1.0-SNAPSHOT</common.version>
-        <mybatis-plus.version>3.3.2</mybatis-plus.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -142,12 +140,6 @@
                 <version>${version.gson}</version>
                 <scope>compile</scope>
             </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <version>${version.web}</version>
-            </dependency>
             <!--druid-->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -226,12 +218,6 @@
                 <artifactId>swagger-annotations</artifactId>
                 <version>${version.swagger}</version>
             </dependency>
-                <!--rocketmq-->
-            <dependency>
-                <groupId>org.apache.rocketmq</groupId>
-                <artifactId>rocketmq-client</artifactId>
-                <version>${version.rocketmq}</version>
-            </dependency>
             <!-- 数据库驱动包 -->
             <dependency>
                 <groupId>mysql</groupId>
@@ -244,12 +230,7 @@
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${version.mybatis}</version>
             </dependency>
-            <!--MyBatis Plus 依赖-->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>

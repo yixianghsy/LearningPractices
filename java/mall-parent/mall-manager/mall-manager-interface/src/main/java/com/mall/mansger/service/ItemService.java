@@ -1,8 +1,8 @@
 package com.mall.mansger.service;
 import com.mall.utils.E3Result;
 import com.mall.pojo.EasyUIDataGridResult;
-import com.mall.mapper.pojo.TbItem;
-import com.mall.mapper.pojo.TbItemDesc;
+import com.mall.modules.Item.TbItem;
+import com.mall.modules.Item.TbItemDesc;
 
 public interface ItemService {
     TbItem getItemById(long itemId);

@@ -1,9 +1,8 @@
 package com.mall.mapper.controller;
 import com.mall.content.service.ContentService;
-import com.mall.mapper.pojo.TbContent;
+import com.mall.modules.content.TbContent;
 import com.mall.utils.E3Result;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

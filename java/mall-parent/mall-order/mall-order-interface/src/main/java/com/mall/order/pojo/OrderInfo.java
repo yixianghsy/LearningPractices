@@ -1,7 +1,7 @@
 package com.mall.order.pojo;
-import com.mall.mapper.pojo.TbOrder;
-import com.mall.mapper.pojo.TbOrderItem;
-import com.mall.mapper.pojo.TbOrderShipping;
+import com.mall.modules.order.TbOrder;
+import com.mall.modules.order.TbOrderItem;
+import com.mall.modules.order.TbOrderShipping;
 
 import java.io.Serializable;
 import java.util.List;
