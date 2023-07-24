@@ -5,10 +5,14 @@ import com.mall.content.service.ContentService;
 import com.mall.modules.content.TbContent;
 import com.mall.modules.content.TbContentExample;
 import com.mall.utils.E3Result;
+import com.mall.utils.JsonUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 
 import javax.annotation.Resource;
@@ -28,6 +32,9 @@ public class ContentServiceImpl  implements ContentService {
     @Resource
     private TbContentMapper contentMapper;
 
+    @Resource
+    StringRedisTemplate stringRedisTemplate;
+
     @Value("${CONTENT_LIST:CONTENT_LIST}")
     private String CONTENT_LIST;
 
@@ -40,8 +47,8 @@ public class ContentServiceImpl  implements ContentService {
         //将内容数据插入到内容表
         tbContent.setCreated(new Date());
         tbContent.setUpdated(new Date());
-        //插入到数据库
         contentMapper.insert(tbContent);
+        //插入到数据库
         return E3Result.ok();
     }
 
@@ -55,19 +62,19 @@ public class ContentServiceImpl  implements ContentService {
      */
     @Override
     public List<TbContent> getContentListByCid(Long cid) {
-//        //查询缓存
-//        try {
-//            //如果缓存中有直接响应结果
-//            Object o = stringRedisTemplate.opsForHash().get(CONTENT_LIST, cid + "");
-//            System.out.println(o);
-//            String json = String.valueOf(o);
-//            if (StringUtils.isNotBlank(json)) {
-//                List<TbContent> list = JsonUtils.jsonToList(json, TbContent.class);
-//                return list;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        //查询缓存
+        try {
+            //如果缓存中有直接响应结果
+            Object o = stringRedisTemplate.opsForHash().get(CONTENT_LIST, cid + "");
+            System.out.println(o);
+            String json = String.valueOf(o);
+            if (StringUtils.isNotBlank(json)) {
+                List<TbContent> list = JsonUtils.jsonToList(json, TbContent.class);
+                return list;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         TbContentExample example = new TbContentExample();
         TbContentExample.Criteria criteria = example.createCriteria();
         //设置查询条件
@@ -76,11 +83,11 @@ public class ContentServiceImpl  implements ContentService {
         List<TbContent> list =contentMapper.selectByExampleWithBLOBs(example);
         System.out.println(list);
         //把结果添加到缓存
-//        try {
-//            stringRedisTemplate.opsForHash().put(CONTENT_LIST, cid + "", JsonUtils.objectToJson(list));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            stringRedisTemplate.opsForHash().put(CONTENT_LIST, cid + "", JsonUtils.objectToJson(list));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return list;
 
 
