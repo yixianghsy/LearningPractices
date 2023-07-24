@@ -1,8 +1,5 @@
 package com.mall.item.service.ipml;
 
-
-
-
 import com.mall.item.mapper.TbItemCatMapper;
 import com.mall.item.service.ItemCatService;
 import com.mall.modules.Item.TbItemCat;
@@ -32,7 +29,7 @@ public class ItemCatServiceImpl implements ItemCatService {
         }
 
         //创建返回结果List
-        List<EasyUITreeNode> resultList = new ArrayList<EasyUITreeNode>();
+        List<EasyUITreeNode> resultList = new ArrayList<>();
         //把列表转换成EasyUITreeNode列表
         for (TbItemCat tbItemCat : list) {
             EasyUITreeNode node = new EasyUITreeNode();
