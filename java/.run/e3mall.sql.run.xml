@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="e3mall.sql" type="DatabaseScript" editBeforeRun="true" singleton="false" nameIsGenerated="true">
+    <script-file value="$PROJECT_DIR$/e3-parent/e3mall.sql" />
+    <script-mode>FILE</script-mode>
+    <data-source id="a67a4d2f-7aa0-4e85-b67a-8d2ca2699e0e" namespace="schema/&quot;mall&quot;" />
+    <method v="2" />
+  </configuration>
+</component>

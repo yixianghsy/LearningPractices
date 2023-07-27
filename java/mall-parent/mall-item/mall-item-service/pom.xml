@@ -7,7 +7,7 @@
         <artifactId>mall-item</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.mall.item</groupId>
+    <groupId>com.mall</groupId>
     <artifactId>mall-item-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mall-item-service</name>
@@ -17,12 +17,12 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.mall.item</groupId>
+            <groupId>com.mall</groupId>
             <artifactId>mall-item-mapper</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.mall.item</groupId>
+            <groupId>com.mall</groupId>
             <artifactId>mall-item-interface</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

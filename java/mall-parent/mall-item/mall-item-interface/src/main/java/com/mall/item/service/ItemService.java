@@ -20,4 +20,5 @@ public interface ItemService {
     void instockItemList(Long[] ids);
     //上架商品
     void reshelfItemList(Long[] ids);
+    void  testOrderId(String orderId);
 }

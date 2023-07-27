@@ -30,7 +30,6 @@
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
-
             </dependency>
             <dependency>
                 <groupId>com.mall</groupId>

@@ -5,10 +5,12 @@ import com.github.pagehelper.PageInfo;
 
 import com.mall.item.mapper.TbItemDescMapper;
 import com.mall.item.mapper.TbItemMapper;
+import com.mall.item.mapper.TbOrderMapper;
 import com.mall.item.service.ItemService;
 import com.mall.modules.Item.TbItem;
 import com.mall.modules.Item.TbItemDesc;
 import com.mall.modules.Item.TbItemExample;
+import com.mall.modules.order.TbOrder;
 import com.mall.pojo.EasyUIDataGridResult;
 import com.mall.utils.E3Result;
 import com.mall.utils.IDUtils;
@@ -39,7 +41,10 @@ public class ItemServiceImpl implements ItemService {
     @Resource
     private TbItemMapper tbItemMapper;
     @Resource
+    private TbOrderMapper tbOrderMapper;
+    @Resource
     RedisTemplate redisTemplate;
+
     @Resource
     private DefaultMQProducer producer;
     @Resource
@@ -197,6 +202,14 @@ public class ItemServiceImpl implements ItemService {
         }
 
     }
+
+    @Override
+    public   void   testOrderId(String orderId) {
+        System.out.println("...testOrderId...");
+        TbOrder tbOrder = tbOrderMapper.selectByPrimaryKey("232");
+        System.out.println(tbOrder.getOrderId());
+    }
+
     //这里异常应该是跑出去，调用的捕获
     private void send(Message message) {
         try {
