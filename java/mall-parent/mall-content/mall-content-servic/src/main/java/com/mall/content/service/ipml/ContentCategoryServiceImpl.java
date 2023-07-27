@@ -1,4 +1,4 @@
-package com.mall.content.service.impl;
+package com.mall.content.service.ipml;
 
 import com.mall.content.mapper.TbContentCategoryMapper;
 import com.mall.content.service.ContentCategoryService;
