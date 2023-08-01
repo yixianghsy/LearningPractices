@@ -1,13 +1,11 @@
-package com.mall.search;
-
+package com.mall;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 @SpringBootApplication
-public class MallSearchServiceApplication {
+public class ManagerControllerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MallSearchServiceApplication.class, args);
+        SpringApplication.run(ManagerControllerApplication.class, args);
     }
 
 }

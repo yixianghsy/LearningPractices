@@ -3,6 +3,7 @@ package com.mall.item.controller;
 import com.mall.item.service.ItemService;
 import com.mall.pojo.EasyUIDataGridResult;
 import com.mall.utils.JsonUtils;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import javax.annotation.Resource;
 public class TestController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TestController.class);
-    @Resource
+    @Reference
     private ItemService itemService;
     /**
      * item-lits页面商品显示

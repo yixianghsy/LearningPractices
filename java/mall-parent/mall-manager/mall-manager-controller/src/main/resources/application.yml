@@ -1,0 +1,9 @@
+server:
+  port: 8025
+# dubbo config
+dubbo:
+  application:
+    name: manager-web
+  registry:
+    address: zookeeper://192.168.10.33:2181
+    protocol: zookeeper

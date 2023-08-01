@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @version 1.0
  */
 @Controller
-public class ItemController {
+public class  ItemController {
     @Reference
     private ItemService itemService;
     @RequestMapping("/item/{itemId}")

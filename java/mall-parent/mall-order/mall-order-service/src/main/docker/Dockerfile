@@ -3,10 +3,10 @@ FROM openjdk:8
 #维护人员信息
 MAINTAINER hsy
 #设置镜像对外暴露端口
-EXPOSE 8021
+EXPOSE 8026
 #将当前 target 目录下的 jar 放置在根目录下，命名为 app.jar，推荐使用绝对路径。
 VOLUME /tmp
-ADD mall-content-servic-0.0.1-SNAPSHOT.jar app.jar
+ADD mall-order-service-0.0.1-SNAPSHOT.jar app.jar
 # 设置环境变量
 #ENV JAVA_OPTS="-server -Xms512m -Xmx512m"
 # set  部署服务器IP

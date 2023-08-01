@@ -9,7 +9,7 @@ druid:
 # dubbo config
 dubbo:
   application:
-    name: order-service
+    name: mall-order
     qosPort: 22221
   # 使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper
   # 注册中心id

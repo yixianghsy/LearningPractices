@@ -1,5 +1,5 @@
 server:
-  port: 8888
+  port: 8022
 druid:
   allow: #允许登陆的IP地址
     ip: 127.0.0.1
@@ -9,7 +9,7 @@ druid:
 # dubbo config
 dubbo:
   application:
-    name: item-service
+    name: mall-item
     qosPort: 22221
   # 使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper
   # 注册中心id
@@ -25,7 +25,7 @@ dubbo:
   protocol:
     name: dubbo
     # 协议端口
-    port: 20882
+    port: 20883
     # 协议访问log
     accesslog: dubbo-access.log
   # 重试次数
@@ -36,9 +36,6 @@ dubbo:
   # 注册监控中心
   monitor:
     protocol: registry
-  config-center:
-    protocol: zookeeper
-    address: 192.168.10.33:2181
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -81,7 +78,7 @@ mybatis:
 #mq
 rocketmq:
   producer:
-    groupName: mall-manager
+    groupName: mall-item
     namesrvAddr: 192.168.10.33:9876
     default: true
 #头部值
