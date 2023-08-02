@@ -10,6 +10,8 @@
     <modules>
         <module>mall-sso-interface</module>
         <module>mall-sso-service</module>
+        <module>mall-sso-mapper</module>
+        <module>mall-sso-controller</module>
     </modules>
     <groupId>com.mall.sso</groupId>
     <artifactId>mall-sso</artifactId>

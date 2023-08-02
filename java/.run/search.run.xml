@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="search" type="docker-deploy" factoryName="dockerfile" singleton="false" server-name="openwrt">
+    <deployment type="dockerfile">
+      <settings>
+        <option name="imageTag" value="search-service" />
+        <option name="containerName" value="search-service" />
+        <option name="contextFolderPath" value="mall-parent/mall-search/mall-search-service/target" />
+        <option name="commandLineOptions" value="--network  host" />
+        <option name="sourceFilePath" value="mall-parent/mall-search/mall-search-service/src/main/docker/Dockerfile" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

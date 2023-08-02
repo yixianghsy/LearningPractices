@@ -10,6 +10,7 @@
     <modules>
         <module>mall-cart-interface</module>
         <module>mall-cart-service</module>
+        <module>mall-cart-controller</module>
     </modules>
     <groupId>com.mall.cart</groupId>
     <artifactId>mall-cart</artifactId>

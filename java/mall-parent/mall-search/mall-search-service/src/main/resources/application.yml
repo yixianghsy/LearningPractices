@@ -23,7 +23,7 @@ dubbo:
   protocol:
     name: dubbo
     # ????
-    port: 20885
+    port: 20884
     # ????log
     accesslog: dubbo-access.log
   # ????

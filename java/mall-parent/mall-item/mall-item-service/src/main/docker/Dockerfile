@@ -3,7 +3,7 @@ FROM openjdk:8
 #维护人员信息
 MAINTAINER hsy
 #设置镜像对外暴露端口
-EXPOSE 8888
+EXPOSE 8022
 #将当前 target 目录下的 jar 放置在根目录下，命名为 app.jar，推荐使用绝对路径。
 VOLUME /tmp
 ADD mall-item-service-0.0.1-SNAPSHOT.jar app.jar

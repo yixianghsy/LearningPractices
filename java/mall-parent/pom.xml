@@ -185,8 +185,6 @@
                 <artifactId>zkclient</artifactId>
                 <version>${version.zkclient}</version>
             </dependency>
-
-
             <!-- redis -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -255,6 +253,7 @@
                 <artifactId>spring-boot-starter-freemarker</artifactId>
                 <version>${version.freemarker}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>

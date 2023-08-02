@@ -7,3 +7,11 @@ dubbo:
   registry:
     address: zookeeper://192.168.10.33:2181
     protocol: zookeeper
+#erver:
+#  tomcat:
+#    uri-encoding: UTF-8
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
