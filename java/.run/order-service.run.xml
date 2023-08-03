@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="order-service" type="docker-deploy" factoryName="dockerfile" singleton="false" server-name="openwrt">
+    <deployment type="dockerfile">
+      <settings>
+        <option name="imageTag" value="order-service" />
+        <option name="containerName" value="order-service" />
+        <option name="contextFolderPath" value="mall-parent/mall-order/mall-order-service/target" />
+        <option name="commandLineOptions" value="--network  host" />
+        <option name="sourceFilePath" value="mall-parent/mall-order/mall-order-service/src/main/docker/Dockerfile" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

@@ -39,10 +39,11 @@
         <version.okhttp>3.3.1</version.okhttp>
         <version.gson>2.6.2</version.gson>
         <version.druid>1.1.0</version.druid>
-        <version.dubbo>2.7.3</version.dubbo>
-        <version.curator>2.8.0</version.curator>
+        <version.dubbo>2.7.2</version.dubbo>
+        <version.curator>4.0.1</version.curator>
         <version.curator-recipe>2.8.0</version.curator-recipe>
-        <version.zookeeper>3.4.13</version.zookeeper>
+        <version.zookeeper>3.4.10</version.zookeeper>
+        <version.sgroschupf>0.1</version.sgroschupf>
         <version.zkclient>0.10</version.zkclient>
         <version.redis>2.2.7.RELEASE</version.redis>
         <version.swagger>1.5.0</version.swagger>
@@ -139,51 +140,43 @@
             <!-- 新增 dubbo/zookeeper依赖 -->
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <artifactId>dubbo</artifactId>
                 <version>${version.dubbo}</version>
                 <exclusions>
                     <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-log4j12</artifactId>
+                        <artifactId>spring</artifactId>
+                        <groupId>org.springframework</groupId>
                     </exclusion>
                 </exclusions>
             </dependency>
-
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo</artifactId>
-                <version>${version.dubbo}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.curator</groupId>
-                <artifactId>curator-framework</artifactId>
-                <version>${version.curator}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.curator</groupId>
-                <artifactId>curator-recipes</artifactId>
-                <version>${version.curator-recipe}</version>
-            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo -->
 
             <dependency>
                 <groupId>org.apache.zookeeper</groupId>
                 <artifactId>zookeeper</artifactId>
                 <version>${version.zookeeper}</version>
-                <type>pom</type>
                 <exclusions>
                     <exclusion>
-                        <groupId>org.slf4j</groupId>
                         <artifactId>slf4j-log4j12</artifactId>
+                        <groupId>org.slf4j</groupId>
                     </exclusion>
                 </exclusions>
             </dependency>
-
             <dependency>
-                <groupId>com.101tec</groupId>
+                <groupId>com.github.sgroschupf</groupId>
                 <artifactId>zkclient</artifactId>
-                <version>${version.zkclient}</version>
+                <version>${version.sgroschupf}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${version.curator}</version>
+            </dependency>
+            <!--生产者比消费端多了这个-->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-metadata-report-zookeeper</artifactId>
+                <version>${version.dubbo}</version>
             </dependency>
             <!-- redis -->
             <dependency>

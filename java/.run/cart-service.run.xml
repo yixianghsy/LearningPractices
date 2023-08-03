@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="cart-service" type="docker-deploy" factoryName="dockerfile" singleton="false" server-name="openwrt">
+    <deployment type="dockerfile">
+      <settings>
+        <option name="imageTag" value="cart-service" />
+        <option name="containerName" value="cart-service" />
+        <option name="contextFolderPath" value="mall-parent/mall-cart/mall-cart-service/target" />
+        <option name="commandLineOptions" value="--network  host" />
+        <option name="sourceFilePath" value="mall-parent/mall-cart/mall-cart-service/src/main/docker/Dockerfile" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

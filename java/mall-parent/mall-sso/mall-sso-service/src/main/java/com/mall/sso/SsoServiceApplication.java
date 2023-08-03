@@ -6,7 +6,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableDubboConfig
-@DubboComponentScan("com.mall.sso.service")
+@DubboComponentScan("com.mall.*.service")
 @MapperScan(basePackages = {"com.mall.sso.mapper"})
 @SpringBootApplication
 public class SsoServiceApplication {
