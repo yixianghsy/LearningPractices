@@ -56,8 +56,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--dubbo-->
-
     </dependencies>
 
     <build>

@@ -1,1 +1,43 @@
-
+server:
+  port: 8033
+  servlet:
+    context-path: /
+    path: '*.html'
+dubbo:
+  application:
+    name: cart-web
+  # 使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper
+  # 注册中心id
+  registry:
+    id: zookeeper-registry
+    # 注册中心协议
+    protocol: zookeeper
+    # 注册中心地址
+    address: 192.168.10.33:2181
+  # dubbo协议在20881端口暴露服务
+  # 协议名称
+  protocol:
+    name: dubbo
+    # 协议端口
+    port: 20889
+    # 协议访问log
+    accesslog: dubbo-access.log
+  # 重试次数
+  provider:
+    retries: 0
+    # 超时时间
+    timeout: 3000
+  # 注册监控中心
+  monitor:
+    protocol: registry
+#erver:
+#  tomcat:
+#    uri-encoding: UTF-8
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  pathmatch:
+    use-suffix-pattern: true
+COOKIE_CART_EXPIRE: 432000

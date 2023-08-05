@@ -23,6 +23,7 @@
         <module>mall-sso</module>
         <module>mall-cart</module>
         <module>mall-order</module>
+        <module>mall-portal</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

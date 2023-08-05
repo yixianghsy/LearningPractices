@@ -1,13 +1,13 @@
-package com.mall.sso;
+package com.mall.portal;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MallSsoControllerApplicationTests {
+class MallPortalControllerApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
 
 }

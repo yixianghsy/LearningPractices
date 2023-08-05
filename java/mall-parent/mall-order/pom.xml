@@ -11,6 +11,7 @@
         <module>mall-order-mapper</module>
         <module>mall-order-interface</module>
         <module>mall-order-service</module>
+        <module>mall-order-controller</module>
     </modules>
     <groupId>com.mall.order</groupId>
     <artifactId>mall-order</artifactId>
@@ -27,8 +28,21 @@
             <artifactId>mall-common</artifactId>
             <scope>provided</scope>
         </dependency>
-
-
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
     </dependencies>
 </project>

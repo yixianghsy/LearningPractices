@@ -11,6 +11,7 @@
         <module>mall-search-interface</module>
         <module>mall-search-service</module>
         <module>mall-search-mapper</module>
+        <module>mall-search-controller</module>
     </modules>
     <groupId>com.mall.search</groupId>
     <artifactId>mall-search</artifactId>

@@ -1,13 +1,13 @@
-package com.mall.sso;
+package com.mall.order;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MallSsoControllerApplication {
+public class OrderControllerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MallSsoControllerApplication.class, args);
+        SpringApplication.run(OrderControllerApplication.class, args);
     }
 
 }
