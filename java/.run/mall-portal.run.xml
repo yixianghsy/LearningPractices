@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="mall-portal" type="docker-deploy" factoryName="dockerfile" server-name="openwrt">
+    <deployment type="dockerfile">
+      <settings>
+        <option name="imageTag" value="mall-portal" />
+        <option name="containerName" value="mall-portal" />
+        <option name="contextFolderPath" value="mall-parent/mall-portal/target" />
+        <option name="commandLineOptions" value="--network  host" />
+        <option name="sourceFilePath" value="mall-parent/mall-portal/src/main/docker/Dockerfile" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

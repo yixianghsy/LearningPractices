@@ -1,0 +1,44 @@
+HTML_GEN_PATH: ~/HTML
+rocketmq:
+  producer:
+    default: true
+    groupName: e3-search
+    namesrvAddr: 192.168.10.33:9876
+server:
+  port: 8023
+  servlet:
+    context-path: /
+    path: '*.html'
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  freemarker:
+    allow-request-override: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    suffix: .ftl
+    template-loader-path: classpath:/WEB-INF/ftl/
+  mvc:
+    pathmatch:
+      use-suffix-pattern: true
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+dubbo:
+  application:
+    name: item-web
+  registry:
+    address: zookeeper://192.168.10.33:2181
+    protocol: zookeepe
+#erver:
+#  tomcat:
+#    uri-encoding: UTF-8
+#spring:
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/jsp/
+#      suffix: .jsp

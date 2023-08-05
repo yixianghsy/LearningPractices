@@ -1,6 +1,5 @@
 package com.mall.sso.controller;
-
-import com.mall.modules.user.TbUser;
+import com.mall.item.mapper.pojo.TbUser;
 import com.mall.sso.service.RegisterService;
 import com.mall.utils.E3Result;
 import org.apache.dubbo.config.annotation.Reference;

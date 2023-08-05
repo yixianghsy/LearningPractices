@@ -11,6 +11,7 @@
         <module>mall-item-mapper</module>
         <module>mall-item-interface</module>
         <module>mall-item-service</module>
+        <module>mall-item-controller</module>
     </modules>
     <groupId>com.mall.item</groupId>
     <artifactId>mall-item</artifactId>
@@ -19,15 +20,26 @@
     <name>mall-item</name>
     <description>mall-item</description>
         <dependencies>
-
-
             <dependency>
                 <groupId>com.mall</groupId>
                 <artifactId>mall-common</artifactId>
                 <scope>provided</scope>
             </dependency>
-
-
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.junit.vintage</groupId>
+                        <artifactId>junit-vintage-engine</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
         </dependencies>
 
 </project>
