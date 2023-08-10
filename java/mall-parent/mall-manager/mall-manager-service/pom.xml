@@ -7,7 +7,7 @@
         <artifactId>mall-manager</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.mall</groupId>
+    <groupId>com.mall.mansger</groupId>
     <artifactId>mall-manager-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mall-manager-service</name>
@@ -16,7 +16,45 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
-
+        <dependency>
+            <groupId>com.mall.mansger</groupId>
+            <artifactId>mall-manager-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--dubbo-->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo -->
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-metadata-report-zookeeper</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -27,5 +65,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

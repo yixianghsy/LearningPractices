@@ -3,17 +3,17 @@ package com.mall.order.interceptor;
 
 import com.mall.cart.service.CartService;
 import com.mall.modules.Item.TbItem;
-import com.mall.item.mapper.pojo.TbUser;
+
+import com.mall.modules.user.TbUser;
 import com.mall.sso.service.TokenService;
 import com.mall.utils.CookieUtils;
 import com.mall.utils.E3Result;
 import com.mall.utils.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,9 +28,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Value("${SSO_URL}")
     private String SSO_URL;
 
-    @Autowired
+    @Reference
     private TokenService tokenService;
-    @Autowired
+    @Reference
     private CartService cartService;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

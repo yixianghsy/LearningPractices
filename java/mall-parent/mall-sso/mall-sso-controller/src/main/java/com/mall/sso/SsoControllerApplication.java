@@ -8,18 +8,18 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.DispatcherServlet;
-
+//@ServletComponentScan
 @EnableDubboConfig
 @DubboComponentScan("com.mall.*.service")
-@ServletComponentScan
 @SpringBootApplication
 public class SsoControllerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SsoControllerApplication.class, args);
     }
-    @Bean
-    public ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
-        return new ServletRegistrationBean(dispatcherServlet,"*.html");
-    }
+    //这个bean 或导致无法访问
+//    @Bean
+//    public ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
+//        return new ServletRegistrationBean(dispatcherServlet,"*.html");
+//    }
 }

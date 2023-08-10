@@ -2,11 +2,13 @@ package com.mall.order.controller;
 
 
 import com.mall.cart.service.CartService;
+
 import com.mall.modules.Item.TbItem;
-import com.mall.item.mapper.pojo.TbUser;
-import com.mall.order.pojo.OrderInfo;
+
+import com.mall.modules.user.TbUser;
 import com.mall.order.service.OrderService;
 import com.mall.utils.E3Result;
+import com.mall.vo.OrderInfo;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,4 +67,5 @@ public class OrderController {
         //返回逻辑视图
         return "success";
     }
+
 }

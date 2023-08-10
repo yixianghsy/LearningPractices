@@ -1,1 +1,20 @@
+app:
+  name: 购物车页面
+  version: 1.0
+dubbo:
+  application:
+    name: order-web
+  registry:
+    address: zookeeper://192.168.10.33:2181
+    protocol: zookeeper
+server:
+  port: 8027
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
 
+SSO_URL: http://sso.sylianxizhuanyong.cn

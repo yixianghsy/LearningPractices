@@ -69,11 +69,12 @@ docker run -p 80:80 --name nginx \
 3. 终止容器：docker stop nginx
 4. 执行命令删除原容器：docker rm $ContainerId
 5. 执行以下命令：
-docker run -p 80:80 --name nginx \
--v /mydata/nginx/html:/usr/share/nginx/html \
--v /mydata/nginx/logs:/var/log/nginx  \
--v /mydata/nginx/conf:/etc/nginx \
--d nginx:1.10
+   docker run -p 80:80 --name nginx \
+   -v /volume1/docker/mydata/nginx/html:/usr/share/nginx/html \
+   -v /volume1/docker/mydata/nginx/logs:/var/log/nginx  \
+   -v /volume1/docker/mydata/nginx/conf:/etc/nginx \
+   --ip=192.168.10.36 --network docker-mavlan \
+   nginx:1.10
 
 ## rabbitmq安装
 ### 下载镜像文件

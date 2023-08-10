@@ -21,9 +21,9 @@
     <description>mall-item</description>
         <dependencies>
             <dependency>
-                <groupId>com.mall</groupId>
                 <artifactId>mall-common</artifactId>
-                <scope>provided</scope>
+                <groupId>com.mall</groupId>
+                <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>

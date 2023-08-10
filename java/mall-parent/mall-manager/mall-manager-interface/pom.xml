@@ -7,7 +7,7 @@
         <artifactId>mall-manager</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.mall</groupId>
+    <groupId>com.mall.mansger</groupId>
     <artifactId>mall-manager-interface</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mall-manager-interface</name>
