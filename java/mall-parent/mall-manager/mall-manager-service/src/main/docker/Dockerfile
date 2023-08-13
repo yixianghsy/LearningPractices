@@ -15,6 +15,3 @@ ADD mall-manager-service-0.0.1-SNAPSHOT.jar app.jar
 RUN echo "Asia/shanghai" > /etc/timezone
 #执行启动命令
 ENTRYPOINT ["java", "-jar","/app.jar"]
-#ENTRYPOINT exec java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /certif-system-2.1.0.jar
-#ENTRYPOINT java $JAVA_OPTS -Xshareclasses -Xquickstart -jar /certif-system-2.1.0.jar
-#ENTRYPOINT java $JAVA_OPTS -Xshareclasses -Xquickstart -jar /app.jar

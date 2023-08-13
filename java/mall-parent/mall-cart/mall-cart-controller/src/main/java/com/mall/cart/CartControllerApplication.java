@@ -25,6 +25,6 @@ public class CartControllerApplication {
 	 */
 	@Bean
 	public ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
-		return new ServletRegistrationBean(dispatcherServlet,"*.html,*.action");
+		return new ServletRegistrationBean(dispatcherServlet,"*.html");
 	}
 }

@@ -112,7 +112,7 @@
 					return ;
 				}
 				$.ajax({
-					url : "http://localhost:8088/user/token/" + _ticket,
+					url : "http://sso.mall.com/user/token/" + _ticket,
 					dataType : "jsonp",
 					type : "GET",
 					success : function(data){

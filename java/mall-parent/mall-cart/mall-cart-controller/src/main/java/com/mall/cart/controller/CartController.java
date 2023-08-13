@@ -41,6 +41,12 @@ public class CartController  {
     private ItemService itemService;
     @Reference
     private CartService cartService;
+
+    @RequestMapping("/cart/test")
+    @ResponseBody
+    public  String testCdhd(){
+        return  "测试结果无异常";
+    }
     @RequestMapping("/cart/add/{itemId}")
     public String addCart(@PathVariable Long itemId, @RequestParam(defaultValue="1")Integer num,
                           HttpServletRequest request, HttpServletResponse response) {
