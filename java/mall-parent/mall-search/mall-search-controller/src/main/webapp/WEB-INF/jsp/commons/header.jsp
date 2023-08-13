@@ -14,7 +14,7 @@
 		</div>
     <div class="index_promo"></div>
     <div class="search">
-      <form action="http://localhost:8029/search.html" id="searchForm" name="query" method="GET">
+      <form action="http://search.mall.com/search.html" id="searchForm" name="query" method="GET">
         <input type="text" class="text keyword ac_input" name="keyword" id="keyword" value="${query }" style="color: rgb(153, 153, 153);" onkeydown="javascript:if(event.keyCode==13) search_keys('searchForm');" autocomplete="off">
         <input type="button" value="" class="submit" onclick="search_keys('searchForm')">
       </form>

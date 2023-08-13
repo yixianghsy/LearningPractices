@@ -28,7 +28,7 @@ public class ItemController {
         System.out.println("进来了");
         //调用服务取商品基本信息
         TbItem tbItem = itemService.getItemById(itemId);
-
+        System.out.println("..................."+tbItem.getId()+"..................");
         Item item = new Item(tbItem);
         //取商品描述信息
         TbItemDesc tbItemDesc = itemService.getItemDescById(itemId);

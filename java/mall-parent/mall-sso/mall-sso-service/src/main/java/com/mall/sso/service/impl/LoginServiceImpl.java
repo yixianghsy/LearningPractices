@@ -39,7 +39,6 @@ public class LoginServiceImpl implements LoginService {
         TbUserExample.Criteria criteria = example.createCriteria();
         criteria.andUsernameEqualTo(username);
         //执行查询
-        // TODO 这里bean总是当成dubbo服务i调用，不引用bean而是直接调用接口
         List<TbUser> list = userMapper.selectByExample(example);
         if(list ==null || list.size()==0){
             //返回登录失败
