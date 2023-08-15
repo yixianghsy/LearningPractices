@@ -17,7 +17,7 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.mall</groupId>
+            <groupId>com.mall.item</groupId>
             <artifactId>mall-item-interface</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
