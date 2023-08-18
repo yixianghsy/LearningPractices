@@ -1,12 +1,6 @@
 server:
   port: 8025
-# dubbo config
-#dubbo:
-#  application:
-#    name: manager-web
-#  registry:
-#    address: zookeeper://192.168.10.33:2181
-#    protocol: zookeeper
+
 dubbo:
   application:
     name: manager-web
@@ -34,11 +28,3 @@ dubbo:
   # 注册监控中心
   monitor:
     protocol: registry
-#erver:
-#  tomcat:
-#    uri-encoding: UTF-8
-spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp

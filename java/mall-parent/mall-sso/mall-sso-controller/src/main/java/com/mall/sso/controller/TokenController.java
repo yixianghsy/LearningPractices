@@ -26,12 +26,13 @@ public class TokenController {
     @RequestMapping(value="/user/token/{token}")
     @ResponseBody
     public Object getUserByToken(@PathVariable String token, String callback) {
+        System.out.println("首页请求token"+token);
         E3Result userByToken = tokenService.getUserByToken(token);
         //响应结果之前，判断是否为jsonp请求
         if(StringUtils.isNotBlank(callback)){
             //把结果封装成一个js语句响应
             MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(userByToken);
-//            mappingJacksonValue.setJsonpFunction(callback);
+            mappingJacksonValue.setJsonpFunction(callback);
             return  mappingJacksonValue;
         }
         return  userByToken;

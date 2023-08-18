@@ -17,14 +17,4 @@ public class CartControllerApplication {
 		SpringApplication.run(CartControllerApplication.class, args);
 	}
 
-	/**
-	 * 这个bean 我也不知道用在哪里。。
-	 *
-	 * @param dispatcherServlet
-	 * @return
-	 */
-	@Bean
-	public ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
-		return new ServletRegistrationBean(dispatcherServlet,"*.html");
-	}
 }

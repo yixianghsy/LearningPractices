@@ -26,6 +26,11 @@
             <artifactId>mall-sso-mapper</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <!--springboot的web组件-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <!--druid-->
         <dependency>
             <groupId>com.alibaba</groupId>

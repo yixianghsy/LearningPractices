@@ -15,8 +15,5 @@ public class ItemControllerApplication {
     public static void main(String[] args) {
         SpringApplication.run(ItemControllerApplication.class, args);
     }
-    @Bean
-    public ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
-        return new ServletRegistrationBean(dispatcherServlet,"*.html");
-    }
+
 }

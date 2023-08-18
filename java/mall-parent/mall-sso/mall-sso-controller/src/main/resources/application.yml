@@ -9,10 +9,8 @@ dubbo:
   registry:
     address: zookeeper://192.168.10.33:2181
     protocol: zookeepe
-
-spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp
+#spring:
+#  web:
+#    resources:
+#      static-locations: classpath:/static
 TOKEN_KEY: token

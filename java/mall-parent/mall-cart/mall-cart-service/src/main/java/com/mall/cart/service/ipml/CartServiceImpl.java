@@ -90,7 +90,7 @@ public class CartServiceImpl implements CartService {
         List<TbItem> itemList = new ArrayList<>();
         for (Object string : jsonList) {
             //创建一个TbItem对象
-            TbItem item = JsonUtils.jsonToPojo(string, TbItem.class);
+            TbItem item = JsonUtils.jsonToPojo((String) string, TbItem.class);
 //            //添加到列表
             itemList.add(item);
         }

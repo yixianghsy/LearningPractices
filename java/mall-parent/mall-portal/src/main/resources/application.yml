@@ -10,10 +10,3 @@ dubbo:
     protocol: zookeeper
 server:
   port: 8032
-  tomcat:
-    uri-encoding: UTF-8
-spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp

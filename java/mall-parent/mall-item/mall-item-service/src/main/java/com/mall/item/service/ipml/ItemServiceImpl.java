@@ -61,7 +61,7 @@ public class ItemServiceImpl implements ItemService {
         /**
          * 在UserService的实现类中（业务层）进行缓存测试，注入RedisTemplate或StringRedisTemplate都可以。
          */
-        System.out.println("查询缓存，"+itemId);
+
         //查询缓存
         try {
             String json = stringRedisTemplate.opsForValue().get(REDIS_ITEM_PRE + ":" + itemId + ":BASE");
@@ -72,7 +72,6 @@ public class ItemServiceImpl implements ItemService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("缓存里没有，");
         //缓存中没有，查询数据库
         //根据主键查询
 //        TbItem tbItem = itemMapper.selectByPrimaryKey(itemId);
@@ -82,7 +81,6 @@ public class ItemServiceImpl implements ItemService {
         criteria.andIdEqualTo(itemId);
         //执行查询
         List<TbItem> list = tbItemMapper.selectByExample(example);
-        System.out.println("查询数据，"+list.get(0));
         if (list !=null && list.size()>0){
             try {
                 //查询结果写入缓存
@@ -91,9 +89,7 @@ public class ItemServiceImpl implements ItemService {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return  list.get(0);
         }
-        //TODO 这里需要修复，如果缓存没有这样查询完数据库需要返回数据而不是NULL
         return  null;
     }
 

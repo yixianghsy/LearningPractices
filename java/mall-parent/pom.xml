@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <!--定义SpringBoot依赖父工程-->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.7.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>2.0.4.RELEASE</version>
     </parent>
     <groupId>com.mall</groupId>
     <artifactId>mall-parent</artifactId>
@@ -61,12 +61,19 @@
         <version.freemarker>2.2.7.RELEASE</version.freemarker>
         <common.version>1.0-SNAPSHOT</common.version>
         <mysql.version>6.0.6</mysql.version>
+        <springboot-thymeleaf.version>2.1.1.RELEASE</springboot-thymeleaf.version>
     </properties>
 
     <dependencies>
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <!--thymeleaf组件-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                <version>${springboot-thymeleaf.version}</version>
+            </dependency>
             <!-- 公共依赖 -->
             <dependency>
                 <groupId>com.mall</groupId>

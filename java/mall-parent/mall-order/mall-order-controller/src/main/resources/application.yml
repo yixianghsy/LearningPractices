@@ -11,10 +11,5 @@ server:
   port: 8027
   tomcat:
     uri-encoding: UTF-8
-spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp
 
 SSO_URL: http://sso.sylianxizhuanyong.cn

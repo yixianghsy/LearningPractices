@@ -6,7 +6,7 @@ MAINTAINER hsy
 EXPOSE 8027
 #将当前 target 目录下的 jar 放置在根目录下，命名为 app.jar，推荐使用绝对路径。
 VOLUME /tmp
-ADD mall-order-controller-0.0.1-SNAPSHOT.jar app.jar
+ADD e3-order-web.jar app.jar
 # 设置环境变量
 #ENV JAVA_OPTS="-server -Xms512m -Xmx512m"
 # set  部署服务器IP

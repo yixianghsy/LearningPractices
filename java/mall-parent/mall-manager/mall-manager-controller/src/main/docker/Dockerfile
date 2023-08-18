@@ -3,7 +3,7 @@ FROM openjdk:8
 MAINTAINER hsy
 EXPOSE 8025
 VOLUME /tmp
-ADD mall-manager-controller-0.0.1-SNAPSHOT.jar app.jar
+ADD e3-manager-web.jar app.jar
 RUN echo "Asia/shanghai" > /etc/timezone
 #执行启动命令
 ENTRYPOINT ["java", "-jar","/app.jar"]

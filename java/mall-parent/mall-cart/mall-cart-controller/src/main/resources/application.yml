@@ -30,15 +30,4 @@ dubbo:
   # 注册监控中心
   monitor:
     protocol: registry
-#erver:
-#  tomcat:
-#    uri-encoding: UTF-8
-spring:
-  mvc:
-#开启后缀匹配
-    pathmatch:
-      use-suffix-pattern: true
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp
 COOKIE_CART_EXPIRE: 432000
