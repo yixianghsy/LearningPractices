@@ -32,6 +32,7 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
+@RequestMapping("/cart")
 public class CartController  {
 
     @Value("${COOKIE_CART_EXPIRE}")
@@ -42,7 +43,7 @@ public class CartController  {
     @Reference
     private CartService cartService;
 
-    @RequestMapping("/cart/test")
+    @RequestMapping("/test")
     @ResponseBody
     public  String testCdhd(){
         return  "测试结果无异常";
@@ -117,7 +118,7 @@ public class CartController  {
      * @param request
      * @return
      */
-    @RequestMapping("/cart/cart")
+    @RequestMapping("/cart.html")
     public String showCatList(HttpServletRequest request, HttpServletResponse response) {
         //从cookie中取购物车列表
         List<TbItem> cartList = getCartListFromCookie(request);

@@ -62,12 +62,18 @@
         <common.version>1.0-SNAPSHOT</common.version>
         <mysql.version>6.0.6</mysql.version>
         <springboot-thymeleaf.version>2.1.1.RELEASE</springboot-thymeleaf.version>
+        <fastdfs.version>1.27</fastdfs.version>
     </properties>
 
     <dependencies>
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>cn.bestwu</groupId>
+                <artifactId>fastdfs-client-java</artifactId>
+                <version>${fastdfs.version}</version>
+            </dependency>
             <!--thymeleaf组件-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

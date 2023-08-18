@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ItemController {
     @Reference
     private ItemService itemService;
-    @RequestMapping("/item/{itemId}")
+    @RequestMapping("/item/{itemId}.html")
         public String showItemInfo(@PathVariable Long itemId, Model model) {
         System.out.println("进来了");
         //调用服务取商品基本信息

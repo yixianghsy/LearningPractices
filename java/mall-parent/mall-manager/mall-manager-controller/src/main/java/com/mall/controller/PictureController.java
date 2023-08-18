@@ -1,9 +1,11 @@
 package com.mall.controller;
 
 import com.mall.mansger.service.UploadService;
+import com.mall.utils.FastDFSClient;
 import com.mall.utils.JsonUtils;
 import com.mall.utils.ResultUtil;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,41 +23,37 @@ import java.util.Map;
  * @version 1.0
  */
 @Controller
+@RequestMapping("/pic")
 public class PictureController {
 
-    @Reference
-    private UploadService uploadService;
-    //produces= MediaType.TEXT_PLAIN_VALUE+";charset=utf-8"指定响应结果的content-type：
-    @RequestMapping(value="/pic/upload", produces= MediaType.TEXT_PLAIN_VALUE+";charset=utf-8")
+    @Value("${IMAGE_SERVER_URL}")
+    private String IMAGE_SERVER_URL;
+
+    @RequestMapping(value = "/upload", produces = MediaType.TEXT_PLAIN_VALUE + ";charset=utf-8")
     @ResponseBody
-//    @ApiOperation(value = "上传文件", notes = "上传文件")
-    public String uploadQiniu(MultipartFile uploadFile)  {
-        ResultUtil resultUtil = new ResultUtil();
+    public String fileUpload(MultipartFile uploadFile) {
         try {
-            uploadFile.getBytes();
-            //文件名
-            String fileName = uploadFile.getOriginalFilename();
-            //取文件扩展名
+            //1、取文件的扩展名
             String originalFilename = uploadFile.getOriginalFilename();
-            String extName  = originalFilename.substring(originalFilename.lastIndexOf(".")+1);
-            resultUtil = uploadService.uploadFileQiniu(uploadFile.getBytes(),fileName);
-            String url = resultUtil.getData().getFileUrl();
-            System.out.println(url);
-            //封装到map中返回
+            String extName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+            //2、创建一个FastDFS的客户端
+            FastDFSClient fastDFSClient = new FastDFSClient("classpath:conf/fastdfs-client.conf");
+            //3、执行上传处理
+            String path = fastDFSClient.uploadFile(uploadFile.getBytes(), extName);
+            //4、拼接返回的url和ip地址，拼装成完整的url
+            String url = IMAGE_SERVER_URL + path;
+            //5、返回map
             Map result = new HashMap<>();
             result.put("error", 0);
             result.put("url", url);
             return JsonUtils.objectToJson(result);
         } catch (Exception e) {
             e.printStackTrace();
+            //5、返回map
             Map result = new HashMap<>();
             result.put("error", 1);
             result.put("message", "图片上传失败");
             return JsonUtils.objectToJson(result);
         }
-
-
     }
-
-
 }
