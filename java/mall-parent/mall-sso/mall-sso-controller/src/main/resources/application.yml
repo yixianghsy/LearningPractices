@@ -1,16 +1,12 @@
 app:
   name: 登录页面
   version: 1.0
+#tomcat conf
 server:
   port: 8031
+#dubbo conf
 dubbo:
   application:
-    name: sso-web
+    name: e3-sso-web
   registry:
     address: zookeeper://192.168.10.33:2181
-    protocol: zookeepe
-#spring:
-#  web:
-#    resources:
-#      static-locations: classpath:/static
-TOKEN_KEY: token

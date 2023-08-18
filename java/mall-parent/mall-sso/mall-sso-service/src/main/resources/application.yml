@@ -1,5 +1,5 @@
 app:
-  name: 单点登录系统
+  name: ??????
   version: 1.0
 server:
   port: 8030
@@ -10,62 +10,33 @@ druid:
     user_name: root
     password: root
 # dubbo config
-#dubbo:
-#  application:
-#    name: mall-sso
-#    qosPort: 22221
-#  # ?? zookeeper ??????????????? zookeeper
-#  # ????id
-#  registry:
-#    id: zookeeper-registry
-#    # ??????
-#    protocol: zookeeper
-#    # ??????
-#    address: 192.168.10.33:2181
-#
-#  # dubbo???20880??????
-#  # ????
-#  protocol:
-#    name: dubbo
-#    # ????
-#    port: 20886
-#    # ????log
-#    accesslog: dubbo-access.log
-#  # ????
-#  provider:
-#    retries: 0
-#    # ????
-#    timeout: 3000
-#  # ??????
-#  monitor:
-#    protocol: registry
 dubbo:
   application:
     name: mall-sso
     qosPort: 22221
-  # 使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper
-  # 注册中心id
+  # ?? zookeeper ??????????????? zookeeper
+  # ????id
   registry:
     id: zookeeper-registry
-    # 注册中心协议
+    # ??????
     protocol: zookeeper
-    # 注册中心地址
+    # ??????
     address: 192.168.10.33:2181
 
-  # dubbo协议在20880端口暴露服务
-  # 协议名称
+  # dubbo???20880??????
+  # ????
   protocol:
     name: dubbo
-    # 协议端口
+    # ????
     port: 20883
-    # 协议访问log
+    # ????log
     accesslog: dubbo-access.log
-  # 重试次数
+  # ????
   provider:
     retries: 0
-    # 超时时间
+    # ????
     timeout: 3000
-  # 注册监控中心
+  # ??????
   monitor:
     protocol: registry
 spring:
@@ -107,8 +78,3 @@ spring:
 mybatis:
   type-aliases-package: com.mall.modules.user
   mapper-locations: classpath:/mybatis/*.xml
-
-#???
-REDIS_ITEM_PRE2: ITEM_INFO
-ITEM_CACHE_EXPIRE: 600000
-SESSION_EXPIRE: 1800

@@ -1,5 +1,7 @@
 package com.mall.sso.mapper;
 import java.util.List;
+import java.util.Map;
+
 import com.mall.modules.user.TbUser;
 import com.mall.modules.user.TbUserExample;
 import org.apache.ibatis.annotations.Param;
@@ -26,4 +28,7 @@ public interface TbUserMapper {
     int updateByPrimaryKeySelective(TbUser record);
 
     int updateByPrimaryKey(TbUser record);
+
+    List<TbUser> selectByKey(Map<String, Object> paramMap);
+    List<TbUser> selectUserByNameOrPwd(Map<String, Object> paramMap);
 }

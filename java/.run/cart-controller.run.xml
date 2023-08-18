@@ -5,6 +5,14 @@
         <option name="imageTag" value="cart-controller" />
         <option name="containerName" value="cart-controller" />
         <option name="contextFolderPath" value="mall-parent/mall-cart/mall-cart-controller/target" />
+        <option name="portBindings">
+          <list>
+            <DockerPortBindingImpl>
+              <option name="containerPort" value="8033" />
+              <option name="hostPort" value="8033" />
+            </DockerPortBindingImpl>
+          </list>
+        </option>
         <option name="commandLineOptions" value="--network  host" />
         <option name="sourceFilePath" value="mall-parent/mall-cart/mall-cart-controller/src/main/docker/Dockerfile" />
       </settings>

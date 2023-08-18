@@ -91,6 +91,35 @@
     from tb_user
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectByKey" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT * FROM tb_user
+    <choose>
+      <!-- test语句必须外面是单引号，里面是双引号，否则失效 -->
+      <when test='type=="1"'>
+        WHERE username = #{param}
+      </when>
+      <when test='type=="2"'>
+        WHERE phone = #{param}
+      </when>
+      <when test='type=="3"'>
+        WHERE email = #{param}
+      </when>
+      <otherwise>
+        WHERE 1=1
+      </otherwise>
+    </choose>
+  </select>
+  <select id="selectUserByNameOrPwd" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT * FROM tb_user
+    <where>
+      <if test="username != null">
+        username = #{username}
+      </if>
+      <if test="password != null">
+        AND password = #{password}
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tb_user
     where id = #{id,jdbcType=BIGINT}

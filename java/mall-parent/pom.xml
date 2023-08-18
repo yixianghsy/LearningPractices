@@ -63,12 +63,29 @@
         <mysql.version>6.0.6</mysql.version>
         <springboot-thymeleaf.version>2.1.1.RELEASE</springboot-thymeleaf.version>
         <fastdfs.version>1.27</fastdfs.version>
+        <joda-time.version>2.5</joda-time.version>
+        <commons-net.version>3.3</commons-net.version>
+        <servlet-api.version>2.5</servlet-api.version>
+        <httpclient.version>4.3.5</httpclient.version>
+        <quartz.version>2.2.2</quartz.version>
+        <commons-fileupload.version>1.3.1</commons-fileupload.version>
     </properties>
 
     <dependencies>
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda-time.version}</version>
+            </dependency>
+            <!-- 文件上传组件 -->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
+            </dependency>
             <dependency>
                 <groupId>cn.bestwu</groupId>
                 <artifactId>fastdfs-client-java</artifactId>
@@ -198,17 +215,6 @@
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${version.redis}</version>
             </dependency>
-            <!-- jsp -->
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>jstl</artifactId>
-                <version>${version.jstl}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.tomcat.embed</groupId>
-                <artifactId>tomcat-embed-jasper</artifactId>
-                <version>${version.tomcat}</version>
-            </dependency>
             <!--文档生成包 -->
             <dependency>
                 <groupId>io.swagger</groupId>
@@ -237,6 +243,30 @@
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${version.commons.io}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>${commons-net.version}</version>
+            </dependency>
+            <!--servlet-->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servlet-api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- httpclient -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <!-- quartz任务调度框架 -->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
             </dependency>
             <!-- elasticsearch -->
             <dependency>
