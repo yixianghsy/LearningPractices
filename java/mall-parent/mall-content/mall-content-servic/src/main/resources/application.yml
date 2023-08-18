@@ -75,4 +75,3 @@ spring:
 mybatis:
   type-aliases-package: com.mall.modules.content
   mapper-locations: classpath:/mybatis/*.xml
-CONTENT_LIST: CONTENT_LIST

@@ -4,17 +4,23 @@ import com.mall.content.mapper.TbContentMapper;
 import com.mall.content.service.ContentService;
 import com.mall.modules.content.TbContent;
 import com.mall.modules.content.TbContentExample;
+import com.mall.pojo.EasyUIDataGridResult;
 import com.mall.utils.E3Result;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mall.utils.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 /**
@@ -31,64 +37,65 @@ public class ContentServiceImpl  implements ContentService {
     @Resource
     private TbContentMapper contentMapper;
 
-    @Resource
-    StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
-    @Value("${CONTENT_LIST:CONTENT_LIST}")
-    private String CONTENT_LIST;
+
+    @Value("${CONTENT_KEY}")
+    private String CONTENT_KEY;
+
 
     @Override
-    public E3Result addContent(TbContent tbContent) {
-        logger.debug("this is debug level");
-        logger.info("this is info level ");
-        logger.warn("this is warn level ");
-        logger.error("this is error level");
-        //将内容数据插入到内容表
-        tbContent.setCreated(new Date());
-        tbContent.setUpdated(new Date());
-        contentMapper.insert(tbContent);
-        //插入到数据库
-        return E3Result.ok();
+    public EasyUIDataGridResult getContentListByCategoryId(Long categoryId, int page, int rows) {
+        PageHelper.startPage(page, rows);
+
+        List<TbContent> tbContents = new ArrayList<>();
+        if (categoryId == 0L) {
+            tbContents = contentMapper.getAllContentList();
+        } else {
+            tbContents = contentMapper.getContentListByCategoryId(categoryId);
+        }
+
+        PageInfo<TbContent> pageInfo = new PageInfo<>(tbContents);
+        EasyUIDataGridResult easyUIDataGridResult = new EasyUIDataGridResult();
+        easyUIDataGridResult.setRows(tbContents);
+        easyUIDataGridResult.setTotal(pageInfo.getTotal());
+        return easyUIDataGridResult;
     }
 
-    /**
-     * 根据内容分类id查询内容列表
-     * <p>Title: getContentListByCid</p>
-     * <p>Description: </p>
-     * @param cid
-     * @return
-     * @see com.mall.content.service...getContentListByCid(long)
-     */
     @Override
-    public List<TbContent> getContentListByCid(Long cid) {
-        //查询缓存
+    public List<TbContent> getContentList(Long cid) {
+        // 查询缓存
         try {
-            //如果缓存中有直接响应结果
-            Object o = stringRedisTemplate.opsForHash().get(CONTENT_LIST, cid + "");
-            System.out.println(o);
-            String json = String.valueOf(o);
-            if (StringUtils.isNotBlank(json)) {
-                List<TbContent> list = JsonUtils.jsonToList(json, TbContent.class);
-                return list;
+            List<TbContent> contents = (List<TbContent>) redisTemplate.opsForHash().get(CONTENT_KEY, cid.toString());
+            System.out.println("read redis catch data...");
+            if (!contents.isEmpty() && contents != null) {
+                return contents;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        TbContentExample example = new TbContentExample();
-        TbContentExample.Criteria criteria = example.createCriteria();
-        //设置查询条件
-        criteria.andCategoryIdEqualTo(cid);
-        //执行查询
-        List<TbContent> list =contentMapper.selectByExampleWithBLOBs(example);
-        System.out.println(list);
-        //把结果添加到缓存
+        // 根据cid查询内容列表
+        List<TbContent> list = contentMapper.getContentListByCategoryId(cid);
+        // 向缓存中添加数据
         try {
-            stringRedisTemplate.opsForHash().put(CONTENT_LIST, cid + "", JsonUtils.objectToJson(list));
+            redisTemplate.opsForHash().put(CONTENT_KEY, cid.toString(), list);
+            System.out.println("write redis catch data...");
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
+    }
 
-
+    @Override
+    public E3Result addContent(TbContent content) {
+        //补全属性
+        content.setCreated(new Date());
+        content.setUpdated(new Date());
+        //插入数据
+        contentMapper.insertContent(content);
+        //缓存同步
+        redisTemplate.opsForHash().delete(CONTENT_KEY, content.getCategoryId().toString());
+        return E3Result.ok();
     }
 }

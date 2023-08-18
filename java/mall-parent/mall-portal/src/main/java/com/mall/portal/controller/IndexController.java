@@ -18,15 +18,17 @@ import java.util.List;
  */
 @Controller
 public class IndexController {
-    @Value("${CONTENT_LUNBO_ID}")
-    private Long CONTENT_LUNBO_ID;
-   @Reference
+
+    @Value("${CONTENT_BANNER_ID}")
+    private Long CONTENT_BANNER_ID;
+
+    @Reference
     private ContentService contentService;
-    @RequestMapping("/index")
-    public String showIndex(Model model){
-        //查询内容列表
-        List<TbContent> list= contentService.getContentListByCid(CONTENT_LUNBO_ID);
-         model.addAttribute("ad1List", list);
+
+    @RequestMapping({"/index", "/", "index.html"})
+    public String showIndex(Model model) {
+        List<TbContent> contentList = contentService.getContentList(CONTENT_BANNER_ID);
+        model.addAttribute("ad1List", contentList);
         return "index";
     }
 }

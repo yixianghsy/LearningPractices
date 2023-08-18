@@ -53,7 +53,9 @@ public class UserController {
     @RequestMapping("/token/{token}")
     @ResponseBody
     public Object getUserByToken(@PathVariable String token, String callback) {
+        System.out.println("token获取"+token);
         E3Result result = userService.getUserByToken(token);
+        System.out.println("token获取"+result);
         if (StringUtils.isNotBlank(callback)) {
             MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(result);
             mappingJacksonValue.setJsonpFunction(callback);
