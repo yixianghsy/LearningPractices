@@ -2,31 +2,17 @@ package com.mall.content.mapper;
 
 
 import com.mall.modules.content.TbContentCategory;
-import com.mall.modules.content.TbContentCategoryExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 public interface TbContentCategoryMapper {
-    int countByExample(TbContentCategoryExample example);
 
-    int deleteByExample(TbContentCategoryExample example);
+    List<TbContentCategory> selectTbContentCatsByParentId(Long parentId);
 
-    int deleteByPrimaryKey(Long id);
+    void insertCategory(TbContentCategory contentCategory);
 
-    int insert(TbContentCategory record);
+    TbContentCategory selectTbContentCatById(Long id);
 
-    int insertSelective(TbContentCategory record);
+    void updateContentCategoryById(TbContentCategory parentContentCategory);
 
-    List<TbContentCategory> selectByExample(TbContentCategoryExample example);
 
-    TbContentCategory selectByPrimaryKey(Long id);
-
-    int updateByExampleSelective(@Param("record") TbContentCategory record, @Param("example") TbContentCategoryExample example);
-
-    int updateByExample(@Param("record") TbContentCategory record, @Param("example") TbContentCategoryExample example);
-
-    int updateByPrimaryKeySelective(TbContentCategory record);
-
-    int updateByPrimaryKey(TbContentCategory record);
 }

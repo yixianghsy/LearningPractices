@@ -32,8 +32,6 @@ import java.util.List;
  */
 @Service
 public class ContentServiceImpl  implements ContentService {
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource
     private TbContentMapper contentMapper;
 
