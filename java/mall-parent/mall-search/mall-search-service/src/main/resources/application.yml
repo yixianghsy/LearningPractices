@@ -4,7 +4,36 @@ druid:
   login:
     user_name: root
     password: root
-
+# dubbo config
+#dubbo:
+#  application:
+#    name: mall-search
+#    qosPort: 22221
+#  # ?? zookeeper ??????????????? zookeeper
+#  # ????id
+#  registry:
+#    id: zookeeper-registry
+#    # ??????
+#    protocol: zookeeper
+#    # ??????
+#    address: 192.168.10.33:2181
+#
+#  # dubbo???20880??????
+#  # ????
+#  protocol:
+#    name: dubbo
+#    # ????
+#    port: 20884
+#    # ????log
+#    accesslog: dubbo-access.log
+#  # ????
+#  provider:
+#    retries: 0
+#    # ????
+#    timeout: 3000
+#  # ??????
+#  monitor:
+#    protocol: registry
 dubbo:
   application:
     name: mall-search
@@ -36,11 +65,27 @@ dubbo:
     protocol: registry
 spring:
   datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.10.33:3306/mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: 123456
-    url: jdbc:mysql://192.168.10.33:3306/mall
-    driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+    initial-size: 1
+    min-idle: 1
+    max-idle: 5
+    max-wait-millis: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    # ??????????????????????
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: true
+    testOnReturn: false
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # ?????????filters????????sql?????'wall'?????
+    filters: stat,wall
+    # ??connectProperties?????mergeSql????SQL??
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 es:
   host: 192.168.10.33
   port: 9200
