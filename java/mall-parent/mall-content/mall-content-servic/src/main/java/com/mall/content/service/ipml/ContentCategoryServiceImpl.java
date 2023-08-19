@@ -27,7 +27,7 @@ public class ContentCategoryServiceImpl  implements ContentCategoryService {
     @Autowired
     private TbContentCategoryMapper contentCategoryMapper;
     @Override
-    public List<EasyUITreeNode> getContentCatList(long parentId) {
+    public List<EasyUITreeNode> getContentCategoryList(Long parentId) {
         // 1、取查询参数id，parentId
         // 2、根据parentId查询tb_content_category，查询子节点列表。
         // 3、得到List<TbContentCategory>

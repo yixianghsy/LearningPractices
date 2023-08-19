@@ -24,18 +24,16 @@ public class ItemController {
     @Reference
     private ItemService itemService;
     @RequestMapping("/item/{itemId}.html")
-        public String showItemInfo(@PathVariable Long itemId, Model model) {
-        System.out.println("进来了");
-        //调用服务取商品基本信息
+    public String showItemInfo(@PathVariable Long itemId, Model model) {
+        //跟据商品id查询商品信息
         TbItem tbItem = itemService.getItemById(itemId);
-
+        //把TbItem转换成Item对象
         Item item = new Item(tbItem);
-        //取商品描述信息
+        //根据商品id查询商品描述
         TbItemDesc tbItemDesc = itemService.getItemDescById(itemId);
-        //把信息传递给页面
-        model.addAttribute("item",item);
-        model.addAttribute("itemDesc",tbItemDesc);
-        //返回逻辑视图
+        //把数据传递给页面
+        model.addAttribute("item", item);
+        model.addAttribute("itemDesc", tbItemDesc);
         return "item";
     }
 

@@ -231,4 +231,8 @@
       updated = #{updated,jdbcType=TIMESTAMP}
     where item_id = #{itemId,jdbcType=BIGINT}
   </update>
+
+  <select id="selectItemDescByPrimaryKey" parameterType="java.lang.Long"  resultMap="BaseResultMap">
+    SELECT * FROM tb_item_desc WHERE item_id = #{itemId}
+    </select>
 </mapper>

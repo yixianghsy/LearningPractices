@@ -18,6 +18,7 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
+@RequestMapping("/item/cat")
 public class ItemCatController {
     @Reference
     private ItemCatService itemCatService;
@@ -27,11 +28,10 @@ public class ItemCatController {
      * @param parentId
      * @return
      */
-    @RequestMapping("/item/cat/list")
+    @RequestMapping("/list")
     @ResponseBody
-    public List<EasyUITreeNode> getItemCatList(@RequestParam(name = "id",defaultValue = "0") Long parentId){
-        //调用服务查询节点列表
-        List<EasyUITreeNode> list  =itemCatService.getItemCatlist(parentId);
+    public List<EasyUITreeNode> getItemCatList(@RequestParam(value = "id", defaultValue = "0") Long parentId) {
+        List<EasyUITreeNode> list = itemCatService.getCatList(parentId);
         return list;
     }
 }

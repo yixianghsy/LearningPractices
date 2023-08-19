@@ -21,23 +21,22 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
+@RequestMapping("/content/category")
 public class ContentCatController {
     @Reference
     private ContentCategoryService contentCategoryService;
-    @RequestMapping("/content/category/list")
+    @RequestMapping("/list")
     @ResponseBody
-    public List<EasyUITreeNode> getContentCatList(@RequestParam(name="id", defaultValue="0")Long parentId) {
-        List<EasyUITreeNode> list = contentCategoryService.getContentCatList(parentId);
-        return  list;
+    public List<EasyUITreeNode> getContentCatList(
+            @RequestParam(value="id", defaultValue="0") Long parentId) {
+        return contentCategoryService.getContentCategoryList(parentId);
     }
     /**
      * 添加分类节点
      */
+    @RequestMapping("/create")
     @ResponseBody
-    @RequestMapping(value="/content/category/create", method= RequestMethod.POST)
-    public E3Result createContentCategory(Long parentId, String name){
-        //调用服务添加节点
-        E3Result e3Result = contentCategoryService.addContentCategory(parentId, name);
-        return e3Result;
+    public E3Result createCategory(Long parentId, String name) {
+        return contentCategoryService.addContentCategory(parentId, name);
     }
 }

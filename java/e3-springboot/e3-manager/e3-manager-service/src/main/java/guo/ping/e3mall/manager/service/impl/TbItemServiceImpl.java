@@ -100,7 +100,7 @@ public class TbItemServiceImpl implements TbItemService {
     }
 
     @Override
-    public EasyUIDataGridResult getItemList(int page, int rows) {
+        public EasyUIDataGridResult getItemList(int page, int rows) {
         //设置分页信息
         PageHelper.startPage(page, rows);
         //执行查询

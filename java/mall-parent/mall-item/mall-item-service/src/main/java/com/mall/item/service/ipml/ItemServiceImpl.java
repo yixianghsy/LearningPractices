@@ -8,10 +8,12 @@ import com.mall.item.mapper.TbItemMapper;
 import com.mall.item.mapper.TbOrderMapper;
 import com.mall.item.service.ItemService;
 import com.mall.modules.Item.TbItem;
+import com.mall.modules.Item.TbItemCat;
 import com.mall.modules.Item.TbItemDesc;
 import com.mall.modules.Item.TbItemExample;
 import com.mall.modules.order.TbOrder;
 import com.mall.pojo.EasyUIDataGridResult;
+import com.mall.pojo.EasyUITreeNode;
 import com.mall.utils.E3Result;
 import com.mall.utils.IDUtils;
 import com.mall.utils.JsonUtils;
@@ -30,6 +32,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 
 import javax.annotation.Resource;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -41,67 +44,80 @@ public class ItemServiceImpl implements ItemService {
     @Resource
     private TbItemMapper tbItemMapper;
     @Resource
-    private TbOrderMapper tbOrderMapper;
-    @Resource
-    RedisTemplate redisTemplate;
-
-    @Resource
     private DefaultMQProducer producer;
-    @Resource
-    StringRedisTemplate stringRedisTemplate;
-    @Value("${REDIS_ITEM_PRE2}")
-    private String REDIS_ITEM_PRE ;
-    @Value("${ITEM_CACHE_EXPIRE}")
-    private Integer ITEM_CACHE_EXPIRE ;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+    @Value("${ITEM_INFO_KEY}")
+    private String ITEM_INFO_KEY;
+    @Value("${ITEM_INFO_BASE_KEY}")
+    private String ITEM_INFO_BASE_KEY;
+    @Value("${ITEM_INFO_DESC_KEY}")
+    private String ITEM_INFO_DESC_KEY;
+    @Value("${ITEM_INFO_EXPIRE}")
+    private Integer ITEM_INFO_EXPIRE;
     private static final Logger log = LoggerFactory.getLogger(ItemServiceImpl.class);
-
-
     @Override
-    public TbItem getItemById(long itemId) {
-        /**
-         * 在UserService的实现类中（业务层）进行缓存测试，注入RedisTemplate或StringRedisTemplate都可以。
-         */
-
-        //查询缓存
+    public TbItem getItemById(Long itemId) {
+        // 查询缓存
         try {
-            String json = stringRedisTemplate.opsForValue().get(REDIS_ITEM_PRE + ":" + itemId + ":BASE");
-            if (StringUtils.isNotBlank(json)){
-                TbItem tbItem  = JsonUtils.jsonToPojo(json,TbItem.class);
-                return  tbItem;
+            TbItem tbItem = (TbItem) redisTemplate.opsForValue().get(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_BASE_KEY);
+            if (tbItem != null) {
+                System.out.println("read redis item base information...");
+                return tbItem;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //缓存中没有，查询数据库
-        //根据主键查询
-//        TbItem tbItem = itemMapper.selectByPrimaryKey(itemId);
-        TbItemExample example = new TbItemExample();
-        TbItemExample.Criteria criteria =   example.createCriteria();
-        //设置查询条件
-        criteria.andIdEqualTo(itemId);
-        //执行查询
-        List<TbItem> list = tbItemMapper.selectByExample(example);
-        if (list !=null && list.size()>0){
+
+        // 查询数据库
+        TbItem tbItem = tbItemMapper.selectByPrimaryKey(itemId);
+        if (tbItem != null) {
             try {
-                //查询结果写入缓存
-                //插入缓存及过期时间
-                stringRedisTemplate.opsForValue().set(REDIS_ITEM_PRE + ":" + itemId + ":BASE", JsonUtils.objectToJson(list.get(0)),ITEM_CACHE_EXPIRE , TimeUnit.MILLISECONDS);
+                // 把数据保存到缓存
+                redisTemplate.opsForValue().set(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_BASE_KEY, tbItem);
+                // 设置缓存的有效期
+                redisTemplate.expire(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_BASE_KEY, ITEM_INFO_EXPIRE, TimeUnit.HOURS);
+                System.out.println("write redis item base information...");
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            return tbItem;
         }
-        return  null;
+        return null;
     }
-
     @Override
-    public EasyUIDataGridResult getItemListgetItemList(int page, int rows) {
-        System.out.println("ItemServiceImpl.getItemListgetItemList");
+    public TbItemDesc getItemDescById(Long itemId) {
+        // 查询缓存
+        try {
+            TbItemDesc itemDesc = (TbItemDesc) redisTemplate.opsForValue().get(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_DESC_KEY);
+            if (itemDesc != null) {
+                System.out.println("read redis item desc information...");
+                return itemDesc;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // 查询数据库
+        TbItemDesc itemDesc = tbItemDescMapper.selectItemDescByPrimaryKey(itemId);
+        if (itemDesc != null) {
+            // 把数据保存到缓存
+            try {
+                redisTemplate.opsForValue().set(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_DESC_KEY, itemDesc);
+                redisTemplate.expire(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_DESC_KEY, ITEM_INFO_EXPIRE, TimeUnit.HOURS);
+                System.out.println("write redis item desc information...");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return itemDesc;
+        }
+        return null;
+    }
+    @Override
+    public EasyUIDataGridResult getItemList(int page, int rows) {
         //设置分页信息
         PageHelper.startPage(page, rows);
         //执行查询
-        TbItemExample example = new TbItemExample();
-
-        List<TbItem> list = tbItemMapper.selectByExample(example);
+        List<TbItem> list = tbItemMapper.getItemList();
         //取分页信息
         PageInfo<TbItem> pageInfo = new PageInfo<>(list);
 
@@ -109,30 +125,9 @@ public class ItemServiceImpl implements ItemService {
         EasyUIDataGridResult result = new EasyUIDataGridResult();
         result.setTotal(pageInfo.getTotal());
         result.setRows(list);
+
         return result;
     }
-    @Override
-    public TbItemDesc getItemDescById(long itemId) {
-        try {
-            String json = stringRedisTemplate.opsForValue().get(REDIS_ITEM_PRE + ":" + itemId + ":DESC");
-            if(StringUtils.isNotBlank(json)) {
-                TbItemDesc tbItemDesc = JsonUtils.jsonToPojo(json, TbItemDesc.class);
-                return tbItemDesc;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        TbItemDesc tbItemDesc = tbItemDescMapper.selectByPrimaryKey(itemId);
-        //把结果添加到缓存
-        try {
-            stringRedisTemplate.opsForValue().set(REDIS_ITEM_PRE + ":" + itemId + ":DESC" ,JsonUtils.objectToJson(tbItemDesc),ITEM_CACHE_EXPIRE , TimeUnit.MILLISECONDS);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return tbItemDesc;
-    }
-
     @Override
     public E3Result addItem(TbItem item, String desc) {
         //生成商品id
@@ -165,6 +160,27 @@ public class ItemServiceImpl implements ItemService {
         }
         return E3Result.ok();
     }
+
+    //以下代码是自己写得
+    @Override
+    public EasyUIDataGridResult getItemListgetItemList(int page, int rows) {
+        System.out.println("ItemServiceImpl.getItemListgetItemList");
+        //设置分页信息
+        PageHelper.startPage(page, rows);
+        //执行查询
+        TbItemExample example = new TbItemExample();
+
+        List<TbItem> list = tbItemMapper.selectByExample(example);
+        //取分页信息
+        PageInfo<TbItem> pageInfo = new PageInfo<>(list);
+
+        //创建返回结果对象
+        EasyUIDataGridResult result = new EasyUIDataGridResult();
+        result.setTotal(pageInfo.getTotal());
+        result.setRows(list);
+        return result;
+    }
+
 
     @Override
     public void deleteItemList(Long[] ids) {
@@ -203,12 +219,7 @@ public class ItemServiceImpl implements ItemService {
 
     }
 
-    @Override
-    public   void   testOrderId(String orderId) {
-        System.out.println("...testOrderId...");
-        TbOrder tbOrder = tbOrderMapper.selectByPrimaryKey("232");
-        System.out.println(tbOrder.getOrderId());
-    }
+
 
     //这里异常应该是跑出去，调用的捕获
     private void send(Message message) {

@@ -19,22 +19,14 @@ import org.springframework.web.bind.annotation.*;
  * @version 1.0
  */
 @Controller
+@RequestMapping("/item")
 public class  ItemController {
     @Reference
     private ItemService itemService;
-    @RequestMapping("/item/{itemId}")
-    public String showItemInfo(@PathVariable Long itemId, Model model) {
-        System.out.println("进来了");
-        //调用服务取商品基本信息
-        TbItem tbItem = itemService.getItemById(itemId);
-//        Item item = new Item(tbItem);
-        //取商品描述信息
-        TbItemDesc tbItemDesc = itemService.getItemDescById(itemId);
-        //把信息传递给页面
-        model.addAttribute("item",tbItem);
-        model.addAttribute("itemDesc",tbItemDesc);
-        //返回逻辑视图
-        return "item";
+    @GetMapping("/{itemId}")
+    @ResponseBody
+    public TbItem getItemById(@PathVariable Long itemId) {
+        return itemService.getItemById(itemId);
     }
     /**
      * item-lits页面商品显示
@@ -42,24 +34,22 @@ public class  ItemController {
      * @param rows
      * @return
      */
-    @RequestMapping("/item/list")
+    @GetMapping("/list")
     @ResponseBody
-    public EasyUIDataGridResult getItemList(@RequestParam(defaultValue="1")Integer page , @RequestParam(defaultValue="3")Integer rows){
-
-        //调用服务查询商品列表
-        EasyUIDataGridResult easyUIDataGridResult = itemService.getItemListgetItemList(page,rows);
-        String json = JsonUtils.objectToJson(easyUIDataGridResult);
-        System.out.println("ItemController.getItemList"+json);
-        return easyUIDataGridResult;
+    public EasyUIDataGridResult getItemList(Integer page, Integer rows) {
+        EasyUIDataGridResult result = itemService.getItemList(page, rows);
+        return result;
     }
     /**
      * 商品添加功能
      */
-    @RequestMapping(value="/item/save", method= RequestMethod.POST)
-    public E3Result addItem(TbItem item, String desc){
+    @RequestMapping("/save")
+    @ResponseBody
+    public E3Result saveItem(TbItem item, String desc) {
         E3Result result = itemService.addItem(item, desc);
         return result;
     }
+    //以下功能是自己加的
 
     /**
      * 删除

@@ -13,8 +13,8 @@ public class SearchItemController {
     @Reference(timeout = 300000)
     private SearchItemService searchItemService;
 
-    @RequestMapping("/index/item/import")
-    @ResponseBody
+        @RequestMapping("/index/item/import")
+        @ResponseBody
     public E3Result impotItemIndex() {
         E3Result result = searchItemService.importItems();
         return result;

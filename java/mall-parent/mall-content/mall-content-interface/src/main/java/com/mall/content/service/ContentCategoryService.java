@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ContentCategoryService {
 
-    List<EasyUITreeNode> getContentCatList(long parentId);
+    List<EasyUITreeNode> getContentCategoryList(Long parentId);
     E3Result addContentCategory(long parentId, String name);
 }

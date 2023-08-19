@@ -4,26 +4,30 @@ package com.mall.item.vo;
 import com.mall.modules.Item.TbItem;
 
 public class Item extends TbItem {
-    public Item(TbItem tbItem) {
-        this.setId(tbItem.getId());
-        this.setTitle(tbItem.getTitle());
-        this.setSellPoint(tbItem.getSellPoint());
-        this.setPrice(tbItem.getPrice());
-        this.setNum(tbItem.getNum());
-        this.setBarcode(tbItem.getBarcode());
-        this.setImage(tbItem.getImage());
-        this.setCid(tbItem.getCid());
-        this.setStatus(tbItem.getStatus());
-        this.setCreated(tbItem.getCreated());
-        this.setUpdated(tbItem.getUpdated());
-    }
 
     public String[] getImages() {
-        String image2 = this.getImage();
-        if (image2 != null && !"".equals(image2)) {
-            String[] strings = image2.split(",");
-            return strings;
+        String image1 = this.getImage();
+        if (image1 != null && !"".equals(image1)) {
+            String[] images = image1.split(",");
+            return images;
         }
         return null;
+    }
+
+    public Item() {
+    }
+
+    public Item(TbItem tbItem) {
+        this.setBarcode(tbItem.getBarcode());
+        this.setCid(tbItem.getCid());
+        this.setCreated(tbItem.getCreated());
+        this.setId(tbItem.getId());
+        this.setImage(tbItem.getImage());
+        this.setNum(tbItem.getNum());
+        this.setPrice(tbItem.getPrice());
+        this.setSellPoint(tbItem.getSellPoint());
+        this.setStatus(tbItem.getStatus());
+        this.setTitle(tbItem.getTitle());
+        this.setUpdated(tbItem.getUpdated());
     }
 }

@@ -1,6 +1,7 @@
 package com.mall.controller.controller;
 import com.mall.content.service.ContentService;
 import com.mall.modules.content.TbContent;
+import com.mall.pojo.EasyUIDataGridResult;
 import com.mall.utils.E3Result;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
@@ -16,14 +17,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @version 1.0
  */
 @Controller
+@RequestMapping("/content")
 public class ContentController {
     @Reference
     private ContentService contentService;
-    @RequestMapping(value="/content/save", method= RequestMethod.POST)
+
     @ResponseBody
-    public E3Result addContent(TbContent content){
-            //调用服务把内容数据保存到数据库
-        E3Result e3Result = contentService.addContent(content);
-        return e3Result;
+    @RequestMapping("/query/list")
+    public EasyUIDataGridResult getContentListByCategoryId(Long categoryId, Integer page, Integer rows) {
+        return contentService.getContentListByCategoryId(categoryId, page, rows);
+    }
+    @RequestMapping("/save")
+    @ResponseBody
+    public E3Result addContent(TbContent content) {
+        return contentService.addContent(content);
     }
 }

@@ -35,4 +35,6 @@ public interface TbItemDescMapper {
     int updateByPrimaryKeyWithBLOBs(TbItemDesc record);
 
     int updateByPrimaryKey(TbItemDesc record);
+
+    TbItemDesc selectItemDescByPrimaryKey(Long itemId);
 }

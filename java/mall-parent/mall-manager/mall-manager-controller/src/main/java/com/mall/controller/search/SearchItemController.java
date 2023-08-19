@@ -10,20 +10,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class SearchItemController {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-    /**
-     * 设置重试次数和超时时间
-     */
-    @Reference(retries = 3,timeout = 2000)
+
+    @Reference(timeout = 300000)
     private SearchItemService searchItemService;
 
     @RequestMapping("/index/item/import")
     @ResponseBody
     public E3Result importItemList(){
-        logger.debug("this is debug level");
-        logger.info("this is info level ");
-        logger.warn("this is warn level ");
-        logger.error("this is error level");
         E3Result e3Result = searchItemService.importAllItems();
         return e3Result;
     }
