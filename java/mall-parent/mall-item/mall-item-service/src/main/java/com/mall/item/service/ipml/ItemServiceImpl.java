@@ -162,6 +162,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     //以下代码是自己写得
+
+    @Override
+    public TbItem getByPrimaryKey(Long itemId) {
+        return tbItemMapper.selectByPrimaryKey(itemId);
+    }
     @Override
     public EasyUIDataGridResult getItemListgetItemList(int page, int rows) {
         System.out.println("ItemServiceImpl.getItemListgetItemList");
@@ -218,6 +223,7 @@ public class ItemServiceImpl implements ItemService {
         }
 
     }
+
 
 
 

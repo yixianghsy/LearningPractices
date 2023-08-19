@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface CartService {
 
-    E3Result addCart(long userId, long itemId, int num);
-    E3Result mergeCart(long userId, List<TbItem> itemList);
-    List<TbItem> getCartList(long userId);
-    E3Result updateCartNum(long userId, long itemId, int num);
-    E3Result deleteCartItem(long userId, long itemId);
-    E3Result clearCartItem(long userId);
+    E3Result addCart(Long userId, Long itemId, int num);
+    E3Result mergeCart(Long userId, List<TbItem> cookieItemList);
+    List<TbItem> getCartList(Long userId);
+    E3Result updateCartNum(Long userId, Long itemId, int num);
+    E3Result deleteCartItem(Long userId, Long itemId);
+    E3Result clearCartList(Long userId);
 }

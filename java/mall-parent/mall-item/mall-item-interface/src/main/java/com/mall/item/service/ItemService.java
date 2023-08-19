@@ -21,6 +21,6 @@ public interface ItemService {
     //上架商品
     void reshelfItemList(Long[] ids);
 
-
+    TbItem getByPrimaryKey(Long itemId);
 
 }

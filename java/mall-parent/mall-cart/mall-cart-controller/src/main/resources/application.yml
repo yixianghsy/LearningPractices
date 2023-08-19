@@ -27,4 +27,3 @@ dubbo:
   # 注册监控中心
   monitor:
     protocol: registry
-COOKIE_CART_EXPIRE: 432000
