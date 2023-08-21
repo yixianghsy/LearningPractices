@@ -59,11 +59,11 @@ import java.util.stream.Collectors;
 public class EsUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(EsUtil.class);
 
-    @Value("${es.host}")
+    @Value("${es.host:192.168.10.33}")
     public String host;
-    @Value("${es.port}")
+    @Value("${es.port:9200}")
     public int port;
-    @Value("${es.scheme}")
+    @Value("${es.scheme:http}")
     public String scheme;
     /**
      * 索引名称

@@ -36,7 +36,7 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public SearchResult search(int startPage, int pageSize, String query) throws Exception {
         SearchResult esPage = esUtil.searchDataPage(startPage, pageSize, query);
-//        System.out.println(esPage.getItemList().get(0));
+        System.out.println(esPage.getItemList().get(0));
         return esPage;
     }
 }

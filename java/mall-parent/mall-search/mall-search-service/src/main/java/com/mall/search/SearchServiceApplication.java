@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @DubboComponentScan("com.mall.*.service")
 @MapperScan(basePackages = {"com.mall.search.mapper"})
 @SpringBootApplication
-public class SearchApplication {
+public class SearchServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SearchApplication.class, args);
+        SpringApplication.run(SearchServiceApplication.class, args);
     }
 
 }

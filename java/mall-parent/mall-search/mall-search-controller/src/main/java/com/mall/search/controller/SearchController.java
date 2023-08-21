@@ -21,16 +21,16 @@ public class SearchController {
 
 	@Reference
 	private SearchService searchService;
-	
-	@Value("${SEARCH_RESULT_ROWS}")
-	private Integer SEARCH_RESULT_ROWS;
 
-	@RequestMapping(value ="/search")
+	@Value("${PAGE_ROWS}")
+	private Integer PAGE_ROWS;
+
+	@RequestMapping("/search.html")
 	public String searchItemList(String keyword, @RequestParam(defaultValue="1") Integer page, Model model) throws Exception {
 		//本地环境是GBK需要转,部署服务器就要注释掉
 //		keyword = new String(keyword.getBytes("iso-8859-1"), "utf-8");
 		//查询商品列表
-		SearchResult searchResult = searchService.search(page,SEARCH_RESULT_ROWS,keyword);
+		SearchResult searchResult = searchService.search(page,PAGE_ROWS,keyword);
 		//把结果传递给页面
 		model.addAttribute("query", keyword);
 		model.addAttribute("totalPages", searchResult.getTotalPages());

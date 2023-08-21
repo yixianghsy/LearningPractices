@@ -29,18 +29,18 @@ public class OrderController {
     @Reference
     private OrderService orderService;
 
-    /**
-     * 跳转订单确认页面
-     * @param request
-     * @return
-     */
-    @RequestMapping("/order-cart.html")
-    public String showOrderCart(HttpServletRequest request) {
-        TbUser user = (TbUser) request.getAttribute("user");
-        List<TbItem> cartList = cartService.getCartList(5L);
-        request.setAttribute("cartList", cartList);
-        return "order-cart";
-    }
+        /**
+         * 跳转订单确认页面
+         * @param request
+         * @return
+         */
+        @RequestMapping("/order-cart.html")
+        public String showOrderCart(HttpServletRequest request) {
+            TbUser user = (TbUser) request.getAttribute("user");
+            List<TbItem> cartList = cartService.getCartList(5L);
+            request.setAttribute("cartList", cartList);
+            return "order-cart";
+        }
 
     @PostMapping("/create.html")
     public String createOrder(OrderInfo orderInfo, HttpServletRequest request) {

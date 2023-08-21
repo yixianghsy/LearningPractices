@@ -16,9 +16,4 @@ public class SearchControllerApplication {
     public static void main(String[] args) {
         SpringApplication.run(SearchControllerApplication.class, args);
     }
-    //注释掉好像也没影响
-//    @Bean
-//    public ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
-//        return new ServletRegistrationBean(dispatcherServlet,"*.html");
-//    }
 }
