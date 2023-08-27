@@ -65,13 +65,13 @@
 						</div>
 						<div class="pItem pGoods">
 							<div class="cart_pimg">
-								<a target="_blank" title="${cart.title }" href="http://localhost:8083/item/${cart.id }.html">
+								<a target="_blank" title="${cart.title }" href="http://search.e3mall.cn/item/${cart.id }.html">
 								<img src="${cart.image}" style="width: 60px;height: 60px;"/>
 								</a>
 							</div>
 							<div class="cart_pname">
 								<div>
-								<a target="_blank" href="http://localhost:8083/item/${cart.id }.html">${cart.title }</a>
+								<a target="_blank" href="http://search.e3mall.cn/item/${cart.id }.html">${cart.title }</a>
 								</div>
 								<div class="cdzg">产地直供</div>
 							</div>

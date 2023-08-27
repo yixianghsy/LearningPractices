@@ -119,12 +119,12 @@
                             </div>
                             <div class="orderPInfo" th:each="cart,cartStat : ${cartList}">
                                 <div class="pItem">
-                                    <a th:href="|http:// cart.e3mall.cn/item/${cart.id}.html|" target="_blank">
+                                    <a th:href="|http://localhost:8086/item/${cart.id}.html|" target="_blank">
                                         <img th:src="${cart.image}" style="width: 60px;height: 60px;"/>
                                     </a>
                                 </div>
                                 <div class="pItem pGoods">
-                                    <a th:href="|http:// cart.e3mall.cn/item/${cart.id}.html|" target="_blank">[[${cart.title}]]</a>
+                                    <a th:href="|http://localhost:8086/item/${cart.id}.html|" target="_blank">[[${cart.title}]]</a>
                                 </div>
                                 <div class="pItem pPrice" style="position: relative; z-index: 99">¥[[${cart.price / 100 }]]</div>
                                 <div class="pItem pPromotion">¥0</div>

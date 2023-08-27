@@ -5,7 +5,7 @@ var E3MALL = {
 			return ;
 		}
 		$.ajax({
-			url : "http://http://sso.e3mall.cn//user/token/" + _ticket,
+			url : "http://localhost:8085/user/token/" + _ticket,
 			dataType : "jsonp",
 			type : "GET",
 			success : function(data){
