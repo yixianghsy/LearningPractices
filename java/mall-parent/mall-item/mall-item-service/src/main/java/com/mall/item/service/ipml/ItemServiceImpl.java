@@ -167,25 +167,6 @@ public class ItemServiceImpl implements ItemService {
     public TbItem getByPrimaryKey(Long itemId) {
         return tbItemMapper.selectByPrimaryKey(itemId);
     }
-    @Override
-    public EasyUIDataGridResult getItemListgetItemList(int page, int rows) {
-        System.out.println("ItemServiceImpl.getItemListgetItemList");
-        //设置分页信息
-        PageHelper.startPage(page, rows);
-        //执行查询
-        TbItemExample example = new TbItemExample();
-
-        List<TbItem> list = tbItemMapper.selectByExample(example);
-        //取分页信息
-        PageInfo<TbItem> pageInfo = new PageInfo<>(list);
-
-        //创建返回结果对象
-        EasyUIDataGridResult result = new EasyUIDataGridResult();
-        result.setTotal(pageInfo.getTotal());
-        result.setRows(list);
-        return result;
-    }
-
 
     @Override
     public void deleteItemList(Long[] ids) {

@@ -12,7 +12,6 @@ public interface ItemService {
     E3Result addItem(TbItem item, String desc);
     TbItemDesc getItemDescById(Long itemId);
     //分页查询
-    EasyUIDataGridResult getItemListgetItemList(int page, int rows);
     //以下代码自己加的
     //删除商品
     void deleteItemList(Long[] ids);

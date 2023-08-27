@@ -35,7 +35,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 1、从Cookie中取出token
-        String e3_token = CookieUtils.getCookieValue(request, "E3_TOKEN");
+        String e3_token = CookieUtils.getCookieValue(request, "token");
         // 2、没有token，直接跳转登录
         if (StringUtils.isBlank(e3_token)) {
             response.sendRedirect(SSO_SERVICE_URL + "/page/login?redirect=" + request.getRequestURL());

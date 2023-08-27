@@ -1,15 +1,11 @@
 package com.mall.cart.controller;
-//import com.mall.cart.service.CartService;
 import com.mall.cart.service.CartService;
 import com.mall.item.service.ItemService;
 import com.mall.modules.Item.TbItem;
-//import com.mall.item.mapper.pojo.TbUser;
 import com.mall.modules.user.TbUser;
 import com.mall.utils.CookieUtils;
 import com.mall.utils.E3Result;
 import com.mall.utils.JsonUtils;
-//import org.apache.commons.lang3.StringUtils;
-//import org.apache.dubbo.config.annotation.Reference;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
