@@ -48,7 +48,6 @@
         <version.zkclient>0.10</version.zkclient>
         <version.redis>2.2.7.RELEASE</version.redis>
         <version.swagger>1.5.0</version.swagger>
-        <version.rocketmq>4.3.0</version.rocketmq>
         <version.mybatis>1.3.2</version.mybatis>
         <version.pagehelper>1.2.10</version.pagehelper>
         <version.lang3>3.3.2</version.lang3>
