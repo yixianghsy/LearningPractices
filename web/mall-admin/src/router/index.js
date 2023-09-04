@@ -20,6 +20,8 @@ export const constantRouterMap = [
     }
   ]
   export const asyncRouterMap = [
+
+    
     {path: '*', redirect: '/404', hidden: true}
   ]
   export default new Router({
