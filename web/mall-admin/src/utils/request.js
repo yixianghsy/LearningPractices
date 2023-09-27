@@ -2,16 +2,36 @@ import axios from 'axios'
 import { Message, MessageBox } from 'element-ui'
 import store from '../store'
 import { getToken } from '@/utils/auth'
-
 // 创建axios实例
+// let DataSource_URL = 'http://localhost:8099'
+// let DataLineage_URL = 'http://localhost:8088'
 const service = axios.create({
-  baseURL: process.env.BASE_API, // api的base_url
+  // baseURL: process.env.BASE_API, // api的base_url
   timeout: 15000, // 请求超时时间
  // withCredentials:true   // 设置请求携带cookie  保证session有效性
 })
-
 // request拦截器
 service.interceptors.request.use(config => {
+//   switch (config.url.split("/")[1]) {
+//     case 'admin':
+//         config.url = DataSource_URL + config.url;
+//         break;
+//     case 'role':
+//         config.url = DataSource_URL + config.url;
+//         break;
+//     case 'menu':
+//         config.url = DataSource_URL + config.url;
+//         break;
+//     case 'resourceCategory':
+//         config.url = DataSource_URL + config.url;
+//         break;
+//     case 'resource':
+//         config.url = DataSource_URL + config.url;
+//         break;         
+//     default:
+//         config.url = DataLineage_URL + config.url;
+// }
+
   if (store.getters.token) { 
     config.headers['Authorization'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
   }

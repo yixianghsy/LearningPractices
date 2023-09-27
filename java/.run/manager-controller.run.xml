@@ -5,14 +5,6 @@
         <option name="imageTag" value="manager-controller" />
         <option name="containerName" value="manager-controller" />
         <option name="contextFolderPath" value="mall-parent/mall-manager/mall-manager-controller/target" />
-        <option name="portBindings">
-          <list>
-            <DockerPortBindingImpl>
-              <option name="containerPort" value="8025" />
-              <option name="hostPort" value="8225" />
-            </DockerPortBindingImpl>
-          </list>
-        </option>
         <option name="commandLineOptions" value="--network  host" />
         <option name="sourceFilePath" value="mall-parent/mall-manager/mall-manager-controller/src/main/docker/Dockerfile" />
       </settings>

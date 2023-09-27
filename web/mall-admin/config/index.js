@@ -3,18 +3,78 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
 module.exports = {
   dev: {
 
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+    //后期需要封装，避免代码臃肿
+      '/admin/': {
+        target: 'http://sso.mall.cn/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/': ''
+        }
+      },
+      '/menu/': {
+        target: 'http://sso.mall.cn/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/': ''
+        }
+      },
+      '/role/': {
+        target: 'http://sso.mall.cn/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/': ''
+        }
+      },
+      '/resourceCategory/': {
+        target: 'http://sso.mall.cn/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/': ''
+        }
+      },
+      '/resource/': {
+        target: 'http://sso.mall.cn/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/': ''
+        }
+      },
+      '/product/': {
+        target: 'http://localhost:8025/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/': ''
+        }
+      },
+    //反向代理配置,在这里可以配置特定的请求代理到对应的API接口
+    // 例如：localhost:8080/代理到http://localhost:8888
+    // 例如：请求地址为："http://218.78.187.216/api/v1/authentication"
+    // 请求的时候可以写为：
+    // this.$axios.post("/api/anthentication",params).then(res=>{
+    //     console.log(res);
+    // },err=>{
+    //     console.log(err);
+    // })
+
+      // '/api': {
+      //   target: 'http://sso.mall.cn/api/v1',//设置调用的接口域名和端口，必须是http或https开头的网址,否者接口报错500、404
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/api': ''//注意这里后面是一根斜杠也可以是空''；用'/api' 代替 'http://218.78.187.216/api/v1'
+      //   }
+      // },
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8090, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8088, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,

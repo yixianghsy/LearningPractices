@@ -7,8 +7,11 @@ import { getToken } from '@/utils/auth' // 验权
 
 const whiteList = ['/login'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
+  console.log("进来了")
     NProgress.start()
+    console.log("获取到的token"+getToken())
     if (getToken()) {
+      console.log("没有获取token踢到登录页面")
       if (to.path === '/login') {
         next({ path: '/' })
         NProgress.done() // if current page is dashboard will not trigger	afterEach hook, so manually handle it
