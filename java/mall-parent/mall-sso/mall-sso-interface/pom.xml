@@ -20,6 +20,7 @@
             <groupId>com.mall.sso</groupId>
             <artifactId>mall-sso-mapper</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+
         </dependency>
     </dependencies>
 
