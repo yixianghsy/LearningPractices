@@ -10,6 +10,8 @@
     <modules>
         <module>mall-manager-interface</module>
         <module>mall-manager-service</module>
+        <module>mall-manager-mapper</module>
+        <module>mall-manager-pojo</module>
         <module>mall-manager-controller</module>
     </modules>
     <groupId>com.mall</groupId>

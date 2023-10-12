@@ -58,7 +58,7 @@ public class UserController {
         System.out.println("token获取"+result);
         if (StringUtils.isNotBlank(callback)) {
             MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(result);
-            mappingJacksonValue.setJsonpFunction(callback);
+//            mappingJacksonValue.setJsonpFunction(callback);
             return mappingJacksonValue;
         }
         return result;

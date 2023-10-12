@@ -75,6 +75,10 @@ spring:
     host: 192.168.10.33
     port: 6379
 # MyBatis
+#mybatis:
+#  type-aliases-package: com.mall.modules.user
+#  mapper-locations: classpath:/mybatis/*.xml
 mybatis:
-  type-aliases-package: com.mall.modules.user
-  mapper-locations: classpath:/mybatis/*.xml
+  mapper-locations:
+    - classpath:mybatis/*.xml
+#    - classpath*:com/**/mapper/*.xml
