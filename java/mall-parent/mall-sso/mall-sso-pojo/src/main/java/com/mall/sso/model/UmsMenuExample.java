@@ -1,10 +1,11 @@
 package com.mall.sso.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UmsMenuExample {
+public class UmsMenuExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;

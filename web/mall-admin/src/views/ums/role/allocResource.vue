@@ -1,32 +1,34 @@
 <template>
-    <el-card class="form-container" shadow="never">
-      <div v-for="(cate,index) in allResourceCate" :class="index===0?'top-line':null" :key="'cate'+cate.id">
-        <el-row class="table-layout" style="background: #F2F6FC;">
-          <el-checkbox v-model="cate.checked"
-                       :indeterminate="isIndeterminate(cate.id)"
-                       @change="handleCheckAllChange(cate)">
-            {{cate.name}}
+  <el-card class="form-container" shadow="never">
+    <div v-for="(cate,index) in allResourceCate" :class="index===0?'top-line':null" :key="'cate'+cate.id">
+      <el-row class="table-layout" style="background: #F2F6FC;">
+        <el-checkbox v-model="cate.checked"
+                     :indeterminate="isIndeterminate(cate.id)"
+                     @change="handleCheckAllChange(cate)">
+          {{cate.name}}
+        </el-checkbox>
+      </el-row>
+      <el-row class="table-layout">
+        <el-col :span="8" v-for="resource in getResourceByCate(cate.id)" :key="resource.id" style="padding: 4px 0">
+          <el-checkbox v-model="resource.checked" @change="handleCheckChange(resource)">
+            {{resource.name}}
           </el-checkbox>
-        </el-row>
-        <el-row class="table-layout">
-          <el-col :span="8" v-for="resource in getResourceByCate(cate.id)" :key="resource.id" style="padding: 4px 0">
-            <el-checkbox v-model="resource.checked" @change="handleCheckChange(resource)">
-              {{resource.name}}
-            </el-checkbox>
-          </el-col>
-        </el-row>
-      </div>
-      <div style="margin-top: 20px" align="center">
-        <el-button type="primary" @click="handleSave()">保存</el-button>
-        <el-button @click="handleClear()">清空</el-button>
-      </div>
-  
-    </el-card>
-  </template>
+        </el-col>
+      </el-row>
+    </div>
+    <div style="margin-top: 20px" align="center">
+      <el-button type="primary" @click="handleSave()">保存</el-button>
+      <el-button @click="handleClear()">清空</el-button>
+    </div>
+
+  </el-card>
+</template>
+
 <script>
   import {fetchAllResourceList} from '@/api/resource';
   import {listAllCate} from '@/api/resourceCategory';
   import {allocResource,listResourceByRole} from '@/api/role';
+
   export default {
     name: "allocResource",
     data() {
@@ -168,7 +170,7 @@
         this.$forceUpdate();
       }
     }
-  }   
+  }
 </script>
 
 <style scoped>

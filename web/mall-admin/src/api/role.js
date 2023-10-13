@@ -1,8 +1,8 @@
 import request from '@/utils/request'
-
+let  url = 'sso'
 export function fetchList(params) {
   return request({
-    url: '/role/list',
+    url: url +'/role/list',
     method: 'get',
     params: params
   })
@@ -10,7 +10,7 @@ export function fetchList(params) {
 
 export function createRole(data) {
   return request({
-    url: '/role/create',
+    url: url +'/role/create',
     method: 'post',
     data: data
   })
@@ -18,7 +18,7 @@ export function createRole(data) {
 
 export function updateRole(id, data) {
   return request({
-    url: '/role/update/' + id,
+    url: url +'/role/update/' + id,
     method: 'post',
     data: data
   })
@@ -26,7 +26,7 @@ export function updateRole(id, data) {
 
 export function updateStatus(id, params) {
   return request({
-    url: '/role/updateStatus/' + id,
+    url: url +'/role/updateStatus/' + id,
     method: 'post',
     params: params
   })
@@ -34,7 +34,7 @@ export function updateStatus(id, params) {
 
 export function deleteRole(data) {
   return request({
-    url:'/role/delete',
+    url: url +'/role/delete',
     method:'post',
     data:data
   })
@@ -42,28 +42,28 @@ export function deleteRole(data) {
 
 export function fetchAllRoleList() {
   return request({
-    url: '/role/listAll',
+    url: url +'/role/listAll',
     method: 'get'
   })
 }
 
 export function listMenuByRole(roleId) {
   return request({
-    url: '/role/listMenu/'+roleId,
+    url: url +'/role/listMenu/'+roleId,
     method: 'get'
   })
 }
 
 export function listResourceByRole(roleId) {
   return request({
-    url: '/role/listResource/'+roleId,
+    url: url +'/role/listResource/'+roleId,
     method: 'get'
   })
 }
 
 export function allocMenu(data) {
   return request({
-    url: '/role/allocMenu',
+    url: url +'/role/allocMenu',
     method: 'post',
     data:data
   })
@@ -71,7 +71,7 @@ export function allocMenu(data) {
 
 export function allocResource(data) {
   return request({
-    url: '/role/allocResource',
+    url: url +'/role/allocResource',
     method: 'post',
     data:data
   })

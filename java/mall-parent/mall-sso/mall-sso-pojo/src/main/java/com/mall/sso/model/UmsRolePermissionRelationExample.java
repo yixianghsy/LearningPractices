@@ -1,9 +1,10 @@
 package com.mall.sso.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UmsRolePermissionRelationExample {
+public class UmsRolePermissionRelationExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;

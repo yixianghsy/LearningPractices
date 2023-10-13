@@ -1,15 +1,15 @@
 import request from '@/utils/request'
-
+let  url = 'sso'
 export function listAllCate() {
   return request({
-    url: '/resourceCategory/listAll',
+    url: url+'/resourceCategory/listAll',
     method: 'get'
   })
 }
 
 export function createResourceCategory(data) {
   return request({
-    url: '/resourceCategory/create',
+    url: url+'/resourceCategory/create',
     method: 'post',
     data: data
   })
@@ -17,7 +17,7 @@ export function createResourceCategory(data) {
 
 export function updateResourceCategory(id, data) {
   return request({
-    url: '/resourceCategory/update/' + id,
+    url: url+'/resourceCategory/update/' + id,
     method: 'post',
     data: data
   })
@@ -25,7 +25,7 @@ export function updateResourceCategory(id, data) {
 
 export function deleteResourceCategory(id) {
   return request({
-    url: '/resourceCategory/delete/' + id,
+    url: url+'/resourceCategory/delete/' + id,
     method: 'post'
   })
 }

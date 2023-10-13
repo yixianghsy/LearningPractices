@@ -1,8 +1,8 @@
 import request from '@/utils/request'
-
+let  url = 'sso'
 export function login(username, password) {
   return request({
-    url: '/admin/login',
+    url: url +'/admin/login',
     method: 'post',
     data: {
       username,
@@ -13,21 +13,21 @@ export function login(username, password) {
 
 export function getInfo() {
   return request({
-    url: '/admin/info',
+    url: url +'/admin/info',
     method: 'get',
   })
 }
 
 export function logout() {
   return request({
-    url: '/admin/logout',
+    url: url +'/admin/logout',
     method: 'post'
   })
 }
 
 export function fetchList(params) {
   return request({
-    url: '/admin/list',
+    url: url +'/admin/list',
     method: 'get',
     params: params
   })
@@ -35,7 +35,7 @@ export function fetchList(params) {
 
 export function createAdmin(data) {
   return request({
-    url: '/admin/register',
+    url: url +'/admin/register',
     method: 'post',
     data: data
   })
@@ -43,7 +43,7 @@ export function createAdmin(data) {
 
 export function updateAdmin(id, data) {
   return request({
-    url: '/admin/update/' + id,
+    url: url +'/admin/update/' + id,
     method: 'post',
     data: data
   })
@@ -51,7 +51,7 @@ export function updateAdmin(id, data) {
 
 export function updateStatus(id, params) {
   return request({
-    url: '/admin/updateStatus/' + id,
+    url: url +'/admin/updateStatus/' + id,
     method: 'post',
     params: params
   })
@@ -59,21 +59,21 @@ export function updateStatus(id, params) {
 
 export function deleteAdmin(id) {
   return request({
-    url: '/admin/delete/' + id,
+    url: url +'/admin/delete/' + id,
     method: 'post'
   })
 }
 
 export function getRoleByAdmin(id) {
   return request({
-    url: '/admin/role/' + id,
+    url: url +'/admin/role/' + id,
     method: 'get'
   })
 }
 
 export function allocRole(data) {
   return request({
-    url: '/admin/role/update',
+    url: url +'/admin/role/update',
     method: 'post',
     data: data
   })

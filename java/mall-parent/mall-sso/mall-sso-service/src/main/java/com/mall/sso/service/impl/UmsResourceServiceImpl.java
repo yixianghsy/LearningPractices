@@ -12,6 +12,7 @@ import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,9 +66,10 @@ public class UmsResourceServiceImpl implements UmsResourceService {
         if(StrUtil.isNotEmpty(urlKeyword)){
             criteria.andUrlLike('%'+urlKeyword+'%');
         }
-        return resourceMapper.selectByExample(example);
+        //不知道为什么直接返回不行
+        List<UmsResource>  list=  resourceMapper.selectByExample(example);
+        return list;
     }
-
     @Override
     public List<UmsResource> listAll() {
         return resourceMapper.selectByExample(new UmsResourceExample());

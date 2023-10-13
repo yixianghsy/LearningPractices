@@ -1,9 +1,10 @@
 package com.mall.sso.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UmsMemberReceiveAddressExample {
+public class UmsMemberReceiveAddressExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;

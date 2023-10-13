@@ -11,48 +11,14 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
     //后期需要封装，避免代码臃肿
-      // '/admin/': {
-      //   target: 'http://sso.mall.cn/',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/': ''
-      //   }
-      // },
-      // '/menu/': {
-      //   target: 'http://sso.mall.cn/',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/': ''
-      //   }
-      // },
-      // '/role/': {
-      //   target: 'http://sso.mall.cn/',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/': ''
-      //   }
-      // },
-      // '/resourceCategory/': {
-      //   target: 'http://sso.mall.cn/',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/': ''
-      //   }
-      // },
-      // '/resource/': {
-      //   target: 'http://sso.mall.cn/',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/': ''
-      //   }
-      // },
-      // '/product/': {
-      //   target: 'http://localhost:8025/',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/': ''
-      //   }
-      // },
+        '/sso': {
+        target: 'http://localhost:8031',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/sso': ''
+        }
+      },
+
     //反向代理配置,在这里可以配置特定的请求代理到对应的API接口
     // 例如：localhost:8080/代理到http://localhost:8888
     // 例如：请求地址为："http://218.78.187.216/api/v1/authentication"
