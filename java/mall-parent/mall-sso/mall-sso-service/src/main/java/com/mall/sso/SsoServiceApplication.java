@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableDubboConfig
 @DubboComponentScan("com.mall.*.service")
-@MapperScan(basePackages = {"com.mall.sso.mapper"})
 @SpringBootApplication
 public class SsoServiceApplication {
 

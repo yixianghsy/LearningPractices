@@ -38,17 +38,17 @@ public class UserController {
         return userService.register(tbUser);
     }
 
-    @PostMapping("/login")
-    @ResponseBody
-    public E3Result login(String username, String password, HttpServletRequest request, HttpServletResponse response) {
-        E3Result result = userService.login(username, password);
-        // Token写入cookie 浏览器关闭就过期
-        if (result.getStatus() == 200) {
-            String token = result.getData().toString();
-            CookieUtils.setCookie(request, response, TOKEN_KEY, token);
-        }
-        return result;
-    }
+//    @PostMapping("/login")
+//    @ResponseBody
+//    public E3Result login(String username, String password, HttpServletRequest request, HttpServletResponse response) {
+//        E3Result result = userService.login(username, password);
+//        // Token写入cookie 浏览器关闭就过期
+//        if (result.getStatus() == 200) {
+//            String token = result.getData().toString();
+//            CookieUtils.setCookie(request, response, TOKEN_KEY, token);
+//        }
+//        return result;
+//    }
 
     @RequestMapping("/token/{token}")
     @ResponseBody

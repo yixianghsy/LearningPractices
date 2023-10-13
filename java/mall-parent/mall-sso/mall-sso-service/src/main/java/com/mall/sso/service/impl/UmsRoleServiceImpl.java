@@ -1,11 +1,6 @@
 package com.mall.sso.service.impl;
-
-import cn.hutool.core.util.StrUtil;
-import com.github.pagehelper.PageHelper;
-
+import com.mall.sso.mapper.UmsRoleDao;
 import com.mall.sso.mapper.UmsRoleMapper;
-import com.mall.sso.mapper.UmsRoleMenuRelationMapper;
-import com.mall.sso.mapper.UmsRoleResourceRelationMapper;
 import com.mall.sso.model.UmsMenu;
 import com.mall.sso.model.UmsResource;
 import com.mall.sso.model.UmsRole;
@@ -13,7 +8,6 @@ import com.mall.sso.service.UmsRoleService;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +16,10 @@ import java.util.List;
  */
 @Service
 public class UmsRoleServiceImpl implements UmsRoleService {
-
+    @Autowired
+    private UmsRoleMapper roleMapper;
+    @Autowired
+    private UmsRoleDao roleDao;
     @Override
     public int create(UmsRole role) {
         return 0;
@@ -50,7 +47,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
 
     @Override
     public List<UmsMenu> getMenuList(Long adminId) {
-        return null;
+        return roleDao.getMenuList(adminId);
     }
 
     @Override

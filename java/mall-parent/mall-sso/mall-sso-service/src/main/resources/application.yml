@@ -82,3 +82,10 @@ mybatis:
   mapper-locations:
     - classpath:mybatis/*.xml
 #    - classpath*:com/**/mapper/*.xml
+redis:
+  database: mall
+  key:
+    admin: 'ums:admin'
+    resourceList: 'ums:resourceList'
+  expire:
+    common: 86400 # 24小时

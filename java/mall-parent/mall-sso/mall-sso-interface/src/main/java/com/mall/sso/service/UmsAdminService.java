@@ -31,7 +31,7 @@ public interface UmsAdminService {
      * @param password 密码
      * @return 生成的JWT的token
      */
-    String login(String username,String password);
+    UmsAdmin login(String username,String password);
 
     /**
      * 刷新token的功能
