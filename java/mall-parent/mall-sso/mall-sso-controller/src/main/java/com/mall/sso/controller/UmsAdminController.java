@@ -7,8 +7,10 @@ import com.mall.sso.dto.UmsAdminLoginParam;
 import com.mall.sso.dto.UmsAdminParam;
 import com.mall.sso.dto.UpdateAdminPasswordParam;
 import com.mall.sso.model.UmsAdmin;
+import com.mall.sso.model.UmsResource;
 import com.mall.sso.model.UmsRole;
 import com.mall.sso.service.UmsAdminService;
+import com.mall.sso.service.UmsResourceService;
 import com.mall.sso.service.UmsRoleService;
 import com.mall.utils.ComConstants;
 import io.swagger.annotations.Api;
@@ -39,6 +41,8 @@ public class UmsAdminController {
     @Reference
     private UmsRoleService roleService;
 
+    @Reference
+    private UmsResourceService resourceService;
     @ApiOperation(value = "用户注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
@@ -101,7 +105,6 @@ public class UmsAdminController {
         List<UmsAdmin> adminList = adminService.list(keyword, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(adminList));
     }
-
     @ApiOperation("获取指定用户信息")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody

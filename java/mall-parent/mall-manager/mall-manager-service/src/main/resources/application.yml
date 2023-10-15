@@ -1,5 +1,11 @@
 server:
   port: 8024
+druid:
+  allow: #?????IP??
+    ip: 127.0.0.1
+  login: #???????
+    user_name: root
+    password: root
 dubbo:
   application:
     name: mall-manager
@@ -29,3 +35,56 @@ dubbo:
   # 注册监控中心
   monitor:
     protocol: registry
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.10.33:3306/mall?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    # ????????
+    # ?????????????????????????????
+    initialSize: 1
+    minIdle: 1
+    maxIdle: 5
+    maxActive: 20
+    # ?????????????
+    maxWait: 60000
+    # ???????????????????????????????
+    timeBetweenEvictionRunsMillis: 60000
+    # ??????????????????????
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: true
+    testOnReturn: false
+    # ??PSCache??????????PSCache???
+    poolPreparedStatements: false
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # ?????????filters????????sql?????'wall'?????
+    filters: stat,wall
+    # ??connectProperties?????mergeSql????SQL??
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # ????DruidDataSource?????
+    #spring.datasource.useGlobalDataSourceStat=true
+  redis:
+    host: 192.168.10.33
+    port: 6379
+mybatis:
+  mapper-locations:
+    - classpath:mybatis/*.xml
+#    - classpath*:com/**/mapper/*.xml
+redis:
+  database: mall
+  key:
+    admin: 'ums:admin'
+    resourceList: 'ums:resourceList'
+  expire:
+    common: 86400 # 24小时
+logging:
+  level:
+    root: info
+    com.mall: debug
+logstash:
+  host: localhost
+  enableInnerLog: false

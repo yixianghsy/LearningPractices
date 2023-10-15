@@ -6,7 +6,7 @@ import com.mall.sso.model.UmsAdmin;
 import com.mall.sso.model.UmsResource;
 import com.mall.sso.model.UmsRole;
 import org.springframework.transaction.annotation.Transactional;
-//import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 

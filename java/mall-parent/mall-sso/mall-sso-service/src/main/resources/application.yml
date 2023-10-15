@@ -89,3 +89,10 @@ redis:
     resourceList: 'ums:resourceList'
   expire:
     common: 86400 # 24小时
+logging:
+  level:
+    root: info
+    com.mall.sso: debug
+logstash:
+  host: localhost
+  enableInnerLog: false

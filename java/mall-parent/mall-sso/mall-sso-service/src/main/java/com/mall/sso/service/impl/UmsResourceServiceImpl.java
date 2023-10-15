@@ -2,12 +2,15 @@ package com.mall.sso.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
-
+import com.mall.sso.mapper.UmsAdminMapper;
 import com.mall.sso.mapper.UmsResourceMapper;
+import com.mall.sso.model.UmsAdmin;
+import com.mall.sso.model.UmsAdminExample;
 import com.mall.sso.model.UmsResource;
 import com.mall.sso.model.UmsResourceExample;
 import com.mall.sso.service.UmsAdminCacheService;
 import com.mall.sso.service.UmsResourceService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,6 +28,8 @@ public class UmsResourceServiceImpl implements UmsResourceService {
     @Autowired
     private UmsResourceMapper resourceMapper;
     @Autowired
+    private UmsAdminMapper adminMapper;
+    @Reference
     private UmsAdminCacheService adminCacheService;
     @Override
     public int create(UmsResource umsResource) {
@@ -54,6 +59,7 @@ public class UmsResourceServiceImpl implements UmsResourceService {
 
     @Override
     public List<UmsResource> list(Long categoryId, String nameKeyword, String urlKeyword, Integer pageSize, Integer pageNum) {
+        //因为加这个就报错，先注释掉
         PageHelper.startPage(pageNum,pageSize);
         UmsResourceExample example = new UmsResourceExample();
         UmsResourceExample.Criteria criteria = example.createCriteria();
@@ -66,8 +72,7 @@ public class UmsResourceServiceImpl implements UmsResourceService {
         if(StrUtil.isNotEmpty(urlKeyword)){
             criteria.andUrlLike('%'+urlKeyword+'%');
         }
-        //不知道为什么直接返回不行
-        List<UmsResource>  list=  resourceMapper.selectByExample(example);
+        List<UmsResource> list = resourceMapper.selectByExample(example);
         return list;
     }
     @Override

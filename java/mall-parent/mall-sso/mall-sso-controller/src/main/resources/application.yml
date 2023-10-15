@@ -10,3 +10,7 @@ dubbo:
     name: e3-sso-web
   registry:
     address: zookeeper://192.168.10.33:2181
+logging:
+  level:
+    root: info
+    com.mall.sso: debug

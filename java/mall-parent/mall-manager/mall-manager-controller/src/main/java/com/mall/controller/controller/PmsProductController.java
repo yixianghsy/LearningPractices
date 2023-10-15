@@ -1,40 +1,39 @@
 package com.mall.controller.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.mall.api.CommonPage;
+import com.mall.api.CommonResult;
+import com.mall.mansger.dto.PmsProductQueryParam;
+import com.mall.mansger.model.PmsProduct;
+import com.mall.mansger.service.PmsProductService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
- * <p>
- * 商品信息 前端控制器
- * </p>
- *
- * @author XuShu
- * @since 2021-02-26
+ * 商品管理Controller
+ * Created by macro on 2018/4/26.
  */
-@RestController
+@Controller
+@Api(tags = "PmsProductController")
+@Tag(name = "PmsProductController", description = "商品管理")
 @RequestMapping("/product")
 public class PmsProductController {
-
-    /**
-     *
-     url:'/product/list',
-     method:'get',
-     data:          axios 如果设置的是data属性就是以json的方式传递
-     params:{       axios 如果设置的是params属性就是以url参数的方式传递
-     如果传递是URLSearchParams  会以formdata的方式传递
-     keyword: null,
-     pageNum: 1,
-     pageSize: 5,
-     publishStatus: null,
-     verifyStatus: null,
-     productSn: null,
-     productCategoryId: null,
-     brandId: null
-     };
-     */
-    @RequestMapping(value="/list",method = RequestMethod.GET)
-    public void list(){
-        System.out.println("进来了");
+    @Reference
+    private PmsProductService productService;
+    @ApiOperation("查询商品")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CommonPage<PmsProduct>> getList(PmsProductQueryParam productQueryParam,
+                                                        @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                                        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        List<PmsProduct> productList = productService.list(productQueryParam, pageSize, pageNum);
+        return CommonResult.success(CommonPage.restPage(productList));
     }
+
 }

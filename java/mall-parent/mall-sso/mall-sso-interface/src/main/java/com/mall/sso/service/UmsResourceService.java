@@ -1,6 +1,7 @@
 package com.mall.sso.service;
 
 
+import com.mall.sso.model.UmsAdmin;
 import com.mall.sso.model.UmsResource;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public interface UmsResourceService {
      * 分页查询资源
      */
     List<UmsResource> list(Long categoryId, String nameKeyword, String urlKeyword, Integer pageSize, Integer pageNum);
+
 
     /**
      * 查询全部资源

@@ -1,5 +1,6 @@
 package com.mall.sso.mapper;
 
+
 import com.mall.sso.model.UmsResource;
 import com.mall.sso.model.UmsResourceExample;
 import org.apache.ibatis.annotations.Param;

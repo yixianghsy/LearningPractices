@@ -20,6 +20,13 @@
             <groupId>com.mall.mansger</groupId>
             <artifactId>mall-manager-interface</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <!--            排除该依赖包-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>com.github.pagehelper</groupId>-->
+<!--                    <artifactId>pagehelper-spring-boot-starter</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
         </dependency>
         <!--thymeleaf组件-->
         <dependency>

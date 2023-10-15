@@ -1,11 +1,14 @@
 package com.mall.sso.controller;
 
+
 import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
 import com.mall.sso.model.UmsResource;
+import com.mall.sso.service.UmsAdminService;
 import com.mall.sso.service.UmsResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,14 +21,14 @@ import java.util.List;
  * Created by macro on 2020/2/4.
  */
 @Controller
-@Api(tags = "UmsResourceController", description = "后台资源管理")
+@Api(tags = "UmsResourceController")
+@Tag(name = "UmsResourceController", description = "后台资源管理")
 @RequestMapping("/resource")
 public class UmsResourceController {
-
+    @Reference
+    private UmsAdminService adminService;
     @Reference
     private UmsResourceService resourceService;
-//    @Autowired
-//    private DynamicSecurityMetadataSource dynamicSecurityMetadataSource;
     @ApiOperation("添加后台资源")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
@@ -86,6 +89,7 @@ public class UmsResourceController {
         return CommonResult.success(CommonPage.restPage(resourceList));
     }
 
+
     @ApiOperation("查询所有后台资源")
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     @ResponseBody
@@ -93,4 +97,6 @@ public class UmsResourceController {
         List<UmsResource> resourceList = resourceService.listAll();
         return CommonResult.success(resourceList);
     }
+
+
 }
