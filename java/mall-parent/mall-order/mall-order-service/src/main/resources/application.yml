@@ -72,11 +72,19 @@ spring:
     port: 6379
 # MyBatis
 mybatis:
-  type-aliases-package: com.mall.modules.order
-  mapper-locations: classpath:/mybatis/*.xml
+  mapper-locations:
+    - classpath:mybatis/*.xml
+#    - classpath*:com/**/mapper/*.xml
 #mq
 rocketmq:
   producer:
     groupName: order-service
     namesrvAddr: 192.168.10.33:9876
     default: true
+logging:
+  level:
+    root: info
+    com.mall.order: debug
+logstash:
+  host: localhost
+  enableInnerLog: false

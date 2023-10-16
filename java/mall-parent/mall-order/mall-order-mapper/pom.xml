@@ -17,8 +17,9 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.mybatis.generator</groupId>
-            <artifactId>mybatis-generator-core</artifactId>
+            <groupId>com.mall.order</groupId>
+            <artifactId>mall-order-pojo</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.github.pagehelper</groupId>

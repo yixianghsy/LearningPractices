@@ -25,6 +25,13 @@ module.exports = {
           '^/admin': ''
         }
       },
+      '/order': {
+        target: 'http://localhost:8027',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/order': ''
+        }
+      },
     //反向代理配置,在这里可以配置特定的请求代理到对应的API接口
     // 例如：localhost:8080/代理到http://localhost:8888
     // 例如：请求地址为："http://218.78.187.216/api/v1/authentication"

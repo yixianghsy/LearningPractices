@@ -1,7 +1,8 @@
 import request from '@/utils/request'
+let url =  'order'
 export function fetchList(params) {
   return request({
-    url:'/returnApply/list',
+    url:url+ '/returnApply/list',
     method:'get',
     params:params
   })
@@ -9,14 +10,14 @@ export function fetchList(params) {
 
 export function deleteApply(params) {
   return request({
-    url:'/returnApply/delete',
+    url:url+'/returnApply/delete',
     method:'post',
     params:params
   })
 }
 export function updateApplyStatus(id,data) {
   return request({
-    url:'/returnApply/update/status/'+id,
+    url:url+'/returnApply/update/status/'+id,
     method:'post',
     data:data
   })
@@ -24,7 +25,7 @@ export function updateApplyStatus(id,data) {
 
 export function getApplyDetail(id) {
   return request({
-    url:'/returnApply/'+id,
+    url:url+'/returnApply/'+id,
     method:'get'
   })
 }
