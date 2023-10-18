@@ -1,4 +1,5 @@
 package com.mall.sso.controller;
+
 import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
 import com.mall.sso.dto.UmsMenuNode;

@@ -1,7 +1,6 @@
 package com.mall.sso.service;
 
 
-import com.mall.sso.model.UmsAdmin;
 import com.mall.sso.model.UmsResource;
 
 import java.util.List;

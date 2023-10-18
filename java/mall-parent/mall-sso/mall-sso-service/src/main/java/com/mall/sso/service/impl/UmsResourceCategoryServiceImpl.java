@@ -5,9 +5,8 @@ import com.mall.sso.mapper.UmsResourceCategoryMapper;
 import com.mall.sso.model.UmsResourceCategory;
 import com.mall.sso.model.UmsResourceCategoryExample;
 import com.mall.sso.service.UmsResourceCategoryService;
-import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.apache.dubbo.config.annotation.Service;
 
 import java.util.Date;
 import java.util.List;

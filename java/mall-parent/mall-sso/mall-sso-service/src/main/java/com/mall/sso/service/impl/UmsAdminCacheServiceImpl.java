@@ -10,10 +10,9 @@ import com.mall.sso.model.UmsAdminRoleRelationExample;
 import com.mall.sso.model.UmsResource;
 import com.mall.sso.service.UmsAdminCacheService;
 import com.mall.sso.service.UmsAdminService;
-import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.apache.dubbo.config.annotation.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
-    @Reference
+    @Autowired
     private UmsAdminService adminService;
     @Autowired
     private RedisService redisService;

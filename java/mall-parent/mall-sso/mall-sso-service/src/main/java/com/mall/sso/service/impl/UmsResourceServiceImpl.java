@@ -4,18 +4,13 @@ import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import com.mall.sso.mapper.UmsAdminMapper;
 import com.mall.sso.mapper.UmsResourceMapper;
-import com.mall.sso.model.UmsAdmin;
-import com.mall.sso.model.UmsAdminExample;
 import com.mall.sso.model.UmsResource;
 import com.mall.sso.model.UmsResourceExample;
 import com.mall.sso.service.UmsAdminCacheService;
 import com.mall.sso.service.UmsResourceService;
-import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.dubbo.config.annotation.Service;
 
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +24,7 @@ public class UmsResourceServiceImpl implements UmsResourceService {
     private UmsResourceMapper resourceMapper;
     @Autowired
     private UmsAdminMapper adminMapper;
-    @Reference
+    @Autowired
     private UmsAdminCacheService adminCacheService;
     @Override
     public int create(UmsResource umsResource) {

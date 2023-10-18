@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableDubboConfig
 @DubboComponentScan("com.mall.*.service")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = { "com.mall.*",})
 public class SsoServiceApplication {
 
     public static void main(String[] args) {

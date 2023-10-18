@@ -17,6 +17,7 @@
         <module>mall-content-mapper</module>
         <module>mall-content-interface</module>
         <module>mall-content-servic</module>
+        <module>mall-content-pojo</module>
     </modules>
     <dependencies>
         <dependency>

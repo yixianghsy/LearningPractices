@@ -3,24 +3,32 @@ package com.mall.sso.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.crypto.digest.BCrypt;
 import cn.hutool.extra.spring.SpringUtil;
 import com.github.pagehelper.PageHelper;
-import com.mall.exception.ApiException;
 import com.mall.exception.Asserts;
+import com.mall.securit.util.JwtTokenUtil;
+import com.mall.sso.bo.AdminUserDetails;
 import com.mall.sso.dto.UmsAdminParam;
 import com.mall.sso.dto.UpdateAdminPasswordParam;
-import com.mall.sso.mapper.*;
+import com.mall.sso.mapper.UmsAdminLoginLogMapper;
+import com.mall.sso.mapper.UmsAdminMapper;
+import com.mall.sso.mapper.UmsAdminRoleRelationDao;
+import com.mall.sso.mapper.UmsAdminRoleRelationMapper;
 import com.mall.sso.model.*;
 import com.mall.sso.service.UmsAdminCacheService;
 import com.mall.sso.service.UmsAdminService;
-import com.mall.sso.service.UmsRoleService;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -39,22 +47,17 @@ import java.util.List;
 public class UmsAdminServiceImpl implements UmsAdminService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UmsAdminServiceImpl.class);
     @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
     private UmsAdminMapper adminMapper;
     @Autowired
-    private UmsAdminLoginLogMapper loginLogMapper;
-    @Reference
-    private UmsAdminCacheService adminCacheService;
-    @Reference
-    private UmsRoleService adminRoleRelationService;
+    private UmsAdminRoleRelationMapper adminRoleRelationMapper;
     @Autowired
     private UmsAdminRoleRelationDao adminRoleRelationDao;
     @Autowired
-    private UmsRoleMapper roleMapper;
-    @Autowired
-    private UmsResourceMapper resourceMapper;
-
-    @Autowired
-    private UmsAdminRoleRelationMapper adminRoleRelationMapper;
+    private UmsAdminLoginLogMapper loginLogMapper;
 
     @Override
     public UmsAdmin getAdminByUsername(String username) {
@@ -88,30 +91,35 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             return null;
         }
         //将密码进行加密操作
-        String encodePassword = BCrypt.hashpw(umsAdmin.getPassword());
+        String encodePassword = passwordEncoder.encode(umsAdmin.getPassword());
         umsAdmin.setPassword(encodePassword);
         adminMapper.insert(umsAdmin);
         return umsAdmin;
     }
-    //TODO  后期需要修改返回类型
+
     @Override
-    public UmsAdmin login(String username, String password) {
+    public String login(String username, String password) {
+        String token = null;
         //密码需要客户端加密后传递
-        UmsAdmin umsAdmin=null;
         try {
-            umsAdmin = loadUserByUsername(username);
-            if(!BCrypt.checkpw(password,umsAdmin.getPassword())){
+            UserDetails userDetails = loadUserByUsername(username);
+            if(!passwordEncoder.matches(password,userDetails.getPassword())){
                 Asserts.fail("密码不正确");
             }
-            /*if(!userDetails.isEnabled()){
+            if(!userDetails.isEnabled()){
                 Asserts.fail("帐号已被禁用");
-            }*/
+            }
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            token = jwtTokenUtil.generateToken(userDetails);
+//            updateLoginTimeByUsername(username);
 //            insertLoginLog(username);
-        } catch (Exception e) {
-            Asserts.fail("登录异常:"+e.getMessage());
+        } catch (AuthenticationException e) {
+            LOGGER.warn("登录异常:{}", e.getMessage());
         }
-        return umsAdmin;
+        return token;
     }
+
     /**
      * 添加登录记录
      * @param username 用户名
@@ -123,14 +131,25 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         loginLog.setAdminId(admin.getId());
         loginLog.setCreateTime(new Date());
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        loginLog.setIp(request.getRemoteAddr());
-        loginLogMapper.insert(loginLog);
+//        HttpServletRequest request = attributes.getRequest();
+//        loginLog.setIp(RequestUtil.getRequestIp(request));
+//        loginLogMapper.insert(loginLog);
     }
-    //TODO 以后权限控制
+
+    /**
+     * 根据用户名修改登录时间
+     */
+    private void updateLoginTimeByUsername(String username) {
+        UmsAdmin record = new UmsAdmin();
+        record.setLoginTime(new Date());
+        UmsAdminExample example = new UmsAdminExample();
+        example.createCriteria().andUsernameEqualTo(username);
+        adminMapper.updateByExampleSelective(record, example);
+    }
+
     @Override
     public String refreshToken(String oldToken) {
-        return null;
+        return jwtTokenUtil.refreshHeadToken(oldToken);
     }
 
     @Override
@@ -162,8 +181,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             if(StrUtil.isEmpty(admin.getPassword())){
                 admin.setPassword(null);
             }else{
-                //TODO  后期改passwordEncoder
-                admin.setPassword(BCrypt.hashpw(admin.getPassword()));
+                admin.setPassword(passwordEncoder.encode(admin.getPassword()));
             }
         }
         int count = adminMapper.updateByPrimaryKeySelective(admin);
@@ -236,26 +254,25 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             return -2;
         }
         UmsAdmin umsAdmin = adminList.get(0);
-        if(!BCrypt.checkpw(param.getOldPassword(),umsAdmin.getPassword())){
+        if(!passwordEncoder.matches(param.getOldPassword(),umsAdmin.getPassword())){
             return -3;
         }
-        umsAdmin.setPassword(BCrypt.hashpw(param.getNewPassword()));
+        umsAdmin.setPassword(passwordEncoder.encode(param.getNewPassword()));
         adminMapper.updateByPrimaryKey(umsAdmin);
         getCacheService().delAdmin(umsAdmin.getId());
         return 1;
     }
 
     @Override
-    public UmsAdmin loadUserByUsername(String username) {
+    public UserDetails loadUserByUsername(String username){
         //获取用户信息
         UmsAdmin admin = getAdminByUsername(username);
         if (admin != null) {
-            // 查询用户访问资源，暂留， 后续改动
-            // List<UmsResource> resourceList = getResourceList(admin.getId());
-            return admin;
+            List<UmsResource> resourceList = getResourceList(admin.getId());
+            AdminUserDetails adminUserDetails = new AdminUserDetails(admin, resourceList);
+            return adminUserDetails;
         }
-        throw new ApiException("用户不存在");
-
+        throw new UsernameNotFoundException("用户名或密码错误");
     }
 
     @Override

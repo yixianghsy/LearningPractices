@@ -6,9 +6,9 @@ import com.mall.sso.mapper.UmsMenuMapper;
 import com.mall.sso.model.UmsMenu;
 import com.mall.sso.model.UmsMenuExample;
 import com.mall.sso.service.UmsMenuService;
-import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.dubbo.config.annotation.Service;
 
 import java.util.Date;
 import java.util.List;

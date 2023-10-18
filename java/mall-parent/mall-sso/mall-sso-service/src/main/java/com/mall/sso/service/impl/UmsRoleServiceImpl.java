@@ -1,4 +1,5 @@
 package com.mall.sso.service.impl;
+
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import com.mall.sso.mapper.UmsRoleDao;
@@ -8,9 +9,8 @@ import com.mall.sso.mapper.UmsRoleResourceRelationMapper;
 import com.mall.sso.model.*;
 import com.mall.sso.service.UmsAdminCacheService;
 import com.mall.sso.service.UmsRoleService;
-import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.dubbo.config.annotation.Service;
 
 import java.util.Date;
 import java.util.List;
@@ -29,7 +29,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     private UmsRoleResourceRelationMapper roleResourceRelationMapper;
     @Autowired
     private UmsRoleDao roleDao;
-    @Reference
+    @Autowired
     private UmsAdminCacheService adminCacheService;
     @Override
     public int create(UmsRole role) {

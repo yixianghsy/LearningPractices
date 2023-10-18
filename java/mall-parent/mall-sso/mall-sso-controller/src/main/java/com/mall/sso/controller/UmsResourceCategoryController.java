@@ -1,4 +1,5 @@
 package com.mall.sso.controller;
+
 import com.mall.api.CommonResult;
 import com.mall.sso.model.UmsResourceCategory;
 import com.mall.sso.service.UmsResourceCategoryService;

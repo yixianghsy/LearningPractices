@@ -5,8 +5,8 @@ import com.mall.sso.dto.UpdateAdminPasswordParam;
 import com.mall.sso.model.UmsAdmin;
 import com.mall.sso.model.UmsResource;
 import com.mall.sso.model.UmsRole;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public interface UmsAdminService {
      * @param password 密码
      * @return 生成的JWT的token
      */
-    UmsAdmin login(String username,String password);
+    String login(String username,String password);
 
     /**
      * 刷新token的功能
@@ -80,12 +80,11 @@ public interface UmsAdminService {
      */
     int updatePassword(UpdateAdminPasswordParam updatePasswordParam);
 
-//
-//    /**
-//     * 获取用户信息
-//     */
-//    UserDetails loadUserByUsername(String username);
-    UmsAdmin loadUserByUsername(String username);
+    /**
+     * 获取用户信息
+     */
+    UserDetails loadUserByUsername(String username);
+
     /**
      * 获取缓存服务
      */

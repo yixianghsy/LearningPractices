@@ -1,10 +1,11 @@
 package com.mall.sso.mapper;
-import java.util.List;
-import java.util.Map;
 
 import com.mall.modules.user.TbUser;
 import com.mall.modules.user.TbUserExample;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 public interface TbUserMapper {
     int countByExample(TbUserExample example);

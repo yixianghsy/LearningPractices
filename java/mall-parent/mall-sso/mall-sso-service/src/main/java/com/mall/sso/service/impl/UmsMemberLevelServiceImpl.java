@@ -5,9 +5,8 @@ import com.mall.sso.mapper.UmsMemberLevelMapper;
 import com.mall.sso.model.UmsMemberLevel;
 import com.mall.sso.model.UmsMemberLevelExample;
 import com.mall.sso.service.UmsMemberLevelService;
-import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.apache.dubbo.config.annotation.Service;
 
 import java.util.List;
 
