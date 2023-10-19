@@ -2,7 +2,7 @@
   <configuration default="false" name="manager-service" type="docker-deploy" factoryName="dockerfile" singleton="false" server-name="openwrt">
     <deployment type="dockerfile">
       <settings>
-        <option name="imageTag" value="manager-service" />
+        <option name="imageTag" value="manager-service:0.0.2" />
         <option name="containerName" value="manager-service" />
         <option name="contextFolderPath" value="mall-parent/mall-manager/mall-manager-service/target" />
         <option name="commandLineOptions" value="--network  host" />

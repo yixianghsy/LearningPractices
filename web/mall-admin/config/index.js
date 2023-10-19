@@ -12,7 +12,7 @@ module.exports = {
     proxyTable: {
     //后期需要封装，避免代码臃肿
         '/sso': {
-        target: 'http://localhost:8031',
+        target: 'http://sso.e3mall.cn',
         changeOrigin: true,
         pathRewrite: {
           '^/sso': ''
