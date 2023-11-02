@@ -38,3 +38,10 @@ secure:
       - /admin/info
       - /admin/logout
       - /minio/upload
+#因为maven子工程会继承其他工程数据配置，需要屏蔽
+#spring:
+#  autoconfigure:
+#    exclude:
+#      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+#      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+

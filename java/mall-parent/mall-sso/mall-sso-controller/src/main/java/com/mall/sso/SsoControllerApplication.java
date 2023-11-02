@@ -9,7 +9,10 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 
 @EnableDubboConfig
 @DubboComponentScan("com.mall.*.service")
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class},scanBasePackages = { "com.mall.*",})
+/*
+scanBasePackages 扫面其他包路径，后期需要调整包
+ */
+@SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class},scanBasePackages = { "com.mall.*"})
 public class SsoControllerApplication {
     public static void main(String[] args) {
         SpringApplication.run(SsoControllerApplication.class, args);

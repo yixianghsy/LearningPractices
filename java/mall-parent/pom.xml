@@ -83,6 +83,7 @@
         <alipay-sdk.version>4.38.61.ALL</alipay-sdk.version>
         <logstash-logback.version>7.2</logstash-logback.version>
         <minio.version>8.4.5</minio.version>
+        <alipay-sdk.version>4.38.61.ALL</alipay-sdk.version>
     </properties>
 
     <dependencies>
