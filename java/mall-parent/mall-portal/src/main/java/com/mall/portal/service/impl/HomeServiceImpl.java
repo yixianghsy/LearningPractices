@@ -1,12 +1,13 @@
 package com.mall.portal.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.mall.content.mapper.CmsSubjectMapper;
 import com.mall.content.model.CmsSubject;
+import com.mall.content.model.CmsSubjectExample;
+import com.mall.mansger.mapper.PmsProductCategoryMapper;
+import com.mall.mansger.mapper.PmsProductMapper;
 import com.mall.mansger.mapper.SmsHomeAdvertiseMapper;
-import com.mall.mansger.model.PmsProduct;
-import com.mall.mansger.model.PmsProductCategory;
-import com.mall.mansger.model.SmsHomeAdvertise;
-import com.mall.mansger.model.SmsHomeAdvertiseExample;
+import com.mall.mansger.model.*;
 //import com.mall.portal.dao.HomeDao;
 import com.mall.portal.dao.FlashPromotionProductDao;
 import com.mall.portal.dao.HomeDao;
@@ -35,7 +36,16 @@ public class HomeServiceImpl implements HomeService {
     private HomeDao homeDao;
 
     @Autowired
+    private PmsProductMapper productMapper;
+
+    @Autowired
     private FlashPromotionProductDao flashPromotionProductDao;
+
+    @Autowired
+    private PmsProductCategoryMapper productCategoryMapper;
+
+    @Autowired
+    private CmsSubjectMapper subjectMapper;
     @Override
     public HomeContentResult content() {
         HomeContentResult result = new HomeContentResult();
@@ -56,17 +66,35 @@ public class HomeServiceImpl implements HomeService {
 
     @Override
     public List<PmsProduct> recommendProductList(Integer pageSize, Integer pageNum) {
-        return null;
+        // TODO: 2019/1/29 暂时默认推荐所有商品
+        PageHelper.startPage(pageNum,pageSize);
+        PmsProductExample example = new PmsProductExample();
+        example.createCriteria()
+                .andDeleteStatusEqualTo(0)
+                .andPublishStatusEqualTo(1);
+        return productMapper.selectByExample(example);
     }
 
     @Override
     public List<PmsProductCategory> getProductCateList(Long parentId) {
-        return null;
+        PmsProductCategoryExample example = new PmsProductCategoryExample();
+        example.createCriteria()
+                .andShowStatusEqualTo(1)
+                .andParentIdEqualTo(parentId);
+        example.setOrderByClause("sort desc");
+        return productCategoryMapper.selectByExample(example);
     }
 
     @Override
     public List<CmsSubject> getSubjectList(Long cateId, Integer pageSize, Integer pageNum) {
-        return null;
+        PageHelper.startPage(pageNum,pageSize);
+        CmsSubjectExample example = new CmsSubjectExample();
+        CmsSubjectExample.Criteria criteria = example.createCriteria();
+        criteria.andShowStatusEqualTo(1);
+        if(cateId!=null){
+            criteria.andCategoryIdEqualTo(cateId);
+        }
+        return subjectMapper.selectByExample(example);
     }
 
     @Override
