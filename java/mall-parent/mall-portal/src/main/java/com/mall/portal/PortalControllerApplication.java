@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 
 @EnableDubboConfig
 @DubboComponentScan("com.mall.*.service")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = { "com.mall.*",})
 public class PortalControllerApplication {
 
 	public static void main(String[] args) {

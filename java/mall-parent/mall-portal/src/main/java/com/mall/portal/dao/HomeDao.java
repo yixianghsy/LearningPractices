@@ -1,5 +1,4 @@
 package com.mall.portal.dao;
-
 import com.mall.content.model.CmsSubject;
 import com.mall.mansger.model.PmsBrand;
 import com.mall.mansger.model.PmsProduct;

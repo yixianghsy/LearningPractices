@@ -1,5 +1,4 @@
 package com.mall.portal.dao;
-
 import com.mall.portal.domain.FlashPromotionParam;
 import com.mall.portal.domain.FlashPromotionProduct;
 import org.apache.ibatis.annotations.Param;

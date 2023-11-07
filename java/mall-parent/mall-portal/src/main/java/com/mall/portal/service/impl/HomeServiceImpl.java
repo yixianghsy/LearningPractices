@@ -15,6 +15,7 @@ import com.mall.portal.domain.FlashPromotionParam;
 import com.mall.portal.domain.FlashPromotionProduct;
 import com.mall.portal.domain.HomeContentResult;
 import com.mall.portal.service.HomeService;
+import com.mall.portal.service.SmsFlashPromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -31,19 +32,16 @@ public class HomeServiceImpl implements HomeService {
 
     @Autowired
     private SmsHomeAdvertiseMapper advertiseMapper;
-
     @Autowired
     private HomeDao homeDao;
-
-    @Autowired
-    private PmsProductMapper productMapper;
-
     @Autowired
     private FlashPromotionProductDao flashPromotionProductDao;
-
+    @Autowired
+    private SmsFlashPromotionService smsFlashPromotionService;
+    @Autowired
+    private PmsProductMapper productMapper;
     @Autowired
     private PmsProductCategoryMapper productCategoryMapper;
-
     @Autowired
     private CmsSubjectMapper subjectMapper;
     @Override
