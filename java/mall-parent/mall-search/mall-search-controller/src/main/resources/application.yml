@@ -7,7 +7,7 @@ dubbo:
   application:
     name: search-web
   registry:
-    address: zookeeper://192.168.10.33:2181
+    address: zookeeper://192.168.10.251:2181
     protocol: zookeeper
 
 

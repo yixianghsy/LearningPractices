@@ -12,6 +12,7 @@
         <module>mall-search-service</module>
         <module>mall-search-mapper</module>
         <module>mall-search-controller</module>
+        <module>mall-search-pojo</module>
     </modules>
     <groupId>com.mall.search</groupId>
     <artifactId>mall-search</artifactId>
@@ -32,7 +33,6 @@
             <groupId>com.mall</groupId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

@@ -8,20 +8,20 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.mall.search</groupId>
-    <artifactId>mall-search-interface</artifactId>
+    <artifactId>mall-search-pojo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mall-search-interface</name>
-    <description>mall-search-interface</description>
+    <name>mall-search-pojo</name>
+    <description>mall-search-pojo</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.mall.search</groupId>
-            <artifactId>mall-search-mapper</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
     </dependencies>
+
 
 
 </project>
