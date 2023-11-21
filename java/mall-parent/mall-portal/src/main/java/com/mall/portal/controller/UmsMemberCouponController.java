@@ -46,6 +46,15 @@ public class UmsMemberCouponController {
         List<SmsCouponHistory> couponHistoryList = memberCouponService.list(useStatus);
         return CommonResult.success(couponHistoryList);
     }
+    @ApiOperation("获取会员优惠券历史列表")
+    @ApiImplicitParam(name = "useStatus", value = "优惠券筛选类型:0->未使用；1->已使用；2->已过期",
+            allowableValues = "0,1,2", paramType = "query", dataType = "integer")
+    @RequestMapping(value = "/listHistory", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<SmsCouponHistory>> listHistory(@RequestParam(value = "useStatus", required = false) Integer useStatus) {
+        List<SmsCouponHistory> couponHistoryList = memberCouponService.listHistory(useStatus);
+        return CommonResult.success(couponHistoryList);
+    }
 
     @ApiOperation("获取登录会员购物车的相关优惠券")
     @ApiImplicitParam(name = "type", value = "使用可用:0->不可用；1->可用",

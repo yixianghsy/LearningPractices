@@ -97,12 +97,14 @@ public class HomeServiceImpl implements HomeService {
 
     @Override
     public List<PmsProduct> hotProductList(Integer pageNum, Integer pageSize) {
-        return null;
+        int offset = pageSize * (pageNum - 1);
+        return homeDao.getHotProductList(offset, pageSize);
     }
 
     @Override
     public List<PmsProduct> newProductList(Integer pageNum, Integer pageSize) {
-        return null;
+        int offset = pageSize * (pageNum - 1);
+        return homeDao.getNewProductList(offset, pageSize);
     }
     private List<SmsHomeAdvertise> getHomeAdvertiseList() {
         SmsHomeAdvertiseExample example = new SmsHomeAdvertiseExample();

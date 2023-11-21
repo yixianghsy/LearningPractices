@@ -21,7 +21,7 @@ dubbo:
     # ??????
     protocol: zookeeper
     # ??????
-    address: 192.168.10.33:2181
+    address: 192.168.10.251:2181
 
   # dubbo???20880??????
   # ????
@@ -42,7 +42,7 @@ dubbo:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.10.33:3306/mall?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.10.251:3306/mall?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
@@ -72,7 +72,7 @@ spring:
     # ????DruidDataSource?????
     #spring.datasource.useGlobalDataSourceStat=true
   redis:
-    host: 192.168.10.33
+    host: 192.168.10.251
     port: 6379
 # MyBatis
 #mybatis:

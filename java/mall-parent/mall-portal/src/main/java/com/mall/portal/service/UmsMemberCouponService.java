@@ -29,4 +29,8 @@ public interface UmsMemberCouponService {
      * 根据购物车信息获取可用优惠券
      */
     List<SmsCouponHistoryDetail> listCart(List<CartPromotionItem> cartItemList, Integer type);
+    /**
+     * 获取优惠券历史列表
+     */
+    List<SmsCouponHistory> listHistory(Integer useStatus);
 }

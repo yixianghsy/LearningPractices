@@ -55,7 +55,6 @@
         <pagehelper.version>5.3.2</pagehelper.version>
         <version.lang3>3.3.2</version.lang3>
         <version.commons.io>2.5</version.commons.io>
-        <version.elasticsearch>7.2.0</version.elasticsearch>
         <version.web>2.2.7.RELEASE</version.web>
         <version.jstl>1.2</version.jstl>
         <version.tomcat>9.0.34</version.tomcat>
@@ -356,17 +355,6 @@
                 <groupId>org.quartz-scheduler</groupId>
                 <artifactId>quartz</artifactId>
                 <version>${quartz.version}</version>
-            </dependency>
-            <!-- elasticsearch -->
-            <dependency>
-                <groupId>org.elasticsearch.client</groupId>
-                <artifactId>elasticsearch-rest-high-level-client</artifactId>
-                <version>${version.elasticsearch}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.elasticsearch</groupId>
-                <artifactId>elasticsearch</artifactId>
-                <version>${version.elasticsearch}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>

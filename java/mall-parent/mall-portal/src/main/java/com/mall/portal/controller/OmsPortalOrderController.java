@@ -4,6 +4,7 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.google.common.collect.Maps;
 
+import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
 import com.mall.exception.BusinessException;
 import com.mall.order.dto.OmsOrderDetail;
@@ -135,6 +136,40 @@ public class OmsPortalOrderController {
         portalOrderService.sendDelayMessageCancelOrder(orderId);
         return CommonResult.success(null);
     }
+    @ApiOperation("按状态分页获取用户订单列表")
+    @ApiImplicitParam(name = "status", value = "订单状态：-1->全部；0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭",
+            defaultValue = "-1", allowableValues = "-1,0,1,2,3,4", paramType = "query", dataType = "int")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CommonPage<OmsOrderDetail>> list(@RequestParam Integer status,
+                                                         @RequestParam(required = false, defaultValue = "1") Integer pageNum,
+                                                         @RequestParam(required = false, defaultValue = "5") Integer pageSize) {
+        CommonPage<OmsOrderDetail> orderPage = portalOrderService.list(status,pageNum,pageSize);
+        return CommonResult.success(orderPage);
+    }
+    @ApiOperation("根据ID获取订单详情")
+    @RequestMapping(value = "/detail/{orderId}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<OmsOrderDetail> detail(@PathVariable Long orderId) {
+        OmsOrderDetail orderDetail = portalOrderService.detail(orderId);
+        return CommonResult.success(orderDetail);
+    }
+    @ApiOperation("用户取消订单")
+    @RequestMapping(value = "/cancelUserOrder", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult cancelUserOrder(Long orderId) {
+        portalOrderService.cancelOrder(orderId);
+        return CommonResult.success(null);
+    }
+
+    @ApiOperation("用户确认收货")
+    @RequestMapping(value = "/confirmReceiveOrder", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult confirmReceiveOrder(Long orderId) {
+        portalOrderService.confirmReceiveOrder(orderId);
+        return CommonResult.success(null);
+    }
+
 
     /**
      * 删除订单[逻辑删除],只能status为：3->已完成；4->已关闭；5->无效订单，才可以删除
@@ -153,6 +188,7 @@ public class OmsPortalOrderController {
             return CommonResult.failed("订单已经被删除或者没有符合条件的订单");
         }
     }
+
     /**
      * 订单服务由会员服务调用，会员服务传来会员：ID
      * @param status

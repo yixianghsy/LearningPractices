@@ -1,6 +1,7 @@
 package com.mall.portal.service;
 
 
+import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
 import com.mall.exception.BusinessException;
 import com.mall.order.dto.OmsOrderDetail;
@@ -14,7 +15,7 @@ import java.util.List;
  * 前台订单管理Service
  * Created on 2018/8/30.
  */
-public interface OmsPortalOrderService {
+public interface    OmsPortalOrderService {
     /**
      * 根据用户购物车信息生成确认单信息
      */
@@ -76,4 +77,17 @@ public interface OmsPortalOrderService {
      * @return
      */
     CommonResult<List<OmsOrderDetail>> findMemberOrderList(Integer pageSize, Integer pageNum, Long memberId, Integer status);
+    /**
+     * 确认收货
+     */
+    void confirmReceiveOrder(Long orderId);
+
+    /**
+     * 分页获取用户订单
+     */
+    CommonPage<OmsOrderDetail> list(Integer status, Integer pageNum, Integer pageSize);
+    /**
+     * 根据订单ID获取订单详情
+     */
+    OmsOrderDetail detail(Long orderId);
 }

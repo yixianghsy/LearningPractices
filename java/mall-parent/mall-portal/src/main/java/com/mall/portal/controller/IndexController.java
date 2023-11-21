@@ -16,6 +16,7 @@ import java.util.List;
  * <p>Company: www.itcast.cn</p>
  * @version 1.0
  */
+@Deprecated
 @Controller
 public class IndexController {
 

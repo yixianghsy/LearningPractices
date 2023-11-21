@@ -23,4 +23,14 @@ public interface MemberAttentionService {
      * 获取用户关注列表
      */
     List<MemberBrandAttention> list(Long memberId);
+
+    /**
+     * 获取用户关注详情
+     */
+    MemberBrandAttention detail(Long brandId);
+
+    /**
+     * 清空关注列表
+     */
+    void clear();
 }

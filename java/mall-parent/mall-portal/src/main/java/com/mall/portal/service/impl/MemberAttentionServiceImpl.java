@@ -3,6 +3,8 @@ package com.mall.portal.service.impl;
 import com.mall.portal.domain.MemberBrandAttention;
 import com.mall.portal.repository.MemberBrandAttentionRepository;
 import com.mall.portal.service.MemberAttentionService;
+import com.mall.portal.service.UmsMemberService;
+import com.mall.sso.model.UmsMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ public class MemberAttentionServiceImpl implements MemberAttentionService {
 
     @Autowired
     private MemberBrandAttentionRepository memberBrandAttentionRepository;
+    @Autowired
+    private UmsMemberService memberService;
     @Override
     public int add(MemberBrandAttention memberBrandAttention) {
         int count = 0;
@@ -35,5 +39,17 @@ public class MemberAttentionServiceImpl implements MemberAttentionService {
     @Override
     public List<MemberBrandAttention> list(Long memberId) {
         return memberBrandAttentionRepository.findByMemberId(memberId);
+    }
+
+    @Override
+    public MemberBrandAttention detail(Long brandId) {
+        UmsMember member = memberService.getCurrentMember();
+        return memberBrandAttentionRepository.findByMemberIdAndBrandId(member.getId(), brandId);
+    }
+
+    @Override
+    public void clear() {
+        UmsMember member = memberService.getCurrentMember();
+        memberBrandAttentionRepository.deleteAllByMemberId(member.getId());
     }
 }

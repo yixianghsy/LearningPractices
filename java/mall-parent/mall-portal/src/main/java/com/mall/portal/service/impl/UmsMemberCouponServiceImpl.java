@@ -164,6 +164,18 @@ public class UmsMemberCouponServiceImpl implements UmsMemberCouponService {
         }
     }
 
+    @Override
+    public List<SmsCouponHistory> listHistory(Integer useStatus) {
+        UmsMember currentMember = memberService.getCurrentMember();
+        SmsCouponHistoryExample couponHistoryExample=new SmsCouponHistoryExample();
+        SmsCouponHistoryExample.Criteria criteria = couponHistoryExample.createCriteria();
+        criteria.andMemberIdEqualTo(currentMember.getId());
+        if(useStatus!=null){
+            criteria.andUseStatusEqualTo(useStatus);
+        }
+        return couponHistoryMapper.selectByExample(couponHistoryExample);
+    }
+
     private BigDecimal calcTotalAmount(List<CartPromotionItem> cartItemList) {
         BigDecimal total = new BigDecimal("0");
         for (CartPromotionItem item : cartItemList) {

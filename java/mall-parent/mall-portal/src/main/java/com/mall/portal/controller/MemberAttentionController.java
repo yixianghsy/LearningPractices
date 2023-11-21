@@ -52,4 +52,19 @@ public class MemberAttentionController {
         List<MemberBrandAttention> memberBrandAttentionList = memberAttentionService.list(memberId);
         return CommonResult.success(memberBrandAttentionList);
     }
+    @ApiOperation("显示品牌关注详情")
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<MemberBrandAttention> detail(@RequestParam Long brandId) {
+        MemberBrandAttention memberBrandAttention = memberAttentionService.detail(brandId);
+        return CommonResult.success(memberBrandAttention);
+    }
+
+    @ApiOperation("清空当前用户品牌关注列表")
+    @RequestMapping(value = "/clear", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult clear() {
+        memberAttentionService.clear();
+        return CommonResult.success(null);
+    }
 }

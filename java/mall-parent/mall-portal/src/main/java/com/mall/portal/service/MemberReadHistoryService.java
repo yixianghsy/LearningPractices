@@ -1,6 +1,7 @@
 package com.mall.portal.service;
 
 import com.mall.portal.domain.MemberReadHistory;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -23,4 +24,13 @@ public interface MemberReadHistoryService {
      * 获取用户浏览历史记录
      */
     List<MemberReadHistory> list(Long memberId);
+    /**
+     * 分页获取用户浏览历史记录
+     */
+    Page<MemberReadHistory> list(Integer pageNum, Integer pageSize);
+
+    /**
+     * 清空浏览记录
+     */
+    void clear();
 }

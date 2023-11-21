@@ -60,8 +60,8 @@ docker exec -it redis redis-cli
 docker pull nginx:1.10
 ### 创建实例并启动
 docker run -p 80:80 --name nginx \
--v /mydata/nginx/html:/usr/share/nginx/html \
--v /mydata/nginx/logs:/var/log/nginx  \
+-v /volume1/docker/mydata/nginx/html:/usr/share/nginx/html \
+-v /volume1/docker/mydata/nginx/logs:/var/log/nginx  \
 -d nginx:1.10
 ### 修改nginx配置
 1. 将容器内的配置文件拷贝到当前目录：docker container cp nginx:/etc/nginx .
