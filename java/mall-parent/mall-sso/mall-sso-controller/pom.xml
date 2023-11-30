@@ -20,13 +20,13 @@
             <groupId>com.mall.sso</groupId>
             <artifactId>mall-sso-interface</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-<!--&lt;!&ndash;            排除该依赖包&ndash;&gt;-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>com.github.pagehelper</groupId>-->
-<!--                    <artifactId>pagehelper-spring-boot-starter</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
+<!--            排除该依赖包-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-data-redis</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

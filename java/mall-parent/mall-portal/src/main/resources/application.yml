@@ -24,6 +24,13 @@ spring:
       stat-view-servlet: #访问监控网页的登录用户名和密码
         login-username: druid
         login-password: druid
+#  rabbitmq:
+#    host: 192.168.10.33
+#    port: 5672
+#    virtual-host: /mall
+#    username: admin
+#    password: admin
+#    publisher-confirms: true #如果对异步消息需要回调必须设置为true
   data:
     mongodb:
       host: 192.168.10.251
@@ -59,6 +66,7 @@ logging:
 logstash:
   host: localhost
   enableInnerLog: false
+
 # 自定义redis键值
 redis:
   key:
@@ -72,6 +80,7 @@ redis:
 #  queue:
 #    name:
 #      cancelOrder: cancelOrderQueue
+#支付-当面付qrcode存储与访问路径设置
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
   secret: mall-portal-secret #JWT加解密使用的密钥
@@ -99,14 +108,21 @@ secure:
       - /order/paySuccess/*
       - /esProduct/search/**
 #支付-当面付qrcode存储与访问路径设置
-trade:
-  zhifu:
-    qrcode:
-      aliPayPath: /alipay
-      weChatPath: /wechat
-      storePath: C:/temp/qr-code
-      httpBasePath: /static/qrcode
-      paySuccessCallBack: http://yangguo.natapp1.cc/order/paySuccess
+#trade:
+#  zhifu:
+#    qrcode:
+#      aliPayPath: /alipay
+#      weChatPath: /wechat
+#      storePath: C:/temp/qr-code
+#      httpBasePath: /static/qrcode
+#      paySuccessCallBack: http://yangguo.natapp1.cc/order/paySuccess
+alipay:
+  gatewayUrl: https://openapi-sandbox.dl.alipaydev.com/gateway.do
+  appId: 9021000132619867
+  alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyQVNvsgGz1JWMX+8cQw/+xtA56EbxghWBeArkOM59Y7bokDKR/DTYn6mK46vEhA8IXvt86yaQkBJQ+a4SM0DJgqBe64qKBdEocXfhDG69eEFrbV3Eu7OMWNx7SWXWvMr9Pwvw2jQItDW00ADLpRuLFRmEivZZ2duDVmjwogxsrF53OIeghfW9KI+LCxun7RbKxVFyBzPeOKzQ0jddO7wkjnBh/1bGaajTvzO9YnXEN/PnOepcazYKdxKh3cK93XSsAp75cKI+t5b1H7Im0fKst3PdcnSBFCZ9IzvMlOoM5Pc+y7bduOovOcSD3P8l62SYDqBhdYLhUBGRcEhPhBbaQIDAQAB
+  appPrivateKey: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQClF11JFy2vjyC6lrohFyt/eohIWJI46WowhuQn6nvZT7ebjz+gavDgCh2/NH4nxM0Zmh9OjG6W077zhUmwPTLH7M9ixXS7yyCYD+M3YVvv7xAGcN5S06l7yX4HLqDT2Yy8k0tcOdgCAbD0dxOv6XzJ++lm05/ozQ4RV24duNcaEDcADMnDjWIkspavBO22L/OLOjQUlVQv5SEBJXfnxG3ub4W7T3BlhW/9nyLN8iaytamVz1uG/4j7lbEJvQHDjGg6aXizHLTGXm+zuRWhf6zUELDfO1n0TPhBNTHEItKlyGaSUb2M9YzGGEhB6sDbcwjhp3XHeQDf12yf/7bSIMTJAgMBAAECggEAGggrH4FWJN6uzH1D8D/VDg7mOnIs7Ghx5CEBDQI+cS/Oxeq6n7L9NHaj5iiC1AaGSMkyspIWRhYxf/i+e9nKjhfbQ7nbBFmtVAz9SRhDBPxvTHSzud/CU9Cb3MoPdhhRxtJ7CZndY8OcgY/dPNnWYYslbJ9mEbFzzGw64tjooiU2PpC7sjnDkJmGbda7e8IMeukwoNdnVQI1yq7iwjEtXTjo/qQZRAzUvh9VGeso2AP3fotUmgkeEtvhY8D6U06ysZtBNUPgF5xYQn94IasbRG4MMLEno1yaItcF3rgdBq+JNocwXB75EptT8MTl5obBlr/1tBM5xFqQqcHXRYh6WQKBgQD7itPQ+o/jNjkLyG+g3lNt0YHh+v763e5GTPbMc4iQ3fhqnbejda4BfmafCq/o6LnGyN5UO7q9pjZNsPBC7YIkLzTK/hz3QkZlnGqscUZaHGw8eOCJNwv3dAQnkYhQ9dwljSGkqRAn8ejX+ZkAxL/h0PTPIYBaIWuu6No/w1w9FwKBgQCoBFWaOqkGxoOsghOoPe+kEqlrRKQq74eBpiTsVN+SY8shEne/QjuXpThV87UeJmpI5okz8y8wmrys7jgO8Y/W8A5o04qhooD6tg5IqJaLQojXuDg5g7nbNebBBpuaV0XI3yCRTVhCdHQ+Sfuse6gZ5gBG7RhdOqwGifLanAb5HwKBgQCCQogiBj8Q+HleIrO76KXnjsDl12bHXroPabe8dG/aJTiJbZc1bLFpUJ2v6obh4/KggFCx6iRwJWylmuUwo3Hrbw61uBYj7Qwrfm63UgmOjH14a1hLdlgaEtg77V9cHZWdVJKBhJM7PEjJ3xVekoSTWfQMd1rSUdBDyY2Ly40ujQKBgFGB8MkmJfN8gEpCvCiFC2lMCFZacU3G77TMleL0dZU9xkAgBmmJRwGVDFReKwIaXrtI40yJb94jYt59nkJZm48I2+Ssovcwr2NwyFMlPgsG1v3Xh6cXKSWX636+puPj7J266MC0hdmPRwkkuOv+/Ri7RG0j/grUOLnfWCoHQTa/AoGAYFRLUgyOKIvGRGKVnKmG+GC8Gc1joWaOLgMCTZGPqe3kwTqAiEgW/3SsrT7OzgL0zpda1nE0N6PbgBhmEm7JCqoFEKdjQyl2NM/XXOjm2zKJ5dTiihWQ169KXviI24atrRTnL/ZjVrb1AXhOn2/4/IdXRUuFcNowz9dYJRetF9E=
+  returnUrl: http://localhost:8060/#/pages/money/paySuccess
+  notifyUrl: http://zi9aqf.natappfree.cc/notify
 mongo:
   insert:
     sqlEnable: true # 用于控制是否通过数据库数据来插入mongo

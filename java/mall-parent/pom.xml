@@ -83,6 +83,7 @@
         <logstash-logback.version>7.2</logstash-logback.version>
         <minio.version>8.4.5</minio.version>
         <alipay-sdk.version>4.38.61.ALL</alipay-sdk.version>
+        <swagger2.version>2.9.2</swagger2.version>
     </properties>
 
     <dependencies>
@@ -178,12 +179,13 @@
                 <artifactId>fastdfs_client</artifactId>
                 <version>${version.fastdfs}</version>
             </dependency>
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>${version.okhttp}</version>
-                <scope>compile</scope>
-            </dependency>
+            <!--  minio自带-->
+<!--            <dependency>-->
+<!--                <groupId>com.squareup.okhttp3</groupId>-->
+<!--                <artifactId>okhttp</artifactId>-->
+<!--                <version>${version.okhttp}</version>-->
+<!--                <scope>compile</scope>-->
+<!--            </dependency>-->
             <!--gson-->
             <dependency>
                 <groupId>com.google.code.gson</groupId>

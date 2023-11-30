@@ -46,6 +46,7 @@ public class UmsMemberController {
     public CommonResult login(@RequestParam String username,
                               @RequestParam String password) {
         String token = memberService.login(username, password);
+        System.out.println("token"+token);
         if (token == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }

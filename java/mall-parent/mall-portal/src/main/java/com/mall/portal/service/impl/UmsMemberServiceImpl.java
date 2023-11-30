@@ -3,6 +3,7 @@ package com.mall.portal.service.impl;
 import com.mall.api.CommonResult;
 import com.mall.portal.domain.MemberDetails;
 import com.mall.portal.service.UmsMemberService;
+
 import com.mall.securit.util.JwtTokenUtil;
 import com.mall.service.RedisService;
 import com.mall.sso.mapper.UmsMemberLevelMapper;
@@ -53,6 +54,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
     private String REDIS_KEY_PREFIX_AUTH_CODE;
     @Value("${redis.key.expire.authCode}")
     private Long AUTH_CODE_EXPIRE_SECONDS;
+
     @Override
     public UmsMember getByUsername(String username) {
         UmsMemberExample example = new UmsMemberExample();
@@ -170,6 +172,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             token = jwtTokenUtil.generateToken(userDetails);
+            System.out.println("service...token"+token);
         } catch (AuthenticationException e) {
             LOGGER.warn("登录异常:{}", e.getMessage());
         }

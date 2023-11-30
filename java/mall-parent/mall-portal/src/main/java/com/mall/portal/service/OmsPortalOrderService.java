@@ -90,4 +90,10 @@ public interface    OmsPortalOrderService {
      * 根据订单ID获取订单详情
      */
     OmsOrderDetail detail(Long orderId);
+
+    /**
+     * 根据orderSn来实现的支付成功逻辑
+     */
+
+    void paySuccessByOrderSn(String orderSn, Integer payType);
 }

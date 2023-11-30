@@ -47,6 +47,22 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--
+        Caused by: java.util.concurrent.ExecutionException:
+        org.apache.dubbo.remoting.RemotingException:
+        io.netty.handler.codec.EncoderException: j
+        ava.lang.NoClassDefFoundError: com/esotericsoftware/kryo/io/Output
+         -->
+        <dependency>
+            <groupId>de.javakaffee</groupId>
+            <artifactId>kryo-serializers</artifactId>
+            <version>0.45</version>
+        </dependency>
+        <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryo</artifactId>
+            <version>4.0.2</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>

@@ -2,7 +2,7 @@
   <configuration default="false" name="sso-service" type="docker-deploy" factoryName="dockerfile" singleton="false" server-name="openwrt">
     <deployment type="dockerfile">
       <settings>
-        <option name="imageTag" value="sso-service:0.02" />
+        <option name="imageTag" value="sso-service:0.01" />
         <option name="containerName" value="sso-service" />
         <option name="contextFolderPath" value="mall-parent/mall-sso/mall-sso-service/target" />
         <option name="commandLineOptions" value="--network  host" />

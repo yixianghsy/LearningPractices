@@ -29,6 +29,10 @@
 <!--            </exclusions>-->
         </dependency>
         <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.mall.content</groupId>
             <artifactId>mall-content-interface</artifactId>
             <version>0.0.1-SNAPSHOT</version>

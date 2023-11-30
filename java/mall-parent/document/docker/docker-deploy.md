@@ -114,7 +114,31 @@ docker pull mongo:3.2
 docker run -p 27017:27017 --name mongo -v /mydata/mongo/db:/data/db -d mongo:3.2
 ### 使用mongo命令进入容器
 docker exec -it mongo mongo
+## Minio安装
+### 下载镜像文件
+docker pull minio/minio
+docker run -p 9000:9000 -p 9090:9090 \
+--net=host \
+--name minio \
+-d --restart=always \
+-e "MINIO_ACCESS_KEY=minioadmin" \
+-e "MINIO_SECRET_KEY=minioadmin" \
+-v /volume1/docker/mydata/minio/data:/data \
+-v /volume1/docker/mydata/minio/config:/root/.minio \
+minio/minio server \
+/data --console-address ":9090" -address ":9000"
 
+### 创建实例并运行
+docker run -p 9000:9000 -p 9090:9090 \
+--net=host \
+--name minio \
+-d --restart=always \
+-e "MINIO_ACCESS_KEY=minioadmin" \
+-e "MINIO_SECRET_KEY=minioadmin" \
+-v /volume1/docker/mydata/minio/data:/data \
+-v /volume1/docker/mydata/minio/config:/root/.minio \
+minio/minio server \
+/data --console-address ":9090" -address ":9000"
 ## SpringBoot应用命令部署
 **docker容器间进行连接才能互相访问**
 ### 部署mall-admin

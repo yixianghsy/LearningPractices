@@ -165,6 +165,20 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         return orderDetail;
     }
 
+    @Override
+    public void paySuccessByOrderSn(String orderSn, Integer payType) {
+        OmsOrderExample example =  new OmsOrderExample();
+        example.createCriteria()
+                .andOrderSnEqualTo(orderSn)
+                .andStatusEqualTo(0)
+                .andDeleteStatusEqualTo(0);
+        List<OmsOrder> orderList = orderMapper.selectByExample(example);
+        if(CollUtil.isNotEmpty(orderList)){
+            OmsOrder order = orderList.get(0);
+            paySuccess(order.getId(),payType);
+        }
+    }
+
     /**
      * 删除订单[逻辑删除],只能status为：3->已完成；4->已关闭；5->无效订单，才可以删除
      * ，否则只能先取消订单然后删除。
