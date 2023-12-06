@@ -2,8 +2,7 @@
   <div class="product">
     <product-param v-bind:title="product.name">
       <template v-slot:buy>
-        <button  v-if="product.flashPromotionRelationId==null"  class="btn" @click="buy">立即购买</button>
-        <button  v-else  class="btn" @click="secKillbuy">立即秒杀</button>
+        <button  class="btn" @click="buy">立即购买</button> 
 
          
       </template>

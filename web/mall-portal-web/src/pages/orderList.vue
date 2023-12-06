@@ -55,15 +55,12 @@
                   </div>
                   <div class="good-name">
                     <div class="p-name">{{item.productName}}</div>
-                    <div class="p-money">{{item.productPrice + 'X' + item.quantity}}元</div>
+                    <div class="p-money">{{item.productPrice + 'X' + item.productQuantity}}元</div>
                   </div>
                 </div>
               </div>
-              <div class="good-state fr" v-if="order.status == 20">
-                <a href="javascript:;">{{order.statusDesc}}</a>
-              </div>
-              <div class="good-state fr" v-else>
-                <a href="javascript:;" @click="goPay(order.orderNo)">{{order.statusDesc}}</a>
+              <div class="good-state fr" v-if="order.status == 0"> 
+                <a href="javascript:;" @click="goPay(order.id)">去支付</a>
               </div>
             </div>
           </div>
@@ -131,15 +128,13 @@
       getOrderList(){
         this.loading = true;
         this.busy = true;
-        this.axios.post('/order/list/userOrder',Qs.stringify({
-          
-            memberId:1,
+        this.axios.post('/order/list/userOrder',Qs.stringify({ 
             pageSize:10,
             pageNum:this.pageNum
            
         }),{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((res)=>{
           this.loading = false;
-          this.list = this.list.concat(res);
+          this.list = res.records;
           this.total = res.total;
           this.showNextPage = res.hasNextPage;
           this.busy = false;
@@ -147,7 +142,7 @@
           this.loading = false;
         })
       },
-      goPay(orderNo){
+      goPay(orderId){
         // 三种路由跳转方式
         // this.$router.push('/order/pay')
         /*this.$router.push({
@@ -159,7 +154,7 @@
         this.$router.push({
           path:'/order/pay',
           query:{
-            orderNo
+            orderId
           }
         })
       },

@@ -60,8 +60,7 @@
         color:$colorB;
         font-weight:bold;
       }
-      .pro-param{
-        font-size:$fontJ;
+      .pro-param{ 
         span{
           margin:0 10px;
         }

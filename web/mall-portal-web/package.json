@@ -13,7 +13,10 @@
     "@babel/plugin-syntax-dynamic-import": "^7.7.4",
     "axios": "^0.19.0",
     "core-js": "^3.3.2",
+    "font-awesome": "^4.7.0",
     "js-cookie": "^2.2.1",
+    "less": "^4.1.0",
+    "less-loader": "^7.2.1",
     "qrcode": "^1.4.4",
     "vue": "^2.6.10",
     "vue-awesome-countdown": "^1.0.23",
@@ -50,7 +53,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": { 
+      "no-unused-vars":0
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

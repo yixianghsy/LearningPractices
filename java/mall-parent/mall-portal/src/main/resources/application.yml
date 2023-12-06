@@ -8,7 +8,7 @@ dubbo:
     address: zookeeper://192.168.10.251:2181
     protocol: zookeeper
 server:
-  port: 8032
+  port: 8888
 
 spring:
   datasource:
@@ -81,11 +81,16 @@ redis:
 #    name:
 #      cancelOrder: cancelOrderQueue
 #支付-当面付qrcode存储与访问路径设置
+#jwt:
+#  tokenHeader: Authorization #JWT存储的请求头
+#  secret: mall-portal-secret #JWT加解密使用的密钥
+#  expiration: 604800 #JWT的超期限时间(60*60*24)
+#  tokenHead: Bearer #JWT负载中拿到开头
 jwt:
-  tokenHeader: Authorization #JWT存储的请求头
-  secret: mall-portal-secret #JWT加解密使用的密钥
-  expiration: 604800 #JWT的超期限时间(60*60*24)
-  tokenHead: Bearer #JWT负载中拿到开头
+  secret: tuling-mall-portal  #服务端私钥（一定不能泄露）
+  expiration: 86400   #过期时间 60*60*24  =一天
+  tokenHead: Bearer #jwt规范  #告诉客户端jwt令牌开头需要加的一个字符串
+  tokenHeader: Authorization #告诉客户端你要在请求头里面传什么参数名字
 secure:
   ignored:
     urls: #安全路径白名单
@@ -99,14 +104,11 @@ secure:
       - /**/*.ico
       - /webjars/springfox-swagger-ui/**
       - /druid/**
-      - /actuator/**
-      - /sso/**
+      - /user/**
+      - /product/**
       - /home/**
-      #杨过添加,开放访问秒杀活、产品详情
-      - /sms/**
-      - /pms/**
       - /order/paySuccess/*
-      - /esProduct/search/**
+      - /static/qrcode/**
 #支付-当面付qrcode存储与访问路径设置
 #trade:
 #  zhifu:

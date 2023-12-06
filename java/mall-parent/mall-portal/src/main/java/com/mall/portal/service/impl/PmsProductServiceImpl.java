@@ -1,7 +1,7 @@
 package com.mall.portal.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.mall.mansger.dto.PmsProductParam;
+import com.mall.portal.domain.PmsProductParam;
 import com.mall.portal.dao.FlashPromotionProductDao;
 import com.mall.portal.dao.PortalProductDao;
 import com.mall.portal.domain.FlashPromotionProduct;

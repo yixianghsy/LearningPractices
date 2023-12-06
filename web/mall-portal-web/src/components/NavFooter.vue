@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="footer-logo">
       <img src="/imgs/logo-footer.png" alt="">
-      <p>小米商城</p>
+      <p>图灵商城</p>
     </div>             
     <div class="footer-link">
       <a href="http://www.tulingxueyuan.cn/" target="_blank">图灵学院</a><span>|</span>
@@ -31,8 +31,7 @@
       margin-bottom:31px;
       img{
         width:53px;
-        height:36px;
-        margin-bottom:13px;
+        height:53px; 
       }
     }
     .footer-link{

@@ -2,13 +2,13 @@ rocketmq:
   producer:
     default: true
     groupName: e3-item-web
-    namesrvAddr: 192.168.10.33:9876
+    namesrvAddr: 192.168.10.251:9876
 server:
   port: 8023
 dubbo:
   application:
     name: item-web
   registry:
-    address: zookeeper://192.168.10.33:2181
+    address: zookeeper://192.168.10.251:2181
     protocol: zookeepe
 

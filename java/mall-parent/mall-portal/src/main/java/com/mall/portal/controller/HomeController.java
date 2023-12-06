@@ -5,7 +5,14 @@ import com.mall.content.model.CmsSubject;;
 import com.mall.mansger.model.PmsProduct;
 import com.mall.mansger.model.PmsProductCategory;
 import com.mall.portal.domain.HomeContentResult;
+import com.mall.portal.dto.HomeGoodsSaleDTO;
+import com.mall.portal.dto.HomeMenusBannerDTO;
+import com.mall.portal.dto.HomeMenusDTO;
+import com.mall.mansger.model.SmsHomeAdvertise;
 import com.mall.portal.service.HomeService;
+import com.mall.portal.service.PmsProductCategoryService;
+import com.mall.portal.service.SmsHomeAdvertiseService;
+import com.mall.portal.service.SmsHomeCategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +29,16 @@ import java.util.List;
 @Api(tags = "HomeController", description = "首页内容管理")
 @RequestMapping("/home")
 public class HomeController {
+
+    @Autowired
+    PmsProductCategoryService productCategoryService;
+
+    @Autowired
+    SmsHomeCategoryService homeCategoryService;
+
+    @Autowired
+    SmsHomeAdvertiseService homeAdvertiseService;
+
     @Autowired
     private HomeService homeService;
     @ApiOperation("首页内容信息展示")
@@ -72,5 +89,29 @@ public class HomeController {
                                                          @RequestParam(value = "pageSize", defaultValue = "6") Integer pageSize) {
         List<PmsProduct> productList = homeService.newProductList(pageNum,pageSize);
         return CommonResult.success(productList);
+    }
+    @ApiOperation("获取首页类型导航栏和数据")
+    @RequestMapping(value = "/menus_banner", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult getMenus() {
+        // 分类导航
+        List<HomeMenusDTO> list= productCategoryService.getMenus();
+
+        // banner
+        List<SmsHomeAdvertise> homeAdvertisesList= homeAdvertiseService.getHomeBanners();
+
+        HomeMenusBannerDTO homeMenusBannerDTO=new HomeMenusBannerDTO();
+        homeMenusBannerDTO.setHomeMenusList(list);
+        homeMenusBannerDTO.setHomeAdvertisesList(homeAdvertisesList);
+
+
+        return CommonResult.success(homeMenusBannerDTO);
+    }
+    @ApiOperation("goods_sale")
+    @RequestMapping(value = "/goods_sale", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult getGoodsSale() {
+        List<HomeGoodsSaleDTO> list= homeCategoryService.getGoodsSale();
+        return CommonResult.success(list);
     }
 }

@@ -1,6 +1,6 @@
 package com.mall.portal.dao;
 
-import com.mall.order.dto.OmsOrderDetail;
+import com.mall.portal.domain.OmsOrderDetail;
 import com.mall.order.model.OmsOrderItem;
 import org.apache.ibatis.annotations.Param;
 

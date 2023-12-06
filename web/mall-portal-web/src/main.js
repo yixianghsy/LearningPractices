@@ -4,10 +4,12 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueLazyLoad from 'vue-lazyload'
 import VueCookie from 'vue-cookie'
-import { Message } from 'element-ui'
+import { Message,Autocomplete } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import store from './store'
-import App from './App.vue'
+// npm install --save font-awesome
+import 'font-awesome/css/font-awesome.min.css'
+import store from './store'  // 全局变量
+import App from './App.vue' 
 
 // import env from './env'
 // mock开关
@@ -35,9 +37,11 @@ function getCookie(c_name){
   return ""
 }
 // request
-
+// axios的拦截器   jwt+spring security
 axios.interceptors.request.use(config => {
+  // jwt令牌
   var token= getCookie("token");
+  window.console.log(token);
   if (token !=undefined) {
     config.headers['Authorization'] = token; // 让每个请求携带自定义token 请根据实际情况自行修改
   } 
@@ -52,9 +56,15 @@ axios.interceptors.request.use(config => {
 
 
 // 接口错误拦截
-axios.interceptors.response.use(function(response){
+axios.interceptors.response.use(function(response){ 
   let res = response.data;
-  let path = location.hash;
+  let path = location.hash;   
+
+  if(res.code==undefined){
+    return res;
+  }
+
+  // 处理CommonResult逻辑
   if(res.code == 200){
     return res.data;
   }else if(res.code==401 || res.code==403|| res.code==600){  //|| res.code==401 || res.code==403 
@@ -67,22 +77,23 @@ axios.interceptors.response.use(function(response){
     Message.warning(res.message);
     return Promise.reject(res);
   }
-},(error)=>{
-  let res = error.response;
-  Message.error(res.data.message);
+},(error)=>{ 
+  Message.error(error.message);
   return Promise.reject(error);
 });
 
+Vue.use(Autocomplete);
 Vue.use(VueAxios,axios);
 Vue.use(VueCookie);
 Vue.use(VueLazyLoad,{
-  loading:'/imgs/loading-svg/loading-bars.svg'
+  loading:'/imgs/loading-svg/loading-bars.svg',
+  error:'/imgs/nopic.png'
 })
 Vue.prototype.$message = Message;
 Vue.config.productionTip = false
 
 
-
+// 创建VUe根实例
 new Vue({
   store,
   router,

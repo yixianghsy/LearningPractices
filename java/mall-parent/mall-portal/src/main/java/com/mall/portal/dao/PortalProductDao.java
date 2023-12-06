@@ -1,6 +1,6 @@
 package com.mall.portal.dao;
 
-import com.mall.mansger.dto.PmsProductParam;
+import com.mall.portal.domain.PmsProductParam;
 import com.mall.portal.domain.CartProduct;
 import com.mall.portal.domain.PromotionProduct;
 import org.apache.ibatis.annotations.Param;

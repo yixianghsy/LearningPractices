@@ -2,27 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mall.order.mapper.OmsOrderItemMapper">
   <resultMap id="BaseResultMap" type="com.mall.order.model.OmsOrderItem">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="order_id" jdbcType="BIGINT" property="orderId" />
-    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
-    <result column="product_id" jdbcType="BIGINT" property="productId" />
-    <result column="product_pic" jdbcType="VARCHAR" property="productPic" />
-    <result column="product_name" jdbcType="VARCHAR" property="productName" />
-    <result column="product_brand" jdbcType="VARCHAR" property="productBrand" />
-    <result column="product_sn" jdbcType="VARCHAR" property="productSn" />
-    <result column="product_price" jdbcType="DECIMAL" property="productPrice" />
-    <result column="product_quantity" jdbcType="INTEGER" property="productQuantity" />
-    <result column="product_sku_id" jdbcType="BIGINT" property="productSkuId" />
-    <result column="product_sku_code" jdbcType="VARCHAR" property="productSkuCode" />
-    <result column="product_category_id" jdbcType="BIGINT" property="productCategoryId" />
-    <result column="promotion_name" jdbcType="VARCHAR" property="promotionName" />
-    <result column="promotion_amount" jdbcType="DECIMAL" property="promotionAmount" />
-    <result column="coupon_amount" jdbcType="DECIMAL" property="couponAmount" />
-    <result column="integration_amount" jdbcType="DECIMAL" property="integrationAmount" />
-    <result column="real_amount" jdbcType="DECIMAL" property="realAmount" />
-    <result column="gift_integration" jdbcType="INTEGER" property="giftIntegration" />
-    <result column="gift_growth" jdbcType="INTEGER" property="giftGrowth" />
-    <result column="product_attr" jdbcType="VARCHAR" property="productAttr" />
+    <id column="id" property="id" />
+    <result column="order_id" property="orderId" />
+    <result column="order_sn" property="orderSn" />
+    <result column="product_id" property="productId" />
+    <result column="product_pic" property="productPic" />
+    <result column="product_name" property="productName" />
+    <result column="product_brand" property="productBrand" />
+    <result column="product_sn" property="productSn" />
+    <result column="product_price" property="productPrice" />
+    <result column="product_quantity" property="productQuantity" />
+    <result column="product_sku_id" property="productSkuId" />
+    <result column="product_sku_code" property="productSkuCode" />
+    <result column="product_category_id" property="productCategoryId" />
+    <result column="sp1" property="sp1" />
+    <result column="sp2" property="sp2" />
+    <result column="sp3" property="sp3" />
+    <result column="promotion_name" property="promotionName" />
+    <result column="promotion_amount" property="promotionAmount" />
+    <result column="coupon_amount" property="couponAmount" />
+    <result column="integration_amount" property="integrationAmount" />
+    <result column="real_amount" property="realAmount" />
+    <result column="gift_integration" property="giftIntegration" />
+    <result column="gift_growth" property="giftGrowth" />
+    <result column="product_attr" property="productAttr" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>

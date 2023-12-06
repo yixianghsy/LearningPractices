@@ -4,7 +4,7 @@ package com.mall.portal.service;
 import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
 import com.mall.exception.BusinessException;
-import com.mall.order.dto.OmsOrderDetail;
+import com.mall.portal.domain.OmsOrderDetail;
 import com.mall.portal.domain.ConfirmOrderResult;
 import com.mall.portal.domain.OrderParam;
 import org.springframework.transaction.annotation.Transactional;

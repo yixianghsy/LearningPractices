@@ -3,17 +3,14 @@
     <div class="nav-topbar">
       <div class="container">
         <div class="topbar-menu">
-          <a href="javascript:;">小米商城</a>
-          <a href="javascript:;">MUI</a>
-          <a href="javascript:;">云服务</a>
-          <a href="javascript:;">协议规则</a>
+          <a href="javascript:;">图灵商城</a> 
         </div>
         <div class="topbar-user">
           <a href="javascript:;" v-if="username">{{username}}</a>
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
           <a href="javascript:;" v-if="username" @click="logout">退出</a>
           <a href="/#/order/list" v-if="username">我的订单</a>
-          <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车</a>
+          <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车({{cartCount}})</a>
         </div>
       </div>
     </div>
@@ -22,7 +19,7 @@
         <div class="header-logo">
           <a href="/#/index"></a>
         </div>
-        <div class="header-menu">
+        <!--div class="header-menu">
           <div class="item-menu">
             <span>热销产品</span>
             <div class="children">
@@ -103,7 +100,7 @@
               </ul>
             </div>
           </div>
-        </div>
+        </div-->
         <div class="header-search">
           <div class="wrapper">
             <input type="text"  v-model="keyword" name="keyword">
@@ -138,7 +135,8 @@
        username(){
         return this.$store.state.username;
       },
-      cartCount(){
+      cartCount(){ 
+        // 取
         return this.$store.state.cartCount;
       }, 
       ...mapState(['username','cartCount'])

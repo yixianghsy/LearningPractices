@@ -12,7 +12,7 @@
             <div class="icon-succ"></div>
             <div class="order-info">
               <h2>订单提交成功！去付款咯～</h2>
-              <p>请在<span>30分</span>内完成支付, 超时后将取消订单</p>
+              <p>请在<span>{{orderOvertime}}分</span>内完成支付, 超时后将取消订单</p>
               <p>收货信息：{{addressInfo}}</p>
             </div>
             <div class="order-total">
@@ -23,7 +23,7 @@
           <div class="item-detail" v-if="showDetail">
             <div class="item">
               <div class="detail-title">订单号：</div>
-              <div class="detail-info theme-color">{{orderId}}</div>
+              <div class="detail-info theme-color">{{orderSn}}</div>
             </div>
             <div class="item">
               <div class="detail-title">收货信息：</div>
@@ -34,32 +34,31 @@
               <div class="detail-info">
                 <ul>
                   <li v-for="(item,index) in orderDetail" :key="index">
-                    <img v-lazy="item.productImage"/>{{item.productName}}
+                    <img v-lazy="item.productPic"/>{{item.productName}}
                   </li>
                 </ul>
               </div>
             </div>
-            <div class="item">
+            <!-- <div class="item">
               <div class="detail-title">发票信息：</div>
               <div class="detail-info">电子发票 个人</div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="item-pay">
           <h3>选择以下支付方式付款</h3>
           <div class="pay-way">
             <p>支付平台</p>
-            <div class="pay pay-ali" :class="{'checked':payType==1}" ></div>
-            <!-- <div class="pay pay-wechat" :class="{'checked':payType==2}" @click="paySubmit(2)"></div> -->
+            <div class="pay pay-ali" @click="paySubmit(1)" :class="{'checked':payType==1}"></div>
+            <div class="pay pay-wechat" :class="{'checked':payType==2}" ></div>
           </div>
-           <div class="pay-way">
-             <img  :src="payImageQr"/>
-            
-          </div>
+           <div class="pay-way"  v-if="showPay && payType==1" >
+              <img  :src="payImageQr"/>
+            </div>
         </div>
       </div>
     </div>
-    <scan-pay-code v-if="showPay" @close="closePayModal" :img="payImg"></scan-pay-code>
+    <scan-pay-code v-if="showPay && payType==2" @close="closePayModal" :img="payImg"></scan-pay-code>
     <modal
       title="支付确认"
       btnType="3"
@@ -95,7 +94,9 @@ export default{
       showPayModal:false,//是否显示二次支付确认弹框
       payment:0,//订单总金额
       T:'',//定时器ID
-      payImageQr:''
+      payImageQr:'', 
+      orderSn:'',
+      orderOvertime:'',
     }
   },
   components:{
@@ -109,25 +110,31 @@ export default{
   methods:{
     getOrderDetail(){
       this.axios.get(`/order/orderDetail?orderId=${this.orderId}`).then((res)=>{
-         this.orderDetail=res.orderItemList;
+         this.orderDetail=res.orderItemList;  //订单商品详情
          this.addressInfo=res.receiverProvince+res.receiverCity+res.receiverRegion+res.receiverDetailAddress;
          this.payment=res.payAmount;
-      })
-      this.axios.post('/order/tradeQrCode',Qs.stringify({
-        orderId:this.orderId,
-        payType:1
-      }),{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((res)=>{
-       this.payImageQr='http://localhost:8085'+res;
-       window.console.log(res);
-      })
+         this.orderSn=res.orderSn;
+         this.orderOvertime=res.normalOrderOvertime;
+
+      }) 
     },
     paySubmit(payType){
-      if(payType == 1){
-        window.open('/#/order/alipay?orderId='+this.orderId,'_blank');
+      this.payType=payType;
+      this.showPay = !this.showPay;
+      // 支付宝
+      if(payType == 1){ 
+          this.axios.post('/order/tradeQrCode',Qs.stringify({
+          orderId:this.orderId,
+          payType:1
+        }),{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((res)=>{
+        this.payImageQr='http://localhost:8888'+res;
+        window.console.log(res);
+        })
       }else{
+        // 微信
         this.axios.post('/pay',{
           orderId:this.orderId,
-          orderName:'Vue高仿小米商城',
+          orderName:'图灵商城基础版',
           amount:0.01,//单位元
           payType:2 //1支付宝，2微信
         }).then((res)=>{

@@ -10,7 +10,7 @@ import com.mall.exception.BusinessException;
 import com.mall.mansger.mapper.PmsSkuStockMapper;
 import com.mall.mansger.mapper.SmsCouponHistoryMapper;
 import com.mall.mansger.model.*;
-import com.mall.order.dto.OmsOrderDetail;
+import com.mall.portal.domain.OmsOrderDetail;
 import com.mall.order.mapper.OmsOrderItemMapper;
 import com.mall.order.mapper.OmsOrderMapper;
 import com.mall.order.mapper.OmsOrderSettingMapper;
@@ -23,7 +23,6 @@ import com.mall.portal.domain.ConfirmOrderResult;
 import com.mall.portal.domain.OrderParam;
 import com.mall.portal.domain.SmsCouponHistoryDetail;
 import com.mall.portal.service.*;
-import com.mall.service.RedisService;
 import com.mall.sso.mapper.UmsIntegrationConsumeSettingMapper;
 import com.mall.sso.model.UmsIntegrationConsumeSetting;
 import com.mall.sso.model.UmsMember;
@@ -357,6 +356,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
             orderItem.setOrderId(order.getId());
             orderItem.setOrderSn(order.getOrderSn());
         }
+        // TODO 请求错误:->nested exception is org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'sp1' in 'class com.mall.order.model.OmsOrderItem'
         orderItemDao.insertList(orderItemList);
         //如使用优惠券更新优惠券使用状态
         if (orderParam.getCouponId() != null) {
@@ -478,9 +478,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         StringBuilder sb = new StringBuilder();
         String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
         String key = REDIS_KEY_PREFIX_ORDER_ID + date;
-        Long increment=null;
-        //TODO  redis生成，redis 还未配置
-//        Long increment = redisService.increment(key, 1);
+        Long increment = redisService.increment(key, 1);
         sb.append(date);
         sb.append(String.format("%02d", order.getSourceType()));
         sb.append(String.format("%02d", order.getPayType()));

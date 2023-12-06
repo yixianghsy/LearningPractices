@@ -1,6 +1,6 @@
 package com.mall.portal.service;
 
-import com.mall.mansger.dto.PmsProductParam;
+import com.mall.portal.domain.PmsProductParam;
 import com.mall.portal.domain.FlashPromotionProduct;
 
 import java.util.List;

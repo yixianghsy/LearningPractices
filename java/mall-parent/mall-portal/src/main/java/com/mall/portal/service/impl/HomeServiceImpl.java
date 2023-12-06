@@ -106,6 +106,7 @@ public class HomeServiceImpl implements HomeService {
         int offset = pageSize * (pageNum - 1);
         return homeDao.getNewProductList(offset, pageSize);
     }
+
     private List<SmsHomeAdvertise> getHomeAdvertiseList() {
         SmsHomeAdvertiseExample example = new SmsHomeAdvertiseExample();
         example.createCriteria().andTypeEqualTo(1).andStatusEqualTo(1);

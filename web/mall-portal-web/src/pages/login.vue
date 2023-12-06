@@ -7,7 +7,8 @@
       <div class="container">
         <div class="login-form">
           <h3>
-            <span class="checked">帐号登录</span><span class="sep-line">|</span><span>扫码登录</span>
+            <span class="checked">帐号登录</span>
+              <!-- <span class="sep-line">|</span><span>扫码登录</span> -->
           </h3>
           <div class="input">
             <input type="text" placeholder="请输入帐号" v-model="username">
@@ -19,8 +20,8 @@
             <a href="javascript:;" class="btn" @click="login">登录</a>
           </div>
           <div class="tips">
-            <div class="sms" @click="register">手机短信登录/注册</div>
-            <div class="reg">立即注册<span>|</span>忘记密码？</div>
+            <!-- <div class="sms" @click="register">手机短信登录/注册</div> -->
+            <div class="reg" @click="register">立即注册<span>|</span>忘记密码？</div>
           </div>
         </div>
       </div>
@@ -57,19 +58,28 @@ export default {
       let { username,password } = this;
       
       this.axios.post(
-        '/sso/login',
+        'user/login',
          Qs.stringify({
          username:username,
          password:password
          }),{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((res)=>{
        
-            this.$cookie.set('token',res.tokenHead+' '+res.token,{expires:'1M'});
-            this.$store.dispatch('saveToken',res.token);
+           // 将 tokenHead+jwtToken 存入到cookie  下次请求就可以携带在请求头中了
+          this.$cookie.set('token',res.tokenHead+' '+res.token,{expires:'1M'});
+          // 保存到全局变量中
+          this.$store.dispatch('saveToken',res.token);
+          // 拿到payloader 解码
+          var tokenStr= decodeURIComponent(escape(window.atob(res.token.split('.')[1])));
+          // 转换为json对象
+          let username = JSON.parse(tokenStr).user_name;
 
+          // let username=res.username
+          
+          // setCookie("token",username,120);
 
-           var tokenStr= decodeURIComponent(escape(window.atob(res.token.split('.')[1])));
-           let username = JSON.parse(tokenStr).user_name;
+          // setCookie=this.$cookie.set
            setCookie("username",username,120);
+           // this.saveUserName= this.$store.dispatch('saveUserName',username)
            this.saveUserName(username);
             
            this.$router.push({
@@ -83,9 +93,8 @@ export default {
     ...mapActions(['saveUserName']),
     register(){
       this.axios.post('/user/register',{
-        username:'admin1',
-        password:'admin1',
-        email:'admin1@163.com'
+        username:this.username,
+        password:this.password
       }).then(()=>{
         this.$message.success('注册成功');
       })

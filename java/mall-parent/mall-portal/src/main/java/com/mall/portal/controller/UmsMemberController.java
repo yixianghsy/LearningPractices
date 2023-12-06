@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @Controller
 @Api(tags = "UmsMemberController", description = "会员登录注册管理")
-@RequestMapping("/sso")
+@RequestMapping("/user")
 public class UmsMemberController {
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
@@ -51,6 +51,8 @@ public class UmsMemberController {
             return CommonResult.validateFailed("用户名或密码错误");
         }
         Map<String, String> tokenMap = new HashMap<>();
+
+//        token = "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX25hbWUiOiJ0ZXN0IiwiY3JlYXRlZCI6MTcwMTg1MDU0MzQ2NCwiZXhwIjoxNzAxOTM2OTQzfQ.a0lsmUs0Y0zVRmNnzuMjQlMQqBXxeHZpFoy4WLMMKyPtdTXl6L2FHjAs_LwbQNKVkMDjVOiE0gXqwpnuL1AbiA";
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
         return CommonResult.success(tokenMap);

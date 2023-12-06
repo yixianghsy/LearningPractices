@@ -22,7 +22,7 @@
                 <span class="checkbox"     v-bind:class="{'checked':item.productSelected}"      @click="updateCart(item)"></span>
               </div>
               <div class="item-name">
-                <img v-lazy="item.productMainImage" alt="">
+                <img v-lazy="item.productPic" alt="">
                 <span>{{item.productName + ' , ' + item.productSubTitle}}</span>
               </div>
               <div class="item-price">{{item.price}}</div>
@@ -32,8 +32,9 @@
                   <span >{{item.quantity}}</span>
                   <a href="javascript:;"  @click="updateCart(item,'+')">+</a>
                 </div>
+                <div>当前库存：{{item.stock}}</div>
               </div>
-              <div class="item-total">{{item.productTotalPrice}}</div>
+              <div class="item-total">{{item.quantity*item.price}}</div>
               <div class="item-del" @click="delProduct(item)"></div>
             </li>
           </ul>
@@ -41,7 +42,7 @@
         <div class="order-wrap clearfix">
           <div class="cart-tip fl">
             <a href="/#/index">继续购物</a>
-            共<span>{{list.length}}</span>件商品，已选择<span>{{checkedNum}}</span>件
+            共<span>{{list.length}}</span>件商品，已选择<span>{{checkedNum}}</span>件，总价<span>{{calcSum}}</span>
           </div>
           <div class="total fr">
              <a href="javascript:;" class="btn" @click="order">去结算</a>
@@ -73,15 +74,26 @@
         cartTotalPrice:0,//商品总金额
         checkedNum:0//选中商品数量
       }
+    }, 
+    computed:{
+      calcSum(){
+        let sum=0;
+            this.list.map((item)=>{
+              // 是否选中
+               if(item.productSelected){
+                  sum+=item.price*item.quantity
+                }
+             });
+        return sum;
+      }
     },
-   
     mounted(){
       this.getCartList();
     },
     methods:{
       // 获取购物车列表
       getCartList(){
-        this.axios.get('/cart/list').then((res)=>{
+        this.axios.get('/car/list').then((res)=>{
           this.renderData(res);
         })
       },
@@ -96,23 +108,35 @@
           }
            --quantity;
             item.quantity=quantity;
-          this.axios.post('/cart/update/quantity',Qs.stringify({
+          this.axios.post('/car/update/quantity',Qs.stringify({
             id:item.id,
             quantity:item.quantity
           }),{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(()=>{
            });
         }else if(type == '+'){
+          // 如果当前数量等于库存就不能再加
+          if(quantity>=item.stock){
+            this.$message.warning('库存不足！');
+            return;
+          }
+
             ++quantity; 
             item.quantity=quantity;
-         this.axios.post('/cart/add',{
-            productId:item.productId,
-            productSkuId:item.productSkuId,
-            quantity:1
-          }).then(()=>{
-          });
+         
+          this.axios.post('/car/update/quantity',Qs.stringify({
+            id:item.id,
+            quantity:item.quantity
+          }),{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(()=>{
+           });
 
 
         }else{
+        // 选择
+        if(quantity>item.stock){
+            this.$message.warning('库存不足！');
+            return;
+          }
+
          var index=0;
          this.list.map((oitem)=>{
                if(oitem.id==item.id){
@@ -131,7 +155,7 @@
       },
        // 删除购物车商品
       delProduct(item){
-          this.axios.post('/cart/delete',Qs.stringify({
+          this.axios.post('/car/delete',Qs.stringify({
             ids:item.id
           }),{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(()=>{
             this.$message.success('删除成功');
@@ -153,6 +177,11 @@
       // 控制全选功能
       toggleAll(){
            this.list.map((item)=>{
+             // 为每个项设置productSelected 
+             if(item.quantity>item.stock){
+              this.$message.warning('库存不足！');
+              return;
+             }
                item.productSelected=!this.allChecked;
            });
          this.allChecked=!this.allChecked;
@@ -170,9 +199,7 @@
           if(item.productSelected==undefined){
               item.productSelected=false;
           }
-        });
-
- 
+        }); 
 
         //this.list.filter(item=>item.productSelected).length;
       },
@@ -185,14 +212,17 @@
         }else{
             constStore.itemids=[];
             this.list.map((item)=>{
+              // 如果选中
                if(item.productSelected){
+                 // 当前购物车id
                  constStore.itemids.push(item.id);
                 }
              });
+             // 替换路由：不会刷新页面 会保留根vue对象中的值 ， 跳转页面： 重新加载会创建创建vue对象
              this.$router.push('/order/confirm');
         }
       }
-    }
+    },
   }
 </script>
 <style lang="scss">
