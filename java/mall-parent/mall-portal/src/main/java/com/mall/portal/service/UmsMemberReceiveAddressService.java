@@ -15,6 +15,8 @@ public interface UmsMemberReceiveAddressService {
      */
     int add(UmsMemberReceiveAddress address);
 
+
+
     /**
      * 删除收货地址
      * @param id 地址表的id
@@ -32,10 +34,15 @@ public interface UmsMemberReceiveAddressService {
      * 返回当前用户的收货地址
      */
     List<UmsMemberReceiveAddress> list();
-
+    /**
+     * 返回当前用户的收货地址
+     */
+    List<UmsMemberReceiveAddress> list(Long id);
     /**
      * 获取地址详情
      * @param id 地址id
      */
     UmsMemberReceiveAddress getItem(Long id);
+
+    List<UmsMemberReceiveAddress> listByMemberId();
 }

@@ -1,7 +1,9 @@
 package com.mall.portal.service;
 
+import com.mall.mansger.model.PmsProduct;
 import com.mall.portal.domain.PmsProductParam;
 import com.mall.portal.domain.FlashPromotionProduct;
+import com.mall.portal.dto.ProductDetailDTO;
 
 import java.util.List;
 
@@ -10,6 +12,7 @@ import java.util.List;
  * @date ：Created in 2019/12/31
  * @version: V1.0
  * @slogan: 天下风云出我辈，一入代码岁月催
+ * 商品信息 服务类
  * @description:
  **/
 public interface PmsProductService {
@@ -28,4 +31,8 @@ public interface PmsProductService {
      * @param sessionId 场次活动ID，for example：13:00-14:00场等
      */
     List<FlashPromotionProduct> getFlashProductList(Integer pageSize, Integer pageNum, Long flashPromotionId, Long sessionId);
+
+    PmsProduct getById(Long productId);
+
+    ProductDetailDTO getProductDetail(Long id);
 }

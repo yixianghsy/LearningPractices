@@ -7,10 +7,11 @@ import com.google.common.collect.Maps;
 import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
 import com.mall.exception.BusinessException;
+import com.mall.order.service.OmsOrderService;
 import com.mall.portal.domain.OmsOrderDetail;
 import com.mall.portal.config.Configs;
-import com.mall.portal.domain.ConfirmOrderResult;
 import com.mall.portal.domain.OrderParam;
+import com.mall.portal.dto.ConfirmOrderDTO;
 import com.mall.portal.service.OmsPortalOrderService;
 import com.mall.portal.service.TradeService;
 import io.swagger.annotations.Api;
@@ -48,13 +49,26 @@ public class OmsPortalOrderController {
     @Autowired
     private UmsMemberService umsMemberService;
 
+//    @Autowired
+//    OmsOrderService orderService;
+
+    @Autowired
+    OmsPortalOrderService omsPortalOrderService;
+    /**
+     * 加入购物车---生成确认订单实现
+     * 立即购买—生成确认订单实现 product_id  sku_id. 改成DTO接收
+     * 复用业务逻辑的代码 product_id 和sku_id 查出购物车对象所需要信息
+     * 初始化确认订单的商品和收货地址信息
+     * this.axios.post('/order/generateConfirmOrder',Qs.stringify({itemIds: constStore.itemids}
+     */
     @ApiOperation("根据购物车信息生成确认单信息")
     @ApiImplicitParam(name = "itemId",value = "购物车选择购买的选项ID",allowMultiple = true,paramType = "query",dataType = "long")
     @RequestMapping(value = "/generateConfirmOrder",method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult<ConfirmOrderResult> generateConfirmOrder(@RequestParam(value = "itemIds") List<Long> itemIds) throws BusinessException {
-        ConfirmOrderResult confirmOrderResult = portalOrderService.generateConfirmOrder(itemIds);
-        return CommonResult.success(confirmOrderResult);
+    public CommonResult<ConfirmOrderDTO> generateConfirmOrder(@RequestParam(value = "itemIds") List<Long> itemIds) throws BusinessException {
+//        ConfirmOrderResult confirmOrderResult = portalOrderService.generateConfirmOrder(itemIds);
+        ConfirmOrderDTO confirmOrderDTO= omsPortalOrderService.generateConfirmOrder(itemIds);
+        return CommonResult.success(confirmOrderDTO) ;
     }
 
     @ApiOperation("根据购物车信息生成订单")

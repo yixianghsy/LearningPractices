@@ -413,4 +413,8 @@
       product_attr = #{productAttr,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectMaps" parameterType="java.lang.Long" resultType="java.util.Map">
+    SELECT  COALESCE(sum(quantity)) as total FROM oms_cart_item WHERE delete_status=0 AND member_id = #{id}
+    </select>
 </mapper>

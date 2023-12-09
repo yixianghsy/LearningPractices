@@ -5,7 +5,6 @@ import com.mall.sso.model.UmsMemberReceiveAddressExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
 public interface UmsMemberReceiveAddressMapper {
     long countByExample(UmsMemberReceiveAddressExample example);
 

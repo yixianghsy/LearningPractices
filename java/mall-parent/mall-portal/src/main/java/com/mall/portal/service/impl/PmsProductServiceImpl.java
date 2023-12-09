@@ -1,10 +1,14 @@
 package com.mall.portal.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.mall.mansger.mapper.PmsProductMapper;
+import com.mall.mansger.model.PmsProduct;
+import com.mall.portal.dao.ProductDao;
 import com.mall.portal.domain.PmsProductParam;
 import com.mall.portal.dao.FlashPromotionProductDao;
 import com.mall.portal.dao.PortalProductDao;
 import com.mall.portal.domain.FlashPromotionProduct;
+import com.mall.portal.dto.ProductDetailDTO;
 import com.mall.portal.service.PmsProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,11 @@ public class PmsProductServiceImpl implements PmsProductService {
 
     @Autowired
     private FlashPromotionProductDao flashPromotionProductDao;
+
+    @Autowired
+    private PmsProductMapper productMapper;
+    @Autowired
+    private ProductDao productDao;
     /**
      * add by yangguo
      * 获取商品详情信息
@@ -39,6 +48,20 @@ public class PmsProductServiceImpl implements PmsProductService {
     public List<FlashPromotionProduct> getFlashProductList(Integer pageSize,Integer pageNum,Long flashPromotionId, Long sessionId){
         PageHelper.startPage(pageNum,pageSize,"sort desc");
         return flashPromotionProductDao.getFlashProductList(flashPromotionId,sessionId);
+    }
+
+    @Override
+    public PmsProduct getById(Long productId) {
+        return productMapper.selectByPrimaryKey(productId);
+    }
+    /**
+     * 取商品详情获
+     * @param id 商品id
+     * @return
+     */
+    @Override
+    public ProductDetailDTO getProductDetail(Long id) {
+        return productDao.getProductDetail(id);
     }
 }
 

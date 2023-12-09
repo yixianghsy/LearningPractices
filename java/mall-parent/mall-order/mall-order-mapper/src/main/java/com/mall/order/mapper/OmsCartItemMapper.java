@@ -4,6 +4,7 @@ import com.mall.order.model.OmsCartItemExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface OmsCartItemMapper {
     long countByExample(OmsCartItemExample example);
@@ -27,4 +28,11 @@ public interface OmsCartItemMapper {
     int updateByPrimaryKeySelective(OmsCartItem record);
 
     int updateByPrimaryKey(OmsCartItem record);
+
+    /**
+     * 更新购物车数量
+     * @param id
+     * @return
+     */
+    List<Map<String, Object>> selectMaps(Long id);
 }

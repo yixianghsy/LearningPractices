@@ -7,6 +7,7 @@ import com.mall.exception.BusinessException;
 import com.mall.portal.domain.OmsOrderDetail;
 import com.mall.portal.domain.ConfirmOrderResult;
 import com.mall.portal.domain.OrderParam;
+import com.mall.portal.dto.ConfirmOrderDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -19,8 +20,13 @@ public interface    OmsPortalOrderService {
     /**
      * 根据用户购物车信息生成确认单信息
      */
-    ConfirmOrderResult generateConfirmOrder(List<Long> itemIds) throws BusinessException;
-
+//    ConfirmOrderResult generateConfirmOrder(List<Long> itemIds) throws BusinessException;
+    /**
+     * 初始化确认订单的商品和收货地址信息
+     * @param ids
+     * @return
+     */
+    ConfirmOrderDTO generateConfirmOrder(List<Long> ids);
     /**
      * 根据提交信息生成订单
      */

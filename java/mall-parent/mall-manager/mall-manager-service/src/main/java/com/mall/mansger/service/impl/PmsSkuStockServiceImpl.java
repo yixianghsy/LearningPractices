@@ -1,9 +1,11 @@
 package com.mall.mansger.service.impl;
 
 
+import com.mall.mansger.mapper.PmsSkuStockMapper;
 import com.mall.mansger.model.PmsSkuStock;
 import com.mall.mansger.service.PmsSkuStockService;
 import org.apache.dubbo.config.annotation.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -13,6 +15,8 @@ import java.util.List;
  */
 @Service
 public class PmsSkuStockServiceImpl implements PmsSkuStockService {
+    @Autowired
+    private PmsSkuStockMapper pmsSkuStockMapper;
 
     @Override
     public List<PmsSkuStock> getList(Long pid, String keyword) {
@@ -22,5 +26,10 @@ public class PmsSkuStockServiceImpl implements PmsSkuStockService {
     @Override
     public int update(Long pid, List<PmsSkuStock> skuStockList) {
         return 0;
+    }
+
+    @Override
+    public PmsSkuStock getById(Long productSkuId) {
+        return pmsSkuStockMapper.selectByPrimaryKey(productSkuId);
     }
 }

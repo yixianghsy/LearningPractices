@@ -4,6 +4,7 @@ import com.mall.api.CommonResult;
 import com.mall.order.model.OmsCartItem;
 import com.mall.portal.domain.CartProduct;
 import com.mall.portal.domain.CartPromotionItem;
+import com.mall.portal.dto.AddCarDTO;
 import com.mall.portal.service.OmsCartItemService;
 import com.mall.portal.service.UmsMemberService;
 import io.swagger.annotations.Api;
@@ -27,17 +28,46 @@ public class OmsCartItemController {
     @Autowired
     private UmsMemberService memberService;
 
+//    @ApiOperation(value = "添加商品到购物车",notes = "杨过修改购物逻辑,数据不必全都从前台传")
+//    @RequestMapping(value = "/add", method = RequestMethod.POST)
+//    @ResponseBody
+//    public CommonResult add(@RequestBody OmsCartItem cartItem) {
+//        int count = cartItemService.add(cartItem);
+//        if(count > 0){
+//            return CommonResult.success(cartItemService.cartItemCount());
+//        }
+//        return CommonResult.failed();
+//    }
+    /**
+     *  .post("/cart/add", {
+     *           productId: this.id,
+     *           productSkuId: this.skuId,
+     *           quantity: 1,
+     *         })
+     * @return
+     */
     @ApiOperation(value = "添加商品到购物车",notes = "杨过修改购物逻辑,数据不必全都从前台传")
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value="/add",method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult add(@RequestBody OmsCartItem cartItem) {
-        int count = cartItemService.add(cartItem);
-        if(count > 0){
-            return CommonResult.success(cartItemService.cartItemCount());
+    public CommonResult add(@RequestBody AddCarDTO addCarDTO){
+        Boolean result=cartItemService.add(addCarDTO);
+        if(result){
+            return  CommonResult.success(result);
         }
-        return CommonResult.failed();
+        else {
+            return  CommonResult.failed();
+        }
     }
-
+    /**
+     *  初始化状态栏的购物车商品数量
+     *   this.axios.get('/car/products/sum').then((res=0)=>{
+     */
+    @ResponseBody
+    @RequestMapping(value="/products/sum",method = RequestMethod.GET)
+    public CommonResult getCarProdutSum(){
+        Integer count= cartItemService.getCarProdutSum();
+        return CommonResult.success(count);
+    }
     @ApiOperation("获取某个会员的购物车列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody

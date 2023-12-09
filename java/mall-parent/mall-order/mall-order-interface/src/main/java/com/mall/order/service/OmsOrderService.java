@@ -56,5 +56,4 @@ public interface OmsOrderService {
     @Transactional
     int updateNote(Long id, String note, Integer status);
 
-    void cancelOverTimeOrder();
 }

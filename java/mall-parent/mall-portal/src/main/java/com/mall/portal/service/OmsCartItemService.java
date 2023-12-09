@@ -7,7 +7,7 @@ import com.mall.portal.domain.CartPromotionItem;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+import com.mall.portal.dto.AddCarDTO;
 /**
  * 购物车管理Service
  * Created on 2018/8/2.
@@ -19,6 +19,7 @@ public interface OmsCartItemService {
     @Transactional
     int add(OmsCartItem cartItem);
 
+    Boolean add(AddCarDTO addCarDTO);
     /**
      * 购物车产品数量
      */
@@ -68,4 +69,8 @@ public interface OmsCartItemService {
      * 清空购物车
      */
     int clear(Long memberId);
+
+    Integer getCarProdutSum();
+
+    List<OmsCartItem> listByIds(List<Long> ids);
 }

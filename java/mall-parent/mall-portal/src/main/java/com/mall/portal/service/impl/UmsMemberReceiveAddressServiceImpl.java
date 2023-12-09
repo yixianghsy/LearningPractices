@@ -22,6 +22,8 @@ public class UmsMemberReceiveAddressServiceImpl implements UmsMemberReceiveAddre
     private UmsMemberService memberService;
     @Autowired
     private UmsMemberReceiveAddressMapper addressMapper;
+    @Autowired
+    private UmsMemberReceiveAddressMapper umsMemberReceiveAddressMapper;
     @Override
     public int add(UmsMemberReceiveAddress address) {
         UmsMember currentMember = memberService.getCurrentMember();
@@ -55,6 +57,17 @@ public class UmsMemberReceiveAddressServiceImpl implements UmsMemberReceiveAddre
     }
 
     @Override
+    public List<UmsMemberReceiveAddress> list(Long id) {
+        /**
+         * SELECT id,member_id,name,phone_number,default_status,post_code,province,
+         * city,region,detail_address FROM ums_member_receive_address WHERE (member_id = ?)
+         */
+        UmsMemberReceiveAddressExample  example  = new UmsMemberReceiveAddressExample();
+        example.createCriteria().andMemberIdEqualTo(id);
+        return umsMemberReceiveAddressMapper.selectByExample(example);
+    }
+
+    @Override
     public UmsMemberReceiveAddress getItem(Long id) {
         UmsMember currentMember = memberService.getCurrentMember();
         UmsMemberReceiveAddressExample example = new UmsMemberReceiveAddressExample();
@@ -64,5 +77,12 @@ public class UmsMemberReceiveAddressServiceImpl implements UmsMemberReceiveAddre
             return addressList.get(0);
         }
         return null;
+    }
+
+    @Override
+    public List<UmsMemberReceiveAddress> listByMemberId() {
+        UmsMemberReceiveAddressExample example = new UmsMemberReceiveAddressExample();
+        example.createCriteria().andMemberIdEqualTo(memberService.getCurrentMember().getId());
+        return addressMapper.selectByExample(example);
     }
 }
