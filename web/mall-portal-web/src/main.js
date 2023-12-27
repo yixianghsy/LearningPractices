@@ -10,6 +10,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/css/font-awesome.min.css'
 import store from './store'  // 全局变量
 import App from './App.vue' 
+import vueQr from 'vue-qr';
 
 // import env from './env'
 // mock开关
@@ -89,6 +90,7 @@ Vue.use(VueLazyLoad,{
   loading:'/imgs/loading-svg/loading-bars.svg',
   error:'/imgs/nopic.png'
 })
+Vue.use(vueQr);
 Vue.prototype.$message = Message;
 Vue.config.productionTip = false
 

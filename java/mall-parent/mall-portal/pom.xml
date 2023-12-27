@@ -33,6 +33,11 @@
 <!--			</exclusions>-->
 		</dependency>
 		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
 			<groupId>com.mall.sso</groupId>
 			<artifactId>mall-sso-interface</artifactId>
 			<version>0.0.1-SNAPSHOT</version>

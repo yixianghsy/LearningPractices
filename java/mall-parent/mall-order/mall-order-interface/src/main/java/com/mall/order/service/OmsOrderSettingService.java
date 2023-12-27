@@ -17,4 +17,6 @@ public interface OmsOrderSettingService {
      * 修改指定订单设置
      */
     int update(Long id, OmsOrderSetting orderSetting);
+
+    OmsOrderSetting getById(long l);
 }

@@ -25,4 +25,9 @@ public class OmsOrderSettingServiceImpl implements OmsOrderSettingService {
         orderSetting.setId(id);
         return orderSettingMapper.updateByPrimaryKey(orderSetting);
     }
+
+    @Override
+    public OmsOrderSetting getById(long l) {
+        return orderSettingMapper.selectByPrimaryKey(l);
+    }
 }

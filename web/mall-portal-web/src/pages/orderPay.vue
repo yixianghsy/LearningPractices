@@ -75,6 +75,8 @@
   </div>
 </template>
 <script>
+// 创建websocket
+let webSocket = null;
 import QRCode from 'qrcode'
 import OrderHeader from './../components/OrderHeader'
 import ScanPayCode from './../components/ScanPayCode'
@@ -118,9 +120,13 @@ export default{
 
       }) 
     },
+    //webSocketSubmit也可以写这里  把代码包进去
     paySubmit(payType){
       this.payType=payType;
       this.showPay = !this.showPay;
+      let id =  JSON.parse(this.orderId);
+      window.console.log("id"+id)
+      // console.log(id);报错
       // 支付宝
       if(payType == 1){ 
           this.axios.post('/order/tradeQrCode',Qs.stringify({
@@ -128,7 +134,11 @@ export default{
           payType:1
         }),{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((res)=>{
         this.payImageQr='http://localhost:8888'+res;
+        //支付成功跳转到订单页面
+        //思路:使用同步访问，是否支付成功页面需要显示“请等待”,成功跳转，失败重新支付
+        // 图片出来以后执行这个轮询
         window.console.log(res);
+        this.webSocketSubmit(payType) ;
         })
       }else{
         // 微信
@@ -150,6 +160,56 @@ export default{
         })
       }
     },
+
+    // webSocket开始代码
+    webSocketSubmit(payType){
+       //websoket进行连接
+       const _this = this
+       const target = "ws://localhost:8888/api/webSocket";
+       if ("WebSocket" in window) {//判断浏览器是否支持，创建websocket对象
+              webSocket = new WebSocket(target);
+           } else {
+             alert("浏览器不支持websocket");
+           }
+            
+         webSocket.onerror = function () {
+              alert("发生错误连接失败");
+           };
+         webSocket.onopen = function () { 
+          window.console.log("连接成功");
+          window.console.log("payType:"+payType);
+          //后期把paySubmit代码移到这里
+         };
+         //响应
+         webSocket.onmessage = (res) => {
+          //转换成对象
+          const result = JSON.parse(res.data)
+          if(result.status === 200){
+            _this.$message.success("支付成功")
+            _this.order.status = "未发货"
+            //提交订单
+            _this.insertOrder();
+            //删除购物车的内容
+            _this.deleteCart();
+            //关闭webSocket资源
+            webSocket.close();
+            //跳转到结算完成界面(页面待开发)
+            _this.$router.replace("/ego/alipay")
+          }
+
+         };
+         webSocket.onclose = function () {
+         // this.sendMessage("Loc MSG:关闭连接");
+         window.console.log("关闭连接");
+          };
+ 
+        window.onbeforeunload = function () {
+           webSocket.close();
+         };
+
+    },
+    // webSocket结束代码
+
     // 关闭微信弹框
     closePayModal(){
       this.showPay = false;
