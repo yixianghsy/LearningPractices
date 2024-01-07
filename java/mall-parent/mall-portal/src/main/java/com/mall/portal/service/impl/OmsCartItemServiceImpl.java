@@ -6,6 +6,7 @@ import com.mall.exception.BusinessException;
 import com.mall.mansger.model.PmsProduct;
 import com.mall.mansger.model.PmsSkuStock;
 import com.mall.mansger.service.PmsSkuStockService;
+import com.mall.order.dto.CartItemStockDTO;
 import com.mall.order.mapper.OmsCartItemMapper;
 import com.mall.order.model.OmsCartItem;
 import com.mall.order.model.OmsCartItemExample;
@@ -123,13 +124,15 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
 
             omsCartItem.setCreateDate(new Date());
             omsCartItem.setModifyDate(new Date());
+            // TODO  插入语句有问题
             return cartItemMapper.insert(omsCartItem)>0;
             // 修改  给商品数量+1
         } else{
             cartItem.setQuantity(cartItem.getQuantity()+1);
             cartItem.setModifyDate(new Date());
             OmsCartItemExample example = new OmsCartItemExample();
-            example.createCriteria().andIdEqualTo(cartItem.getId()).andDeleteStatusEqualTo(0);
+            example.createCriteria().andDeleteStatusEqualTo(0).andIdEqualTo(cartItem.getId());
+//            example.createCriteria().andIdEqualTo(cartItem.getId()).andDeleteStatusEqualTo(0);
             return cartItemMapper.updateByExampleSelective(cartItem,example) > 0;
 
         }
@@ -166,6 +169,8 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         return  cartItemMapper.selectByExample(example);
     }
 
+
+
     /**
      * 购物车产品数量
      * @return
@@ -200,10 +205,19 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         }
         return null;
     }
+    /**
+     * 判断同一个商品、sku、用户 下是否添加的重复的购物车
+     * @param productId
+     * @param skuId
+     * @param memberId
+     * @return
+     */
     public OmsCartItem getCartItem(Long productId,Long skuId, Long memberId){
         OmsCartItemExample example = new OmsCartItemExample();
-        OmsCartItemExample.Criteria criteria = example.createCriteria().andMemberIdEqualTo(memberId)
-                .andProductIdEqualTo(productId).andDeleteStatusEqualTo(0);
+//        OmsCartItemExample.Criteria criteria = example.createCriteria().andMemberIdEqualTo(memberId)
+        OmsCartItemExample.Criteria criteria = example.createCriteria().andDeleteStatusEqualTo(0)
+                // product_id = 27 , AND product_sku_id = 99 ,AND member_id = 1
+                .andProductIdEqualTo(productId).andMemberIdEqualTo(memberId);
         if (!StringUtils.isEmpty(skuId)) {
             criteria.andProductSkuIdEqualTo(skuId);
         }
@@ -220,7 +234,11 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         example.createCriteria().andDeleteStatusEqualTo(0).andMemberIdEqualTo(memberId);
         return cartItemMapper.selectByExample(example);
     }
-
+    @Override
+    public List<CartItemStockDTO> getList(Long memberId) {
+        List<CartItemStockDTO> list=cartItemMapper.getCartItemStock(memberId);
+        return list;
+    }
     /**
      * 获取被选择的包含促销活动信息的购物车列表
      * add by yangguo

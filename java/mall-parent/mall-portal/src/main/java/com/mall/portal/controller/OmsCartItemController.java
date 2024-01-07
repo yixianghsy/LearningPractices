@@ -1,6 +1,7 @@
 package com.mall.portal.controller;
 
 import com.mall.api.CommonResult;
+import com.mall.order.dto.CartItemStockDTO;
 import com.mall.order.model.OmsCartItem;
 import com.mall.portal.domain.CartProduct;
 import com.mall.portal.domain.CartPromotionItem;
@@ -68,14 +69,26 @@ public class OmsCartItemController {
         Integer count= cartItemService.getCarProdutSum();
         return CommonResult.success(count);
     }
+//    @ApiOperation("获取某个会员的购物车列表")
+//    @RequestMapping(value = "/list", method = RequestMethod.GET)
+//    @ResponseBody
+//    public CommonResult<List<OmsCartItem>> list() {
+//        // TODO  SQL 缺少字段
+//        List<OmsCartItem> cartItemList = cartItemService.list(memberService.getCurrentMember().getId());
+//        return CommonResult.success(cartItemList);
+//    }
+    /**
+     * 获取购物数据初始化
+     *  this.axios.get('/car/list')
+     */
     @ApiOperation("获取某个会员的购物车列表")
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value="/list",method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<List<OmsCartItem>> list() {
-        List<OmsCartItem> cartItemList = cartItemService.list(memberService.getCurrentMember().getId());
-        return CommonResult.success(cartItemList);
-    }
+    public CommonResult<List<CartItemStockDTO>> getList(){
+        List<CartItemStockDTO> list= cartItemService.getList(memberService.getCurrentMember().getId());
 
+        return CommonResult.success(list);
+    }
     @ApiOperation("获取某个会员的购物车列表,包括促销信息")
     @RequestMapping(value = "/list/promotion", method = RequestMethod.GET)
     @ResponseBody

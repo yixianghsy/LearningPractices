@@ -4,6 +4,8 @@ package com.mall.portal.service;
 import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
 import com.mall.exception.BusinessException;
+import com.mall.order.dto.OrderParamDTO;
+import com.mall.order.model.OmsOrder;
 import com.mall.portal.domain.OmsOrderDetail;
 import com.mall.portal.domain.ConfirmOrderResult;
 import com.mall.portal.domain.OrderParam;
@@ -33,6 +35,12 @@ public interface    OmsPortalOrderService {
     @Transactional
     CommonResult generateOrder(OrderParam orderParam) throws BusinessException;
 
+    /**
+     * 下单
+     * @param paramDTO
+     * @return
+     */
+    OmsOrder generateOrder(OrderParamDTO paramDTO);
     /**
      * 订单详情
      * @param orderId

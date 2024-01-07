@@ -1,4 +1,4 @@
-package com.mall.portal.dto;
+package com.mall.order.dto;
 
 import com.mall.order.model.OmsOrderItem;
 import io.swagger.annotations.ApiModel;

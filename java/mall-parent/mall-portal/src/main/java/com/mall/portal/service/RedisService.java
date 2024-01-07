@@ -31,5 +31,8 @@ public interface RedisService {
      * @param delta 自增步长
      */
     Long increment(String key, long delta);
-
+    /**
+     * 按delta递增
+     */
+    Long incr(String key, long delta);
 }

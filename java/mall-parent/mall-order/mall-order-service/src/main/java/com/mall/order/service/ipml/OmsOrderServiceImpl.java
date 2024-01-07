@@ -1,16 +1,18 @@
 package com.mall.order.service.ipml;
 
+import cn.hutool.core.io.FileUtil;
 import com.github.pagehelper.PageHelper;
 
+import com.mall.exception.ApiException;
+import com.mall.mansger.mapper.PmsSkuStockMapper;
+import com.mall.mansger.model.PmsSkuStock;
+import com.mall.mansger.model.PmsSkuStockExample;
+import com.mall.mansger.service.PmsSkuStockService;
 import com.mall.order.dto.*;
-import com.mall.order.mapper.OmsOrderDao;
-import com.mall.order.mapper.OmsOrderMapper;
-import com.mall.order.mapper.OmsOrderOperateHistoryDao;
-import com.mall.order.mapper.OmsOrderOperateHistoryMapper;
-import com.mall.order.model.OmsOrder;
-import com.mall.order.model.OmsOrderExample;
-import com.mall.order.model.OmsOrderOperateHistory;
+import com.mall.order.mapper.*;
+import com.mall.order.model.*;
 import com.mall.order.service.OmsOrderService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.dubbo.config.annotation.Service;
 
@@ -32,7 +34,14 @@ public class OmsOrderServiceImpl implements OmsOrderService {
     private OmsOrderOperateHistoryDao orderOperateHistoryDao;
     @Autowired
     private OmsOrderOperateHistoryMapper orderOperateHistoryMapper;
-
+    @Autowired
+    private OmsOrderItemMapper omsOrderItemMapper;
+    @Autowired
+    private PmsSkuStockMapper pmsSkuStockMapper;
+    @Reference
+    private PmsSkuStockService pmsSkuStockService;
+//    @Autowired
+//    private TradePayProp tradePayProp;
     @Override
     public List<OmsOrder> list(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
@@ -150,5 +159,56 @@ public class OmsOrderServiceImpl implements OmsOrderService {
         history.setNote("修改备注信息："+note);
         orderOperateHistoryMapper.insert(history);
         return count;
+    }
+    //  TODO 代码未完善
+    @Override
+    public void paySuccess(Long orderId, Integer payType) {
+        /**
+         * 1更新订单状态和支付方式、支付时间        唯一标识
+         * 2.清除锁定库存，扣除实际库存
+         * 3.删除二维码
+         */
+        //更新订单状态和支付方式、支付时间
+        OmsOrder omsOrder=new OmsOrder();
+        omsOrder.setStatus(1); // 待发货
+        omsOrder.setPayType(payType);
+        omsOrder.setPaymentTime(new Date());
+        OmsOrderExample omsOrderExample = new OmsOrderExample();
+        omsOrderExample.createCriteria().andStatusEqualTo(0).andIdEqualTo(orderId);
+        int update = orderMapper.updateByExampleSelective(omsOrder, omsOrderExample);
+//        omsOrder.setId(orderId);
+//        UpdateWrapper<OmsOrder> updateWrapper = new UpdateWrapper<>();
+//        updateWrapper.lambda().set(OmsOrder::getStatus,omsOrder.getStatus())
+//                .set(OmsOrder::getPayType,omsOrder.getPayType())
+//                .set(OmsOrder::getPaymentTime,omsOrder.getPaymentTime())
+//                .eq(OmsOrder::getId,omsOrder.getId());
+//        boolean update = this.update(updateWrapper);
+        //==0没有更新成功
+        if(update==0){
+            throw  new ApiException("订单支付成功：更新失败！");
+        }
+
+        //清除锁定库存，扣除实际库存
+        OmsOrderItemExample omsOrderItemExample = new OmsOrderItemExample();
+        omsOrderItemExample.createCriteria().andOrderIdEqualTo(orderId);
+        List<OmsOrderItem> list = omsOrderItemMapper.selectByExample(omsOrderItemExample);
+        for (OmsOrderItem omsOrderItem : list) {
+
+            pmsSkuStockService.minusUpdate(
+                    omsOrderItem.getProductQuantity(),
+                    omsOrderItem.getProductQuantity(),
+                    omsOrderItem.getProductSkuId()
+            );
+        }
+
+        //删除二维码
+        // 需要修改为运行机器上的路径
+        String fileName= String.format("/qr-%s.png", orderId);
+        String filePath ="E:/Temp/qr-code"+fileName;
+        // 如果二维码存在
+        if(FileUtil.exist(filePath) && FileUtil.isFile(filePath)){
+            // 删除
+            FileUtil.del(filePath);
+        }
     }
 }

@@ -288,4 +288,26 @@
       detail_address = #{detailAddress,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="getOne" resultMap="BaseResultMap">
+    SELECT
+      id,
+      member_id,
+      name,
+      phone_number,
+      default_status,
+      post_code,
+      province,
+      city,
+      region,
+      detail_address
+    FROM
+      ums_member_receive_address
+    WHERE
+      (
+          member_id = #{memberId}
+          AND id = #{id}
+        );
+
+  </select>
 </mapper>

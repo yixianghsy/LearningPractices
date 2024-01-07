@@ -1,6 +1,7 @@
 package com.mall.search.config;
 
 
+import com.mall.config.BaseSwaggerConfig;
 import com.mall.domain.SwaggerProperties;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;

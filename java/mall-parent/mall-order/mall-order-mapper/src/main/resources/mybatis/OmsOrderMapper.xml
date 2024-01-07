@@ -39,7 +39,6 @@
     <result column="receiver_detail_address" jdbcType="VARCHAR" property="receiverDetailAddress" />
     <result column="note" jdbcType="VARCHAR" property="note" />
     <result column="confirm_status" jdbcType="INTEGER" property="confirmStatus" />
-    <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
     <result column="use_integration" jdbcType="INTEGER" property="useIntegration" />
     <result column="payment_time" jdbcType="TIMESTAMP" property="paymentTime" />
     <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
@@ -111,7 +110,7 @@
     pay_type, source_type, status, order_type, delivery_company, delivery_sn, auto_confirm_day, 
     integration, growth, promotion_info, bill_type, bill_header, bill_content, bill_receiver_phone, 
     bill_receiver_email, receiver_name, receiver_phone, receiver_post_code, receiver_province, 
-    receiver_city, receiver_region, receiver_detail_address, note, confirm_status, delete_status, 
+    receiver_city, receiver_region, receiver_detail_address, note, confirm_status,
     use_integration, payment_time, delivery_time, receive_time, comment_time, modify_time
   </sql>
   <select id="selectByExample" parameterType="com.mall.order.model.OmsOrderExample" resultMap="BaseResultMap">
@@ -160,7 +159,7 @@
       receiver_name, receiver_phone, receiver_post_code, 
       receiver_province, receiver_city, receiver_region, 
       receiver_detail_address, note, confirm_status, 
-      delete_status, use_integration, payment_time, 
+      use_integration, payment_time,
       delivery_time, receive_time, comment_time, 
       modify_time)
     values (#{memberId,jdbcType=BIGINT}, #{couponId,jdbcType=BIGINT}, #{orderSn,jdbcType=VARCHAR}, 
@@ -175,7 +174,7 @@
       #{receiverName,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=VARCHAR}, #{receiverPostCode,jdbcType=VARCHAR}, 
       #{receiverProvince,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR}, #{receiverRegion,jdbcType=VARCHAR}, 
       #{receiverDetailAddress,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{confirmStatus,jdbcType=INTEGER}, 
-      #{deleteStatus,jdbcType=INTEGER}, #{useIntegration,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP}, 
+      #{useIntegration,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP},
       #{deliveryTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP}, #{commentTime,jdbcType=TIMESTAMP}, 
       #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
@@ -292,9 +291,6 @@
       </if>
       <if test="confirmStatus != null">
         confirm_status,
-      </if>
-      <if test="deleteStatus != null">
-        delete_status,
       </if>
       <if test="useIntegration != null">
         use_integration,
@@ -567,9 +563,6 @@
       <if test="record.confirmStatus != null">
         confirm_status = #{record.confirmStatus,jdbcType=INTEGER},
       </if>
-      <if test="record.deleteStatus != null">
-        delete_status = #{record.deleteStatus,jdbcType=INTEGER},
-      </if>
       <if test="record.useIntegration != null">
         use_integration = #{record.useIntegration,jdbcType=INTEGER},
       </if>
@@ -632,7 +625,6 @@
       receiver_detail_address = #{record.receiverDetailAddress,jdbcType=VARCHAR},
       note = #{record.note,jdbcType=VARCHAR},
       confirm_status = #{record.confirmStatus,jdbcType=INTEGER},
-      delete_status = #{record.deleteStatus,jdbcType=INTEGER},
       use_integration = #{record.useIntegration,jdbcType=INTEGER},
       payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
       delivery_time = #{record.deliveryTime,jdbcType=TIMESTAMP},
@@ -754,9 +746,6 @@
       <if test="confirmStatus != null">
         confirm_status = #{confirmStatus,jdbcType=INTEGER},
       </if>
-      <if test="deleteStatus != null">
-        delete_status = #{deleteStatus,jdbcType=INTEGER},
-      </if>
       <if test="useIntegration != null">
         use_integration = #{useIntegration,jdbcType=INTEGER},
       </if>
@@ -816,7 +805,6 @@
       receiver_detail_address = #{receiverDetailAddress,jdbcType=VARCHAR},
       note = #{note,jdbcType=VARCHAR},
       confirm_status = #{confirmStatus,jdbcType=INTEGER},
-      delete_status = #{deleteStatus,jdbcType=INTEGER},
       use_integration = #{useIntegration,jdbcType=INTEGER},
       payment_time = #{paymentTime,jdbcType=TIMESTAMP},
       delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
@@ -825,4 +813,47 @@
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+<!--  <select id="getOrderDetail" resultType="com.mall.order.dto.OrderDetailDTO">-->
+<!--    </select>-->
+  <resultMap id="OrderDetailMap" type="com.mall.order.dto.OrderDetailDTO">
+    <id column="id" property="id" />
+    <result column="order_sn" property="orderSn" />
+    <result column="receiver_province" property="receiverProvince" />
+    <result column="receiver_city" property="receiverCity" />
+    <result column="receiver_region" property="receiverRegion" />
+    <result column="receiver_detail_address" property="receiverDetailAddress" />
+    <result column="pay_amount" property="payAmount" />
+    <result column="status" property="status"></result>
+    <result column="create_time" property="createTime"></result>
+    <result column="normal_order_overtime" property="normalOrderOvertime"></result>
+    <collection property="orderItemList" ofType="com.mall.order.model.OmsOrderItem">
+      <id column="item_id" property="id"></id>
+      <result column="product_pic" property="productPic"></result>
+      <result column="product_name" property="productName"></result>
+      <result column="product_price" property="productPrice"></result>
+      <result column="product_quantity" property="productQuantity"></result>
+    </collection>
+  </resultMap>
+  <select id="getOrderDetail" resultMap="OrderDetailMap">
+    SELECT
+      o.id,
+      o.order_sn,
+      o.receiver_province,
+      o.receiver_city,
+      o.receiver_region,
+      o.receiver_detail_address,
+      o.pay_amount,
+      o.status,
+      o.create_time,
+      oi.product_pic,
+      oi.product_name,
+      oi.id as item_id,
+      oi.product_price,
+      oi.product_quantity,
+      (SELECT normal_order_overtime FROM oms_order_setting  LIMIT 0,1) as normal_order_overtime
+    FROM oms_order o
+           LEFT JOIN oms_order_item oi on o.id=oi.order_id
+    WHERE o.id=#{id} and o.delete_status=0
+  </select>
 </mapper>

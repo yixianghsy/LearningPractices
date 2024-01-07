@@ -1,4 +1,5 @@
 package com.mall.order.mapper;
+import com.mall.order.dto.OrderDetailDTO;
 import com.mall.order.model.OmsOrder;
 import com.mall.order.model.OmsOrderExample;
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +13,7 @@ public interface OmsOrderMapper {
 
     int deleteByPrimaryKey(Long id);
 
-    int insert(OmsOrder record);
+    Long insert(OmsOrder record);
 
     int insertSelective(OmsOrder record);
 
@@ -27,4 +28,5 @@ public interface OmsOrderMapper {
     int updateByPrimaryKeySelective(OmsOrder record);
 
     int updateByPrimaryKey(OmsOrder record);
+    OrderDetailDTO getOrderDetail(Long id);
 }

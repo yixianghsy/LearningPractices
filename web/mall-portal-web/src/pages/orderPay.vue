@@ -133,6 +133,7 @@ export default{
           orderId:this.orderId,
           payType:1
         }),{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((res)=>{
+        //二维码
         this.payImageQr='http://localhost:8888'+res;
         //支付成功跳转到订单页面
         //思路:使用同步访问，是否支付成功页面需要显示“请等待”,成功跳转，失败重新支付
@@ -185,16 +186,18 @@ export default{
           //转换成对象
           const result = JSON.parse(res.data)
           if(result.status === 200){
-            _this.$message.success("支付成功")
-            _this.order.status = "未发货"
+            // _this.$message.success("支付成功")
+            // _this.order.status = "未发货"
             //提交订单
-            _this.insertOrder();
+            // _this.insertOrder();
             //删除购物车的内容
-            _this.deleteCart();
+            // _this.deleteCart();
             //关闭webSocket资源
             webSocket.close();
-            //跳转到结算完成界面(页面待开发)
-            _this.$router.replace("/ego/alipay")
+            //跳转到我得订单页面(成功页面待开发)
+            _this.$router.replace("/order/list")
+            // this.$router.push('/order/pay')
+            // _this.goOrderList();
           }
 
          };

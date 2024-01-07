@@ -9,23 +9,25 @@
     </resultMap>
     <select id="getDetail" resultMap="orderDetailMap">
         SELECT
-        o.*,
-        ot.id ot_id,
-        ot.product_id ot_product_id,
-        ot.product_name ot_product_name,
-        ot.product_brand ot_product_brand,
-        ot.product_pic ot_product_pic,
-        ot.product_price ot_product_price,
-        ot.product_sku_id ot_product_sku_id,
-        ot.product_sku_code ot_product_sku_code,
-        ot.product_quantity ot_product_quantity,
-        ot.product_attr ot_product_attr
+            o.id,
+            o.order_sn,
+            o.receiver_province,
+            o.receiver_city,
+            o.receiver_region,
+            o.receiver_detail_address,
+            o.pay_amount,
+            o.status,
+            o.create_time,
+            oi.product_pic,
+            oi.product_name,
+            oi.id as item_id,
+            oi.product_price,
+            oi.product_quantity,
+            (SELECT normal_order_overtime FROM oms_order_setting  LIMIT 0,1) as normal_order_overtime
         FROM
         oms_order o
-        LEFT JOIN
-        oms_order_item ot ON o.id = ot.order_id
-        WHERE
-           o.delete_status = 0 and o.id = #{orderId}
+        LEFT JOIN oms_order_item oi on o.id=oi.order_id
+        WHERE o.id=#{orderId} and o.delete_status=0
     </select>
 
     <select id="getTimeOutOrders" resultMap="orderDetailMap">

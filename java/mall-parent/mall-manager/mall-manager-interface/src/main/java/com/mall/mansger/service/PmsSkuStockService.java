@@ -1,6 +1,7 @@
 package com.mall.mansger.service;
 
 import com.mall.mansger.model.PmsSkuStock;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface PmsSkuStockService {
     int update(Long pid, List<PmsSkuStock> skuStockList);
 
     PmsSkuStock getById(Long productSkuId);
+
+    int minusUpdate ( Integer stock,Integer lowStock ,  Long id);
 }

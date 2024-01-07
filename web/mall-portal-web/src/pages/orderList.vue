@@ -143,6 +143,7 @@
         })
       },
       goPay(orderId){
+      window.console("orderId0"+orderId)
         // 三种路由跳转方式
         // this.$router.push('/order/pay')
         /*this.$router.push({

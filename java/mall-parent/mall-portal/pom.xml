@@ -76,6 +76,21 @@
 <!--				</exclusion>-->
 <!--			</exclusions>-->
 		</dependency>
+		<!--  WebSocekt-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.50</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.7</version>
+		</dependency>
 		<!--mongodb依赖配置-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

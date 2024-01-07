@@ -9,6 +9,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages = {"com.mall.order.mapper"})
+@MapperScan(basePackages = {"com.mall.order.mapper","com.mall.mansger.mapper"})
 public class MyBatisConfig {
 }

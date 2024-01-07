@@ -2,6 +2,7 @@ package com.mall.mansger.mapper;
 
 import com.mall.mansger.model.PmsSkuStock;
 import com.mall.mansger.model.PmsSkuStockExample;
+import com.mall.order.dto.CartItemStockDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -29,5 +30,8 @@ public interface PmsSkuStockMapper {
 
     int updateByPrimaryKey(PmsSkuStock record);
 
+    int batchUpdate(Integer quantity,Long productSkuId);
+
+    int minusUpdate(@Param("stock") Integer stock,@Param("lowStock") Integer lowStock ,@Param("id") Long id);
 
 }

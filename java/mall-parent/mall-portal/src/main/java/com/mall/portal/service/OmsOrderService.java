@@ -2,8 +2,7 @@ package com.mall.portal.service;
 
 import com.mall.order.model.OmsOrder;
 import com.mall.portal.dto.ConfirmOrderDTO;
-import com.mall.portal.dto.OrderDetailDTO;
-import com.mall.portal.dto.OrderListDTO;
+import com.mall.order.dto.OrderDetailDTO;
 import com.mall.portal.dto.OrderParamDTO;
 
 import java.util.List;

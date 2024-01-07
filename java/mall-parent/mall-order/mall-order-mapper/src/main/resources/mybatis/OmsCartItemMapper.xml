@@ -21,6 +21,9 @@
     <result column="product_sn" jdbcType="VARCHAR" property="productSn" />
     <result column="product_attr" jdbcType="VARCHAR" property="productAttr" />
   </resultMap>
+  <resultMap id="CartItemStockMap" extends="BaseResultMap" type="com.mall.order.dto.CartItemStockDTO">
+    <result property="stock" column="stock"></result>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -80,10 +83,30 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, product_id, product_sku_id, member_id, quantity, price, product_pic, product_name, 
+    id, product_id, product_sku_id, member_id, quantity, price,  sp1, sp2, sp3,product_pic, product_name,
     product_sub_title, product_sku_code, member_nickname, create_date, modify_date, delete_status, 
     product_category_id, product_brand, product_sn, product_attr
   </sql>
+
+  <select id="getCartItemStock" resultMap="CartItemStockMap">
+    SELECT
+      *,(SELECT stock-lock_stock FROM pms_sku_stock s WHERE  s.id=c.product_sku_id) as stock
+    FROM oms_cart_item c
+    WHERE c.delete_status=0 and c.member_id=#{memberId}
+
+  </select>
+  <!--根据多个购物车id批量查询 , 在xml中使用QueryWrapper， 使用customSqlSegment就可以获取mp帮我们生产条件sql语句-->
+  <select id="getCartItemStockByIds" resultMap="CartItemStockMap">
+    SELECT
+      *,(SELECT stock-lock_stock FROM pms_sku_stock s WHERE  s.id=c.product_sku_id) as stock
+    FROM oms_cart_item c
+     WHERE
+      member_id = #{id}
+       AND id IN
+       <foreach collection="itemIds" item="item" index="index" open="(" separator="," close=")"  >
+         #{item}
+       </foreach>
+  </select>
   <select id="selectByExample" parameterType="com.mall.order.model.OmsCartItemExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -119,17 +142,17 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into oms_cart_item (product_id, product_sku_id, member_id, 
-      quantity, price, product_pic, 
+      quantity, price, sp1, sp2,
       product_name, product_sub_title, product_sku_code, 
       member_nickname, create_date, modify_date, 
-      delete_status, product_category_id, product_brand, 
-      product_sn, product_attr)
+      product_category_id, product_brand,
+      product_sn)
     values (#{productId,jdbcType=BIGINT}, #{productSkuId,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, 
-      #{quantity,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{productPic,jdbcType=VARCHAR}, 
-      #{productName,jdbcType=VARCHAR}, #{productSubTitle,jdbcType=VARCHAR}, #{productSkuCode,jdbcType=VARCHAR}, 
+      #{quantity,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{sp1,jdbcType=VARCHAR}, #{sp2,jdbcType=VARCHAR},
+    #{productName,jdbcType=VARCHAR}, #{productSubTitle,jdbcType=VARCHAR}, #{productSkuCode,jdbcType=VARCHAR},
       #{memberNickname,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}, 
-      #{deleteStatus,jdbcType=INTEGER}, #{productCategoryId,jdbcType=BIGINT}, #{productBrand,jdbcType=VARCHAR}, 
-      #{productSn,jdbcType=VARCHAR}, #{productAttr,jdbcType=VARCHAR})
+      #{deleteStatus,jdbcType=INTEGER}, #{productCategoryId,jdbcType=BIGINT},
+      #{productSn,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mall.order.model.OmsCartItem">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -269,6 +292,12 @@
       </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sp1 != null">
+        price = #{record.sp1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sp2 != null">
+        price = #{record.sp2,jdbcType=VARCHAR},
       </if>
       <if test="record.productPic != null">
         product_pic = #{record.productPic,jdbcType=VARCHAR},
@@ -417,4 +446,16 @@
   <select id="selectMaps" parameterType="java.lang.Long" resultType="java.util.Map">
     SELECT  COALESCE(sum(quantity)) as total FROM oms_cart_item WHERE delete_status=0 AND member_id = #{id}
     </select>
+  <update id="removeByIds">
+      UPDATE
+        oms_cart_item
+         SET
+        delete_status=1
+      WHERE
+        id IN
+        <foreach collection="ids" item="menu_id"  open="(" separator="," close=")">
+        #{menu_id}
+        </foreach>
+       AND delete_status=0;
+  </update>
 </mapper>

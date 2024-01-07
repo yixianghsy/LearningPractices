@@ -13,7 +13,7 @@ import com.mall.order.mapper.OmsOrderMapper;
 import com.mall.order.model.*;
 import com.mall.order.service.OmsOrderSettingService;
 import com.mall.portal.dto.ConfirmOrderDTO;
-import com.mall.portal.dto.OrderDetailDTO;
+import com.mall.order.dto.OrderDetailDTO;
 import com.mall.portal.dto.OrderParamDTO;
 import com.mall.portal.service.OmsCartItemService;
 import com.mall.portal.service.OmsOrderService;
@@ -85,7 +85,7 @@ public class OmsOrderServiceImpl implements OmsOrderService {
 
     @Override
     public OrderDetailDTO getOrderDetail(Long id) {
-        return null;
+        return orderMapper.getOrderDetail(id);
     }
     /**
      * 自动取消规定时间段内未支付的订单

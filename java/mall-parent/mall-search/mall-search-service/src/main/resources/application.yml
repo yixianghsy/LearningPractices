@@ -63,7 +63,7 @@ spring:
       repositories:
         enabled: true
   elasticsearch:
-    uris: 192.168.10.33:9200
+    uris: 192.168.10.251:9200
   redis:
     host: 192.168.10.251
     port: 6379

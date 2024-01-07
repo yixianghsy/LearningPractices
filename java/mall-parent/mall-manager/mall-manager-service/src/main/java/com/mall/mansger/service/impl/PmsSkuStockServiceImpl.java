@@ -32,4 +32,9 @@ public class PmsSkuStockServiceImpl implements PmsSkuStockService {
     public PmsSkuStock getById(Long productSkuId) {
         return pmsSkuStockMapper.selectByPrimaryKey(productSkuId);
     }
+
+    @Override
+    public int minusUpdate(Integer stock, Integer lowStock, Long id) {
+        return pmsSkuStockMapper.minusUpdate(stock, lowStock, id);
+    }
 }

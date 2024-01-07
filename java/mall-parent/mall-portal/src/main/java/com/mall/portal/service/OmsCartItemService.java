@@ -1,6 +1,7 @@
 package com.mall.portal.service;
 
 import com.mall.exception.BusinessException;
+import com.mall.order.dto.CartItemStockDTO;
 import com.mall.order.model.OmsCartItem;
 import com.mall.portal.domain.CartProduct;
 import com.mall.portal.domain.CartPromotionItem;
@@ -73,4 +74,7 @@ public interface OmsCartItemService {
     Integer getCarProdutSum();
 
     List<OmsCartItem> listByIds(List<Long> ids);
+
+    public List<CartItemStockDTO> getList(Long memberId);
+
 }

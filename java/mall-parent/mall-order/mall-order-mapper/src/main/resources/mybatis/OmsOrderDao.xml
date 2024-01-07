@@ -87,4 +87,7 @@
             o.id = #{id}
         ORDER BY oi.id ASC,oh.create_time DESC
     </select>
+
+    <delete id="save">
+    </delete>
 </mapper>

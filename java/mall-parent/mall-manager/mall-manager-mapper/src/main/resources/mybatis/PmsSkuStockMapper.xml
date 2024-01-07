@@ -303,4 +303,21 @@
         lock_stock = #{lockStock,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <update id="batchUpdate" >
+    UPDATE
+      pms_sku_stock
+    SET
+      lock_stock=lock_stock+ #{quantity}
+    WHERE
+        id = #{productSkuId}
+  </update>
+  <update id="minusUpdate" >
+    UPDATE
+      pms_sku_stock
+    SET
+      stock=stock - #{stock},
+      lock_stock=lock_stock - #{lowStock}
+    WHERE
+      id = #{id}
+  </update>
 </mapper>

@@ -1,4 +1,5 @@
 package com.mall.order.mapper;
+import com.mall.order.dto.CartItemStockDTO;
 import com.mall.order.model.OmsCartItem;
 import com.mall.order.model.OmsCartItemExample;
 import org.apache.ibatis.annotations.Param;
@@ -35,4 +36,10 @@ public interface OmsCartItemMapper {
      * @return
      */
     List<Map<String, Object>> selectMaps(Long id);
+
+    List<CartItemStockDTO> getCartItemStock(Long id);
+
+    List<CartItemStockDTO> getCartItemStockByIds(Long id, List<Long> itemIds);
+
+    void removeByIds(List<Long> ids);
 }

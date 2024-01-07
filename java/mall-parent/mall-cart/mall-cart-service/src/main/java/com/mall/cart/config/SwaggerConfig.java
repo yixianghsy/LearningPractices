@@ -1,4 +1,4 @@
-package com.mall.search.config;
+package com.mall.cart.config;
 
 
 import com.mall.config.BaseSwaggerConfig;
@@ -19,7 +19,7 @@ public class SwaggerConfig extends BaseSwaggerConfig {
     @Override
     public SwaggerProperties swaggerProperties() {
         return SwaggerProperties.builder()
-                .apiBasePackage("com.mall.mansger.service")
+                .apiBasePackage("com.mall.sso.service")
                 .title("mall后台系统")
                 .description("mall后台相关接口文档")
                 .contactName("macro")
