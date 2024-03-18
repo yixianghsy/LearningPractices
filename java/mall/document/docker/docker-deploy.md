@@ -59,7 +59,7 @@ docker exec -it redis redis-cli
 ### 下载镜像文件
 docker pull nginx:1.10
 ### 创建实例并启动
-docker run -p 80:80 --name nginx \
+docker run -p 81:80 --name nginx \
 -v /mydata/nginx/html:/usr/share/nginx/html \
 -v /mydata/nginx/logs:/var/log/nginx  \
 -d nginx:1.10

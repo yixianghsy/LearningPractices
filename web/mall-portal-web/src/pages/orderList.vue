@@ -134,7 +134,7 @@
            
         }),{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((res)=>{
           this.loading = false;
-          this.list = res.records;
+          this.list = res.list;
           this.total = res.total;
           this.showNextPage = res.hasNextPage;
           this.busy = false;

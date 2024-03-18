@@ -4,6 +4,8 @@ app:
 #tomcat conf
 server:
   port: 8031
+#  servlet:
+#    context-path: /sso
 #dubbo conf
 dubbo:
   application:
