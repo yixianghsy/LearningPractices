@@ -1,8 +1,8 @@
 package com.mall.controller.controller;
 import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
-import com.mall.mansger.model.SmsCouponHistory;
-import com.mall.mansger.service.SmsCouponHistoryService;
+import com.mall.marketing.model.SmsCouponHistory;
+import com.mall.marketing.service.SmsCouponHistoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;

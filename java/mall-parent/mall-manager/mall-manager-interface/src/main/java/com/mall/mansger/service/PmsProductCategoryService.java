@@ -1,5 +1,6 @@
 package com.mall.mansger.service;
 
+import com.mall.mansger.dto.HomeMenusDTO;
 import com.mall.mansger.dto.PmsProductCategoryParam;
 import com.mall.mansger.dto.PmsProductCategoryWithChildrenItem;
 import com.mall.mansger.model.PmsProductCategory;
@@ -53,4 +54,7 @@ public interface PmsProductCategoryService {
      * 以层级形式获取商品分类
      */
     List<PmsProductCategoryWithChildrenItem> listWithChildren();
+
+    List<HomeMenusDTO> getMenus();
+
 }

@@ -2,9 +2,9 @@ package com.mall.controller.controller;
 
 import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
-import com.mall.mansger.dto.SmsFlashPromotionProduct;
-import com.mall.mansger.model.SmsFlashPromotionProductRelation;
-import com.mall.mansger.service.SmsFlashPromotionProductRelationService;
+import com.mall.marketing.dto.SmsFlashPromotionProduct;
+import com.mall.marketing.model.SmsFlashPromotionProductRelation;
+import com.mall.marketing.service.SmsFlashPromotionProductRelationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,7 +1,9 @@
 package com.mall.sso.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.github.pagehelper.PageHelper;
+import com.mall.sso.confg.datasource.dynamic.DataSourceConfig;
 import com.mall.sso.mapper.UmsRoleDao;
 import com.mall.sso.mapper.UmsRoleMapper;
 import com.mall.sso.mapper.UmsRoleMenuRelationMapper;
@@ -70,6 +72,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     }
 
     @Override
+    @DS(DataSourceConfig.SHARDING_DATA_SOURCE_NAME)
     public List<UmsMenu> getMenuList(Long adminId) {
         return roleDao.getMenuList(adminId);
     }

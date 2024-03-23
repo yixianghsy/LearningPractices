@@ -1,8 +1,8 @@
 package com.mall.controller.controller;
 import com.mall.api.CommonResult;
-import com.mall.mansger.dto.SmsFlashPromotionSessionDetail;
-import com.mall.mansger.model.SmsFlashPromotionSession;
-import com.mall.mansger.service.SmsFlashPromotionSessionService;
+import com.mall.marketing.dto.SmsFlashPromotionSessionDetail;
+import com.mall.marketing.model.SmsFlashPromotionSession;
+import com.mall.marketing.service.SmsFlashPromotionSessionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -3,9 +3,9 @@ package com.mall.controller.controller;
 
 import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
-import com.mall.mansger.dto.SmsCouponParam;
-import com.mall.mansger.model.SmsCoupon;
-import com.mall.mansger.service.SmsCouponService;
+import com.mall.marketing.dto.SmsCouponParam;
+import com.mall.marketing.model.SmsCoupon;
+import com.mall.marketing.service.SmsCouponService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -14,7 +14,7 @@
         <result column="sort" property="sort" />
     </resultMap>
 
-    <resultMap id="HomeCategoryWithProductMap" type="com.mall.portal.dto.HomeGoodsSaleDTO">
+    <resultMap id="HomeCategoryWithProductMap" type="com.mall.marketing.dto.HomeGoodsSaleDTO">
 
         <result column="category_name" property="categoryName" />
         <result column="pic" property="pic" />

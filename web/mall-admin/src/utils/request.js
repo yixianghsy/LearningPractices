@@ -3,7 +3,7 @@ import { Message, MessageBox } from 'element-ui'
 import store from '../store'
 import { getToken } from '@/utils/auth'
 const service = axios.create({
-  baseURL: process.env.BASE_API, // api的base_url
+  // baseURL: process.env.BASE_API, // api的base_url
   timeout: 15000, // 请求超时时间
 //  withCredentials:true   // 设置请求携带cookie  保证session有效性
 })

@@ -3,8 +3,8 @@ package com.mall.controller.controller;
 
 import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
-import com.mall.mansger.model.SmsHomeBrand;
-import com.mall.mansger.service.SmsHomeBrandService;
+import com.mall.marketing.model.SmsHomeBrand;
+import com.mall.marketing.service.SmsHomeBrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;

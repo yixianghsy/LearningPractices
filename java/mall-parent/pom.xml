@@ -27,6 +27,7 @@
         <module>mall-order</module>
         <module>mall-portal</module>
         <module>mall-security</module>
+        <module>mall-marketing</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

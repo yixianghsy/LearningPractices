@@ -6,9 +6,10 @@ import com.mall.content.model.CmsSubject;
 import com.mall.content.model.CmsSubjectExample;
 import com.mall.mansger.mapper.PmsProductCategoryMapper;
 import com.mall.mansger.mapper.PmsProductMapper;
-import com.mall.mansger.mapper.SmsHomeAdvertiseMapper;
+
 import com.mall.mansger.model.*;
 //import com.mall.portal.dao.HomeDao;
+import com.mall.marketing.mapper.SmsHomeAdvertiseMapper;
 import com.mall.portal.dao.FlashPromotionProductDao;
 import com.mall.portal.dao.HomeDao;
 import com.mall.portal.domain.FlashPromotionParam;

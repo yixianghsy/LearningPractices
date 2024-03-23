@@ -1,0 +1,188 @@
+spring:
+  # 多数据源配置 可参考 https://gitee.com/baomidou/dynamic-datasource-spring-boot-starter
+  datasource:
+    dynamic:
+      primary: master # 设置默认的数据源或者数据源组,默认值即为master
+      strict: false   # 严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      datasource:
+        master:
+          url: jdbc:mysql://192.168.10.251:3306/mall?ds0?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver
+  #        db-test:
+  #          url: jdbc:mysql://127.0.0.1:3306/demo?ds0?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
+  #          username: root
+  #          password: root
+  #          driver-class-name: com.mysql.jdbc.Driver
+
+
+  # sharding-jdbc配置
+  shardingsphere:
+    # 是否开启SQL显示
+    props:
+      sql:
+        show: true
+    # ====================== ↓↓↓↓↓↓ 数据源配置 ↓↓↓↓↓↓ ======================
+    datasource:
+      names: ds-master-0,ds-slave-0-1,ds-master-1,ds-slave-1-1
+      # ====================== ↓↓↓↓↓↓ 配置第1个主从库 ↓↓↓↓↓↓ ======================
+      # 主库1
+      ds-master-0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        initial-size: 6
+        min-idle: 3
+        maxActive: 20
+        # 配置获取连接等待超时的时间
+        maxWait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        minEvictableIdleTimeMillis: 300000
+        #Oracle需要打开注释
+        #validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        # 打开PSCache，并且指定每个连接上PSCache的大小
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        filters: stat,wall,slf4j
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+        wall:
+          multi-statement-allow: true
+        url: jdbc:mysql://192.168.10.61:3306/ums?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
+        username: ums
+        password: ums
+      # 主库1-从库1
+      ds-slave-0-1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.10.63:3306/ums?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
+        username: ums
+        password: ums
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        filters: stat,wall,slf4j
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+      # ====================== ↓↓↓↓↓↓ 配置第2个主从库 ↓↓↓↓↓↓ ======================
+      # 主库2
+      ds-master-1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.10.62:3306/ums?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&serverTimezone=UTC&useSSL=false # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
+        username: ums
+        password: ums
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        filters: stat,wall,slf4j
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+      # 主库2-从库1
+      ds-slave-1-1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.10.64:3306/ums?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&serverTimezone=UTC&useSSL=false # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
+        username: ums
+        password: ums
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        filters: stat,wall,slf4j
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+    sharding:
+
+      # ====================== ↓↓↓↓↓↓ 读写分离配置 ↓↓↓↓↓↓ ======================
+      master-slave-rules:
+        ds-master-0:
+          # 主库
+          masterDataSourceName: ds-master-0
+          # 从库
+          slaveDataSourceNames:
+            - ds-slave-0-1
+            - ds-slave-1-1
+          # 从库查询数据的负载均衡算法 目前有2种算法 round_robin（轮询）和 random（随机）
+          # 算法接口 org.apache.shardingsphere.spi.masterslave.MasterSlaveLoadBalanceAlgorithm
+          # 实现类 RandomMasterSlaveLoadBalanceAlgorithm 和 RoundRobinMasterSlaveLoadBalanceAlgorithm
+          loadBalanceAlgorithmType: ROUND_ROBIN
+        ds-master-1:
+          masterDataSourceName: ds-master-1
+          slaveDataSourceNames:
+            - ds-slave-1-1
+            - ds-slave-0-1
+          loadBalanceAlgorithmType: ROUND_ROBIN
+
+      # ====================== ↓↓↓↓↓↓ 分库分表配置 ↓↓↓↓↓↓ ======================
+      tables:
+        ums_admin_role_relation:
+          actual-data-nodes: ds-master-$->{0..1}.ums_admin_role_relation
+        ums_role:
+          actual-data-nodes: ds-master-$->{0..1}.ums_role
+        t_user:
+          actual-data-nodes: ds-master-$->{0..1}.t_user$->{0..1}
+
+          # 配置属性可参考 org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration
+
+          # =========== ↓↓↓↓↓↓ 行表达式分片策略 ↓↓↓↓↓↓ ===========
+          # 在配置中使用 Groovy 表达式，提供对 SQL语句中的 = 和 IN 的分片操作支持，只支持单分片健。
+
+          #           # ====== ↓↓↓↓↓↓ 分库 ↓↓↓↓↓↓ ======
+          #          database-strategy:
+          #            inline:
+          #              sharding-column: user_id # 添加数据分库字段(根据字段插入数据到哪个库 ex：user_id)
+          #              algorithm-expression: ds-master-$->{user_id % 2} # 根据user_id取模拆分到不同的库中
+          #           # ====== ↓↓↓↓↓↓ 分表 ↓↓↓↓↓↓ ======
+          #          table-strategy:
+          #            inline:
+          #              sharding-column: sex   # 添加数据分表字段(根据字段插入数据到哪个表 ex：sex)
+          #              algorithm-expression: t_user$->{sex % 2} # 分片算法表达式 => 根据用户性别取模拆分到不同的表中
+
+          # =========== ↓↓↓↓↓↓ 标准分片策略 ↓↓↓↓↓↓ ===========
+
+          # 精确分片算法 => sql在分库/分表键上执行 = 与 IN 时触发计算逻辑，否则不走分库/分表，全库/全表执行。
+          #          database-strategy:
+          #            standard:
+          #              sharding-column: user_id # 分库用到的键
+          #              precise-algorithm-class-name: com.zhengqing.demo.config.sharding.precise.MyDbPreciseShardingAlgorithm # 自定义分库算法实现类
+          #          table-strategy:
+          #            standard:
+          #              sharding-column: sex # 添加数据分表字段(根据字段插入数据到那个表 ex：sex)
+          #              precise-algorithm-class-name: com.zhengqing.demo.config.sharding.precise.MyTablePreciseShardingAlgorithm # 自定义分表算法实现类
+
+          # 范围分片算法 => sql在分库/分表键上执行 BETWEEN AND、>、<、>=、<= 时触发计算逻辑，否则不走分库/分表，全库/全表执行。
+          #          database-strategy:
+          #            standard:
+          #              sharding-column: user_id
+          #              precise-algorithm-class-name: com.zhengqing.demo.config.sharding.range.MyDbPreciseShardingAlgorithm
+          #              range-algorithm-class-name: com.zhengqing.demo.config.sharding.range.MyDbRangeShardingAlgorithm
+          #          table-strategy:
+          #            standard:
+          #              sharding-column: sex
+          #              precise-algorithm-class-name: com.zhengqing.demo.config.sharding.range.MyTablePreciseShardingAlgorithm
+          #              range-algorithm-class-name: com.zhengqing.demo.config.sharding.range.MyTableRangeShardingAlgorithm
+
+          # =========== ↓↓↓↓↓↓ 复合分片策略 ↓↓↓↓↓↓ ===========
+          # SQL 语句中有>，>=, <=，<，=，IN 和 BETWEEN AND 等操作符，不同的是复合分片策略支持对多个分片健操作。
+
+          #          database-strategy:
+          #            complex:
+          #              sharding-columns: user_id,sex
+          #              algorithm-class-name: com.zhengqing.demo.config.sharding.complex.MyDbComplexKeysShardingAlgorithm
+          #          table-strategy:
+          #            complex:
+          #              sharding-columns: user_id,sex
+          #              algorithm-class-name: com.zhengqing.demo.config.sharding.complex.MyTableComplexKeysShardingAlgorithm
+
+          # =========== ↓↓↓↓↓↓ hint分片策略 ↓↓↓↓↓↓ ===========
+          # 通过 Hint API实现个性化配置 => 可查看 com.zhengqing.demo.service.impl.UserServiceImpl.listPageForHint
+
+#          database-strategy:
+#            hint:
+#              algorithm-class-name: com.zhengqing.demo.config.sharding.hint.MyDbHintShardingAlgorithm
+#          table-strategy:
+#            hint:
+#              algorithm-class-name: com.zhengqing.demo.config.sharding.hint.MyTableHintShardingAlgorithm
+
+
+

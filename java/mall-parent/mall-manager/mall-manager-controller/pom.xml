@@ -81,6 +81,12 @@
             <artifactId>mall-sso-interface</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.mall.marketing</groupId>
+            <artifactId>mall-marketing-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

@@ -4,17 +4,18 @@ import com.mall.api.CommonResult;
 import com.mall.content.model.CmsSubject;;
 import com.mall.mansger.model.PmsProduct;
 import com.mall.mansger.model.PmsProductCategory;
+import com.mall.mansger.service.PmsProductCategoryService;
+import com.mall.marketing.service.SmsHomeAdvertiseService;
 import com.mall.portal.domain.HomeContentResult;
-import com.mall.portal.dto.HomeGoodsSaleDTO;
-import com.mall.portal.dto.HomeMenusBannerDTO;
-import com.mall.portal.dto.HomeMenusDTO;
-import com.mall.mansger.model.SmsHomeAdvertise;
+import com.mall.marketing.dto.HomeGoodsSaleDTO;
+import com.mall.marketing.dto.HomeMenusBannerDTO;
+import com.mall.mansger.dto.HomeMenusDTO;
+import com.mall.marketing.model.SmsHomeAdvertise;
 import com.mall.portal.service.HomeService;
-import com.mall.portal.service.PmsProductCategoryService;
-import com.mall.portal.service.SmsHomeAdvertiseService;
-import com.mall.portal.service.SmsHomeCategoryService;
+import com.mall.marketing.service.SmsHomeCategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -30,13 +31,13 @@ import java.util.List;
 @RequestMapping("/home")
 public class HomeController {
 
-    @Autowired
+    @Reference
     PmsProductCategoryService productCategoryService;
 
-    @Autowired
+    @Reference
     SmsHomeCategoryService homeCategoryService;
 
-    @Autowired
+    @Reference
     SmsHomeAdvertiseService homeAdvertiseService;
 
     @Autowired

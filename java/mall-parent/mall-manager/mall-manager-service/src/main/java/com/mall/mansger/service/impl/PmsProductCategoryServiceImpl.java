@@ -2,8 +2,10 @@ package com.mall.mansger.service.impl;
 
 
 import com.github.pagehelper.PageHelper;
+import com.mall.mansger.dto.HomeMenusDTO;
 import com.mall.mansger.dto.PmsProductCategoryParam;
 import com.mall.mansger.dto.PmsProductCategoryWithChildrenItem;
+import com.mall.mansger.mapper.PmsPortalProductCategoryMapper;
 import com.mall.mansger.mapper.PmsProductCategoryDao;
 import com.mall.mansger.mapper.PmsProductCategoryMapper;
 import com.mall.mansger.model.PmsProductCategory;
@@ -21,6 +23,9 @@ import java.util.List;
  */
 @Service
 public class PmsProductCategoryServiceImpl implements PmsProductCategoryService {
+
+    @Autowired
+    private PmsPortalProductCategoryMapper mapper;
     @Autowired
     private PmsProductCategoryMapper productCategoryMapper;
     @Autowired
@@ -67,5 +72,10 @@ public class PmsProductCategoryServiceImpl implements PmsProductCategoryService 
     @Override
     public List<PmsProductCategoryWithChildrenItem> listWithChildren() {
         return productCategoryDao.listWithChildren();
+    }
+
+    @Override
+    public List<HomeMenusDTO> getMenus() {
+        return mapper.getProductWithCategory();
     }
 }

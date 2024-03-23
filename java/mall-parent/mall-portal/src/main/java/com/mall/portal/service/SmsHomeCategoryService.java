@@ -1,6 +1,6 @@
 package com.mall.portal.service;
 
-import com.mall.portal.dto.HomeGoodsSaleDTO;
+import com.mall.marketing.dto.HomeGoodsSaleDTO;
 
 import java.util.List;
 

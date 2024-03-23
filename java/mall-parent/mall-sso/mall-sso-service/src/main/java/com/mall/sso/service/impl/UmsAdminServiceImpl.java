@@ -4,10 +4,12 @@ package com.mall.sso.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.github.pagehelper.PageHelper;
 import com.mall.exception.Asserts;
 import com.mall.securit.util.JwtTokenUtil;
 import com.mall.sso.bo.AdminUserDetails;
+import com.mall.sso.confg.datasource.dynamic.DataSourceConfig;
 import com.mall.sso.dto.UmsAdminParam;
 import com.mall.sso.dto.UpdateAdminPasswordParam;
 import com.mall.sso.mapper.UmsAdminLoginLogMapper;
@@ -60,6 +62,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     private UmsAdminLoginLogMapper loginLogMapper;
 
     @Override
+    @DS(DataSourceConfig.SHARDING_DATA_SOURCE_NAME)
     public UmsAdmin getAdminByUsername(String username) {
         //先从缓存中获取数据
         UmsAdmin admin = getCacheService().getAdmin(username);
@@ -220,8 +223,10 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     }
 
     @Override
+    @DS(DataSourceConfig.SHARDING_DATA_SOURCE_NAME)
     public List<UmsRole> getRoleList(Long adminId) {
-        return adminRoleRelationDao.getRoleList(adminId);
+        List<UmsRole> roleList = adminRoleRelationDao.getRoleList(adminId);
+        return roleList;
     }
 
     @Override
@@ -264,6 +269,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     }
 
     @Override
+
     public UserDetails loadUserByUsername(String username){
         //获取用户信息
         UmsAdmin admin = getAdminByUsername(username);

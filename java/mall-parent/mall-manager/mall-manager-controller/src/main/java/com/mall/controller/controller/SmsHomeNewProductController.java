@@ -3,8 +3,8 @@ package com.mall.controller.controller;
 
 import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
-import com.mall.mansger.model.SmsHomeNewProduct;
-import com.mall.mansger.service.SmsHomeNewProductService;
+import com.mall.marketing.model.SmsHomeNewProduct;
+import com.mall.marketing.service.SmsHomeNewProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;

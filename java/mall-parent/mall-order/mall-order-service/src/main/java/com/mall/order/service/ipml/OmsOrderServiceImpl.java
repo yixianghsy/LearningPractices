@@ -1,6 +1,7 @@
 package com.mall.order.service.ipml;
 
 import cn.hutool.core.io.FileUtil;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.github.pagehelper.PageHelper;
 
 import com.mall.exception.ApiException;
@@ -8,6 +9,7 @@ import com.mall.mansger.mapper.PmsSkuStockMapper;
 import com.mall.mansger.model.PmsSkuStock;
 import com.mall.mansger.model.PmsSkuStockExample;
 import com.mall.mansger.service.PmsSkuStockService;
+import com.mall.order.config.dynamic.DataSourceConfig;
 import com.mall.order.dto.*;
 import com.mall.order.mapper.*;
 import com.mall.order.model.*;
@@ -43,6 +45,7 @@ public class OmsOrderServiceImpl implements OmsOrderService {
 //    @Autowired
 //    private TradePayProp tradePayProp;
     @Override
+//    @DS(DataSourceConfig.SHARDING_DATA_SOURCE_NAME)
     public List<OmsOrder> list(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         return orderDao.getList(queryParam);

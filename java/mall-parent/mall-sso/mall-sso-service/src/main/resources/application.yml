@@ -1,14 +1,27 @@
-app:
-  name: ??????
-  version: 1.0
 server:
   port: 8030
-druid:
-  allow: #?????IP??
-    ip: 127.0.0.1
-  login: #???????
-    user_name: root
-    password: root
+spring:
+  application:
+    name: sso
+  profiles:
+    active: dynamic
+  main:
+    allow-bean-definition-overriding: true
+    # ====================== ↓↓↓↓↓↓ 配置druid↓↓↓↓↓↓ ======================
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      stat-view-servlet:
+        enabled: true
+        loginUsername: admin
+        loginPassword: 123456
+      web-stat-filter:
+        enabled: true
+  redis:
+    host: 192.168.10.251
+    port: 6379
 # dubbo config
 dubbo:
   application:
@@ -39,45 +52,8 @@ dubbo:
   # ??????
   monitor:
     protocol: registry
-spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.10.251:3306/mall?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
-    username: root
-    password: 123456
-    type: com.alibaba.druid.pool.DruidDataSource
-    # ????????
-    # ?????????????????????????????
-    initialSize: 1
-    minIdle: 1
-    maxIdle: 5
-    maxActive: 20
-    # ?????????????
-    maxWait: 60000
-    # ???????????????????????????????
-    timeBetweenEvictionRunsMillis: 60000
-    # ??????????????????????
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1 FROM DUAL
-    testWhileIdle: true
-    testOnBorrow: true
-    testOnReturn: false
-    # ??PSCache??????????PSCache???
-    poolPreparedStatements: false
-    maxPoolPreparedStatementPerConnectionSize: 20
-    # ?????????filters????????sql?????'wall'?????
-    filters: stat,wall
-    # ??connectProperties?????mergeSql????SQL??
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-    # ????DruidDataSource?????
-    #spring.datasource.useGlobalDataSourceStat=true
-  redis:
-    host: 192.168.10.251
-    port: 6379
+
 # MyBatis
-#mybatis:
-#  type-aliases-package: com.mall.modules.user
-#  mapper-locations: classpath:/mybatis/*.xml
 mybatis:
   mapper-locations:
     - classpath:mybatis/*.xml
@@ -101,3 +77,22 @@ jwt:
   secret: mall-admin-secret #JWT加解密使用的密钥
   expiration: 604800 #JWT的超期限时间(60*60*24*7)
   tokenHead: 'Bearer '  #JWT负载中拿到开头
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /swagger-ui/
+      - /swagger-resources/**
+      - /**/v2/api-docs
+      - /**/*.html
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.map
+      - /favicon.ico
+      - /actuator/**
+      - /druid/**
+      - /admin/login
+      - /admin/register
+      - /admin/info
+      - /admin/logout
+      - /minio/upload

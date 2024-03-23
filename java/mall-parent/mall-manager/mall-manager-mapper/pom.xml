@@ -21,9 +21,17 @@
             <artifactId>mall-manager-pojo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <!--mybatis的依赖 -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+        <!-- 分页插件依赖 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <artifactId>pagehelper</artifactId>
+            <version>4.1.0</version>
         </dependency>
         <dependency>
             <groupId>com.mall.order</groupId>
