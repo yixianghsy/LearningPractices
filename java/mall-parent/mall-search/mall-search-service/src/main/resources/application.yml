@@ -17,7 +17,7 @@ dubbo:
     # 注册中心协议
     protocol: zookeeper
     # 注册中心地址
-    address: 192.168.10.251:2181
+    address: 192.168.10.250:2181
   # dubbo协议在20880端口暴露服务
   # 协议名称
   protocol:
@@ -38,7 +38,7 @@ dubbo:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.10.251:3306/mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://192.168.10.250:3306/mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
@@ -65,12 +65,12 @@ spring:
   elasticsearch:
     uris: 192.168.10.251:9200
   redis:
-    host: 192.168.10.251
+    host: 192.168.10.250
     port: 6379
 rocketmq:
   producer:
     groupName: mall-search
-    namesrvAddr: 192.168.10.251:9876
+    namesrvAddr: 192.168.10.250:9876
     default: true
 # MyBatis
 mybatis:

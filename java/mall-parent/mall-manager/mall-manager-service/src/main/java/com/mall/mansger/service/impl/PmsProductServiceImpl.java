@@ -62,7 +62,8 @@ public class PmsProductServiceImpl implements PmsProductService {
         if (productQueryParam.getProductCategoryId() != null) {
             criteria.andProductCategoryIdEqualTo(productQueryParam.getProductCategoryId());
         }
-        return productMapper.selectByExample(productExample);
+        List<PmsProduct> pmsProducts = productMapper.selectByExample(productExample);
+        return pmsProducts;
     }
 
     @Override

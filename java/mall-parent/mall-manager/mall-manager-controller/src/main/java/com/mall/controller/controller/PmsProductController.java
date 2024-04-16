@@ -1,5 +1,7 @@
 package com.mall.controller.controller;
 
+import cn.hutool.core.convert.Convert;
+import com.github.pagehelper.PageInfo;
 import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
 import com.mall.mansger.dto.PmsProductQueryParam;
@@ -33,7 +35,11 @@ public class PmsProductController {
                                                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<PmsProduct> productList = productService.list(productQueryParam, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(productList));
+        CommonPage<PmsProduct> pmsProductCommonPage = CommonPage.restPage(productList);
+        return CommonResult.success(pmsProductCommonPage);
+
+
+
     }
 
 }

@@ -20,44 +20,21 @@ spring:
       web-stat-filter:
         enabled: true
   redis:
-    host: 192.168.10.251
+    host: 192.168.10.250
     port: 6379
 # dubbo config
 dubbo:
   application:
-    name: mall-sso
-    qosPort: 22221
-  # ?? zookeeper ??????????????? zookeeper
-  # ????id
-  registry:
-    id: zookeeper-registry
-    # ??????
-    protocol: zookeeper
-    # ??????
-    address: 192.168.10.251:2181
-
-  # dubbo???20880??????
-  # ????
+    name: ${spring.application.name}
   protocol:
     name: dubbo
-    # ????
     port: 20883
-    # ????log
-    accesslog: dubbo-access.log
-  # ????
-  provider:
-    retries: 0
-    # ????
-    timeout: 3000
-  # ??????
-  monitor:
-    protocol: registry
-
+  registry:
+    address: zookeeper://192.168.10.250:2181
 # MyBatis
 mybatis:
   mapper-locations:
     - classpath:mybatis/*.xml
-#    - classpath*:com/**/mapper/*.xml
 redis:
   database: mall
   key:
