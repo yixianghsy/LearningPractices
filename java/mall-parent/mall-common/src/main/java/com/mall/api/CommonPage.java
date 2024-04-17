@@ -65,7 +65,7 @@ public class CommonPage<T> {
         pageInfo.setPageSize(pageSize);
         pageInfo.setPageNum(pageNo);
         pageInfo.setList((pageNo - 1) * pageSize >= list.size() ?
-        new ArrayList<>() : list.subList((pageNo - 1) * pageSize, Math.min(pageNo * pageSize, list.size())));
+                new ArrayList<>() : list.subList((pageNo - 1) * pageSize, Math.min(pageNo * pageSize, list.size())));
         return pageInfo;
     }
     /**

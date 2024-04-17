@@ -3,6 +3,8 @@ package com.mall.mansger.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.mall.api.CommonPage;
 import com.mall.mansger.dto.PmsProductParam;
 import com.mall.mansger.dto.PmsProductQueryParam;
 import com.mall.mansger.dto.PmsProductResult;
@@ -62,8 +64,16 @@ public class PmsProductServiceImpl implements PmsProductService {
         if (productQueryParam.getProductCategoryId() != null) {
             criteria.andProductCategoryIdEqualTo(productQueryParam.getProductCategoryId());
         }
-        List<PmsProduct> pmsProducts = productMapper.selectByExample(productExample);
-        return pmsProducts;
+        List<PmsProduct> list =productMapper.selectByExample(productExample);
+        PageInfo<PmsProduct> pageInfos = new PageInfo<>(list);
+        System.out.println("//第几页:"+pageInfos.getPageNum());
+        System.out.println("//没页多少数据："+ pageInfos.getPageSize());
+        System.out.println("//没页实际多少数据："+ pageInfos.getSize());
+        System.out.println("//总共几页:"+pageInfos.getPages());
+        System.out.println("//总共多少条数据:"+pageInfos.getTotal());
+        System.out.println("//结果集:"+pageInfos.getList().get(0).toString());
+        return list;
+
     }
 
     @Override

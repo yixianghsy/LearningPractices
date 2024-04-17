@@ -35,8 +35,14 @@ public class PmsProductController {
                                                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<PmsProduct> productList = productService.list(productQueryParam, pageSize, pageNum);
-        CommonPage<PmsProduct> pmsProductCommonPage = CommonPage.restPage(productList);
-        return CommonResult.success(pmsProductCommonPage);
+        PageInfo<PmsProduct> pageInfos = new PageInfo<>(productList);
+        System.out.println("//第几页:"+pageInfos.getPageNum());
+        System.out.println("//没页多少数据："+ pageInfos.getPageSize());
+        System.out.println("//没页实际多少数据："+ pageInfos.getSize());
+        System.out.println("//总共几页:"+pageInfos.getPages());
+        System.out.println("//总共多少条数据:"+pageInfos.getTotal());
+        System.out.println("//结果集:"+pageInfos.getList().get(0).toString());
+        return CommonResult.success(CommonPage.restPage(pageInfos));
 
 
 
