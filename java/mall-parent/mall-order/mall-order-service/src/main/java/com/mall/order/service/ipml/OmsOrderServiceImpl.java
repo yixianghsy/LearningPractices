@@ -4,6 +4,7 @@ import cn.hutool.core.io.FileUtil;
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.github.pagehelper.PageHelper;
 
+import com.mall.api.CommonPage;
 import com.mall.exception.ApiException;
 import com.mall.mansger.mapper.PmsSkuStockMapper;
 import com.mall.mansger.model.PmsSkuStock;
@@ -50,7 +51,13 @@ public class OmsOrderServiceImpl implements OmsOrderService {
         PageHelper.startPage(pageNum, pageSize);
         return orderDao.getList(queryParam);
     }
-
+    @Override
+//    @DS(DataSourceConfig.SHARDING_DATA_SOURCE_NAME)
+    public CommonPage orderlist(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<OmsOrder> orderList = orderDao.getList(queryParam);
+        return CommonPage.restPage(orderList);
+    }
     @Override
     public int delivery(List<OmsOrderDeliveryParam> deliveryParamList) {
         //批量发货

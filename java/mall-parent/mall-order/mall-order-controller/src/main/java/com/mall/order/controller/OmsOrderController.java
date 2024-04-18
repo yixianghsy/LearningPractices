@@ -34,8 +34,9 @@ public class OmsOrderController {
                                                    @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                    @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         System.out.println("进来了");
-        List<OmsOrder> orderList = orderService.list(queryParam, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(orderList));
+//        List<OmsOrder> orderList = orderService.list(queryParam, pageSize, pageNum);
+        CommonPage orderlist = orderService.orderlist(queryParam, pageSize, pageNum);
+        return CommonResult.success(orderlist);
     }
 
     @ApiOperation("批量发货")

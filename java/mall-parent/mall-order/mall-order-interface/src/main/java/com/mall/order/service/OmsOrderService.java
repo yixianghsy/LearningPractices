@@ -1,5 +1,6 @@
 package com.mall.order.service;
 
+import com.mall.api.CommonPage;
 import com.mall.order.dto.*;
 import com.mall.order.model.OmsOrder;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ public interface OmsOrderService {
      * 订单查询
      */
     List<OmsOrder> list(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum);
+    CommonPage orderlist(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum);
 
     /**
      * 批量发货
