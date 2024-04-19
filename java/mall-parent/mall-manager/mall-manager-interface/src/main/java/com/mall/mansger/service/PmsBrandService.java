@@ -2,7 +2,7 @@ package com.mall.mansger.service;
 
 import com.mall.mansger.dto.PmsBrandParam;
 import com.mall.mansger.model.PmsBrand;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -24,7 +24,6 @@ public interface PmsBrandService {
     /**
      * 修改品牌
      */
-    @Transactional
     int updateBrand(Long id, PmsBrandParam pmsBrandParam);
 
     /**

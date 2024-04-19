@@ -12,7 +12,6 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="首页类型导航栏数据", description="首页类型导航栏数据")
 public class HomeMenusDTO {
 
     private Long id;

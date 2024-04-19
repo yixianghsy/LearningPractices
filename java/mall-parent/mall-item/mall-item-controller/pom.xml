@@ -16,25 +16,7 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>com.mall.item</groupId>
-            <artifactId>mall-item-interface</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <!--thymeleaf组件-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <!-- freemarker 依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.rocketmq</groupId>
-            <artifactId>rocketmq-client</artifactId>
-        </dependency>
+
         <!--dubbo-->
         <dependency>
             <groupId>org.apache.dubbo</groupId>
@@ -64,18 +46,7 @@
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-recipes</artifactId>
         </dependency>
-        <!-- jsp -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
-
     <build>
         <finalName>e3-item-web</finalName>
         <plugins>

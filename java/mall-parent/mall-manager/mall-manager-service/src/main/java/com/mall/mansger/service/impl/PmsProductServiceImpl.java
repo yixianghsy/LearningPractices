@@ -3,6 +3,7 @@ package com.mall.mansger.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
+import com.mall.api.CommonPage;
 import com.mall.mansger.dto.PmsProductParam;
 import com.mall.mansger.dto.PmsProductQueryParam;
 import com.mall.mansger.dto.PmsProductResult;
@@ -39,7 +40,7 @@ public class PmsProductServiceImpl implements PmsProductService {
     }
 
     @Override
-    public List<PmsProduct> list(PmsProductQueryParam productQueryParam, Integer pageSize, Integer pageNum) {
+    public CommonPage<PmsProduct> list(PmsProductQueryParam productQueryParam, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         PmsProductExample productExample = new PmsProductExample();
         PmsProductExample.Criteria criteria = productExample.createCriteria();
@@ -63,7 +64,8 @@ public class PmsProductServiceImpl implements PmsProductService {
             criteria.andProductCategoryIdEqualTo(productQueryParam.getProductCategoryId());
         }
         List<PmsProduct> pmsProducts = productMapper.selectByExample(productExample);
-        return pmsProducts;
+        CommonPage<PmsProduct> pmsProductCommonPage = CommonPage.restPage(pmsProducts);
+        return pmsProductCommonPage;
     }
 
     @Override

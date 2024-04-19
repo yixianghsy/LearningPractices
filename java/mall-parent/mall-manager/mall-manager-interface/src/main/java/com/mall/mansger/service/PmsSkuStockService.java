@@ -1,9 +1,6 @@
 package com.mall.mansger.service;
 
 import com.mall.mansger.model.PmsSkuStock;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**

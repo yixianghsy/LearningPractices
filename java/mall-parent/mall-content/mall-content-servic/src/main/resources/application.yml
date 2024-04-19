@@ -3,25 +3,6 @@ server:
 spring:
   application:
     name: content
-  profiles:
-    active: dynamic
-  main:
-    allow-bean-definition-overriding: true
-    # ====================== ↓↓↓↓↓↓ 配置druid↓↓↓↓↓↓ ======================
-  autoconfigure:
-    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      stat-view-servlet:
-        enabled: true
-        loginUsername: admin
-        loginPassword: 123456
-      web-stat-filter:
-        enabled: true
-  redis:
-    host: 192.168.10.250
-    port: 6379
     # ====================== ↓↓↓↓↓↓ 配置druid↓↓↓↓↓↓ ======================
 dubbo:
   application:
@@ -35,7 +16,6 @@ dubbo:
     protocol: zookeeper
     # 注册中心地址
     address: 192.168.10.250:2181
-
   # dubbo协议在20880端口暴露服务
   # 协议名称
   protocol:
@@ -57,14 +37,6 @@ dubbo:
 mybatis:
   mapper-locations:
     - classpath:mybatis/*.xml
-#    - classpath*:com/**/mapper/*.xml
-redis:
-  database: mall
-  key:
-    admin: 'ums:admin'
-    resourceList: 'ums:resourceList'
-  expire:
-    common: 86400 # 24小时
 logging:
   level:
     root: info

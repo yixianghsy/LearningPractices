@@ -10,13 +10,6 @@ spring:
           username: root
           password: 123456
           driver-class-name: com.mysql.jdbc.Driver
-  #        db-test:
-  #          url: jdbc:mysql://127.0.0.1:3306/demo?ds0?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
-  #          username: root
-  #          password: root
-  #          driver-class-name: com.mysql.jdbc.Driver
-
-
   # sharding-jdbc配置
   shardingsphere:
     # 是否开启SQL显示
@@ -119,9 +112,6 @@ spring:
           actual-data-nodes: ds-master-$->{0..1}.pms_admin_role_relation
         pms_role:
           actual-data-nodes: ds-master-$->{0..1}.pms_role
-        t_user:
-          actual-data-nodes: ds-master-$->{0..1}.t_user$->{0..1}
-
           # 配置属性可参考 org.apache.shardingsphere.core.yaml.config.sharding.YamlShardingStrategyConfiguration
 
           # =========== ↓↓↓↓↓↓ 行表达式分片策略 ↓↓↓↓↓↓ ===========

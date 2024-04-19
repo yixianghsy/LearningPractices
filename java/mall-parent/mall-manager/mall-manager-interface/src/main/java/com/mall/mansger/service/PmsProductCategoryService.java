@@ -4,7 +4,7 @@ import com.mall.mansger.dto.HomeMenusDTO;
 import com.mall.mansger.dto.PmsProductCategoryParam;
 import com.mall.mansger.dto.PmsProductCategoryWithChildrenItem;
 import com.mall.mansger.model.PmsProductCategory;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -16,13 +16,13 @@ public interface PmsProductCategoryService {
     /**
      * 创建商品分类
      */
-    @Transactional
+
     int create(PmsProductCategoryParam pmsProductCategoryParam);
 
     /**
      * 修改商品分类
      */
-    @Transactional
+
     int update(Long id, PmsProductCategoryParam pmsProductCategoryParam);
 
     /**

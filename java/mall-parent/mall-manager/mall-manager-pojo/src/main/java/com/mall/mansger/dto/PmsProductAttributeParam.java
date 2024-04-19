@@ -1,7 +1,7 @@
 package com.mall.mansger.dto;
 
 
-import com.mall.validator.FlagValidator;
+import com.mall.mansger.validator.FlagValidator;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

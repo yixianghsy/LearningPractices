@@ -1,11 +1,6 @@
 server:
   port: 8022
-druid:
-  allow: #允许登陆的IP地址
-    ip: 127.0.0.1
-  login: #登陆的账户密码
-    user_name: root
-    password: root
+
 # dubbo config
 dubbo:
   application:

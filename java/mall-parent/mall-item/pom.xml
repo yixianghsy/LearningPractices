@@ -25,11 +25,6 @@
                 <artifactId>spring-boot-starter-web</artifactId>
             </dependency>
             <dependency>
-                <groupId>com.mall</groupId>
-                <artifactId>mall-common</artifactId>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
             </dependency>

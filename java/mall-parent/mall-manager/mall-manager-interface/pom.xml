@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.mall.mansger</groupId>
-            <artifactId>mall-manager-mapper</artifactId>
+            <artifactId>mall-manager-pojo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

@@ -3,7 +3,7 @@ package com.mall.mansger.service;
 import com.mall.mansger.dto.PmsProductAttributeParam;
 import com.mall.mansger.dto.ProductAttrInfo;
 import com.mall.mansger.model.PmsProductAttribute;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public interface PmsProductAttributeService {
     /**
      * 添加商品属性
      */
-    @Transactional
+
     int create(PmsProductAttributeParam pmsProductAttributeParam);
 
     /**
@@ -38,7 +38,7 @@ public interface PmsProductAttributeService {
     /**
      * 批量删除商品属性
      */
-    @Transactional
+
     int delete(List<Long> ids);
 
     /**

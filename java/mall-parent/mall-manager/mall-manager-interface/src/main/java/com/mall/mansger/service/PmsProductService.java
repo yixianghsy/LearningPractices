@@ -1,13 +1,10 @@
 package com.mall.mansger.service;
 
+import com.mall.api.CommonPage;
 import com.mall.mansger.dto.PmsProductParam;
 import com.mall.mansger.dto.PmsProductQueryParam;
 import com.mall.mansger.dto.PmsProductResult;
 import com.mall.mansger.model.PmsProduct;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 /**
@@ -18,7 +15,6 @@ public interface PmsProductService {
     /**
      * 创建商品
      */
-    @Transactional(isolation = Isolation.DEFAULT,propagation = Propagation.REQUIRED)
     int create(PmsProductParam productParam);
 
     /**
@@ -29,13 +25,12 @@ public interface PmsProductService {
     /**
      * 更新商品
      */
-    @Transactional
     int update(Long id, PmsProductParam productParam);
 
     /**
      * 分页查询商品
      */
-    List<PmsProduct> list(PmsProductQueryParam productQueryParam, Integer pageSize, Integer pageNum);
+    CommonPage<PmsProduct> list(PmsProductQueryParam productQueryParam, Integer pageSize, Integer pageNum);
 
     /**
      * 批量修改审核状态
@@ -43,7 +38,6 @@ public interface PmsProductService {
      * @param verifyStatus 审核状态
      * @param detail 审核详情
      */
-    @Transactional
     int updateVerifyStatus(List<Long> ids, Integer verifyStatus, String detail);
 
     /**

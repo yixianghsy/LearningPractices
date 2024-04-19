@@ -16,31 +16,6 @@
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>com.mall.sso</groupId>
-			<artifactId>mall-sso-interface</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.mall.cart</groupId>
-			<artifactId>mall-cart-interface</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.mall.item</groupId>
-			<artifactId>mall-item-interface</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<!--thymeleaf组件-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-		<!-- commons-lang3 -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
 		<!--dubbo-->
 		<dependency>
 			<groupId>org.apache.dubbo</groupId>
@@ -72,7 +47,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>e3-cart-web</finalName>
+		<finalName>mall-cart-web</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -80,7 +55,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
-
 </project>
