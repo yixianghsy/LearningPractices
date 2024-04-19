@@ -5,7 +5,7 @@ server:
   port: 8027
 dubbo:
   application:
-    name: order-web
+    name: order-controller
   registry:
     address: zookeeper://192.168.10.250:2181
     protocol: zookeeper

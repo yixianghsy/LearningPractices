@@ -40,7 +40,7 @@ public class PmsProductServiceImpl implements PmsProductService {
     }
 
     @Override
-    public CommonPage<PmsProduct> list(PmsProductQueryParam productQueryParam, Integer pageSize, Integer pageNum) {
+    public CommonPage list(PmsProductQueryParam productQueryParam, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         PmsProductExample productExample = new PmsProductExample();
         PmsProductExample.Criteria criteria = productExample.createCriteria();
@@ -64,9 +64,9 @@ public class PmsProductServiceImpl implements PmsProductService {
             criteria.andProductCategoryIdEqualTo(productQueryParam.getProductCategoryId());
         }
         List<PmsProduct> pmsProducts = productMapper.selectByExample(productExample);
-        CommonPage<PmsProduct> pmsProductCommonPage = CommonPage.restPage(pmsProducts);
-        return pmsProductCommonPage;
+        return CommonPage.restPage(pmsProducts);
     }
+
 
     @Override
     public int updateVerifyStatus(List<Long> ids, Integer verifyStatus, String detail) {

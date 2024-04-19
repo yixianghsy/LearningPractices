@@ -30,7 +30,8 @@ public interface PmsProductService {
     /**
      * 分页查询商品
      */
-    CommonPage<PmsProduct> list(PmsProductQueryParam productQueryParam, Integer pageSize, Integer pageNum);
+    CommonPage list(PmsProductQueryParam productQueryParam, Integer pageSize, Integer pageNum);
+
 
     /**
      * 批量修改审核状态

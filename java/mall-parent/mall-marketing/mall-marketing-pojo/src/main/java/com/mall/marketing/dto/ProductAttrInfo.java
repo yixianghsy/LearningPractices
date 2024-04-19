@@ -1,7 +1,5 @@
 package com.mall.marketing.dto;
 
-
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,8 +12,8 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode
 public class ProductAttrInfo implements Serializable {
-    @ApiModelProperty("商品属性ID")
+
     private Long attributeId;
-    @ApiModelProperty("商品属性分类ID")
+
     private Long attributeCategoryId;
 }

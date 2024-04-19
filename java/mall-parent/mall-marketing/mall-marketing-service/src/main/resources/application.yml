@@ -2,7 +2,7 @@ server:
   port: 8033
 spring:
   application:
-    name: marketing
+    name: marketing-service
   profiles:
     active: dynamic
   main:
@@ -20,7 +20,7 @@ spring:
       web-stat-filter:
         enabled: true
   redis:
-    host: 192.168.10.251
+    host: 192.168.10.250
     port: 6379
 # ====================== ↓↓↓↓↓↓ 配置dubbo↓↓↓↓↓↓ ======================
 dubbo:
@@ -71,27 +71,27 @@ logging:
 logstash:
   host: localhost
   enableInnerLog: false
-jwt:
-  tokenHeader: Authorization #JWT存储的请求头
-  secret: mall-admin-secret #JWT加解密使用的密钥
-  expiration: 604800 #JWT的超期限时间(60*60*24*7)
-  tokenHead: 'Bearer '  #JWT负载中拿到开头
-secure:
-  ignored:
-    urls: #安全路径白名单
-      - /swagger-ui/
-      - /swagger-resources/**
-      - /**/v2/api-docs
-      - /**/*.html
-      - /**/*.js
-      - /**/*.css
-      - /**/*.png
-      - /**/*.map
-      - /favicon.ico
-      - /actuator/**
-      - /druid/**
-      - /admin/login
-      - /admin/register
-      - /admin/info
-      - /admin/logout
-      - /minio/upload
+#jwt:
+#  tokenHeader: Authorization #JWT存储的请求头
+#  secret: mall-admin-secret #JWT加解密使用的密钥
+#  expiration: 604800 #JWT的超期限时间(60*60*24*7)
+#  tokenHead: 'Bearer '  #JWT负载中拿到开头
+#secure:
+#  ignored:
+#    urls: #安全路径白名单
+#      - /swagger-ui/
+#      - /swagger-resources/**
+#      - /**/v2/api-docs
+#      - /**/*.html
+#      - /**/*.js
+#      - /**/*.css
+#      - /**/*.png
+#      - /**/*.map
+#      - /favicon.ico
+#      - /actuator/**
+#      - /druid/**
+#      - /admin/login
+#      - /admin/register
+#      - /admin/info
+#      - /admin/logout
+#      - /minio/upload

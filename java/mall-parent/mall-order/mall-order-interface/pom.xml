@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.mall.order</groupId>
-            <artifactId>mall-order-mapper</artifactId>
+            <artifactId>mall-order-pojo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

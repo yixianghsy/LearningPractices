@@ -1,10 +1,10 @@
-package com.mall;
+package com.mall.order;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ManagerApplicationTests {
+class OCAppTests {
 
     @Test
     void contextLoads() {

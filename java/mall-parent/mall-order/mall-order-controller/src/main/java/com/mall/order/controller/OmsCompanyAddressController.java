@@ -4,11 +4,7 @@ package com.mall.order.controller;
 import com.mall.api.CommonResult;
 import com.mall.order.model.OmsCompanyAddress;
 import com.mall.order.service.OmsCompanyAddressService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,14 +17,13 @@ import java.util.List;
  * Created by macro on 2018/10/18.
  */
 @Controller
-@Api(tags = "OmsCompanyAddressController")
-@Tag(name = "OmsCompanyAddressController", description = "收货地址管理")
+
 @RequestMapping("/companyAddress")
 public class OmsCompanyAddressController {
     @Reference
     private OmsCompanyAddressService companyAddressService;
 
-    @ApiOperation("获取所有收货地址")
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<OmsCompanyAddress>> list() {

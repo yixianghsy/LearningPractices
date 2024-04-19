@@ -17,9 +17,10 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.mall.mansger</groupId>
-            <artifactId>mall-manager-pojo</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 </project>

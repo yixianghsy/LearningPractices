@@ -3,11 +3,8 @@ import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
 import com.mall.order.model.OmsOrderReturnReason;
 import com.mall.order.service.OmsOrderReturnReasonService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.apache.dubbo.config.annotation.Reference;;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,14 +15,12 @@ import java.util.List;
  * Created by macro on 2018/10/17.
  */
 @Controller
-@Api(tags = "OmsOrderReturnReasonController")
-@Tag(name = "OmsOrderReturnReasonController", description = "退货原因管理")
 @RequestMapping("/returnReason")
 public class OmsOrderReturnReasonController {
     @Reference
     private OmsOrderReturnReasonService orderReturnReasonService;
 
-    @ApiOperation("添加退货原因")
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult create(@RequestBody OmsOrderReturnReason returnReason) {
@@ -36,7 +31,7 @@ public class OmsOrderReturnReasonController {
         return CommonResult.failed();
     }
 
-    @ApiOperation("修改退货原因")
+
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult update(@PathVariable Long id, @RequestBody OmsOrderReturnReason returnReason) {
@@ -47,7 +42,6 @@ public class OmsOrderReturnReasonController {
         return CommonResult.failed();
     }
 
-    @ApiOperation("批量删除退货原因")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult delete(@RequestParam("ids") List<Long> ids) {
@@ -58,7 +52,7 @@ public class OmsOrderReturnReasonController {
         return CommonResult.failed();
     }
 
-    @ApiOperation("分页查询退货原因")
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<CommonPage<OmsOrderReturnReason>> list(@RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
@@ -67,7 +61,7 @@ public class OmsOrderReturnReasonController {
         return CommonResult.success(CommonPage.restPage(reasonList));
     }
 
-    @ApiOperation("获取单个退货原因详情信息")
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<OmsOrderReturnReason> getItem(@PathVariable Long id) {
@@ -75,7 +69,7 @@ public class OmsOrderReturnReasonController {
         return CommonResult.success(reason);
     }
 
-    @ApiOperation("修改退货原因启用状态")
+
     @RequestMapping(value = "/update/status", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateStatus(@RequestParam(value = "status") Integer status,

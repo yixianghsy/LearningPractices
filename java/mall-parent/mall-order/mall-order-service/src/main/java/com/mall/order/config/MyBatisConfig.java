@@ -13,7 +13,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages = {"com.mall.order.mapper","com.mall.mansger.mapper"})
+@MapperScan(basePackages = {"com.mall.order.mapper"})
 public class MyBatisConfig {
     @Bean
     public PageHelper pageHelper(){

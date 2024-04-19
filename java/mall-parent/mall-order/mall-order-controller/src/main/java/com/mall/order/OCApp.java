@@ -1,16 +1,19 @@
-package com.mall;
+package com.mall.order;
 
 import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubboConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+
 @EnableDubboConfig
 @DubboComponentScan("com.mall.*.service")
-@SpringBootApplication
-public class MarketingApplication {
+@SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+public class OCApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(MarketingApplication.class, args);
+        SpringApplication.run(OCApp.class, args);
     }
 
 }

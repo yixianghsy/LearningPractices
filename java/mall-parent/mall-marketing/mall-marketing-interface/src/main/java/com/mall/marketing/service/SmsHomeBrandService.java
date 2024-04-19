@@ -1,7 +1,7 @@
 package com.mall.marketing.service;
 
 import com.mall.marketing.model.SmsHomeBrand;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface SmsHomeBrandService {
     /**
      * 添加首页品牌推荐
      */
-    @Transactional
+
     int create(List<SmsHomeBrand> homeBrandList);
 
     /**

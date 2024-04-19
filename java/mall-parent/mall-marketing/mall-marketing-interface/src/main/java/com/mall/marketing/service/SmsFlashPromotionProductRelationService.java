@@ -1,8 +1,7 @@
 package com.mall.marketing.service;
 
 import com.mall.marketing.dto.SmsFlashPromotionProduct;
-import com.mall.marketing.model.SmsFlashPromotionProductRelation;
-import org.springframework.transaction.annotation.Transactional;
+import com.mall.marketing.model.SmsFlashPromotionProductRelation;;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ public interface SmsFlashPromotionProductRelationService {
     /**
      * 批量添加关联
      */
-    @Transactional
+
     int create(List<SmsFlashPromotionProductRelation> relationList);
 
     /**

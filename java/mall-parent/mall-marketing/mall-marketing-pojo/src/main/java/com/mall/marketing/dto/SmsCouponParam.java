@@ -3,7 +3,6 @@ package com.mall.marketing.dto;
 import com.mall.marketing.model.SmsCoupon;
 import com.mall.marketing.model.SmsCouponProductCategoryRelation;
 import com.mall.marketing.model.SmsCouponProductRelation;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,10 +15,8 @@ import java.util.List;
 public class SmsCouponParam extends SmsCoupon {
     @Getter
     @Setter
-    @ApiModelProperty("优惠券绑定的商品")
     private List<SmsCouponProductRelation> productRelationList;
     @Getter
     @Setter
-    @ApiModelProperty("优惠券绑定的商品分类")
     private List<SmsCouponProductCategoryRelation> productCategoryRelationList;
 }

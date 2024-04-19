@@ -3,7 +3,6 @@ package com.mall.order.service;
 import com.mall.api.CommonPage;
 import com.mall.order.dto.*;
 import com.mall.order.model.OmsOrder;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,19 +14,18 @@ public interface OmsOrderService {
     /**
      * 订单查询
      */
-    List<OmsOrder> list(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum);
-    CommonPage orderlist(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum);
+    CommonPage list(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum);
 
     /**
      * 批量发货
      */
-    @Transactional
+
     int delivery(List<OmsOrderDeliveryParam> deliveryParamList);
 
     /**
      * 批量关闭订单
      */
-    @Transactional
+
     int close(List<Long> ids, String note);
 
     /**
@@ -43,19 +41,19 @@ public interface OmsOrderService {
     /**
      * 修改订单收货人信息
      */
-    @Transactional
+
     int updateReceiverInfo(OmsReceiverInfoParam receiverInfoParam);
 
     /**
      * 修改订单费用信息
      */
-    @Transactional
+
     int updateMoneyInfo(OmsMoneyInfoParam moneyInfoParam);
 
     /**
      * 修改订单备注
      */
-    @Transactional
+
     int updateNote(Long id, String note, Integer status);
     /**
      * 支付成功回调

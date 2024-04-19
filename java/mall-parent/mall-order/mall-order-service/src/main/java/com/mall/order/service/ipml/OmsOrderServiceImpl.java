@@ -1,16 +1,9 @@
 package com.mall.order.service.ipml;
 
 import cn.hutool.core.io.FileUtil;
-import com.baomidou.dynamic.datasource.annotation.DS;
 import com.github.pagehelper.PageHelper;
-
 import com.mall.api.CommonPage;
 import com.mall.exception.ApiException;
-import com.mall.mansger.mapper.PmsSkuStockMapper;
-import com.mall.mansger.model.PmsSkuStock;
-import com.mall.mansger.model.PmsSkuStockExample;
-import com.mall.mansger.service.PmsSkuStockService;
-import com.mall.order.config.dynamic.DataSourceConfig;
 import com.mall.order.dto.*;
 import com.mall.order.mapper.*;
 import com.mall.order.model.*;
@@ -18,6 +11,7 @@ import com.mall.order.service.OmsOrderService;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.dubbo.config.annotation.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -39,25 +33,16 @@ public class OmsOrderServiceImpl implements OmsOrderService {
     private OmsOrderOperateHistoryMapper orderOperateHistoryMapper;
     @Autowired
     private OmsOrderItemMapper omsOrderItemMapper;
-    @Autowired
-    private PmsSkuStockMapper pmsSkuStockMapper;
-    @Reference
-    private PmsSkuStockService pmsSkuStockService;
 //    @Autowired
 //    private TradePayProp tradePayProp;
     @Override
 //    @DS(DataSourceConfig.SHARDING_DATA_SOURCE_NAME)
-    public List<OmsOrder> list(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum) {
-        PageHelper.startPage(pageNum, pageSize);
-        return orderDao.getList(queryParam);
-    }
-    @Override
-//    @DS(DataSourceConfig.SHARDING_DATA_SOURCE_NAME)
-    public CommonPage orderlist(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum) {
+    public CommonPage list(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         List<OmsOrder> orderList = orderDao.getList(queryParam);
         return CommonPage.restPage(orderList);
     }
+    @Transactional
     @Override
     public int delivery(List<OmsOrderDeliveryParam> deliveryParamList) {
         //批量发货
@@ -204,11 +189,11 @@ public class OmsOrderServiceImpl implements OmsOrderService {
         List<OmsOrderItem> list = omsOrderItemMapper.selectByExample(omsOrderItemExample);
         for (OmsOrderItem omsOrderItem : list) {
 
-            pmsSkuStockService.minusUpdate(
-                    omsOrderItem.getProductQuantity(),
-                    omsOrderItem.getProductQuantity(),
-                    omsOrderItem.getProductSkuId()
-            );
+//            pmsSkuStockService.minusUpdate(
+//                    omsOrderItem.getProductQuantity(),
+//                    omsOrderItem.getProductQuantity(),
+//                    omsOrderItem.getProductSkuId()
+//            );
         }
 
         //删除二维码

@@ -1,8 +1,7 @@
 package com.mall.marketing.dto;
 
-import com.mall.mansger.model.PmsProduct;
+
 import com.mall.marketing.model.SmsFlashPromotionProductRelation;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +10,7 @@ import lombok.Setter;
  * Created by macro on 2018/11/16.
  */
 public class SmsFlashPromotionProduct extends SmsFlashPromotionProductRelation{
-    @Getter
-    @Setter
-    @ApiModelProperty("关联商品")
-    private PmsProduct product;
+//    @Getter
+//    @Setter
+//    private PmsProduct product;
 }

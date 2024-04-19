@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.mall.marketing</groupId>
-            <artifactId>mall-marketing-mapper</artifactId>
+            <artifactId>mall-marketing-pojo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

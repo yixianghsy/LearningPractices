@@ -1,8 +1,6 @@
 package com.mall.marketing.service;
 
 import com.mall.marketing.model.SmsHomeRecommendSubject;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 /**
@@ -13,7 +11,7 @@ public interface SmsHomeRecommendSubjectService {
     /**
      * 添加首页推荐
      */
-    @Transactional
+
     int create(List<SmsHomeRecommendSubject> recommendSubjectList);
 
     /**
