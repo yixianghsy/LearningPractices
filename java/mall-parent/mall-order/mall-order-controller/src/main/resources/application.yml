@@ -3,9 +3,13 @@ app:
   version: 1.0
 server:
   port: 8027
-dubbo:
+spring:
   application:
     name: order-controller
+# ====================== ↓↓↓↓↓↓ 配置dubbo↓↓↓↓↓↓ ======================
+dubbo:
+  application:
+    name: ${spring.application.name}
   registry:
     address: zookeeper://192.168.10.250:2181
     protocol: zookeeper

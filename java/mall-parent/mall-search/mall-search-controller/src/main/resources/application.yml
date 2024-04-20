@@ -3,11 +3,15 @@ server:
 app:
   name: 搜索页面
   version: 1.0
+spring:
+  application:
+    name: seach-controller
+# ====================== ↓↓↓↓↓↓ 配置dubbo↓↓↓↓↓↓ ======================
 dubbo:
   application:
-    name: search-web
+    name: ${spring.application.name}
   registry:
-    address: zookeeper://192.168.10.251:2181
+    address: zookeeper://192.168.10.250:2181
     protocol: zookeeper
 
 

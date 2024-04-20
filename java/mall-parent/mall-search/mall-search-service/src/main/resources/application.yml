@@ -1,14 +1,18 @@
 server:
   port: 8028
-druid:
-  allow:
-    ip: 127.0.0.1
-  login:
-    user_name: root
-    password: root
+spring:
+  application:
+    name: order-service
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+  elasticsearch:
+    uris: 192.168.10.250:9200
+# ====================== ↓↓↓↓↓↓ 配置dubbo↓↓↓↓↓↓ ======================
 dubbo:
   application:
-    name: mall-search
+    name: ${spring.application.name}
     qosPort: 22221
   # 使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper
   # 注册中心id
@@ -35,43 +39,5 @@ dubbo:
   # 注册监控中心
   monitor:
     protocol: registry
-spring:
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.10.250:3306/mall?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
-    username: root
-    password: 123456
-    type: com.alibaba.druid.pool.DruidDataSource
-    initial-size: 1
-    min-idle: 1
-    max-idle: 5
-    max-wait-millis: 60000
-    timeBetweenEvictionRunsMillis: 60000
-    # ??????????????????????
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1 FROM DUAL
-    testWhileIdle: true
-    testOnBorrow: true
-    testOnReturn: false
-    maxPoolPreparedStatementPerConnectionSize: 20
-    # ?????????filters????????sql?????'wall'?????
-    filters: stat,wall
-    # ??connectProperties?????mergeSql????SQL??
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-  data:
-    elasticsearch:
-      repositories:
-        enabled: true
-  elasticsearch:
-    uris: 192.168.10.250:9200
-  redis:
-    host: 192.168.10.250
-    port: 6379
-rocketmq:
-  producer:
-    groupName: mall-search
-    namesrvAddr: 192.168.10.250:9876
-    default: true
-# MyBatis
-mybatis:
-  mapper-locations: classpath:/mybatis/*.xml
+
+

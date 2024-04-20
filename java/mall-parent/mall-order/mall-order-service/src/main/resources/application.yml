@@ -2,7 +2,7 @@ server:
   port: 8026
 spring:
   application:
-    name: order
+    name: order-service
   profiles:
     active: dynamic
   main:
@@ -22,10 +22,10 @@ spring:
   redis:
     host: 192.168.10.250
     port: 6379
-# ====================== ↓↓↓↓↓↓ dubbo配置 ↓↓↓↓↓↓ ======================
+# ====================== ↓↓↓↓↓↓ 配置dubbo↓↓↓↓↓↓ ======================
 dubbo:
   application:
-    name: mall-order
+    name: ${spring.application.name}
     qosPort: 22221
   # 使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper
   # 注册中心id

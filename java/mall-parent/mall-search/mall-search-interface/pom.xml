@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.mall.search</groupId>
-            <artifactId>mall-search-mapper</artifactId>
+            <artifactId>mall-search-pojo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

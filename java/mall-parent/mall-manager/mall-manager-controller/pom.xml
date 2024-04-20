@@ -71,7 +71,7 @@
     </dependencies>
 
     <build>
-        <finalName>e3-manager-web</finalName>
+        <finalName>mall-manager-controller</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
