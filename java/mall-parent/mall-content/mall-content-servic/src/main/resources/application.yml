@@ -2,11 +2,27 @@ server:
   port: 8021
 spring:
   application:
-    name: content
+    name: content-service
+  profiles:
+    active: dynamic
+  main:
+    allow-bean-definition-overriding: true
     # ====================== ↓↓↓↓↓↓ 配置druid↓↓↓↓↓↓ ======================
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      stat-view-servlet:
+        enabled: true
+        loginUsername: admin
+        loginPassword: 123456
+      web-stat-filter:
+        enabled: true
+# ====================== ↓↓↓↓↓↓ 配置dubbo↓↓↓↓↓↓ ======================
 dubbo:
   application:
-    name: mall-content
+    name: ${spring.application.name}
     qosPort: 22221
   # 使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper
   # 注册中心id
@@ -37,6 +53,11 @@ dubbo:
 mybatis:
   mapper-locations:
     - classpath:mybatis/*.xml
+pagehelper:
+  helper-dialect: mysql
+  params: count=countSql
+  reasonable: true
+  support-methods-arguments: true
 logging:
   level:
     root: info

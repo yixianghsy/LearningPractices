@@ -1,8 +1,11 @@
 server:
   port: 8033
+spring:
+  application:
+    name: cart-controller
 dubbo:
   application:
-    name: cart-web
+    name: ${spring.application.name}
   # 使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper
   # 注册中心id
   registry:
@@ -10,7 +13,7 @@ dubbo:
     # 注册中心协议
     protocol: zookeeper
     # 注册中心地址
-    address: 192.168.10.251:2181
+    address: 192.168.10.250:2181
   # dubbo协议在20881端口暴露服务
   # 协议名称
   protocol:
@@ -27,3 +30,4 @@ dubbo:
   # 注册监控中心
   monitor:
     protocol: registry
+

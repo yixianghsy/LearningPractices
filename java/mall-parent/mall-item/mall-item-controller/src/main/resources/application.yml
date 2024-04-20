@@ -1,10 +1,12 @@
-
 server:
   port: 8023
+spring:
+  application:
+    name: mall-item
+# ====================== ↓↓↓↓↓↓ 配置dubbo↓↓↓↓↓↓ ======================
 dubbo:
   application:
-    name: item-web
+    name: ${spring.application.name}
   registry:
-    address: zookeeper://192.168.10.251:2181
+    address: zookeeper://192.168.10.250:2181
     protocol: zookeepe
-

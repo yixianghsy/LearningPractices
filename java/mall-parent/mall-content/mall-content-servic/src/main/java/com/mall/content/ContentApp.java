@@ -6,8 +6,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableDubboConfig
-@DubboComponentScan("com.mall.*.service")
-@MapperScan(basePackages = {"com.mall.content.mapper"})
+@DubboComponentScan("com.mall.content.service")
 @SpringBootApplication
 public class ContentApp {
 

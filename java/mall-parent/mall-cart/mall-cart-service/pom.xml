@@ -17,14 +17,15 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>com.mall.cart</groupId>
+            <artifactId>mall-cart-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!-- commons-lang3 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
+
         <!--dubbo-->
         <dependency>
             <groupId>org.apache.dubbo</groupId>

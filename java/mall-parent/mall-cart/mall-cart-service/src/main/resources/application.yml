@@ -1,8 +1,15 @@
 server:
   port: 8020
+spring:
+  application:
+    name: cart-service
+  redis:
+    host: 192.168.10.250
+    port: 6379
+# ====================== ↓↓↓↓↓↓ 配置dubbo↓↓↓↓↓↓ ======================
 dubbo:
   application:
-    name: mall-cart
+    name: ${spring.application.name}
     qosPort: 22221
   # 使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper
   # 注册中心id
@@ -12,7 +19,6 @@ dubbo:
     protocol: zookeeper
     # 注册中心地址
     address: 192.168.10.250:2181
-
   # dubbo协议在20880端口暴露服务
   # 协议名称
   protocol:
@@ -29,8 +35,5 @@ dubbo:
   # 注册监控中心
   monitor:
     protocol: registry
-spring:
-  redis:
-    host: 192.168.10.250
-    port: 6379
+
 

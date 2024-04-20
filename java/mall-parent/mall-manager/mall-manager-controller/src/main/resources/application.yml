@@ -1,8 +1,11 @@
 server:
   port: 8025
+spring:
+  application:
+    name: manager-controller
 dubbo:
   application:
-    name: manager-web
+    name: ${spring.application.name}
   # 使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper
   # 注册中心id
   registry:
@@ -55,4 +58,5 @@ minio:
 #      - /admin/register
 #      - /admin/info
 #      - /admin/logout
+
 #      - /minio/upload
