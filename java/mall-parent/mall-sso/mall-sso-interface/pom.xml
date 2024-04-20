@@ -18,9 +18,8 @@
     <dependencies>
         <dependency>
             <groupId>com.mall.sso</groupId>
-            <artifactId>mall-sso-mapper</artifactId>
+            <artifactId>mall-sso-pojo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-
         </dependency>
     </dependencies>
 

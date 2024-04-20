@@ -4,7 +4,6 @@ package com.mall.sso.service;
 import com.mall.sso.model.UmsMenu;
 import com.mall.sso.model.UmsResource;
 import com.mall.sso.model.UmsRole;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -56,12 +55,12 @@ public interface UmsRoleService {
     /**
      * 给角色分配菜单
      */
-    @Transactional
+
     int allocMenu(Long roleId, List<Long> menuIds);
 
     /**
      * 给角色分配资源
      */
-    @Transactional
+
     int allocResource(Long roleId, List<Long> resourceIds);
 }

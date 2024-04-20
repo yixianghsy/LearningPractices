@@ -1,18 +1,17 @@
-package com.mall.sso;
+package com.mall;
 
 import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubboConfig;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableDubboConfig
 @DubboComponentScan("com.mall.*.service")
-@SpringBootApplication(scanBasePackages = { "com.mall.*",})
-public class SsoServiceApplication {
+@SpringBootApplication
+public class SsoServiceApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(SsoServiceApplication.class, args);
+        SpringApplication.run(SsoServiceApp.class, args);
     }
 
 }

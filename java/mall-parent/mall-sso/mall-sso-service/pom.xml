@@ -26,17 +26,6 @@
             <artifactId>mall-sso-mapper</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
-        <!--springboot的web组件-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
         <!-- 添加适用于生产环境的功能，如性能指标和监测等功能 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
