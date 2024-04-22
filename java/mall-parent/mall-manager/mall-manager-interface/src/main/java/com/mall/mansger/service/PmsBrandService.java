@@ -1,5 +1,6 @@
 package com.mall.mansger.service;
 
+import com.mall.api.CommonPage;
 import com.mall.mansger.dto.PmsBrandParam;
 import com.mall.mansger.model.PmsBrand;
 
@@ -39,7 +40,7 @@ public interface PmsBrandService {
     /**
      * 分页查询品牌
      */
-    List<PmsBrand> listBrand(String keyword, Integer showStatus, int pageNum, int pageSize);
+    CommonPage listBrand(String keyword, Integer showStatus, int pageNum, int pageSize);
 
     /**
      * 获取品牌详情

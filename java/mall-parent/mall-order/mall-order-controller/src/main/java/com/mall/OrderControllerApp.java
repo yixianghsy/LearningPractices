@@ -1,4 +1,4 @@
-package com.mall.order;
+package com.mall;
 
 import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubboConfig;

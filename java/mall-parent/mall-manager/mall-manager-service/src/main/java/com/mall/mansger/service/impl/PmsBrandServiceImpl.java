@@ -3,10 +3,12 @@ package com.mall.mansger.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
+import com.mall.api.CommonPage;
 import com.mall.mansger.dto.PmsBrandParam;
 import com.mall.mansger.mapper.PmsBrandMapper;
 import com.mall.mansger.model.PmsBrand;
 import com.mall.mansger.model.PmsBrandExample;
+import com.mall.mansger.model.PmsProduct;
 import com.mall.mansger.service.PmsBrandService;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +49,7 @@ public class PmsBrandServiceImpl implements PmsBrandService {
     }
 
     @Override
-    public List<PmsBrand> listBrand(String keyword, Integer showStatus, int pageNum, int pageSize) {
+    public CommonPage listBrand(String keyword, Integer showStatus, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         PmsBrandExample pmsBrandExample = new PmsBrandExample();
         pmsBrandExample.setOrderByClause("sort desc");
@@ -58,7 +60,9 @@ public class PmsBrandServiceImpl implements PmsBrandService {
         if(showStatus!=null){
             criteria.andShowStatusEqualTo(showStatus);
         }
-        return brandMapper.selectByExample(pmsBrandExample);
+
+        List<PmsBrand> pmsBrands = brandMapper.selectByExample(pmsBrandExample);
+        return CommonPage.restPage(pmsBrands);
     }
 
     @Override

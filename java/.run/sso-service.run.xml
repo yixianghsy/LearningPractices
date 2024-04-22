@@ -5,7 +5,6 @@
         <option name="imageTag" value="sso-service:0.01" />
         <option name="containerName" value="sso-service" />
         <option name="contextFolderPath" value="mall-parent/mall-sso/mall-sso-service/target" />
-        <option name="commandLineOptions" value="" />
         <option name="sourceFilePath" value="mall-parent/mall-sso/mall-sso-service/src/main/docker/Dockerfile" />
       </settings>
     </deployment>

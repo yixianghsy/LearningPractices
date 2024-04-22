@@ -21,7 +21,12 @@
             <artifactId>mall-order-interface</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
+        <!-- 分页插件依赖 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>4.1.0</version>
+        </dependency>
         <!--dubbo-->
         <dependency>
             <groupId>org.apache.dubbo</groupId>

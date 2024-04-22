@@ -17,7 +17,6 @@ import java.util.List;
  * Created by macro on 2018/4/26.
  */
 @Controller
-
 @RequestMapping("/brand")
 public class PmsBrandController {
     @Reference
@@ -59,8 +58,8 @@ public class PmsBrandController {
                                                       @RequestParam(value = "showStatus",required = false) Integer showStatus,
                                                       @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                       @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
-        List<PmsBrand> brandList = brandService.listBrand(keyword,showStatus,pageNum, pageSize);
-        return CommonResult.success(CommonPage.restPage(brandList));
+        CommonPage  brandList = brandService.listBrand(keyword,showStatus,pageNum, pageSize);
+        return CommonResult.success(brandList);
     }
 
 
