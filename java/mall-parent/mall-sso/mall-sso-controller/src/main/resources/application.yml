@@ -4,6 +4,9 @@ app:
 #tomcat conf
 server:
   port: 8031
+spring:
+  main:
+    allow-circular-references: true
 #dubbo conf
 dubbo:
   application:
@@ -14,34 +17,34 @@ logging:
   level:
     root: info
     com.mall.sso: debug
-jwt:
-  tokenHeader: Authorization #JWT存储的请求头
-  secret: mall-admin-secret #JWT加解密使用的密钥
-  expiration: 604800 #JWT的超期限时间(60*60*24*7)
-  tokenHead: 'Bearer '  #JWT负载中拿到开头
 secure:
   ignored:
     urls: #安全路径白名单
-      - /swagger-ui/
+      - /swagger-ui.html
       - /swagger-resources/**
+      - /swagger/**
       - /**/v2/api-docs
-      - /**/*.html
       - /**/*.js
       - /**/*.css
       - /**/*.png
-      - /**/*.map
-      - /favicon.ico
+      - /**/*.ico
+      - /webjars/springfox-swagger-ui/**
       - /actuator/**
       - /druid/**
       - /admin/login
       - /admin/register
       - /admin/info
       - /admin/logout
-      - /minio/upload
+      - /error
+
+jwt:
+  secret: tuling-mall-admin  #服务端私钥（一定不能泄露）
+  expiration: 86400   #过期时间 60*60*24  =一天
+  tokenHead: Bearer #jwt规范  #告诉客户端jwt令牌开头需要加的一个字符串
+  tokenHeader: Authorization #告诉客户端你要在请求头里面传什么参数名字
 #因为maven子工程会继承其他工程数据配置，需要屏蔽
 #spring:
 #  autoconfigure:
 #    exclude:
 #      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 #      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
-

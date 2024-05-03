@@ -13,6 +13,15 @@ import java.util.List;
  */
 public interface PmsBrandService {
     /**
+     *
+     *  品牌数据列表
+     * @param keyword 商品名称
+     * @param pageNum pageNum
+     * @param pageSize pageSize
+     * @return
+     */
+    CommonPage list(String keyword, Integer pageNum, Integer pageSize);
+    /**
      * 获取所有品牌
      */
     List<PmsBrand> listAllBrand();

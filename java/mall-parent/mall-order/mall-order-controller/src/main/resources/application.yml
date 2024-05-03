@@ -6,6 +6,8 @@ server:
 spring:
   application:
     name: order-controller
+  main:
+    allow-circular-references: true
 # ====================== ↓↓↓↓↓↓ 配置dubbo↓↓↓↓↓↓ ======================
 dubbo:
   application:
@@ -14,3 +16,27 @@ dubbo:
     address: zookeeper://192.168.10.250:2181
     protocol: zookeeper
 
+jwt:
+  secret: tuling-mall-admin  #服务端私钥（一定不能泄露）
+  expiration: 86400   #过期时间 60*60*24  =一天
+  tokenHead: Bearer #jwt规范  #告诉客户端jwt令牌开头需要加的一个字符串
+  tokenHeader: Authorization #告诉客户端你要在请求头里面传什么参数名字
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /swagger-ui/
+      - /swagger-resources/**
+      - /**/v2/api-docs
+      - /**/*.html
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.map
+      - /favicon.ico
+      - /actuator/**
+      - /druid/**
+      - /admin/login
+      - /admin/register
+      - /admin/info
+      - /admin/logout
+      - /minio/upload

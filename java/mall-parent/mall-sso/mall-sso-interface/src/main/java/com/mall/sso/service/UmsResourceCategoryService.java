@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface UmsResourceCategoryService {
 
+
     /**
      * 获取所有资源分类
      */
@@ -19,15 +20,9 @@ public interface UmsResourceCategoryService {
     /**
      * 创建资源分类
      */
-    int create(UmsResourceCategory umsResourceCategory);
+    boolean create(UmsResourceCategory umsResourceCategory);
 
-    /**
-     * 修改资源分类
-     */
-    int update(Long id, UmsResourceCategory umsResourceCategory);
+    boolean removeById(Long id);
 
-    /**
-     * 删除资源分类
-     */
-    int delete(Long id);
+    boolean updateById(UmsResourceCategory umsResourceCategory);
 }

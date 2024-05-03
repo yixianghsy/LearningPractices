@@ -1,11 +1,11 @@
 package com.mall.sso.service;
 
+import com.mall.api.CommonPage;
 import com.mall.sso.dto.UmsAdminParam;
 import com.mall.sso.dto.UpdateAdminPasswordParam;
 import com.mall.sso.model.UmsAdmin;
 import com.mall.sso.model.UmsResource;
 import com.mall.sso.model.UmsRole;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -30,41 +30,33 @@ public interface UmsAdminService {
      * @param password 密码
      * @return 生成的JWT的token
      */
-    String login(String username,String password);
+    UmsAdmin login(String username, String password);
 
-    /**
-     * 刷新token的功能
-     * @param oldToken 旧的token
-     */
-    String refreshToken(String oldToken);
 
-    /**
-     * 根据用户id获取用户
-     */
-    UmsAdmin getItem(Long id);
 
     /**
      * 根据用户名或昵称分页查询用户
      */
-    List<UmsAdmin> list(String keyword, Integer pageSize, Integer pageNum);
+    CommonPage list(String keyword, Integer pageSize, Integer pageNum);
 
     /**
      * 修改指定用户信息
      */
-    int update(Long id, UmsAdmin admin);
+    boolean update(Long id, UmsAdmin admin);
 
     /**
      * 删除指定用户
      */
-    int delete(Long id);
+    boolean delete(Long id);
 
     /**
      * 修改用户角色关系
      */
+
     int updateRole(Long adminId, List<Long> roleIds);
 
     /**
-     * 获取用户对应角色
+     * 获取用户对于角色
      */
     List<UmsRole> getRoleList(Long adminId);
 
@@ -80,11 +72,12 @@ public interface UmsAdminService {
 
     /**
      * 获取用户信息
+     * 使用泛型标注返回类型。
      */
-    UserDetails loadUserByUsername(String username);
+//    <T> T loadUserByUsername(String username);
+    public UmsAdmin loadUserByUsername(String username);
+    public List<UmsRole> loadUserById(Long id);
+    String refreshToken(String token);
 
-    /**
-     * 获取缓存服务
-     */
-    UmsAdminCacheService getCacheService();
+    UmsAdmin getById(Long adminId);
 }

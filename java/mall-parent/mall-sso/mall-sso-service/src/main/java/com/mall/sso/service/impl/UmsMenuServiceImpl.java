@@ -1,6 +1,7 @@
 package com.mall.sso.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.mall.api.CommonPage;
 import com.mall.sso.dto.UmsMenuNode;
 import com.mall.sso.mapper.UmsMenuMapper;
 import com.mall.sso.model.UmsMenu;
@@ -24,10 +25,16 @@ public class UmsMenuServiceImpl implements UmsMenuService {
     private UmsMenuMapper menuMapper;
 
     @Override
-    public int create(UmsMenu umsMenu) {
+    public boolean create(UmsMenu umsMenu) {
         umsMenu.setCreateTime(new Date());
         updateLevel(umsMenu);
-        return menuMapper.insert(umsMenu);
+        int count = menuMapper.insert(umsMenu);
+        if(count == 0){
+            return false;
+        }else
+        {
+            return true;
+        }
     }
 
     /**
@@ -49,31 +56,27 @@ public class UmsMenuServiceImpl implements UmsMenuService {
     }
 
     @Override
-    public int update(Long id, UmsMenu umsMenu) {
+    public boolean update(Long id, UmsMenu umsMenu) {
         umsMenu.setId(id);
         updateLevel(umsMenu);
-        return menuMapper.updateByPrimaryKeySelective(umsMenu);
+        int count = menuMapper.updateByPrimaryKeySelective(umsMenu);
+        if(count == 0){
+            return false;
+        }else
+        {
+            return true;
+        }
     }
-
+    // TODO  返回值必须是page
     @Override
-    public UmsMenu getItem(Long id) {
-        return menuMapper.selectByPrimaryKey(id);
-    }
-
-    @Override
-    public int delete(Long id) {
-        return menuMapper.deleteByPrimaryKey(id);
-    }
-
-    @Override
-    public List<UmsMenu> list(Long parentId, Integer pageSize, Integer pageNum) {
+    public CommonPage list(Long parentId, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         UmsMenuExample example = new UmsMenuExample();
         example.setOrderByClause("sort desc");
         example.createCriteria().andParentIdEqualTo(parentId);
-        return menuMapper.selectByExample(example);
+        List<UmsMenu> umsMenus = menuMapper.selectByExample(example);
+        return CommonPage.restPage(umsMenus);
     }
-
     @Override
     public List<UmsMenuNode> treeList() {
         List<UmsMenu> menuList = menuMapper.selectByExample(new UmsMenuExample());
@@ -83,13 +86,34 @@ public class UmsMenuServiceImpl implements UmsMenuService {
                 .collect(Collectors.toList());
         return result;
     }
-
     @Override
-    public int updateHidden(Long id, Integer hidden) {
+    public boolean updateHidden(Long id, Integer hidden) {
         UmsMenu umsMenu = new UmsMenu();
         umsMenu.setId(id);
         umsMenu.setHidden(hidden);
-        return menuMapper.updateByPrimaryKeySelective(umsMenu);
+        int count = menuMapper.updateByPrimaryKeySelective(umsMenu);
+        if(count == 0){
+            return false;
+        }else
+        {
+            return true;
+        }
+    }
+
+    @Override
+    public UmsMenu getById(Long id) {
+        return menuMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public boolean removeById(Long id) {
+        int count = menuMapper.deleteByPrimaryKey(id);
+        if(count == 0){
+            return false;
+        }else
+        {
+            return true;
+        }
     }
 
     /**

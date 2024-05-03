@@ -155,6 +155,21 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <resultMap id="AllResourceRoleMap" extends="BaseResultMap" type="com.mall.sso.dto.ResourceRoleDTO">
+    <collection property="roleList" columnPrefix="rl_" resultMap="com.mall.sso.mapper.UmsRoleMapper.BaseResultMap"></collection>
+  </resultMap>
+  <select id="getAllResourceRole" resultMap="AllResourceRoleMap">
+    SELECT
+      r.id,
+      r.`name`,
+      r.url,
+      rl.`name` rl_name
+    FROM ums_resource r
+           LEFT JOIN ums_role_resource_relation rrr on rrr.resource_id=r.id
+           LEFT JOIN ums_role rl on rl.id=rrr.role_id
+    where rl.`name` is not null
+    order by r.id
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update ums_resource
     <set>

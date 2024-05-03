@@ -2,8 +2,11 @@ package com.mall.mansger.service.impl;
 
 
 import com.github.pagehelper.PageHelper;
+import com.mall.api.CommonPage;
 import com.mall.mansger.dto.PmsProductAttributeCategoryItem;
+import com.mall.mansger.dto.ProductAttributeCateDTO;
 import com.mall.mansger.mapper.PmsProductAttributeCategoryMapper;
+import com.mall.mansger.model.PmsBrandExample;
 import com.mall.mansger.model.PmsProductAttributeCategory;
 import com.mall.mansger.model.PmsProductAttributeCategoryExample;
 import com.mall.mansger.service.PmsProductAttributeCategoryService;
@@ -24,12 +27,12 @@ public class PmsProductAttributeCategoryServiceImpl implements PmsProductAttribu
     public int create(String name) {
         return 0;
     }
-
+    // TODO
     @Override
     public int update(Long id, String name) {
         return 0;
     }
-
+    // TODO
     @Override
     public int delete(Long id) {
         return 0;
@@ -47,7 +50,34 @@ public class PmsProductAttributeCategoryServiceImpl implements PmsProductAttribu
     }
 
     @Override
-    public List<PmsProductAttributeCategoryItem> getListWithAttr() {
-        return null;
+    public CommonPage list(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PmsProductAttributeCategoryExample example = new PmsProductAttributeCategoryExample();
+        List<PmsProductAttributeCategory> pmsProductAttributeCategories = productAttributeCategoryMapper.selectByExample(example);
+        return  CommonPage.restPage(pmsProductAttributeCategories);
+
+    }
+
+    @Override
+    public boolean add(PmsProductAttributeCategory productAttributeCategory) {
+        productAttributeCategory.setAttributeCount(0);
+        productAttributeCategory.setParamCount(0);
+        int count = productAttributeCategoryMapper.insert(productAttributeCategory);
+        if(count == 0){
+            return false;
+        }else
+        {
+            return true;
+        }
+    }
+
+
+    /**
+     *  筛选属性级联数据
+     * @return
+     */
+    @Override
+    public List<ProductAttributeCateDTO> getListWithAttr() {
+        return productAttributeCategoryMapper.getListWithAttr();
     }
 }

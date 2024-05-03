@@ -94,6 +94,9 @@
             <artifactId>gson</artifactId>
             <scope>compile</scope>
         </dependency>
-
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+        </dependency>
     </dependencies>
 </project>

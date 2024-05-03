@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: manager-controller
+  main:
+    allow-circular-references: true
 dubbo:
   application:
     name: ${spring.application.name}
@@ -30,16 +32,17 @@ dubbo:
   # 注册监控中心
   monitor:
     protocol: registry
-jwt:
-  tokenHeader: Authorization #JWT存储的请求头
-  secret: mall-admin-secret #JWT加解密使用的密钥
-  expiration: 604800 #JWT的超期限时间(60*60*24*7)
-  tokenHead: 'Bearer '  #JWT负载中拿到开头
+
 minio:
   endpoint: http://192.168.10.33:9000 #MinIO服务所在地址
   bucketName: mall #存储桶名称
   accessKey: minioadmin #访问的key
   secretKey: minioadmin #访问的秘钥
+jwt:
+  secret: tuling-mall-admin  #服务端私钥（一定不能泄露）
+  expiration: 86400   #过期时间 60*60*24  =一天
+  tokenHead: Bearer #jwt规范  #告诉客户端jwt令牌开头需要加的一个字符串
+  tokenHeader: Authorization #告诉客户端你要在请求头里面传什么参数名字
 secure:
   ignored:
     urls: #安全路径白名单

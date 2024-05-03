@@ -1,9 +1,7 @@
 package com.mall.mansger.service;
 
 import com.mall.api.CommonPage;
-import com.mall.mansger.dto.PmsProductParam;
-import com.mall.mansger.dto.PmsProductQueryParam;
-import com.mall.mansger.dto.PmsProductResult;
+import com.mall.mansger.dto.*;
 import com.mall.mansger.model.PmsProduct;
 import java.util.List;
 
@@ -12,20 +10,32 @@ import java.util.List;
  * Created by macro on 2018/4/26.
  */
 public interface PmsProductService {
+
+    CommonPage list(ProductConditionDTO condition);
+
+    /**
+     * 更新 单个字段的公共方法
+     * @param publishStatus
+     * @param ids
+     * @param getPublishStatus
+     * @return
+     */
+//    boolean updateStatus(Integer publishStatus, List<Long> ids, SFunction<PmsProduct, ?> getPublishStatus);
+    boolean updateStatus(Integer publishStatus, List<Long> ids ,Integer newStatus);
+    boolean create(ProductSaveParamsDTO productSaveParamsDTO);
+
+    /**
+     * 根据商品编号获取更新信息
+     */
+
+    ProductUpdateInitDTO getUpdateInfo(Long id);
+
+    boolean update(ProductSaveParamsDTO productSaveParamsDTO);
     /**
      * 创建商品
      */
     int create(PmsProductParam productParam);
 
-    /**
-     * 根据商品编号获取更新信息
-     */
-    PmsProductResult getUpdateInfo(Long id);
-
-    /**
-     * 更新商品
-     */
-    int update(Long id, PmsProductParam productParam);
 
     /**
      * 分页查询商品
@@ -65,4 +75,6 @@ public interface PmsProductService {
      * 根据商品名称或者货号模糊查询
      */
     List<PmsProduct> list(String keyword);
+
+    boolean removeByIds(List<Long> ids);
 }

@@ -28,9 +28,9 @@ public class UmsMenuController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult create(@RequestBody UmsMenu umsMenu) {
-        int count = menuService.create(umsMenu);
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = menuService.create(umsMenu);
+        if (success) {
+            return CommonResult.success(null);
         } else {
             return CommonResult.failed();
         }
@@ -41,9 +41,9 @@ public class UmsMenuController {
     @ResponseBody
     public CommonResult update(@PathVariable Long id,
                                @RequestBody UmsMenu umsMenu) {
-        int count = menuService.update(id, umsMenu);
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = menuService.update(id, umsMenu);
+        if (success) {
+            return CommonResult.success(null);
         } else {
             return CommonResult.failed();
         }
@@ -53,17 +53,18 @@ public class UmsMenuController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<UmsMenu> getItem(@PathVariable Long id) {
-        UmsMenu umsMenu = menuService.getItem(id);
+        UmsMenu umsMenu = menuService.getById(id);
         return CommonResult.success(umsMenu);
     }
+
 
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult delete(@PathVariable Long id) {
-        int count = menuService.delete(id);
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = menuService.removeById(id);
+        if (success) {
+            return CommonResult.success(null);
         } else {
             return CommonResult.failed();
         }
@@ -75,25 +76,23 @@ public class UmsMenuController {
     public CommonResult<CommonPage<UmsMenu>> list(@PathVariable Long parentId,
                                                   @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        List<UmsMenu> menuList = menuService.list(parentId, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(menuList));
+        CommonPage menuList = menuService.list(parentId, pageSize, pageNum);
+        return CommonResult.success(menuList);
     }
-
 
     @RequestMapping(value = "/treeList", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<UmsMenuNode>> treeList() {
         List<UmsMenuNode> list = menuService.treeList();
         return CommonResult.success(list);
-}
-
+    }
 
     @RequestMapping(value = "/updateHidden/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateHidden(@PathVariable Long id, @RequestParam("hidden") Integer hidden) {
-        int count = menuService.updateHidden(id, hidden);
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = menuService.updateHidden(id, hidden);
+        if (success) {
+            return CommonResult.success(null);
         } else {
             return CommonResult.failed();
         }

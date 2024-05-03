@@ -2,6 +2,8 @@ package com.mall.sso.service;
 
 
 
+import com.github.pagehelper.Page;
+import com.mall.api.CommonPage;
 import com.mall.sso.dto.UmsMenuNode;
 import com.mall.sso.model.UmsMenu;
 
@@ -15,27 +17,17 @@ public interface UmsMenuService {
     /**
      * 创建后台菜单
      */
-    int create(UmsMenu umsMenu);
+    boolean create(UmsMenu umsMenu);
 
     /**
      * 修改后台菜单
      */
-    int update(Long id, UmsMenu umsMenu);
-
-    /**
-     * 根据ID获取菜单详情
-     */
-    UmsMenu getItem(Long id);
-
-    /**
-     * 根据ID删除菜单
-     */
-    int delete(Long id);
+    boolean update(Long id, UmsMenu umsMenu);
 
     /**
      * 分页查询后台菜单
      */
-    List<UmsMenu> list(Long parentId, Integer pageSize, Integer pageNum);
+    CommonPage list(Long parentId, Integer pageSize, Integer pageNum);
 
     /**
      * 树形结构返回所有菜单列表
@@ -45,5 +37,9 @@ public interface UmsMenuService {
     /**
      * 修改菜单显示状态
      */
-    int updateHidden(Long id, Integer hidden);
+    boolean updateHidden(Long id, Integer hidden);
+
+    UmsMenu getById(Long id);
+
+    boolean removeById(Long id);
 }

@@ -28,10 +28,9 @@ public class UmsResourceController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult create(@RequestBody UmsResource umsResource) {
-        int count = resourceService.create(umsResource);
-//        dynamicSecurityMetadataSource.clearDataSource();
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = resourceService.create(umsResource);
+        if (success) {
+            return CommonResult.success(null);
         } else {
             return CommonResult.failed();
         }
@@ -42,20 +41,20 @@ public class UmsResourceController {
     @ResponseBody
     public CommonResult update(@PathVariable Long id,
                                @RequestBody UmsResource umsResource) {
-        int count = resourceService.update(id, umsResource);
-//        dynamicSecurityMetadataSource.clearDataSource();
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = resourceService.update(id, umsResource);
+        if (success) {
+            return CommonResult.success(null);
         } else {
             return CommonResult.failed();
         }
     }
 
 
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<UmsResource> getItem(@PathVariable Long id) {
-        UmsResource umsResource = resourceService.getItem(id);
+        UmsResource umsResource = resourceService.getById(id);
         return CommonResult.success(umsResource);
     }
 
@@ -63,14 +62,14 @@ public class UmsResourceController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult delete(@PathVariable Long id) {
-        int count = resourceService.delete(id);
-//        dynamicSecurityMetadataSource.clearDataSource();
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = resourceService.delete(id);
+        if (success) {
+            return CommonResult.success(null);
         } else {
             return CommonResult.failed();
         }
     }
+
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -80,8 +79,8 @@ public class UmsResourceController {
                                                       @RequestParam(required = false) String urlKeyword,
                                                       @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                       @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        List<UmsResource> resourceList = resourceService.list(categoryId,nameKeyword, urlKeyword, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(resourceList));
+        CommonPage resourceList = resourceService.list(categoryId,nameKeyword, urlKeyword, pageSize, pageNum);
+        return CommonResult.success(resourceList);
     }
 
 
@@ -89,9 +88,7 @@ public class UmsResourceController {
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<UmsResource>> listAll() {
-        List<UmsResource> resourceList = resourceService.listAll();
+        List<UmsResource> resourceList = resourceService.list();
         return CommonResult.success(resourceList);
     }
-
-
 }

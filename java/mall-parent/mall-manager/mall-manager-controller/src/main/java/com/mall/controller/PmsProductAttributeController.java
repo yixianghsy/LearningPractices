@@ -4,6 +4,7 @@ import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
 import com.mall.mansger.dto.PmsProductAttributeParam;
 import com.mall.mansger.dto.ProductAttrInfo;
+import com.mall.mansger.dto.RelationAttrInfoDTO;
 import com.mall.mansger.model.PmsProductAttribute;
 import com.mall.mansger.service.PmsProductAttributeService;
 
@@ -18,71 +19,101 @@ import java.util.List;
  * 商品属性管理Controller
  * Created by macro on 2018/4/26.
  */
-@Controller
-
+@RestController
 @RequestMapping("/productAttribute")
 public class PmsProductAttributeController {
     @Reference
     private PmsProductAttributeService productAttributeService;
+    /**
+     * 商品分类—商品属性数据列表
+     * url:'/productAttribute/list/'+cid,
+     * method:'get',
+     * params:params
+     */
     @RequestMapping(value = "/list/{cid}", method = RequestMethod.GET)
-    @ResponseBody
-    public CommonResult<CommonPage<PmsProductAttribute>> getList(@PathVariable Long cid,
-                                                                 @RequestParam(value = "type") Integer type,
-                                                                 @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                                                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        List<PmsProductAttribute> productAttributeList = productAttributeService.getList(cid, type, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(productAttributeList));
+    public CommonResult<CommonPage> getList(@PathVariable Long cid,
+                                            @RequestParam(value = "type") Integer type,
+                                            @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                            @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+        return CommonResult.success(productAttributeService.list(cid, type, pageNum, pageSize));
     }
 
 
+    /**
+     * 属性添加
+     * return request({
+     * url:'/productAttribute/create',
+     * method:'post',
+     * data:data
+     * })
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    @ResponseBody
-    public CommonResult create(@RequestBody PmsProductAttributeParam productAttributeParam) {
-        int count = productAttributeService.create(productAttributeParam);
-        if (count > 0) {
-            return CommonResult.success(count);
+    public CommonResult create(@RequestBody PmsProductAttribute productAttribute) {
+
+        boolean result = productAttributeService.create(productAttribute);
+        if (result) {
+            return CommonResult.success(result);
         } else {
             return CommonResult.failed();
         }
+
     }
 
 
+    /**
+     * 属性修改
+     * url:'/productAttribute/update/'+id,
+     * method:'post',
+     * data:data
+     */
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    @ResponseBody
-    public CommonResult update(@PathVariable Long id, @RequestBody PmsProductAttributeParam productAttributeParam) {
-        int count = productAttributeService.update(id, productAttributeParam);
-        if (count > 0) {
-            return CommonResult.success(count);
+    public CommonResult update(@RequestBody PmsProductAttribute productAttribute) {
+        Boolean result = productAttributeService.update(productAttribute);
+        if (result) {
+            return CommonResult.success(result);
         } else {
             return CommonResult.failed();
         }
     }
 
 
+    /**
+     * 根据id获取商品属性
+     * url:'/productAttribute/'+id,
+     * method:'get'
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public CommonResult<PmsProductAttribute> getItem(@PathVariable Long id) {
-        PmsProductAttribute productAttribute = productAttributeService.getItem(id);
-        return CommonResult.success(productAttribute);
+    public CommonResult<PmsProductAttribute> getById(@PathVariable Long id) {
+
+        PmsProductAttribute productCategory = productAttributeService.getById(id);
+        return CommonResult.success(productCategory);
     }
 
 
+    /**
+     * url:'/productAttribute/delete',
+     * method:'post',
+     * data:data
+     */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    @ResponseBody
     public CommonResult delete(@RequestParam("ids") List<Long> ids) {
-        int count = productAttributeService.delete(ids);
-        if (count > 0) {
-            return CommonResult.success(count);
+
+        boolean result = productAttributeService.delete(ids);
+        if (result) {
+            return CommonResult.success(result);
         } else {
             return CommonResult.failed();
         }
     }
-
-
-    @RequestMapping(value = "/attrInfo/{productCategoryId}", method = RequestMethod.GET)
-    @ResponseBody
-    public CommonResult<List<ProductAttrInfo>> getAttrInfo(@PathVariable Long productCategoryId) {
-        List<ProductAttrInfo> productAttrInfoList = productAttributeService.getProductAttrInfo(productCategoryId);
-        return CommonResult.success(productAttrInfoList);
+    /**
+     *  根据商品分类id获取关联的筛选属性
+     *   url:'/productAttribute/attrInfo/'+productCategoryId,
+     *     method:'get'
+     */
+    @RequestMapping(value="/attrInfo/{cId}")
+    public CommonResult getRelationAttrInfoByCid(@PathVariable Long cId){
+        List<RelationAttrInfoDTO> list=  productAttributeService.getRelationAttrInfoByCid(cId);
+        return CommonResult.success(list);
     }
+
 }

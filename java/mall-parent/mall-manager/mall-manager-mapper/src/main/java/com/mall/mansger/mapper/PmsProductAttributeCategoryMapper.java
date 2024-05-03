@@ -1,5 +1,6 @@
 package com.mall.mansger.mapper;
 
+import com.mall.mansger.dto.ProductAttributeCateDTO;
 import com.mall.mansger.model.PmsProductAttributeCategory;
 import com.mall.mansger.model.PmsProductAttributeCategoryExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,6 @@ public interface PmsProductAttributeCategoryMapper {
     int updateByPrimaryKeySelective(PmsProductAttributeCategory record);
 
     int updateByPrimaryKey(PmsProductAttributeCategory record);
+
+    List<ProductAttributeCateDTO> getListWithAttr();
 }

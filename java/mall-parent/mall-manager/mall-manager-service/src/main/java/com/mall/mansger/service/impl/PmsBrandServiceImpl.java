@@ -12,6 +12,7 @@ import com.mall.mansger.model.PmsProduct;
 import com.mall.mansger.service.PmsBrandService;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -23,6 +24,28 @@ import java.util.List;
 public class PmsBrandServiceImpl implements PmsBrandService {
     @Autowired
     private PmsBrandMapper brandMapper;
+    /**
+     *
+     *  品牌数据列表
+     * @param keyword 商品名称
+     * @param pageNum pageNum
+     * @param pageSize pageSize
+     * @return
+     */
+    @Override
+    public CommonPage list(String keyword, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PmsBrandExample pmsBrandExample = new PmsBrandExample();
+        pmsBrandExample.setOrderByClause("sort desc");
+        PmsBrandExample.Criteria criteria = pmsBrandExample.createCriteria();
+        if (!StrUtil.isEmpty(keyword)) {
+            criteria.andNameLike("%" + keyword + "%");
+        }
+        List<PmsBrand> pmsBrands = brandMapper.selectByExample(pmsBrandExample);
+        return CommonPage.restPage(pmsBrands);
+
+    }
+
     @Override
     public List<PmsBrand> listAllBrand() {
         return null;

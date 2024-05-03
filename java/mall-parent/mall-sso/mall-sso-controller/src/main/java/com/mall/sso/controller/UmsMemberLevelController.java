@@ -24,11 +24,12 @@ public class UmsMemberLevelController {
     private UmsMemberLevelService memberLevelService;
 
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    @ResponseBody
-    public CommonResult<List<UmsMemberLevel>> list(@RequestParam("defaultStatus") Integer defaultStatus) {
-        List<UmsMemberLevel> memberLevelList = memberLevelService.list(defaultStatus);
-        return CommonResult.success(memberLevelList);
+    @RequestMapping(value="/list",method = RequestMethod.GET)
+    public CommonResult list(
+            @RequestParam(value="defaultStatus",defaultValue = "0") Integer defaultStatus)
+    {
+        List<UmsMemberLevel> list= memberLevelService.list(defaultStatus);
+        return CommonResult.success(list);
     }
 }
 

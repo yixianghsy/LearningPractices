@@ -6,7 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableDubboConfig
-@DubboComponentScan("com.mall.*.service")
+@DubboComponentScan("com.mall.sso.service")
+/*
+scanBasePackages 扫面其他包路径，后期需要调整包
+ */
 @SpringBootApplication
 public class SsoServiceApp {
 

@@ -1,15 +1,13 @@
 package com.mall.sso.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.dynamic.datasource.annotation.DS;
 import com.github.pagehelper.PageHelper;
-import com.mall.sso.confg.datasource.dynamic.DataSourceConfig;
-import com.mall.sso.mapper.UmsRoleDao;
-import com.mall.sso.mapper.UmsRoleMapper;
-import com.mall.sso.mapper.UmsRoleMenuRelationMapper;
-import com.mall.sso.mapper.UmsRoleResourceRelationMapper;
+import com.mall.api.CommonPage;
+import com.mall.sso.mapper.*;
 import com.mall.sso.model.*;
 import com.mall.sso.service.UmsAdminCacheService;
+import com.mall.sso.service.UmsRoleMenuRelationService;
+import com.mall.sso.service.UmsRoleResourceRelationService;
 import com.mall.sso.service.UmsRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.dubbo.config.annotation.Service;
@@ -23,6 +21,8 @@ import java.util.List;
  */
 @Service
 public class UmsRoleServiceImpl implements UmsRoleService {
+
+
     @Autowired
     private UmsRoleMapper roleMapper;
     @Autowired
@@ -34,45 +34,50 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     @Autowired
     private UmsAdminCacheService adminCacheService;
     @Override
-    public int create(UmsRole role) {
+    public boolean create(UmsRole role) {
         role.setCreateTime(new Date());
         role.setAdminCount(0);
         role.setSort(0);
-        return roleMapper.insert(role);
+        int count = roleMapper.insert(role);
+        if(count == 0){
+            return false;
+        }else
+        {
+            return true;
+        }
     }
-
     @Override
-    public int update(Long id, UmsRole role) {
-        role.setId(id);
-        return roleMapper.updateByPrimaryKeySelective(role);
-    }
-
-    @Override
-    public int delete(List<Long> ids) {
+    public boolean delete(List<Long> ids) {
         UmsRoleExample example = new UmsRoleExample();
         example.createCriteria().andIdIn(ids);
         int count = roleMapper.deleteByExample(example);
         adminCacheService.delResourceListByRoleIds(ids);
-        return count;
+        if(count == 0){
+            return false;
+        }else
+        {
+            return true;
+        }
     }
-
+    // TODO 返回值需要修改
     @Override
-    public List<UmsRole> list() {
-        return roleMapper.selectByExample(new UmsRoleExample());
-    }
-
-    @Override
-    public List<UmsRole> list(String keyword, Integer pageSize, Integer pageNum) {
+    public CommonPage list(String keyword, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         UmsRoleExample example = new UmsRoleExample();
         if (!StrUtil.isEmpty(keyword)) {
             example.createCriteria().andNameLike("%" + keyword + "%");
         }
+        List<UmsRole> umsRoles = roleMapper.selectByExample(example);
+        return CommonPage.restPage(umsRoles);
+    }
+
+    @Override
+    public List<UmsRole> list() {
+        UmsRoleExample example = new UmsRoleExample();
         return roleMapper.selectByExample(example);
     }
 
     @Override
-    @DS(DataSourceConfig.SHARDING_DATA_SOURCE_NAME)
     public List<UmsMenu> getMenuList(Long adminId) {
         return roleDao.getMenuList(adminId);
     }
@@ -118,5 +123,16 @@ public class UmsRoleServiceImpl implements UmsRoleService {
         }
         adminCacheService.delResourceListByRole(roleId);
         return resourceIds.size();
+    }
+
+    @Override
+    public boolean updateById(UmsRole umsRole) {
+        int count= roleMapper.updateByPrimaryKey(umsRole);
+        if(count == 0){
+            return false;
+        }else
+        {
+            return true;
+        }
     }
 }

@@ -6,8 +6,8 @@ spring:
   profiles:
     active: dynamic
   main:
-    allow-bean-definition-overriding: true
-    # ====================== ↓↓↓↓↓↓ 配置druid↓↓↓↓↓↓ ======================
+    allow-circular-references: true
+  # ====================== ↓↓↓↓↓↓ 配置druid↓↓↓↓↓↓ ======================
   autoconfigure:
     exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
   datasource:
@@ -26,11 +26,32 @@ spring:
 dubbo:
   application:
     name: ${spring.application.name}
+    qosPort: 22221
+  # 使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper
+  # 注册中心id
+  registry:
+    id: zookeeper-registry
+    # 注册中心协议
+    protocol: zookeeper
+    # 注册中心地址
+    address: 192.168.10.250:2181
+
+  # dubbo协议在20880端口暴露服务
+  # 协议名称
   protocol:
     name: dubbo
+    # 协议端口
     port: 20883
-  registry:
-    address: zookeeper://192.168.10.250:2181
+    # 协议访问log
+    accesslog: dubbo-access.log
+  # 重试次数
+  provider:
+    retries: 0
+    # 超时时间
+    timeout: 3000
+  # 注册监控中心
+  monitor:
+    protocol: registry
 # MyBatis
 mybatis:
   mapper-locations:
@@ -49,27 +70,28 @@ logging:
 logstash:
   host: localhost
   enableInnerLog: false
-jwt:
-  tokenHeader: Authorization #JWT存储的请求头
-  secret: mall-admin-secret #JWT加解密使用的密钥
-  expiration: 604800 #JWT的超期限时间(60*60*24*7)
-  tokenHead: 'Bearer '  #JWT负载中拿到开头
 secure:
   ignored:
     urls: #安全路径白名单
-      - /swagger-ui/
+      - /swagger-ui.html
       - /swagger-resources/**
+      - /swagger/**
       - /**/v2/api-docs
-      - /**/*.html
       - /**/*.js
       - /**/*.css
       - /**/*.png
-      - /**/*.map
-      - /favicon.ico
+      - /**/*.ico
+      - /webjars/springfox-swagger-ui/**
       - /actuator/**
       - /druid/**
       - /admin/login
       - /admin/register
       - /admin/info
       - /admin/logout
-      - /minio/upload
+      - /error
+
+jwt:
+  secret: tuling-mall-admin  #服务端私钥（一定不能泄露）
+  expiration: 86400   #过期时间 60*60*24  =一天
+  tokenHead: Bearer #jwt规范  #告诉客户端jwt令牌开头需要加的一个字符串
+  tokenHeader: Authorization #告诉客户端你要在请求头里面传什么参数名字

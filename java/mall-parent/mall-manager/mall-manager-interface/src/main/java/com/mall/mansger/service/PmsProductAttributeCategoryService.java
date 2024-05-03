@@ -1,6 +1,8 @@
 package com.mall.mansger.service;
 
+import com.mall.api.CommonPage;
 import com.mall.mansger.dto.PmsProductAttributeCategoryItem;
+import com.mall.mansger.dto.ProductAttributeCateDTO;
 import com.mall.mansger.model.PmsProductAttributeCategory;
 
 import java.util.List;
@@ -10,6 +12,12 @@ import java.util.List;
  * Created by macro on 2018/4/26.
  */
 public interface PmsProductAttributeCategoryService {
+
+    CommonPage list(Integer pageNum, Integer pageSize);
+
+    boolean add(PmsProductAttributeCategory productAttributeCategory);
+
+    List<ProductAttributeCateDTO> getListWithAttr();
     /**
      * 创建属性分类
      */
@@ -35,8 +43,5 @@ public interface PmsProductAttributeCategoryService {
      */
     List<PmsProductAttributeCategory> getList(Integer pageSize, Integer pageNum);
 
-    /**
-     * 获取包含属性的属性分类
-     */
-    List<PmsProductAttributeCategoryItem> getListWithAttr();
+
 }

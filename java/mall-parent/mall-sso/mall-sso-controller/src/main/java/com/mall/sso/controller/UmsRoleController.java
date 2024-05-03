@@ -26,19 +26,21 @@ public class UmsRoleController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult create(@RequestBody UmsRole role) {
-        int count = roleService.create(role);
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = roleService.create(role);
+        if (success) {
+            return CommonResult.success(null);
         }
         return CommonResult.failed();
     }
 
+
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult update(@PathVariable Long id, @RequestBody UmsRole role) {
-        int count = roleService.update(id, role);
-        if (count > 0) {
-            return CommonResult.success(count);
+        role.setId(id);
+        boolean success = roleService.updateById(role);
+        if (success) {
+            return CommonResult.success(null);
         }
         return CommonResult.failed();
     }
@@ -46,9 +48,9 @@ public class UmsRoleController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult delete(@RequestParam("ids") List<Long> ids) {
-        int count = roleService.delete(ids);
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = roleService.delete(ids);
+        if (success) {
+            return CommonResult.success(null);
         }
         return CommonResult.failed();
     }
@@ -66,18 +68,19 @@ public class UmsRoleController {
     public CommonResult<CommonPage<UmsRole>> list(@RequestParam(value = "keyword", required = false) String keyword,
                                                   @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        List<UmsRole> roleList = roleService.list(keyword, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(roleList));
+        CommonPage roleList = roleService.list(keyword, pageSize, pageNum);
+        return CommonResult.success(roleList);
     }
 
     @RequestMapping(value = "/updateStatus/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateStatus(@PathVariable Long id, @RequestParam(value = "status") Integer status) {
         UmsRole umsRole = new UmsRole();
+        umsRole.setId(id);
         umsRole.setStatus(status);
-        int count = roleService.update(id, umsRole);
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = roleService.updateById(umsRole);
+        if (success) {
+            return CommonResult.success(null);
         }
         return CommonResult.failed();
     }
@@ -96,7 +99,6 @@ public class UmsRoleController {
         return CommonResult.success(roleList);
     }
 
-
     @RequestMapping(value = "/allocMenu", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult allocMenu(@RequestParam Long roleId, @RequestParam List<Long> menuIds) {
@@ -105,11 +107,11 @@ public class UmsRoleController {
     }
 
 
+
     @RequestMapping(value = "/allocResource", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult allocResource(@RequestParam Long roleId, @RequestParam List<Long> resourceIds) {
         int count = roleService.allocResource(roleId, resourceIds);
         return CommonResult.success(count);
     }
-
 }

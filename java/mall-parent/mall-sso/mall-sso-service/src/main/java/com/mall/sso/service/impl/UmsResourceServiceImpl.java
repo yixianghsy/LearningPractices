@@ -2,14 +2,18 @@ package com.mall.sso.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
+import com.mall.api.CommonPage;
+import com.mall.sso.dto.ResourceRoleDTO;
 import com.mall.sso.mapper.UmsAdminMapper;
 import com.mall.sso.mapper.UmsResourceMapper;
 import com.mall.sso.model.UmsResource;
 import com.mall.sso.model.UmsResourceExample;
 import com.mall.sso.service.UmsAdminCacheService;
 import com.mall.sso.service.UmsResourceService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.apache.dubbo.config.annotation.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+;
 
 import java.util.Date;
 import java.util.List;
@@ -21,39 +25,49 @@ import java.util.List;
 @Service
 public class UmsResourceServiceImpl implements UmsResourceService {
     @Autowired
+    private UmsAdminCacheService adminCacheService;
+    @Autowired
     private UmsResourceMapper resourceMapper;
     @Autowired
-    private UmsAdminMapper adminMapper;
-    @Autowired
-    private UmsAdminCacheService adminCacheService;
+    private  UmsResourceMapper umsResourceMapper;
     @Override
-    public int create(UmsResource umsResource) {
+    public boolean create(UmsResource umsResource) {
         umsResource.setCreateTime(new Date());
-        return resourceMapper.insert(umsResource);
+        int count = resourceMapper.insert(umsResource);
+        if(count == 0){
+            return false;
+        }else
+        {
+            return true;
+        }
     }
 
     @Override
-    public int update(Long id, UmsResource umsResource) {
+    public boolean update(Long id, UmsResource umsResource) {
         umsResource.setId(id);
         int count = resourceMapper.updateByPrimaryKeySelective(umsResource);
         adminCacheService.delResourceListByResource(id);
-        return count;
+        if(count == 0){
+            return false;
+        }else
+        {
+            return true;
+        }
     }
-
     @Override
-    public UmsResource getItem(Long id) {
-        return resourceMapper.selectByPrimaryKey(id);
-    }
-
-    @Override
-    public int delete(Long id) {
+    public boolean delete(Long id) {
         int count = resourceMapper.deleteByPrimaryKey(id);
         adminCacheService.delResourceListByResource(id);
-        return count;
+        if(count == 0){
+            return false;
+        }else
+        {
+            return true;
+        }
     }
-
+    // TODO 返回值需要修改
     @Override
-    public List<UmsResource> list(Long categoryId, String nameKeyword, String urlKeyword, Integer pageSize, Integer pageNum) {
+    public CommonPage list(Long categoryId, String nameKeyword, String urlKeyword, Integer pageSize, Integer pageNum) {
         //因为加这个就报错，先注释掉
         PageHelper.startPage(pageNum,pageSize);
         UmsResourceExample example = new UmsResourceExample();
@@ -68,10 +82,28 @@ public class UmsResourceServiceImpl implements UmsResourceService {
             criteria.andUrlLike('%'+urlKeyword+'%');
         }
         List<UmsResource> list = resourceMapper.selectByExample(example);
-        return list;
+        CommonPage.restPage(list);
+        return CommonPage.restPage(list);
+    }
+
+
+    /**
+     * 查询资源对应的角色
+     * @return
+     */
+    @Override
+    public List<ResourceRoleDTO> getAllResourceRole() {
+        return umsResourceMapper.getAllResourceRole();
+    }
+
+    @Override
+    public UmsResource getById(Long id) {
+        return umsResourceMapper.selectByPrimaryKey(id);
     }
     @Override
-    public List<UmsResource> listAll() {
-        return resourceMapper.selectByExample(new UmsResourceExample());
+    public List<UmsResource> list() {
+        UmsResourceExample example = new UmsResourceExample();
+        return umsResourceMapper.selectByExample(example);
     }
+
 }

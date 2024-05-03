@@ -1,5 +1,6 @@
 package com.mall.mansger.mapper;
 
+import com.mall.mansger.dto.RelationAttrInfoDTO;
 import com.mall.mansger.model.PmsProductAttribute;
 import com.mall.mansger.model.PmsProductAttributeExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,6 @@ public interface PmsProductAttributeMapper {
     int updateByPrimaryKeySelective(PmsProductAttribute record);
 
     int updateByPrimaryKey(PmsProductAttribute record);
+
+    List<RelationAttrInfoDTO> getRelationAttrInfoByCid(Long cId);
 }

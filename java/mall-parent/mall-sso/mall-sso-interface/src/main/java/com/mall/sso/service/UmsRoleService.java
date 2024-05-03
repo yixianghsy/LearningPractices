@@ -1,6 +1,8 @@
 package com.mall.sso.service;
 
 
+import com.github.pagehelper.Page;
+import com.mall.api.CommonPage;
 import com.mall.sso.model.UmsMenu;
 import com.mall.sso.model.UmsResource;
 import com.mall.sso.model.UmsRole;
@@ -15,28 +17,18 @@ public interface UmsRoleService {
     /**
      * 添加角色
      */
-    int create(UmsRole role);
-
-    /**
-     * 修改角色信息
-     */
-    int update(Long id, UmsRole role);
+    boolean create(UmsRole role);
 
     /**
      * 批量删除角色
      */
-    int delete(List<Long> ids);
-
-    /**
-     * 获取所有角色列表
-     */
-    List<UmsRole> list();
+    boolean delete(List<Long> ids);
 
     /**
      * 分页获取角色列表
      */
-    List<UmsRole> list(String keyword, Integer pageSize, Integer pageNum);
-
+    CommonPage list(String keyword, Integer pageSize, Integer pageNum);
+    List<UmsRole> list();
     /**
      * 根据管理员ID获取对应菜单
      */
@@ -55,12 +47,12 @@ public interface UmsRoleService {
     /**
      * 给角色分配菜单
      */
-
     int allocMenu(Long roleId, List<Long> menuIds);
 
     /**
      * 给角色分配资源
      */
-
     int allocResource(Long roleId, List<Long> resourceIds);
+
+    boolean updateById(UmsRole umsRole);
 }

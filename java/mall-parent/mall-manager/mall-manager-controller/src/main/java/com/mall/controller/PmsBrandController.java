@@ -16,13 +16,30 @@ import java.util.List;
  * 商品品牌管理Controller
  * Created by macro on 2018/4/26.
  */
-@Controller
+@RestController
 @RequestMapping("/brand")
 public class PmsBrandController {
     @Reference
     private PmsBrandService brandService;
 
+    /**
+     *  品牌数据列表
+     *      在商品中进行共用
+     *  url:'/brand/list',
+     *     method:'get',
+     *     params:params
+     */
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    public CommonResult list(
+            @RequestParam(value="keyword",defaultValue = "") String keyword,
+            @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize",defaultValue = "5") Integer pageSize)
+    {
+        System.out.println("/brand/list");
+        CommonPage list = brandService.list(keyword, pageNum, pageSize);
 
+        return CommonResult.success(list);
+    }
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<PmsBrand>> getList() {
@@ -52,15 +69,15 @@ public class PmsBrandController {
     }
 
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    @ResponseBody
-    public CommonResult<CommonPage<PmsBrand>> getList(@RequestParam(value = "keyword", required = false) String keyword,
-                                                      @RequestParam(value = "showStatus",required = false) Integer showStatus,
-                                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                                      @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
-        CommonPage  brandList = brandService.listBrand(keyword,showStatus,pageNum, pageSize);
-        return CommonResult.success(brandList);
-    }
+//    @RequestMapping(value = "/list", method = RequestMethod.GET)
+//    @ResponseBody
+//    public CommonResult<CommonPage<PmsBrand>> getList(@RequestParam(value = "keyword", required = false) String keyword,
+//                                                      @RequestParam(value = "showStatus",required = false) Integer showStatus,
+//                                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+//                                                      @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+//        CommonPage  brandList = brandService.listBrand(keyword,showStatus,pageNum, pageSize);
+//        return CommonResult.success(brandList);
+//    }
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

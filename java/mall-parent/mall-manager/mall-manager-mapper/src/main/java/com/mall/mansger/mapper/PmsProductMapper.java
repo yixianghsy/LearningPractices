@@ -1,5 +1,6 @@
 package com.mall.mansger.mapper;
 
+import com.mall.mansger.dto.ProductUpdateInitDTO;
 import com.mall.mansger.model.PmsProduct;
 import com.mall.mansger.model.PmsProductExample;
 import org.apache.ibatis.annotations.Param;
@@ -35,4 +36,5 @@ public interface PmsProductMapper {
 
     int updateByPrimaryKey(PmsProduct record);
 
+    ProductUpdateInitDTO getUpdateInfo(Long id);
 }

@@ -1,5 +1,6 @@
 package com.mall.mansger.mapper;
 
+import com.mall.mansger.dto.ProductCateChildrenDTO;
 import com.mall.mansger.model.PmsProductCategory;
 import com.mall.mansger.model.PmsProductCategoryExample;
 import org.apache.ibatis.annotations.Param;
@@ -34,4 +35,11 @@ public interface PmsProductCategoryMapper {
     int updateByPrimaryKeyWithBLOBs(PmsProductCategory record);
 
     int updateByPrimaryKey(PmsProductCategory record);
+
+    /**
+     * 获取商品一级分类和二级分类的下拉级联数据
+     * @return
+     */
+    List<ProductCateChildrenDTO> getWithChildren();
+
 }

@@ -28,19 +28,35 @@ public class UmsResourceCategoryServiceImpl implements UmsResourceCategoryServic
     }
 
     @Override
-    public int create(UmsResourceCategory umsResourceCategory) {
+    public boolean create(UmsResourceCategory umsResourceCategory) {
         umsResourceCategory.setCreateTime(new Date());
-        return resourceCategoryMapper.insert(umsResourceCategory);
+        int count = resourceCategoryMapper.insert(umsResourceCategory);
+        if (count == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override
-    public int update(Long id, UmsResourceCategory umsResourceCategory) {
-        umsResourceCategory.setId(id);
-        return resourceCategoryMapper.updateByPrimaryKeySelective(umsResourceCategory);
+    public boolean removeById(Long id) {
+        int count = resourceCategoryMapper.deleteByPrimaryKey(id);
+        if (count == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override
-    public int delete(Long id) {
-        return resourceCategoryMapper.deleteByPrimaryKey(id);
+    public boolean updateById(UmsResourceCategory umsResourceCategory) {
+        int count = resourceCategoryMapper.updateByPrimaryKey(umsResourceCategory);
+        if (count == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
+
+

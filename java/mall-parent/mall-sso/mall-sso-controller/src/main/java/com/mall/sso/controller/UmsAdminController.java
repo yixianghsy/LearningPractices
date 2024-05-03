@@ -3,6 +3,8 @@ package com.mall.sso.controller;
 import cn.hutool.core.collection.CollUtil;
 import com.mall.api.CommonPage;
 import com.mall.api.CommonResult;
+import com.mall.exception.Asserts;
+import com.mall.domain.AdminUserDetails;
 import com.mall.sso.dto.UmsAdminLoginParam;
 import com.mall.sso.dto.UmsAdminParam;
 import com.mall.sso.dto.UpdateAdminPasswordParam;
@@ -11,32 +13,40 @@ import com.mall.sso.model.UmsRole;
 import com.mall.sso.service.UmsAdminService;
 import com.mall.sso.service.UmsRoleService;
 
+import com.mall.util.ComConstants;
+import com.mall.util.JwtTokenUtil;
 import org.apache.dubbo.config.annotation.Reference;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 /**
  * 后台用户管理
  * Created by macro on 2018/4/26.
  */
 @Controller
-
 @RequestMapping("/admin")
 public class UmsAdminController {
+    @Autowired
+    HttpSession session;
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
     @Reference
     private UmsAdminService adminService;
     @Reference
@@ -53,18 +63,28 @@ public class UmsAdminController {
         return CommonResult.success(umsAdmin);
     }
 
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult login(@Validated @RequestBody UmsAdminLoginParam umsAdminLoginParam) {
-        System.out.println("调用login 开始");
-        String token = adminService.login(umsAdminLoginParam.getUsername(), umsAdminLoginParam.getPassword());
-        if (token == null) {
+        UmsAdmin login = adminService.login(umsAdminLoginParam.getUsername(), umsAdminLoginParam.getPassword());
+        List<UmsRole> umsRoles = adminService.loadUserById(login.getId());
+        AdminUserDetails adminUserDetails = new AdminUserDetails(login,umsRoles);
+        // 生成springsecurity的通过认证标识
+        UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(adminUserDetails,null,adminUserDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        if(!adminUserDetails.isEnabled()){
+            Asserts.fail("帐号已被禁用");
+         }
+        if (login == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }
+        String token = jwtTokenUtil.generateUserNameStr(login.getUsername());
+
         Map<String, String> tokenMap = new HashMap<>();
-        tokenMap.put("token", token);
-        tokenMap.put("tokenHead", tokenHead);
+        tokenMap.put("token",token);
+        tokenMap.put("tokenHead",tokenHead);
+        tokenMap.put("tokenHeader",tokenHeader);
+        // jwt
         return CommonResult.success(tokenMap);
     }
 
@@ -79,16 +99,14 @@ public class UmsAdminController {
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", refreshToken);
         tokenMap.put("tokenHead", tokenHead);
-        System.out.println("调用login 结束");
         return CommonResult.success(tokenMap);
     }
-
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult getAdminInfo(Principal principal) {
         System.out.println("调用info 开始");
-        if (principal == null) {
+        if(principal==null){
             return CommonResult.unauthorized(null);
         }
         String username = principal.getName();
@@ -98,36 +116,34 @@ public class UmsAdminController {
         data.put("menus", roleService.getMenuList(umsAdmin.getId()));
         data.put("icon", umsAdmin.getIcon());
         List<UmsRole> roleList = adminService.getRoleList(umsAdmin.getId());
-        if (CollUtil.isNotEmpty(roleList)) {
+        if(CollUtil.isNotEmpty(roleList)){
             List<String> roles = roleList.stream().map(UmsRole::getName).collect(Collectors.toList());
-            data.put("roles", roles);
+            data.put("roles",roles);
         }
-        System.out.println("调用info 结束");
         return CommonResult.success(data);
     }
-
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult logout() {
+        session.setAttribute(ComConstants.FLAG_CURRENT_USER,null);
         return CommonResult.success(null);
     }
-
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<CommonPage<UmsAdmin>> list(@RequestParam(value = "keyword", required = false) String keyword,
                                                    @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                    @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        List<UmsAdmin> adminList = adminService.list(keyword, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(adminList));
+//        List<UmsAdmin> adminList = adminService.list(keyword, pageSize, pageNum);
+        CommonPage orderlist = adminService.list(keyword, pageSize, pageNum);
+        return CommonResult.success(orderlist);
     }
-
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<UmsAdmin> getItem(@PathVariable Long id) {
-        UmsAdmin admin = adminService.getItem(id);
+        UmsAdmin admin = adminService.getById(id);
         return CommonResult.success(admin);
     }
 
@@ -135,13 +151,12 @@ public class UmsAdminController {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult update(@PathVariable Long id, @RequestBody UmsAdmin admin) {
-        int count = adminService.update(id, admin);
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = adminService.update(id, admin);
+        if (success) {
+            return CommonResult.success(null);
         }
         return CommonResult.failed();
     }
-
 
     @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
     @ResponseBody
@@ -160,13 +175,12 @@ public class UmsAdminController {
         }
     }
 
-
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult delete(@PathVariable Long id) {
-        int count = adminService.delete(id);
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = adminService.delete(id);
+        if (success) {
+            return CommonResult.success(null);
         }
         return CommonResult.failed();
     }
@@ -175,14 +189,12 @@ public class UmsAdminController {
     public CommonResult updateStatus(@PathVariable Long id, @RequestParam(value = "status") Integer status) {
         UmsAdmin umsAdmin = new UmsAdmin();
         umsAdmin.setStatus(status);
-        int count = adminService.update(id, umsAdmin);
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = adminService.update(id,umsAdmin);
+        if (success) {
+            return CommonResult.success(null);
         }
         return CommonResult.failed();
     }
-
-
     @RequestMapping(value = "/role/update", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateRole(@RequestParam("adminId") Long adminId,
@@ -193,11 +205,11 @@ public class UmsAdminController {
         }
         return CommonResult.failed();
     }
-
     @RequestMapping(value = "/role/{adminId}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<UmsRole>> getRoleList(@PathVariable Long adminId) {
         List<UmsRole> roleList = adminService.getRoleList(adminId);
         return CommonResult.success(roleList);
     }
+
 }

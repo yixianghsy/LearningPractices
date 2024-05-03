@@ -2,14 +2,15 @@ package com.mall.sso.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 
+import com.mall.security.config.component.dynamicSecurity.DynamicSecurityMetadataSource;
 import com.mall.sso.mapper.UmsAdminRoleRelationDao;
-import com.mall.sso.mapper.UmsAdminRoleRelationMapper;
 import com.mall.sso.model.UmsAdmin;
 import com.mall.sso.model.UmsAdminRoleRelation;
 import com.mall.sso.model.UmsAdminRoleRelationExample;
 import com.mall.sso.model.UmsResource;
 import com.mall.sso.service.RedisService;
 import com.mall.sso.service.UmsAdminCacheService;
+import com.mall.sso.service.UmsAdminRoleRelationService;
 import com.mall.sso.service.UmsAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +30,9 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
     @Autowired
     private RedisService redisService;
     @Autowired
-    private UmsAdminRoleRelationMapper adminRoleRelationMapper;
+    private UmsAdminRoleRelationService adminRoleRelationService;
+    @Autowired
+    private DynamicSecurityMetadataSource dynamicSecurityMetadataSource;
     @Autowired
     private UmsAdminRoleRelationDao adminRoleRelationDao;
 
@@ -43,7 +46,7 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
     private String REDIS_KEY_RESOURCE_LIST;
     @Override
     public void delAdmin(Long adminId) {
-        UmsAdmin admin = adminService.getItem(adminId);
+        UmsAdmin admin = adminService.getById(adminId);
         if (admin != null) {
             String key = REDIS_DATABASE + ":" + REDIS_KEY_ADMIN + ":" + admin.getUsername();
             redisService.del(key);
@@ -52,6 +55,8 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
 
     @Override
     public void delResourceList(Long adminId) {
+
+        dynamicSecurityMetadataSource.clearDataSource();
         String key = REDIS_DATABASE + ":" + REDIS_KEY_RESOURCE_LIST + ":" + adminId;
         redisService.del(key);
     }
@@ -60,7 +65,7 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
     public void delResourceListByRole(Long roleId) {
         UmsAdminRoleRelationExample example = new UmsAdminRoleRelationExample();
         example.createCriteria().andRoleIdEqualTo(roleId);
-        List<UmsAdminRoleRelation> relationList = adminRoleRelationMapper.selectByExample(example);
+        List<UmsAdminRoleRelation> relationList = adminRoleRelationService.list(example);
         if (CollUtil.isNotEmpty(relationList)) {
             String keyPrefix = REDIS_DATABASE + ":" + REDIS_KEY_RESOURCE_LIST + ":";
             List<String> keys = relationList.stream().map(relation -> keyPrefix + relation.getAdminId()).collect(Collectors.toList());
@@ -72,7 +77,7 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
     public void delResourceListByRoleIds(List<Long> roleIds) {
         UmsAdminRoleRelationExample example = new UmsAdminRoleRelationExample();
         example.createCriteria().andRoleIdIn(roleIds);
-        List<UmsAdminRoleRelation> relationList = adminRoleRelationMapper.selectByExample(example);
+        List<UmsAdminRoleRelation> relationList = adminRoleRelationService.list(example);
         if (CollUtil.isNotEmpty(relationList)) {
             String keyPrefix = REDIS_DATABASE + ":" + REDIS_KEY_RESOURCE_LIST + ":";
             List<String> keys = relationList.stream().map(relation -> keyPrefix + relation.getAdminId()).collect(Collectors.toList());

@@ -31,9 +31,9 @@ public class UmsResourceCategoryController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult create(@RequestBody UmsResourceCategory umsResourceCategory) {
-        int count = resourceCategoryService.create(umsResourceCategory);
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = resourceCategoryService.create(umsResourceCategory);
+        if (success) {
+            return CommonResult.success(null);
         } else {
             return CommonResult.failed();
         }
@@ -44,9 +44,10 @@ public class UmsResourceCategoryController {
     @ResponseBody
     public CommonResult update(@PathVariable Long id,
                                @RequestBody UmsResourceCategory umsResourceCategory) {
-        int count = resourceCategoryService.update(id, umsResourceCategory);
-        if (count > 0) {
-            return CommonResult.success(count);
+        umsResourceCategory.setId(id);
+        boolean success = resourceCategoryService.updateById(umsResourceCategory);
+        if (success) {
+            return CommonResult.success(null);
         } else {
             return CommonResult.failed();
         }
@@ -56,9 +57,9 @@ public class UmsResourceCategoryController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult delete(@PathVariable Long id) {
-        int count = resourceCategoryService.delete(id);
-        if (count > 0) {
-            return CommonResult.success(count);
+        boolean success = resourceCategoryService.removeById(id);
+        if (success) {
+            return CommonResult.success(null);
         } else {
             return CommonResult.failed();
         }

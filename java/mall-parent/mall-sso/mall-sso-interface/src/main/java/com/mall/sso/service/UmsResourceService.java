@@ -1,6 +1,9 @@
 package com.mall.sso.service;
 
 
+import com.github.pagehelper.Page;
+import com.mall.api.CommonPage;
+import com.mall.sso.dto.ResourceRoleDTO;
 import com.mall.sso.model.UmsResource;
 
 import java.util.List;
@@ -13,31 +16,24 @@ public interface UmsResourceService {
     /**
      * 添加资源
      */
-    int create(UmsResource umsResource);
+    boolean create(UmsResource umsResource);
 
     /**
      * 修改资源
      */
-    int update(Long id, UmsResource umsResource);
-
-    /**
-     * 获取资源详情
-     */
-    UmsResource getItem(Long id);
+    boolean update(Long id, UmsResource umsResource);
 
     /**
      * 删除资源
      */
-    int delete(Long id);
+    boolean delete(Long id);
 
     /**
      * 分页查询资源
      */
-    List<UmsResource> list(Long categoryId, String nameKeyword, String urlKeyword, Integer pageSize, Integer pageNum);
+    CommonPage list(Long categoryId, String nameKeyword, String urlKeyword, Integer pageSize, Integer pageNum);
+    List<UmsResource> list();
+    List<ResourceRoleDTO> getAllResourceRole();
 
-
-    /**
-     * 查询全部资源
-     */
-    List<UmsResource> listAll();
+    UmsResource getById(Long id);
 }

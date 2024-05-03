@@ -1,7 +1,9 @@
 package com.mall.mansger.service;
 
+import com.mall.api.CommonPage;
 import com.mall.mansger.dto.PmsProductAttributeParam;
 import com.mall.mansger.dto.ProductAttrInfo;
+import com.mall.mansger.dto.RelationAttrInfoDTO;
 import com.mall.mansger.model.PmsProductAttribute;
 
 
@@ -12,6 +14,17 @@ import java.util.List;
  * Created by macro on 2018/4/26.
  */
 public interface PmsProductAttributeService {
+    CommonPage list(Long cid, Integer type, Integer pageNum, Integer pageSize);
+
+
+    List<RelationAttrInfoDTO> getRelationAttrInfoByCid(Long cId);
+
+    boolean create(PmsProductAttribute productAttribute);
+    /**
+     * 批量删除商品属性
+     */
+
+    boolean delete(List<Long> ids);
     /**
      * 根据分类分页获取商品属性
      * @param cid 分类id
@@ -28,18 +41,14 @@ public interface PmsProductAttributeService {
     /**
      * 修改商品属性
      */
-    int update(Long id, PmsProductAttributeParam productAttributeParam);
+    Boolean update(PmsProductAttribute productAttribute);
 
     /**
      * 获取单个商品属性信息
      */
-    PmsProductAttribute getItem(Long id);
+    PmsProductAttribute getById(Long id);
 
-    /**
-     * 批量删除商品属性
-     */
 
-    int delete(List<Long> ids);
 
     /**
      * 获取商品分类对应属性列表
