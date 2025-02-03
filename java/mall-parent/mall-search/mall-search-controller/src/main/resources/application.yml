@@ -1,5 +1,5 @@
 server:
-  port: 8029
+  port: 8030
 app:
   name: 搜索页面
   version: 1.0
@@ -11,7 +11,7 @@ dubbo:
   application:
     name: ${spring.application.name}
   registry:
-    address: zookeeper://192.168.10.250:2181
+    address: zookeeper://192.168.10.251:2181
     protocol: zookeeper
 
 

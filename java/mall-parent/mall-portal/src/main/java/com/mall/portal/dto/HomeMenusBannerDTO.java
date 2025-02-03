@@ -1,6 +1,5 @@
-package com.mall.marketing.dto;
-
-//import com.mall.mansger.dto.HomeMenusDTO;
+package com.mall.portal.dto;
+import com.mall.mansger.dto.HomeMenusDTO;
 import com.mall.marketing.model.SmsHomeAdvertise;
 
 import lombok.Data;
@@ -14,9 +13,8 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-
 public class HomeMenusBannerDTO {
 
-//    private List<HomeMenusDTO> homeMenusList;
+    private List<HomeMenusDTO> homeMenusList;
     private List<SmsHomeAdvertise> homeAdvertisesList;
 }

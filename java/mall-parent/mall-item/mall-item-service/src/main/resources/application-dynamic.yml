@@ -6,9 +6,9 @@ spring:
       strict: false   # 严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
       datasource:
         master:
-          url: jdbc:mysql://192.168.10.250:3306/mall?ds0?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
+          url: jdbc:mysql://192.168.10.251:3306/mall?ds0?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
           username: root
-          password: 123456
+          password: root
           driver-class-name: com.mysql.jdbc.Driver
   # sharding-jdbc配置
   shardingsphere:

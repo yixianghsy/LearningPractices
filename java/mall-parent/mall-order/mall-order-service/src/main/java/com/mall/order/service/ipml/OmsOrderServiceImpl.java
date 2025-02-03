@@ -1,18 +1,26 @@
 package com.mall.order.service.ipml;
 
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import com.github.pagehelper.PageHelper;
 import com.mall.api.CommonPage;
+import com.mall.api.CommonResult;
 import com.mall.exception.ApiException;
 import com.mall.order.dto.*;
 import com.mall.order.mapper.*;
 import com.mall.order.model.*;
 import com.mall.order.service.OmsOrderService;
+import com.mall.order.service.OmsOrderSettingService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +30,7 @@ import java.util.stream.Collectors;
  * Created by macro on 2018/10/11.
  */
 @Service
+@Slf4j
 public class OmsOrderServiceImpl implements OmsOrderService {
     @Autowired
     private OmsOrderMapper orderMapper;
@@ -33,6 +42,8 @@ public class OmsOrderServiceImpl implements OmsOrderService {
     private OmsOrderOperateHistoryMapper orderOperateHistoryMapper;
     @Autowired
     private OmsOrderItemMapper omsOrderItemMapper;
+    @Autowired
+    OmsOrderSettingService orderSettingService;
 //    @Autowired
 //    private TradePayProp tradePayProp;
     @Override
@@ -205,5 +216,92 @@ public class OmsOrderServiceImpl implements OmsOrderService {
             // 删除
             FileUtil.del(filePath);
         }
+    }
+
+    @Override
+    public void orderInsert(OmsOrder omsOrder) {
+        omsOrderItemMapper.orderInsert(omsOrder);
+    }
+
+    @Override
+    public void insertList(List<OmsOrderItem> list) {
+        omsOrderItemMapper.insertList(list);
+    }
+
+    @Override
+    public OmsOrderDetail getDetail(Long orderId) {
+        return orderMapper.getDetail(orderId);
+    }
+
+    @Override
+    public CommonResult<List<OmsOrderDetail>> findMemberOrderList(Integer pageSize, Integer pageNum, Long memberId, Integer status) {
+        PageHelper.startPage(pageNum,pageSize);
+        return CommonResult.success(orderMapper.findMemberOrderList(memberId,status));
+    }
+
+    @Override
+    public void cancelOverTimeOrder() {
+        // 1.获取规定的时间
+        OmsOrderSetting orderSetting = orderSettingService.getById(1L);
+        // 普通订单的超时分钟
+        Integer overtime = orderSetting.getNormalOrderOvertime();
+
+        // 获取当前时间的指定时间之前
+        DateTime offset = DateUtil.offset(new Date(), DateField.MINUTE, -overtime);
+
+        // 2. 获取超过规定时间未支付的订单
+
+        OmsOrderExample omsOrderExample = new OmsOrderExample();
+        omsOrderExample.createCriteria().andStatusEqualTo(0).//未支付
+                andCreateTimeLessThanOrEqualTo(offset);//是否超时
+
+        // 所有超时未支付的订单
+        List<OmsOrder> list = orderMapper.selectByExample(omsOrderExample);
+
+
+        if(CollectionUtil.isEmpty(list)){
+            log.warn("暂无超时订单");
+            return;
+        }
+        // 订单的id 用于获取订单详情
+        List<Long> orderIds=new ArrayList<>();
+        for (OmsOrder omsOrder : list) {
+            omsOrder.setStatus(4); // 设置订单关闭
+            omsOrder.setModifyTime(new Date());
+            orderIds.add(omsOrder.getId());
+        }
+        // TODO 根据ID批量更新
+        // 3. 改变状态：取消
+//        this.updateBatchById(list);
+
+
+        // 4. 归还锁定库存
+        // 4.1 获取订单详情
+        OmsOrderItemExample itemQueryExample = new OmsOrderItemExample();
+        itemQueryExample.createCriteria().andOrderIdIn(orderIds);
+        List<OmsOrderItem> itemList = omsOrderItemMapper.selectByExample(itemQueryExample);// in (订单id)
+        // 循环归还库存
+        for (OmsOrderItem omsOrderItem : itemList) {
+            // 归还的数量
+            Integer productQuantity = omsOrderItem.getProductQuantity();
+            // skuid
+            Long productSkuId = omsOrderItem.getProductSkuId();
+            // TODO  手写更新语句
+//            update  pms_sku_stock  set lock_stock=lock_stock-"+productQuantity" where   id= "productSkuId";
+//            UpdateWrapper<PmsSkuStock> stockUpdateWrapper = new UpdateWrapper<>();
+//            stockUpdateWrapper.setSql("lock_stock=lock_stock-"+productQuantity)
+//                    .lambda()
+//                    .eq(PmsSkuStock::getId,productSkuId);
+//            skuStockService.update(stockUpdateWrapper);
+        }
+    }
+    /**
+     * 读取下单成功订单详情
+     * @param id
+     * @return
+     */
+    @Override
+    public OrderDetailDTO getOrderDetail(Long orderId) {
+        return orderMapper.getOrderDetail(orderId);
     }
 }

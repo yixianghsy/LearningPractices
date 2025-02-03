@@ -4,9 +4,8 @@ import com.mall.marketing.dto.HomeGoodsSaleDTO;
 
 import com.mall.marketing.mapper.SmsHomeCategoryMapper;
 import com.mall.marketing.service.SmsHomeCategoryService;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

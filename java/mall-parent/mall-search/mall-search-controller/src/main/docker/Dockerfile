@@ -7,7 +7,7 @@ ADD e3-cart-web.jar app.jar
 # 时区设置
 RUN echo "Asia/shanghai" > /etc/timezone
 #RUN bash -c 'touch /app.jar'
-EXPOSE 8029
+EXPOSE 8030
 #ENTRYPOINT ["java","exec java ${JAVA_OPTS}","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 #执行启动命令
 #执行启动命令

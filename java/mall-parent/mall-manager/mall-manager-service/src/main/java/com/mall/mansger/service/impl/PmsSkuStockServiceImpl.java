@@ -37,4 +37,9 @@ public class PmsSkuStockServiceImpl implements PmsSkuStockService {
     public int minusUpdate(Integer stock, Integer lowStock, Long id) {
         return pmsSkuStockMapper.minusUpdate(stock, lowStock, id);
     }
+
+    @Override
+    public void batchUpdate(Integer quantity, Long productSkuId) {
+        pmsSkuStockMapper.batchUpdate(quantity,productSkuId);
+    }
 }

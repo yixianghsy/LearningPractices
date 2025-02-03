@@ -15,7 +15,7 @@ dubbo:
     # 注册中心协议
     protocol: zookeeper
     # 注册中心地址
-    address: 192.168.10.250:2181
+    address: 192.168.10.251:2181
   # dubbo协议在20881端口暴露服务
   # 协议名称
   protocol:
@@ -34,7 +34,7 @@ dubbo:
     protocol: registry
 
 minio:
-  endpoint: http://192.168.10.33:9000 #MinIO服务所在地址
+  endpoint: http://192.168.10.251:9000 #MinIO服务所在地址
   bucketName: mall #存储桶名称
   accessKey: minioadmin #访问的key
   secretKey: minioadmin #访问的秘钥

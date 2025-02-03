@@ -77,4 +77,13 @@ public interface PmsProductService {
     List<PmsProduct> list(String keyword);
 
     boolean removeByIds(List<Long> ids);
+
+    PmsProduct getById(Long productId);
+
+    /**
+     * 取商品详情获
+     * @param id 商品id
+     * @return
+     */
+    ProductDetailDTO getProductDetail(Long id);
 }

@@ -3,6 +3,7 @@ package com.mall.marketing.dto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /***
@@ -12,7 +13,7 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(callSuper = false)
 
-public class ProductDTO {
+public class ProductDTO  implements Serializable {
     private Long id;
     private String name;
     private String pic;

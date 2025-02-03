@@ -4,6 +4,7 @@ package com.mall.marketing.dto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.util.List;
 
 /***
@@ -13,7 +14,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 
-public class HomeGoodsSaleDTO {
+public class HomeGoodsSaleDTO  implements Serializable {
     private String categoryName;
 
     private String pic;

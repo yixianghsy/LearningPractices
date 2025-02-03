@@ -51,7 +51,7 @@ docker exec -it mysql /bin/bash
 ### 下载镜像文件
 docker pull redis:3.2
 ### 创建实例并启动
-docker run -p 6379:6379 --name redis -v /mnt/mydata/redis/data:/data -d redis:3.2 redis-server --appendonly yes
+docker run -p 6379:6379 --name redis -v /home/hsy/mydata/redis/data:/data -d redis:3.2 redis-server
 ### 使用redis镜像执行redis-cli命令连接
 docker exec -it redis redis-cli
 

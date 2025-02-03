@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode
 @Builder
-public class BucketPolicyConfigDto {
+public class BucketPolicyConfigDto implements Serializable {
 
     private String Version;
     private List<Statement> Statement;

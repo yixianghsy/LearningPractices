@@ -1,8 +1,10 @@
 package com.mall.order.service;
 
 import com.mall.api.CommonPage;
+import com.mall.api.CommonResult;
 import com.mall.order.dto.*;
 import com.mall.order.model.OmsOrder;
+import com.mall.order.model.OmsOrderItem;
 
 import java.util.List;
 
@@ -11,6 +13,9 @@ import java.util.List;
  * Created by macro on 2018/10/11.
  */
 public interface OmsOrderService {
+
+    
+
     /**
      * 订单查询
      */
@@ -61,4 +66,16 @@ public interface OmsOrderService {
      * @param payType
      */
     void paySuccess(Long orderId, Integer payType);
+
+    void orderInsert(OmsOrder omsOrder);
+
+    void insertList(List<OmsOrderItem> list);
+
+    OmsOrderDetail getDetail(Long orderId);
+
+    CommonResult<List<OmsOrderDetail>> findMemberOrderList(Integer pageSize, Integer pageNum, Long memberId, Integer status);
+
+    void cancelOverTimeOrder();
+
+    OrderDetailDTO getOrderDetail(Long orderId);
 }

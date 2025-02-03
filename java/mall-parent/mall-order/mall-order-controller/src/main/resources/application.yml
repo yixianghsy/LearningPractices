@@ -2,7 +2,7 @@ app:
   name: 购物车页面
   version: 1.0
 server:
-  port: 8027
+  port: 8028
 spring:
   application:
     name: order-controller
@@ -13,7 +13,7 @@ dubbo:
   application:
     name: ${spring.application.name}
   registry:
-    address: zookeeper://192.168.10.250:2181
+    address: zookeeper://192.168.10.251:2181
     protocol: zookeeper
 
 jwt:

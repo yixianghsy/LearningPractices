@@ -1,5 +1,5 @@
 server:
-  port: 8033
+  port: 8019
 spring:
   application:
     name: cart-controller
@@ -13,7 +13,7 @@ dubbo:
     # 注册中心协议
     protocol: zookeeper
     # 注册中心地址
-    address: 192.168.10.250:2181
+    address: 192.168.10.251:2181
   # dubbo协议在20881端口暴露服务
   # 协议名称
   protocol:

@@ -1,8 +1,8 @@
 FROM openjdk:8
 MAINTAINER hsy
-EXPOSE 8033
+EXPOSE 8019
 VOLUME /tmp
-ADD e3-cart-web.jar app.jar
+ADD mall-cart-controller.jar app.jar
 # 设置环境变量
 #ENV JAVA_OPTS="-server -Xms512m -Xmx512m"
 #ENV DUBBO_IP_TO_REGISTRY 192.168.10.140

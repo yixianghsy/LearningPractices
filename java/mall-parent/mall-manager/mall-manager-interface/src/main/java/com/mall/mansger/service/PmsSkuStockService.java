@@ -22,4 +22,6 @@ public interface PmsSkuStockService {
     PmsSkuStock getById(Long productSkuId);
 
     int minusUpdate ( Integer stock,Integer lowStock ,  Long id);
+
+    void batchUpdate(Integer quantity, Long productSkuId);
 }

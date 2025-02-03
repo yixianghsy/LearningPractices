@@ -1,5 +1,5 @@
 server:
-  port: 8028
+  port: 8031
 spring:
   application:
     name: order-service
@@ -8,7 +8,7 @@ spring:
       repositories:
         enabled: true
   elasticsearch:
-    uris: 192.168.10.250:9200
+    uris: 192.168.10.251:9200
 # ====================== ↓↓↓↓↓↓ 配置dubbo↓↓↓↓↓↓ ======================
 dubbo:
   application:
@@ -21,7 +21,7 @@ dubbo:
     # 注册中心协议
     protocol: zookeeper
     # 注册中心地址
-    address: 192.168.10.250:2181
+    address: 192.168.10.251:2181
   # dubbo协议在20880端口暴露服务
   # 协议名称
   protocol:

@@ -222,6 +222,20 @@ public class PmsProductServiceImpl implements PmsProductService {
         return false;
     }
 
+    @Override
+    public PmsProduct getById(Long productId) {
+        return productMapper.selectByPrimaryKey(productId);
+    }
+    /**
+     * 取商品详情获
+     * @param id 商品id
+     * @return
+     */
+    @Override
+    public ProductDetailDTO getProductDetail(Long id) {
+        return productMapper.getProductDetail(id);
+    }
+
 
 //    /**
 //     * 根据商品id删除关联数据

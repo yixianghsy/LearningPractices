@@ -10,7 +10,7 @@ ADD mall-search-service-0.0.1-SNAPSHOT.jar app.jar
 RUN echo "Asia/shanghai" > /etc/timezone
 #执行启动命令
 ENTRYPOINT ["java", "-jar","/app.jar"]
-EXPOSE 8028
+EXPOSE 8031
 #ENTRYPOINT ["java","exec java ${JAVA_OPTS}","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 #执行启动命令
 #ENTRYPOINT ["java", "-jar","/certif-system-2.1.0.jar"]

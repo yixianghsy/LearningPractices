@@ -1,5 +1,6 @@
 package com.mall.mansger.mapper;
 
+import com.mall.mansger.dto.ProductDetailDTO;
 import com.mall.mansger.dto.ProductUpdateInitDTO;
 import com.mall.mansger.model.PmsProduct;
 import com.mall.mansger.model.PmsProductExample;
@@ -37,4 +38,6 @@ public interface PmsProductMapper {
     int updateByPrimaryKey(PmsProduct record);
 
     ProductUpdateInitDTO getUpdateInfo(Long id);
+
+    ProductDetailDTO getProductDetail(Long id);
 }

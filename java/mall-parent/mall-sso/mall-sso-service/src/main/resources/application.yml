@@ -1,8 +1,8 @@
 server:
-  port: 8030
+  port: 8032
 spring:
   application:
-    name: sso
+    name: sso-service
   profiles:
     active: dynamic
   main:
@@ -20,7 +20,7 @@ spring:
       web-stat-filter:
         enabled: true
   redis:
-    host: 192.168.10.250
+    host: 192.168.10.251
     port: 6379
 # dubbo config
 dubbo:
@@ -34,7 +34,7 @@ dubbo:
     # 注册中心协议
     protocol: zookeeper
     # 注册中心地址
-    address: 192.168.10.250:2181
+    address: 192.168.10.251:2181
 
   # dubbo协议在20880端口暴露服务
   # 协议名称

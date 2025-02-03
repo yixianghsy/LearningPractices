@@ -101,7 +101,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             if(!BCrypt.checkpw(password,umsAdmin.getPassword())){
                 Asserts.fail("密码不正确");
             }
-            //  TODO  这个丢大配置文件
+            //  TODO  这个丢Controller
             // 生成springsecurity的通过认证标识
 //            UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(adminUserDetails,null,adminUserDetails.getAuthorities());
 //            SecurityContextHolder.getContext().setAuthentication(authenticationToken);

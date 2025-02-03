@@ -3,16 +3,16 @@ app:
   version: 1.0
 #tomcat conf
 server:
-  port: 8031
+  port: 8033
 spring:
   main:
     allow-circular-references: true
 #dubbo conf
 dubbo:
   application:
-    name: e3-sso-web
+    name: mall-sso-web
   registry:
-    address: zookeeper://192.168.10.250:2181
+    address: zookeeper://192.168.10.251:2181
 logging:
   level:
     root: info
