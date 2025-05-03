@@ -38,9 +38,9 @@ dubbo:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.10.251:3306/mall?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.10.251:3306/mall_tiny?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
     username: root
-    password: 123456
+    password: root
     type: com.alibaba.druid.pool.DruidDataSource
     # 连接池的配置信息
     # 初始化大小，最小等待连接数量，最大等待连接数量，最大连接数
